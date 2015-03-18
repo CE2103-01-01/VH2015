@@ -1,0 +1,2 @@
+18/03/2015
+Se crea la estructura principal y algunas clases.
