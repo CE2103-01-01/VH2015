@@ -4,19 +4,22 @@
 
 #ifndef _VH2015_VMALLOCMETADATA_H_
 #define _VH2015_VMALLOCMETADATA_H_
-
+#include <string>
+#include "vRef.h"
+#include <iostream>
+using namespace std;
 
 class vMallocMetaData {
 public:
     vMallocMetaData();
-    vMallocMetaData(int size,string type, vRef* id, vRef* offset);
+    vMallocMetaData(int size,string type, int* id, int* offset);
     ~vMallocMetaData();
-    void setId(int id);
-    vRef* getId();
-    void setOffset(vRef* offset);
-    vRef* getOffset();
-    void setType(vType type);
-    vType getType();
+    void setId(int* id);
+    int* getId();
+    void setOffset(int* offset);
+    int* getOffset();
+    void setType(string type);
+    string getType();
     void setSize(int datSize);
     int getSize();
     void setFlag(bool flag);
@@ -26,12 +29,12 @@ public:
     void decreaseCounter();
 
 private:
-    vRef* idRef;
-    vRef* offset;
+    int* idRef;
+    int* offset;
     string type;
     int dataSize;
     bool useFlag;
-    int counter;
+    int counter = 0;
 
 };
 
