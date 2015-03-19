@@ -1,2 +1,4 @@
 18/03/2015
 Se crea la estructura principal y algunas clases.
+19/03/2015
+Se arreglo el cmake, se hizo un enum
