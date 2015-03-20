@@ -10,11 +10,11 @@ class vRef {
 public:
     vRef(vObject object,int* ID);
     void changeID(int* id);
-    <vRef>operator*();
+    <vObject>operator*();
     <vRef>operator=();
     <vRef>operator ==();
    // <vRef>operator ++();
-    <vRef>operator*(vRef reference);
+
     <vRef>operator --();
 
     virtual ~vRef();

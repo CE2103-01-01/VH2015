@@ -1,4 +1,8 @@
 //
-// Created by pablo on 18/03/15.
+// Created by alex on 20/03/15.
 //
 
+#include "vHeap.h"
+vHeap::vHeap(int size, float overweight) {
+
+}
