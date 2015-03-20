@@ -1,2 +1,4 @@
 18/03/15
 se implementa algunas clases
+19/03/15
+se implementa la lista enlazada, investigacion

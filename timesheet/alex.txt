@@ -1,2 +1,2 @@
-18/03/15
-Implemtar algunas clases e investigacion
+18/03/15 1.5h implemtar algunas clases e investigacion
+19/03/15 1h implementar las clases necesaria de una lista enlazada
