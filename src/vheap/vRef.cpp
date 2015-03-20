@@ -2,6 +2,7 @@
 // Created by alex on 18/03/15.
 //
 
+#include <vObject.h>
 #include "vRef.h"
 vRef::vRef(vObject newObject,int* id){
     object = newObject;

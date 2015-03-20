@@ -8,7 +8,7 @@
 
 class vRef {
 public:
-    vRef(vObjetc object,int* ID);
+    vRef(vObject object,int* ID);
     void changeID(int* id);
     <vRef>operator*();
     <vRef>operator=();
