@@ -78,6 +78,7 @@ void list<T>::search(T data_)
     cout << endl << endl;
 }
 // Eliminar por data del nodo
+//
 template<typename T>
 void list<T>::del_by_data(T data_)
 {
