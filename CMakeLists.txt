@@ -5,10 +5,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES    main.cpp
                     src/vheap/vHeap.cpp
-                    src/vheap/vGarbageCollector.cpp)
+                    src/vheap/vGarbageCollector.cpp
+                    src/XML/pugixml.cpp
+                    src/XML/xmlWriter.cpp)
 
 set(HEADERS_FILES
                     src/vheap/vHeap.h
-                    src/vheap/vGarbageCollector.h)
+                    src/vheap/vGarbageCollector.h
+                    src/XML/pugiconfig.hpp
+                    src/XML/pugixml.hpp
+                    src/XML/xmlWriter.h)
 
 include_directories(src headers vheap)
+include_directories(src headers vheap XML)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vheap/vHeap.cpp src/vheap/vHeap.h)
