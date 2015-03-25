@@ -7,9 +7,8 @@ set(SOURCE_FILES    main.cpp
                     src/vheap/vHeap.cpp
                     src/vheap/vGarbageCollector.cpp)
 
-set(HEADERS_FILES   headers/vObject.h
+set(HEADERS_FILES
                     src/vheap/vHeap.h
                     src/vheap/vGarbageCollector.h)
 
 include_directories(src headers vheap)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vheap/vHeap.cpp src/vheap/vHeap.h)

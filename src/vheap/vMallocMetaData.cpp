@@ -18,6 +18,9 @@ vMallocMetaData::vMallocMetaData() {
 
 vMallocMetaData::~vMallocMetaData()
 {
+    if(vMallocMetaData::counter==0){
+        delete this;
+    }
     decreaseCounter();
 }
 int vMallocMetaData::getCounter() {
