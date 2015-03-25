@@ -15,19 +15,21 @@ vRef::~vRef()
 }
 
 
-<vObject> vRef::operator*() {
+vObject vRef::operator*(const vRef lado) {
     return vRef::object;
 
+}
+void vRef::operator=() {
 }
 void vRef::changeID(int *id) {
     referenceID = id;
 }
-<vRef> vRef::operator--() {
+vRef vRef::operator--() {
 
 }
-<vRef> vRef::operator=() {
+vRef vRef::operator=() {
 
 }
-<vRef> vRef::operator==() {
+vRef vRef::operator==() {
 
 }
