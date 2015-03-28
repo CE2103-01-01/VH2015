@@ -5,28 +5,34 @@
 #ifndef _VH2015_VHEAP_H_
 #define _VH2015_VHEAP_H_
 
-#include "list.h"
-#include "vRef.h"
+#include "dataStructures/List.h"
 #include <iostream>
-using namespace std;
+#include <stdlib.h>
+#include "Metadata.h"
+#include "vRef.h"
 
-class vHeap {
+
+class vHeap
+{
 private:
     bool vDebug;
     int dumpFrecuency;
-    static vHeapSingleton;
-    list MemoryTable;
+    static vHeap vHeapSingleton;
+    int* overweight;
+    void* mainChunk;
+    void* actualDir;
+    int* actualID;
+    List<Metadata>* control;
 public:
-
-    vHeap(int size,float overweight);
-    ~vHeap();
-    vRef vMalloc(int size, string type);
-    void vFree;
     static vHeap getInstance();
+    vHeap(int, int);
+    virtual ~vHeap();
+    vRef vMalloc(int,std::string);
+    void vFree(vRef);
     bool makeDump();
-    void startDumpThread();
-
+    void printMetadata();
 };
+
 
 
 #endif //_VH2015_VHEAP_H_

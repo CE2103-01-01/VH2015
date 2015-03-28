@@ -95,12 +95,12 @@ namespace pugi
 // The PugiXML namespace
 namespace pugi
 {
-	// Tree node types
+	// Tree Node types
 	enum xml_node_type
 	{
-		node_null,			// Empty (null) node handle
+		node_null,			// Empty (null) Node handle
 		node_document,		// A document tree's absolute root
-		node_element,		// Element tag, i.e. '<node/>'
+		node_element,		// Element tag, i.e. '<Node/>'
 		node_pcdata,		// Plain character data, i.e. 'text'
 		node_cdata,			// Character data, i.e. '<![CDATA[text]]>'
 		node_comment,		// Comment tag, i.e. '<!-- text -->'
@@ -146,7 +146,7 @@ namespace pugi
 	// This flag determines if document type declaration (node_doctype) is added to the DOM tree. This flag is off by default.
 	const unsigned int parse_doctype = 0x0200;
 
-	// This flag determines if plain character data (node_pcdata) that is the only child of the parent node and that consists only
+	// This flag determines if plain character data (node_pcdata) that is the only child of the parent Node and that consists only
 	// of whitespace is added to the DOM tree.
 	// This flag is off by default; turning it on may result in slower parsing and more memory consumption.
 	const unsigned int parse_ws_pcdata_single = 0x0400;
@@ -154,7 +154,7 @@ namespace pugi
 	// This flag determines if leading and trailing whitespace is to be removed from plain character data. This flag is off by default.
 	const unsigned int parse_trim_pcdata = 0x0800;
 
-	// This flag determines if plain character data that does not have a parent node is added to the DOM tree, and if an empty document
+	// This flag determines if plain character data that does not have a parent Node is added to the DOM tree, and if an empty document
 	// is a valid document. This flag is off by default.
 	const unsigned int parse_fragment = 0x1000;
 
@@ -185,7 +185,7 @@ namespace pugi
 
 	// Formatting flags
 	
-	// Indent the nodes that are written to output stream with as many indentation strings as deep the node is in DOM tree. This flag is on by default.
+	// Indent the nodes that are written to output stream with as many indentation strings as deep the Node is in DOM tree. This flag is on by default.
 	const unsigned int format_indent = 0x01;
 	
 	// Write encoding-specific BOM to the output stream. This flag is off by default.
@@ -248,7 +248,7 @@ namespace pugi
 		It _begin, _end;
 	};
 
-	// Writer interface for node printing (see xml_node::print)
+	// Writer interface for Node printing (see xml_node::print)
 	class PUGIXML_CLASS xml_writer
 	{
 	public:
@@ -371,7 +371,7 @@ namespace pugi
 		xml_attribute& operator=(unsigned long long rhs);
 	#endif
 
-		// Get next/previous attribute in the attribute list of the parent node
+		// Get next/previous attribute in the attribute List of the parent Node
 		xml_attribute next_attribute() const;
 		xml_attribute previous_attribute() const;
 
@@ -401,10 +401,10 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xml_node***);
 
 	public:
-		// Default constructor. Constructs an empty node.
+		// Default constructor. Constructs an empty Node.
 		xml_node();
 
-		// Constructs node from internal pointer
+		// Constructs Node from internal pointer
 		explicit xml_node(xml_node_struct* p);
 
 		// Safe bool conversion operator
@@ -413,7 +413,7 @@ namespace pugi
 		// Borland C++ workaround
 		bool operator!() const;
 	
-		// Comparison operators (compares wrapped node pointers)
+		// Comparison operators (compares wrapped Node pointers)
 		bool operator==(const xml_node& r) const;
 		bool operator!=(const xml_node& r) const;
 		bool operator<(const xml_node& r) const;
@@ -421,38 +421,38 @@ namespace pugi
 		bool operator<=(const xml_node& r) const;
 		bool operator>=(const xml_node& r) const;
 
-		// Check if node is empty.
+		// Check if Node is empty.
 		bool empty() const;
 
-		// Get node type
+		// Get Node type
 		xml_node_type type() const;
 
-		// Get node name, or "" if node is empty or it has no name
+		// Get Node name, or "" if Node is empty or it has no name
 		const char_t* name() const;
 
-		// Get node value, or "" if node is empty or it has no value
-        // Note: For <node>text</node> node.value() does not return "text"! Use child_value() or text() methods to access text inside nodes.
+		// Get Node value, or "" if Node is empty or it has no value
+        // Note: For <Node>text</Node> Node.value() does not return "text"! Use child_value() or text() methods to access text inside nodes.
 		const char_t* value() const;
 	
-		// Get attribute list
+		// Get attribute List
 		xml_attribute first_attribute() const;
 		xml_attribute last_attribute() const;
 
-		// Get children list
+		// Get children List
 		xml_node first_child() const;
 		xml_node last_child() const;
 
-		// Get next/previous sibling in the children list of the parent node
+		// Get next/previous sibling in the children List of the parent Node
 		xml_node next_sibling() const;
 		xml_node previous_sibling() const;
 		
-		// Get parent node
+		// Get parent Node
 		xml_node parent() const;
 
-		// Get root of DOM tree this node belongs to
+		// Get root of DOM tree this Node belongs to
 		xml_node root() const;
 
-		// Get text object for the current node
+		// Get text object for the current Node
 		xml_text text() const;
 
 		// Get child, attribute or next/previous sibling with the specified name
@@ -461,13 +461,13 @@ namespace pugi
 		xml_node next_sibling(const char_t* name) const;
 		xml_node previous_sibling(const char_t* name) const;
 
-		// Get child value of current node; that is, value of the first child node of type PCDATA/CDATA
+		// Get child value of current Node; that is, value of the first child Node of type PCDATA/CDATA
 		const char_t* child_value() const;
 
 		// Get child value of child with specified name. Equivalent to child(name).child_value().
 		const char_t* child_value(const char_t* name) const;
 
-		// Set node name/value (returns false if node is empty, there is not enough memory, or node can not have name/value)
+		// Set Node name/value (returns false if Node is empty, there is not enough memory, or Node can not have name/value)
 		bool set_name(const char_t* rhs);
 		bool set_value(const char_t* rhs);
 		
@@ -483,25 +483,25 @@ namespace pugi
 		xml_attribute insert_copy_after(const xml_attribute& proto, const xml_attribute& attr);
 		xml_attribute insert_copy_before(const xml_attribute& proto, const xml_attribute& attr);
 
-		// Add child node with specified type. Returns added node, or empty node on errors.
+		// Add child Node with specified type. Returns added Node, or empty Node on errors.
 		xml_node append_child(xml_node_type type = node_element);
 		xml_node prepend_child(xml_node_type type = node_element);
 		xml_node insert_child_after(xml_node_type type, const xml_node& node);
 		xml_node insert_child_before(xml_node_type type, const xml_node& node);
 
-		// Add child element with specified name. Returns added node, or empty node on errors.
+		// Add child element with specified name. Returns added Node, or empty Node on errors.
 		xml_node append_child(const char_t* name);
 		xml_node prepend_child(const char_t* name);
 		xml_node insert_child_after(const char_t* name, const xml_node& node);
 		xml_node insert_child_before(const char_t* name, const xml_node& node);
 
-		// Add a copy of the specified node as a child. Returns added node, or empty node on errors.
+		// Add a copy of the specified Node as a child. Returns added Node, or empty Node on errors.
 		xml_node append_copy(const xml_node& proto);
 		xml_node prepend_copy(const xml_node& proto);
 		xml_node insert_copy_after(const xml_node& proto, const xml_node& node);
 		xml_node insert_copy_before(const xml_node& proto, const xml_node& node);
 
-		// Move the specified node to become a child of this node. Returns moved node, or empty node on errors.
+		// Move the specified Node to become a child of this Node. Returns moved Node, or empty Node on errors.
 		xml_node append_move(const xml_node& moved);
 		xml_node prepend_move(const xml_node& moved);
 		xml_node insert_move_after(const xml_node& moved, const xml_node& node);
@@ -515,7 +515,7 @@ namespace pugi
 		bool remove_child(const xml_node& n);
 		bool remove_child(const char_t* name);
 
-		// Parses buffer as an XML document fragment and appends all nodes as children of the current node.
+		// Parses buffer as an XML document fragment and appends all nodes as children of the current Node.
 		// Copies/converts the buffer, so it may be deleted or changed after the function returns.
 		// Note: append_buffer allocates memory that has the lifetime of the owning document; removing the appended nodes does not immediately reclaim that memory.
 		xml_parse_result append_buffer(const void* contents, size_t size, unsigned int options = parse_default, xml_encoding encoding = encoding_auto);
@@ -532,7 +532,7 @@ namespace pugi
 			return xml_attribute();
 		}
 
-		// Find child node using predicate. Returns first child for which predicate returned true.
+		// Find child Node using predicate. Returns first child for which predicate returned true.
 		template <typename Predicate> xml_node find_child(Predicate pred) const
 		{
 			if (!_root) return xml_node();
@@ -544,7 +544,7 @@ namespace pugi
 			return xml_node();
 		}
 
-		// Find node from subtree using predicate. Returns first node from subtree (depth-first), for which predicate returned true.
+		// Find Node from subtree using predicate. Returns first Node from subtree (depth-first), for which predicate returned true.
 		template <typename Predicate> xml_node find_node(Predicate pred) const
 		{
 			if (!_root) return xml_node();
@@ -568,31 +568,31 @@ namespace pugi
 			return xml_node();
 		}
 
-		// Find child node by attribute name/value
+		// Find child Node by attribute name/value
 		xml_node find_child_by_attribute(const char_t* name, const char_t* attr_name, const char_t* attr_value) const;
 		xml_node find_child_by_attribute(const char_t* attr_name, const char_t* attr_value) const;
 
 	#ifndef PUGIXML_NO_STL
-		// Get the absolute node path from root as a text string.
+		// Get the absolute Node path from root as a text string.
 		string_t path(char_t delimiter = '/') const;
 	#endif
 
-		// Search for a node by path consisting of node names and . or .. elements.
+		// Search for a Node by path consisting of Node names and . or .. elements.
 		xml_node first_element_by_path(const char_t* path, char_t delimiter = '/') const;
 
 		// Recursively traverse subtree with xml_tree_walker
 		bool traverse(xml_tree_walker& walker);
 	
 	#ifndef PUGIXML_NO_XPATH
-		// Select single node by evaluating XPath query. Returns first node from the resulting node set.
+		// Select single Node by evaluating XPath query. Returns first Node from the resulting Node set.
 		xpath_node select_node(const char_t* query, xpath_variable_set* variables = 0) const;
 		xpath_node select_node(const xpath_query& query) const;
 
-		// Select node set by evaluating XPath query
+		// Select Node set by evaluating XPath query
 		xpath_node_set select_nodes(const char_t* query, xpath_variable_set* variables = 0) const;
 		xpath_node_set select_nodes(const xpath_query& query) const;
 
-		// (deprecated: use select_node instead) Select single node by evaluating XPath query.
+		// (deprecated: use select_node instead) Select single Node by evaluating XPath query.
 		xpath_node select_single_node(const char_t* query, xpath_variable_set* variables = 0) const;
 		xpath_node select_single_node(const xpath_query& query) const;
 
@@ -624,7 +624,7 @@ namespace pugi
 		xml_object_range<xml_named_node_iterator> children(const char_t* name) const;
 		xml_object_range<xml_attribute_iterator> attributes() const;
 
-		// Get node offset in parsed file/string (in char_t units) for debugging purposes
+		// Get Node offset in parsed file/string (in char_t units) for debugging purposes
 		ptrdiff_t offset_debug() const;
 
 		// Get hash value (unique for handles to the same object)
@@ -713,7 +713,7 @@ namespace pugi
 		xml_text& operator=(unsigned long long rhs);
 	#endif
 
-		// Get the data node (node_pcdata or node_cdata) for this object
+		// Get the data Node (node_pcdata or node_cdata) for this object
 		xml_node data() const;
 	};
 
@@ -723,7 +723,7 @@ namespace pugi
 	bool PUGIXML_FUNCTION operator||(const xml_text& lhs, bool rhs);
 #endif
 
-	// Child node iterator (a bidirectional iterator over a collection of xml_node)
+	// Child Node iterator (a bidirectional iterator over a collection of xml_node)
 	class PUGIXML_CLASS xml_node_iterator
 	{
 		friend class xml_node;
@@ -748,7 +748,7 @@ namespace pugi
 		// Default constructor
 		xml_node_iterator();
 
-		// Construct an iterator which points to the specified node
+		// Construct an iterator which points to the specified Node
 		xml_node_iterator(const xml_node& node);
 
 		// Iterator operators
@@ -807,7 +807,7 @@ namespace pugi
 		xml_attribute_iterator operator--(int);
 	};
 
-	// Named node range helper
+	// Named Node range helper
 	class PUGIXML_CLASS xml_named_node_iterator
 	{
 		friend class xml_node;
@@ -826,7 +826,7 @@ namespace pugi
 		// Default constructor
 		xml_named_node_iterator();
 
-		// Construct an iterator which points to the specified node
+		// Construct an iterator which points to the specified Node
 		xml_named_node_iterator(const xml_node& node, const char_t* name);
 
 		// Iterator operators
@@ -869,7 +869,7 @@ namespace pugi
 		// Callback that is called when traversal begins
 		virtual bool begin(xml_node& node);
 
-		// Callback that is called for each node traversed
+		// Callback that is called for each Node traversed
 		virtual bool for_each(xml_node& node) = 0;
 
 		// Callback that is called when traversal ends
@@ -944,7 +944,7 @@ namespace pugi
 		// Default constructor, makes empty document
 		xml_document();
 
-		// Destructor, invalidates all node/attribute handles to this document
+		// Destructor, invalidates all Node/attribute handles to this document
 		~xml_document();
 
 		// Removes all nodes, leaving the empty document
@@ -1049,7 +1049,7 @@ namespace pugi
 		// Get variable type
 		xpath_value_type type() const;
 
-		// Get variable value; no type conversion is performed, default value (false, NaN, empty string, empty node set) is returned on type mismatch error
+		// Get variable value; no type conversion is performed, default value (false, NaN, empty string, empty Node set) is returned on type mismatch error
 		bool get_boolean() const;
 		double get_number() const;
 		const char_t* get_string() const;
@@ -1137,15 +1137,15 @@ namespace pugi
 		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty  set instead.
 		size_t evaluate_string(char_t* buffer, size_t capacity, const xpath_node& n) const;
 
-		// Evaluate expression as node set in the specified context.
+		// Evaluate expression as Node set in the specified context.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws xpath_exception on type mismatch and std::bad_alloc on out of memory errors.
-		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty node set instead.
+		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty Node set instead.
 		xpath_node_set evaluate_node_set(const xpath_node& n) const;
 
-		// Evaluate expression as node set in the specified context.
-		// Return first node in document order, or empty node if node set is empty.
+		// Evaluate expression as Node set in the specified context.
+		// Return first Node in document order, or empty Node if Node set is empty.
 		// If PUGIXML_NO_EXCEPTIONS is not defined, throws xpath_exception on type mismatch and std::bad_alloc on out of memory errors.
-		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty node instead.
+		// If PUGIXML_NO_EXCEPTIONS is defined, returns empty Node instead.
 		xpath_node evaluate_node(const xpath_node& n) const;
 
 		// Get parsing result (used to get compilation errors in PUGIXML_NO_EXCEPTIONS mode)
@@ -1177,7 +1177,7 @@ namespace pugi
 	};
 	#endif
 	
-	// XPath node class (either xml_node or xml_attribute)
+	// XPath Node class (either xml_node or xml_attribute)
 	class PUGIXML_CLASS xpath_node
 	{
 	private:
@@ -1187,18 +1187,18 @@ namespace pugi
 		typedef void (*unspecified_bool_type)(xpath_node***);
 
 	public:
-		// Default constructor; constructs empty XPath node
+		// Default constructor; constructs empty XPath Node
 		xpath_node();
 		
-		// Construct XPath node from XML node/attribute
+		// Construct XPath Node from XML Node/attribute
 		xpath_node(const xml_node& node);
 		xpath_node(const xml_attribute& attribute, const xml_node& parent);
 
-		// Get node/attribute, if any
+		// Get Node/attribute, if any
 		xml_node node() const;
 		xml_attribute attribute() const;
 		
-		// Get parent of contained node/attribute
+		// Get parent of contained Node/attribute
 		xml_node parent() const;
 
 		// Safe bool conversion operator
@@ -1265,7 +1265,7 @@ namespace pugi
 		// Sort the collection in ascending/descending order by document order
 		void sort(bool reverse = false);
 		
-		// Get first node in the collection by document order
+		// Get first Node in the collection by document order
 		xpath_node first() const;
 		
 		// Check if collection is empty

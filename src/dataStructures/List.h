@@ -14,11 +14,11 @@
 
 using namespace std;
 template <class T>
-class list {
+class List {
 
 public:
-    list();
-    ~list();
+    List();
+    ~List();
 
     void add_head(T);
     void add_end(T);

@@ -8,13 +8,13 @@
 #include <iostream>
 using namespace std;
 template <class T>
-class node {
+class Node {
 public:
-    node();
-    node(T);
-    ~node();
+    Node();
+    Node(T);
+    ~Node();
 
-    node *nextNode;
+    Node *nextNode;
     T data;
     void delete_all();
 

@@ -2,19 +2,18 @@
 // Created by alex on 19/03/15.
 //
 
-#include "list.h"
 using namespace std;
 
 // Constructor por defecto
 template<typename T>
-list<T>::list()
+List<T>::List()
 {
     m_num_nodes = 0;
     m_head = NULL;
 }
 // Insertar al inicio
 template<typename T>
-void list<T>::add_head(T data_)
+void List<T>::add_head(T data_)
 {
     node<T> *new_node = new node<T> (data_);
     node<T> *temp = m_head;
@@ -33,7 +32,7 @@ void list<T>::add_head(T data_)
 }
 // Insertar al final
 template<typename T>
-void list<T>::add_end(T data_)
+void List<T>::add_end(T data_)
 {
     node<T> *new_node = new node<T> (data_);
     node<T> *temp = m_head;
@@ -50,14 +49,14 @@ void list<T>::add_end(T data_)
 }
 // Eliminar todos los nodos
 template<typename T>
-void list<T>::del_all()
+void List<T>::del_all()
 {
     m_head->delete_all();
     m_head = 0;
 }
 // Buscar el dato de un nodo
 template<typename T>
-void list<T>::search(T data_)
+void List<T>::search(T data_)
 {
     node<T> *temp = m_head;
     int cont = 1;
@@ -80,7 +79,7 @@ void list<T>::search(T data_)
 // Eliminar por data del nodo
 //
 template<typename T>
-void list<T>::del_by_data(T data_)
+void List<T>::del_by_data(T data_)
 {
     node<T> *temp = m_head;
     node<T> *temp1 = m_head->nextNode;
@@ -109,7 +108,7 @@ void list<T>::del_by_data(T data_)
 }
 // Eliminar por posición del nodo
 template<typename T>
-void list<T>::del_by_position(int pos)
+void List<T>::del_by_position(int pos)
 {
     node<T> *temp = m_head;
     node<T> *temp1 = temp->nextNode;
