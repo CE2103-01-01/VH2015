@@ -31,10 +31,16 @@ vHeap::~vHeap(){
 };
 /*
 vRef vHeap::vMalloc(int sz, std::string type){
+   if(type=="string"){
+        actualPos+=8;
+    }
+    else{
+        actualPos+=4;
+    }
     vRef r= vRef(*actualID);
-    vMallocMetaData m = vMallocMetaData(sz,type,(*actualID)++,0);
+    vMallocMetaData m = vMallocMetaData(sz,type,(*actualID)++,actualPos);
     memoryTable->insertar(m);
-    actualPos+=sz;
+
 
     return r;
 };
