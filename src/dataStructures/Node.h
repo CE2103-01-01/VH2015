@@ -5,20 +5,41 @@
 #ifndef _VH2015_NODE_H_
 #define _VH2015_NODE_H_
 
+
 #include <iostream>
+
 using namespace std;
+
 template <class T>
-class Node {
+
+class Node
+{
 public:
-    Node();
-    Node(T);
-    ~Node();
-
-    Node *nextNode;
+    Node *next;
     T data;
-    void delete_all();
+
+    Node(){
+        data = NULL;
+        next = NULL;
+    }
+    Node(T data_){
+        Node::data = data_;
+        Node::next = NULL;
+    }
+    ~Node(){
+
+    }
 
 
+    void delete_all(){
+        if (Node::next)
+            Node::next->delete_all();
+
+    }
+    void print(){
+        cout << data << "-> ";
+        //Node::~Node();
+    }
 };
 
 

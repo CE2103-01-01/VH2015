@@ -10,27 +10,94 @@
 #include <stdlib.h>
 
 #include "node.h"
-#include "node.cpp"
 
-using namespace std;
+
+
+
 template <class T>
-class List {
 
+class List
+
+
+{
+private:
+
+    int m_num_nodes;
 public:
-    List();
+    Node<T> *m_head;
+    List(){
+        m_num_nodes = 0;
+        m_head = NULL;
+    }
     ~List();
+    int getCounter(){
+        return m_num_nodes;
+    }
+    Node<T> gethead(){
+        return *m_head;
+    }
 
-    void add_head(T);
-    void add_end(T);
+    void add_head(T data_){
+        Node<T> *new_node = new Node<T> (data_);
+        Node<T> *temp = List::m_head;
+
+        if (!List::m_head){
+            List::m_head = new_node;
+        } else {
+            new_node->next = List::m_head;
+            List::m_head = new_node;
+
+            while (temp) {
+                temp = temp->next;
+            }
+        }
+        m_num_nodes++;
+    }
+    void add_end(T data_){
+        {
+            Node<T> *new_node = new Node<T> (data_);
+            Node<T> *temp = List::m_head;
+
+            if (!List::m_head) {
+                List::m_head = new_node;
+            } else {
+                while (temp->next != NULL) {
+                    temp = temp->next;
+                }
+                temp->next = new_node;
+            }
+            m_num_nodes++;
+        }
+
+    }
+
+
     void del_all();
     void del_by_data(T);
     void del_by_position(int);
-    void search(T);
 
 
-private:
-    node<T> *m_head;
-    int m_num_nodes;
+
+
+    void print()
+    {
+        Node<T> *temp = List::m_head;
+        if (!List::m_head) {
+            std::cout << "La Lista está vacía " << std::endl;
+        } else {
+            while (temp) {
+                temp->print();
+                if (!temp->next) std::cout << "NULL";
+                temp = temp->next;
+            }
+        }
+        std::cout << std::endl << std::endl;
+    }
+
+    void Search(T);
+
+
+
 };
 
 

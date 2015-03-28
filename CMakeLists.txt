@@ -5,12 +5,17 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES    main.cpp
                     src/vheap/vHeap.cpp
+                    src/vheap/vMallocMetaData.cpp
+                    src/vheap/vRef.cpp
                     src/vheap/vGarbageCollector.cpp
                     src/XML/pugixml.cpp
                     src/XML/xmlWriter.cpp)
 
 set(HEADERS_FILES
                     src/vheap/vHeap.h
+                    src/vheap/vObject.h
+                    src/vheap/vRef.h
+                    src/vheap/vMallocMetaData.h
                     src/vheap/vGarbageCollector.h
                     src/XML/pugiconfig.hpp
                     src/XML/pugixml.hpp
