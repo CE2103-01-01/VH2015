@@ -5,24 +5,12 @@
 #ifndef _VH2015_VREF_H_
 #define _VH2015_VREF_H_
 
-
 class vRef {
-public:
-    vRef(vObject object,int* ID);
-    void changeID(int* id);
-    <vObject>operator*();
-    <vRef>operator=();
-    <vRef>operator ==();
-   // <vRef>operator ++();
-
-    <vRef>operator --();
-
+    public:
+    vRef(int ID);
+    int referenceID;
+    void changeID(int);
     virtual ~vRef();
-protected:
-private:
-    int* referenceID;
-    vObject object;
 };
-
 
 #endif //_VH2015_VREF_H_
