@@ -29,7 +29,7 @@ vHeap::~vHeap(){
     free(mainChunk);
     free(dumpFrecuency);
 };
-
+/*
 vRef vHeap::vMalloc(int sz, std::string type){
     vRef r= vRef(*actualID);
     vMallocMetaData m = vMallocMetaData(sz,type,(*actualID)++,0);
@@ -52,3 +52,4 @@ void vHeap::printMetadata(){
         n=n->obtenerSiguiente();
     };
 };
+ */

@@ -23,4 +23,4 @@ set(HEADERS_FILES
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vheap/vHeap.cpp src/vheap/vHeap.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vheap/vHeap.cpp src/vheap/vHeap.h src/Iterator/Iterator.h)

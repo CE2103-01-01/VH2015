@@ -1,6 +1,8 @@
 //
 // Created by alex on 19/03/15.
 //
+#ifndef _VH2015_LIST_H
+#define _VH2015_LIST_H
 
 #include <iostream>
 #include <stdlib.h>
@@ -18,7 +20,7 @@ public:
     Node(T*); //Constructor
     Node(T); //Constructor
     ~Node(); //Destructor
-    T* getData()(); //Devuelve el dato del objeto
+    T* getData(); //Devuelve el dato del objeto
     Node<T>* getNextNode(); //Accede al nodo next
     Node<T>* getPrevNode(); //Accede al nodo prev
     void append(Node<T>*); //Inserta un nodo next
@@ -92,7 +94,7 @@ template<class T> Node<T>* Node<T>::getPrevNode(){
 *
 * @return T
 */
-template<class T> T* Node<T>::getData()(){
+template<class T> T* Node<T>::getData(){
     return data;
 };
 /** @brief Inserta un nodo despues
