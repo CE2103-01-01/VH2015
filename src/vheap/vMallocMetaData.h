@@ -8,7 +8,7 @@
 #include <iostream>
 class vMallocMetaData {
         int idRef;
-        int offset;
+        int* offset;
         std::string type;
         int dataSize;
         bool useFlag;
@@ -16,12 +16,12 @@ class vMallocMetaData {
 
     public:
         vMallocMetaData();
-        vMallocMetaData(int,std::string, int, int);
+        vMallocMetaData(int,std::string, int, int*);
         ~vMallocMetaData();
         void setId(int id);
         int getId();
-        void setOffset(int offset);
-        int getOffset();
+        void setOffset(int* offset);
+        int* getOffset();
         void setType(std::string);
         std::string getType();
         void setSize(int);
