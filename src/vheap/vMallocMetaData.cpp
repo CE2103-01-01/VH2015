@@ -4,13 +4,13 @@
 
 #include "vMallocMetaData.h"
 
-vMallocMetaData::vMallocMetaData(int dataSize, string type,int* id,int* offset)
+vMallocMetaData::vMallocMetaData(int dataSize, std::string type,int id,int offset)
 {
-    vMallocMetaData::dataSize = dataSize;
-    vMallocMetaData::type= type;
-    vMallocMetaData::idRef = id;
-    vMallocMetaData::offset = offset;
-    vMallocMetaData::useFlag = true;
+    dataSize = dataSize;
+    type= type;
+    idRef = id;
+    offset = offset;
+    useFlag = true;
     increaseCounter();
 }
 vMallocMetaData::vMallocMetaData() {
@@ -32,10 +32,10 @@ void vMallocMetaData::increaseCounter() {
 void vMallocMetaData::decreaseCounter() {
     counter--;
 }
-void vMallocMetaData::setId(int *id) {
+void vMallocMetaData::setId(int id) {
     idRef=id;
 }
-void vMallocMetaData::setOffset(int *Offset) {
+void vMallocMetaData::setOffset(int Offset) {
     offset=Offset;
 }
 void vMallocMetaData::setSize(int size){
@@ -44,13 +44,13 @@ void vMallocMetaData::setSize(int size){
 void vMallocMetaData::setFlag(bool flag){
     useFlag= flag;
 }
-void vMallocMetaData::setType(string Type){
+void vMallocMetaData::setType(std::string Type){
     type = Type;
 }
-int* vMallocMetaData::getId(){
+int vMallocMetaData::getId(){
     return idRef;
 }
-int* vMallocMetaData::getOffset() {
+int vMallocMetaData::getOffset() {
     return offset;
 }
 int vMallocMetaData::getSize(){
@@ -59,8 +59,6 @@ int vMallocMetaData::getSize(){
 bool vMallocMetaData::getUseFlag(){
     return useFlag;
 }
-string vMallocMetaData::getType(){
+std::string vMallocMetaData::getType(){
     return type;
 }
-
-
