@@ -8,6 +8,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 template<class T> class List;
+template<class T> class Node;
+template <class T> class ListIterator{
+private:
+    int position;
+    List<T>* myList;
+    Node<T>* currentNode;
+public:
+    ListIterator(List<T>*);
+    virtual bool hasNext();
+
+    virtual T* next();
+
+};
+
+
 /** @brief Declaracion de la clase nodo
 *
 */
@@ -33,11 +48,13 @@ public:
 /** @brief Declaracion de la clase nodo
 *
 */
-template<class T> class List{
+template<class T> class List
+{
     Node<T>* _head; //primer nodo
     Node<T>* _tail; //_tail nodo
     int l = 0; //longitud
 public:
+    virtual void getIterator(ListIterator<T> *temp);
     List(); //Constructor
     ~List(); //Destructor
     void add(T); //Inserta nodo al inicio
@@ -52,7 +69,10 @@ public:
     int len(); //Devuelve longtiud
     List<T>operator=(List<T>); //Operador de asignacion
     void print(); //Imprime en consola
+    ListIterator<T> getIterator(ListIterator<T> &ret);
 };
+
+
 /** @brief Constructor
 *
 */
@@ -339,5 +359,26 @@ template<class T> void List<T>::print(){
 };
 
 
+template <class T>
+void List<T>::getIterator(ListIterator<T> *temp) {
+    new(temp) ListIterator<T>(this);
+
+}
+template <class T>
+bool ListIterator<T>::hasNext() {
+    return myList->len()>position-1;
+}
+
+template <class T>
+T* ListIterator<T>::next() {
+    currentNode->getNextNode();
+    return currentNode->getData();
+}
+
+template <class T>
+ListIterator<T>::ListIterator(List<T>* lista) {
+    myList = lista;
+    currentNode = lista->getNode(0);
+}
 
 #endif //_VH2015_LIST_H_

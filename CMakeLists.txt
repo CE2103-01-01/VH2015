@@ -19,8 +19,9 @@ set(HEADERS_FILES
                     src/vheap/vGarbageCollector.h
                     src/XML/pugiconfig.hpp
                     src/XML/pugixml.hpp
-                    src/XML/xmlWriter.h)
+                    src/XML/xmlWriter.h
+                    src/dataStructures/List.h)
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vheap/vHeap.cpp src/vheap/vHeap.h src/Iterator/Iterator.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES}  )
