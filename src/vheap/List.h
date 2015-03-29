@@ -58,7 +58,7 @@ public:
     ~List(); //Destructor
     void add(T); //Inserta nodo al inicio
     void append(T); //Inserta nodo al final
-    bool deleteNode(T); //Busca nodo y lo borra
+    bool deleteNodeByData(T); //Busca nodo y lo borra
     bool deleteNode(int); //Busca nodo y lo borra
     void deleteAll(); //Borra all
     bool empty(); //True=vacia
@@ -207,7 +207,7 @@ template<class T> void List<T>::append(T d){
 *
 * @param T d
 */
-template<class T> bool List<T>::deleteNode(T d){
+template<class T> bool List<T>::deleteNodeByData(T d){
     Node<T>* tmp=_head;
     for(int i=0; i<l; i++){
         if(*tmp->getData()()==d){
