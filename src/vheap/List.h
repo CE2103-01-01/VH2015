@@ -180,11 +180,11 @@ template<class T> void List<T>::add(T d){
     Node<T> *n = static_cast<Node<T>*>(malloc(sizeof(Node<T>)));
     new (n) Node<T>(d);
     if(_head==0){
-        _head = n;
-        _tail = n;
-    }else{
         n->append(_head);
         _head=n;
+    }else{
+        _head = n;
+        _tail = n;
     };
     l++;
 };
