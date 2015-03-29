@@ -121,12 +121,13 @@ template<class T> T* Node<T>::getData(){
 */
 template<class T> void Node<T>::append(Node<T>* n){
     if(next!=0){
-        next->add(n);
+        Node<T>* tmp = next;
+        next = n;
+        next->append(tmp);
+    }else{
+        next=n;
     };
-    next=n;
-    if(n->getPrevNode()!=this){
-        n->add(this);
-    };
+    n->add(this);
 };
 /** @brief Inserta un nodo antes
 *
@@ -134,12 +135,13 @@ template<class T> void Node<T>::append(Node<T>* n){
 */
 template<class T> void Node<T>::add(Node<T>* n){
     if(prev!=0){
-        prev->append(n);
+        Node<T>* tmp = prev;
+        prev = n;
+        prev->add(tmp);
+    }else{
+        prev=n
     };
-    prev=n;
-    if(n->getNextNode()!=this){
-        n->append(this);
-    };
+    prev->append(this);
 };
 /** @brief Vacia nodo antes
 *
