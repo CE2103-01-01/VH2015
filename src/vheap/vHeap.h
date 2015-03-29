@@ -7,13 +7,16 @@
 
 
 
-#include "dataStructures/List.h"
+
 #include "vRef.h"
 #include "vMallocMetaData.h"
+#include "List.h"
 #include <iostream>
 #include <stdlib.h>
+#include <sstream>
 
 class vHeap{
+    friend class Dump;
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
@@ -33,3 +36,14 @@ public:
     void printMetadata();
 };
 #endif //_VH2015_VHEAP_H_
+class Dump {
+    Dump();
+    ~Dump();
+    int frecuency;
+    int counter;
+    std::string directory;
+    bool dumpping;
+
+    std::string IntToStr(int n);
+    void saveDumpFile();
+}

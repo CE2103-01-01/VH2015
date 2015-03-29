@@ -2,6 +2,8 @@
 // Created by alex on 20/03/15.
 //
 
+#include <fstream>
+#include <unistd.h>
 #include "vHeap.h"
 
 
@@ -61,6 +63,24 @@ void vHeap::printMetadata(){
  */vHeap* vHeap::getInstance() {
     if(!vHeapSingleton)
         *vHeapSingleton = vHeap(0,0);
-    return vHeapSingleton
+    return vHeapSingleton;
 
+}
+std::string Dump::IntToStr(int n) {
+
+
+    std::stringstream result;
+        result << n;
+        return result.str();
+
+}
+void Dump::saveDumpFile() {
+    while(Dump::dumpping){
+        std::ofstream myfile(Dump::directory);
+        myfile.open("DumpFile"+IntToStr(Dump::counter)+".txt");
+        //falta escritura de los contenidos de heap
+        Dump::counter++;
+        myfile.close();
+        usleep(Dump::frecuency);
+    }
 }
