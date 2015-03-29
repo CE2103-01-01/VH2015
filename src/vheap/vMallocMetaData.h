@@ -8,7 +8,7 @@
 #include <iostream>
 class vMallocMetaData {
         int idRef;
-        int* offset;
+        void* offset;
         std::string type;
         int dataSize;
         bool useFlag;
@@ -16,12 +16,12 @@ class vMallocMetaData {
 
     public:
         vMallocMetaData();
-        vMallocMetaData(int,std::string, int, int*);
+        vMallocMetaData(int,std::string, int, void*);
         ~vMallocMetaData();
         void setId(int id);
         int getId();
-        void setOffset(int* offset);
-        int* getOffset();
+        void setOffset(void* offset);
+        void* getOffset();
         void setType(std::string);
         std::string getType();
         void setSize(int);
@@ -34,3 +34,60 @@ class vMallocMetaData {
 };
 
 #endif //_VH2015_VMALLOCMETADATA_H_
+
+
+vMallocMetaData::vMallocMetaData(int dataSize, std::string type,int id,void* offset)
+{
+    dataSize = dataSize;
+    type= type;
+    idRef = id;
+    offset = offset;
+    useFlag = true;
+    increaseCounter();
+}
+vMallocMetaData::vMallocMetaData() {
+}
+
+vMallocMetaData::~vMallocMetaData()
+{
+    decreaseCounter();
+}
+int vMallocMetaData::getCounter() {
+    return counter;
+}
+void vMallocMetaData::increaseCounter() {
+    counter++;
+}
+void vMallocMetaData::decreaseCounter() {
+    counter--;
+}
+void vMallocMetaData::setId(int id) {
+    idRef=id;
+}
+void vMallocMetaData::setOffset(void* offs) {
+    offset=offs;
+}
+void vMallocMetaData::setSize(int size){
+    dataSize= size;
+}
+void vMallocMetaData::setFlag(bool flag){
+    useFlag= flag;
+}
+void vMallocMetaData::setType(std::string Type){
+    type = Type;
+}
+int vMallocMetaData::getId(){
+    return idRef;
+}
+void* vMallocMetaData::getOffset() {
+    return offset;
+}
+int vMallocMetaData::getSize(){
+    return dataSize;
+}
+bool vMallocMetaData::getUseFlag(){
+    return useFlag;
+}
+std::string vMallocMetaData::getType(){
+    return type;
+}

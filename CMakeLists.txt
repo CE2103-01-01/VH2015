@@ -13,10 +13,10 @@ set(HEADERS_FILES
                     src/vheap/vRef.h
                     src/vheap/vMallocMetaData.h
                     src/vheap/vGarbageCollector.h
+                    src/vheap/List.h
                     src/XML/pugiconfig.hpp
                     src/XML/pugixml.hpp
-                    src/XML/xmlWriter.h
-                    src/vheap/List.h)
+                    src/XML/xmlWriter.h)
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
