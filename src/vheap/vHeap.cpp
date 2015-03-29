@@ -20,8 +20,8 @@ vHeap::vHeap(int s, float o){
     memoryTable=static_cast<List<vMallocMetaData>*>(malloc(sizeof(List<vMallocMetaData>)));
     new(memoryTable) List<vMallocMetaData>();
 
-    vDebug=static_cast<bool*>(malloc(sizeof(bool)));
-    dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
+    //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
+    //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
 };
 
 vHeap::~vHeap(){
@@ -53,8 +53,11 @@ void vHeap::printMetadata(){
     };
 };
  vHeap* vHeap::getInstance() {
-    if(!vHeapSingleton)
-        *vHeapSingleton = vHeap(0,0);
+    if(!vHeapSingleton) {
+        vHeapSingleton = static_cast<vHeap *>(malloc(sizeof(vHeap)));//TODO-ernesto datos provienen del xml
+        new(vHeapSingleton) vHeap(100,100);
+    }
+
     return vHeapSingleton;
 
 }
