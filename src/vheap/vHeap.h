@@ -16,7 +16,7 @@
 class vHeap{
     bool* vDebug;
     int* dumpFrecuency;
-//    static vHeapSingleton;
+    static vHeap* vHeapSingleton;
     List<vMallocMetaData>* memoryTable;
     float* overweight;
     void* mainChunk;
@@ -27,7 +27,7 @@ public:
     ~vHeap();
     vRef vMalloc(int, std::string);
     void vFree();
-    static vHeap getInstance();
+    static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
     void printMetadata();

@@ -3,3 +3,4 @@ Se crea la estructura principal y algunas clases.
 19/03/2015
 Se arreglo el cmake, se hizo un enum
 28/03/2015
+Reunion con Roberto. Se trabajo unificando vHeap.Arreglos en lista. Iterador de Lista. Investigacion templates, iterator

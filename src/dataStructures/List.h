@@ -381,4 +381,4 @@ ListIterator<T>::ListIterator(List<T>* lista) {
     currentNode = lista->getNode(0);
 }
 
-#endif //_VH2015_LIST_H_
+#endif //_VH2015_LIST

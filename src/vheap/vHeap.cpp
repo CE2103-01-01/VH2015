@@ -58,4 +58,9 @@ void vHeap::printMetadata(){
         n=n->obtenerSiguiente();
     };
 };
- */
+ */vHeap* vHeap::getInstance() {
+    if(!vHeapSingleton)
+        *vHeapSingleton = vHeap(0,0);
+    return vHeapSingleton
+
+}
