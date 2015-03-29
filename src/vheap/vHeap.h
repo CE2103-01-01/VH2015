@@ -16,6 +16,7 @@
 class vHeap{
 friend class vGarbageCollector;
 private:
+    static vHeap* vHeapSingleton;
     bool* vDebug;
     int* dumpFrecuency;
     static const vHeap* singleton;
@@ -25,11 +26,11 @@ private:
     void* actualPos;
     int* actualID;
 public:
-    vHeap(int,float);
+    vHeap(int s,float o);
     ~vHeap();
     vRef vMalloc(int, std::string);
     void vFree();
-    const vHeap* getInstance();
+    static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
     void printMetadata();

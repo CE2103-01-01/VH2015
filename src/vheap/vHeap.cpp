@@ -1,7 +1,7 @@
 //
 // Created by alex on 20/03/15.
 //
-
+#include "vHeap.h"
 
 vHeap::vHeap(int s, float o){
     overweight=static_cast<float*>(malloc(sizeof(float)));
@@ -30,32 +30,9 @@ vHeap::~vHeap(){
 
 
 
-vHeap::vHeap(int s, float o){
-    overweight=static_cast<float*>(malloc(sizeof(float)));
-    *overweight=o;
 
-    actualID=static_cast<int*>(malloc(sizeof(int)));
-    *actualID=0;
 
-    mainChunk=malloc(s);
-    actualPos=mainChunk;
 
-    memoryTable=static_cast<List<vMallocMetaData>*>(malloc(sizeof(List<vMallocMetaData>)));//TODO-roberto hay un error aqui
-    new(memoryTable) List<vMallocMetaData>();
-
-    vDebug=static_cast<bool*>(malloc(sizeof(bool)));
-    dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
-
-    //singleton=this;
-};
-
-vHeap::~vHeap(){
-    free(overweight);
-    free(vDebug);
-    free(memoryTable);
-    free(mainChunk);
-    free(dumpFrecuency);
-};
 
 vRef vHeap::vMalloc(int sz, std::string type){
     vRef r= vRef(*actualID);
