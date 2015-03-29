@@ -6,11 +6,12 @@
 #define _VH2015_VREF_H_
 
 class vRef {
-    public:
-    vRef(int ID);
     int referenceID;
-    void changeID(int);
-    virtual ~vRef();
+    public:
+        vRef(int ID);
+        void changeID(int);
+        virtual ~vRef();
+        int operator *();
 };
 
 #endif //_VH2015_VREF_H_

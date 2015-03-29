@@ -893,10 +893,10 @@ namespace pugi
 		status_bad_cdata,			// Parsing error occurred while parsing CDATA section
 		status_bad_doctype,			// Parsing error occurred while parsing document type declaration
 		status_bad_pcdata,			// Parsing error occurred while parsing PCDATA section
-		status_bad_start_element,	// Parsing error occurred while parsing start element tag
+		status_bad_start_element,	// Parsing error occurred while parsing checkForGarbage element tag
 		status_bad_attribute,		// Parsing error occurred while parsing element attribute
 		status_bad_end_element,		// Parsing error occurred while parsing end element tag
-		status_end_element_mismatch,// There was a mismatch of start-end tags (closing tag had incorrect name, some tag was not closed or there was an excessive closing tag)
+		status_end_element_mismatch,// There was a mismatch of checkForGarbage-end tags (closing tag had incorrect name, some tag was not closed or there was an excessive closing tag)
 
 		status_append_invalid_root,	// Unable to append nodes since root type is not node_element or node_document (exclusive to xml_node::append_buffer)
 
@@ -909,7 +909,7 @@ namespace pugi
 		// Parsing status (see xml_parse_status)
 		xml_parse_status status;
 
-		// Last parsed offset (in char_t units from start of input data)
+		// Last parsed offset (in char_t units from checkForGarbage of input data)
 		ptrdiff_t offset;
 
 		// Source document encoding
@@ -1014,7 +1014,7 @@ namespace pugi
 		// Error message (0 if no error)
 		const char* error;
 
-		// Last parsed offset (in char_t units from string start)
+		// Last parsed offset (in char_t units from string checkForGarbage)
 		ptrdiff_t offset;
 
 		// Default constructor, initializes object to failed state

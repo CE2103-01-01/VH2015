@@ -6,8 +6,16 @@
 #define _VH2015_VGARBAGECOLLECTOR_H_
 
 
-class vGarbageCollector {
+#include "vHeap.h"
 
+class vGarbageCollector {
+private:
+    vHeap* myHeap;
+    int frequency;
+    bool on;
+    void checkForGarbage();
+public:
+    vGarbageCollector(vHeap *pHeap, int frequency);
 };
 
 

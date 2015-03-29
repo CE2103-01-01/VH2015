@@ -16,8 +16,7 @@ private:
     Node<T>* currentNode;
 public:
     ListIterator(List<T>*);
-    virtual bool hasNext();
-
+    virtual bool exists();
     virtual T* next();
 
 };
@@ -54,7 +53,7 @@ template<class T> class List
     Node<T>* _tail; //_tail nodo
     int l = 0; //longitud
 public:
-    virtual void getIterator(ListIterator<T> *temp);
+    virtual void getIterator(ListIterator<T>*);
     List(); //Constructor
     ~List(); //Destructor
     void add(T); //Inserta nodo al inicio
@@ -69,7 +68,6 @@ public:
     int len(); //Devuelve longtiud
     List<T>operator=(List<T>); //Operador de asignacion
     void print(); //Imprime en consola
-    ListIterator<T> getIterator(ListIterator<T> &ret);
 };
 
 
@@ -365,7 +363,7 @@ void List<T>::getIterator(ListIterator<T> *temp) {
 
 }
 template <class T>
-bool ListIterator<T>::hasNext() {
+bool ListIterator<T>::exists() {
     return position<myList->len();
 }
 

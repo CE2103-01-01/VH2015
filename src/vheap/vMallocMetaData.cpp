@@ -1,10 +1,10 @@
 //
-// Created by alex on 18/03/15.
+// Created by pablo on 28/03/15.
 //
 
 #include "vMallocMetaData.h"
 
-vMallocMetaData::vMallocMetaData(int dataSize, std::string type,int id,int* offset)
+vMallocMetaData::vMallocMetaData(int dataSize, std::string type,int id,void* offset)
 {
     dataSize = dataSize;
     type= type;
@@ -18,9 +18,6 @@ vMallocMetaData::vMallocMetaData() {
 
 vMallocMetaData::~vMallocMetaData()
 {
-    if(vMallocMetaData::counter==0){
-        delete this;
-    }
     decreaseCounter();
 }
 int vMallocMetaData::getCounter() {
@@ -35,8 +32,8 @@ void vMallocMetaData::decreaseCounter() {
 void vMallocMetaData::setId(int id) {
     idRef=id;
 }
-void vMallocMetaData::setOffset(int* Offset) {
-    offset=Offset;
+void vMallocMetaData::setOffset(void* offs) {
+    offset=offs;
 }
 void vMallocMetaData::setSize(int size){
     dataSize= size;
@@ -50,7 +47,7 @@ void vMallocMetaData::setType(std::string Type){
 int vMallocMetaData::getId(){
     return idRef;
 }
-int* vMallocMetaData::getOffset() {
+void* vMallocMetaData::getOffset() {
     return offset;
 }
 int vMallocMetaData::getSize(){

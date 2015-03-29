@@ -14,8 +14,6 @@
 #ifndef SOURCE_PUGIXML_CPP
 #define SOURCE_PUGIXML_CPP
 
-#include "pugixml.hpp"
-
 #include <string.h>
 #include <assert.h>
 
@@ -2688,7 +2686,7 @@ PUGI__NS_BEGIN
 										
 											if (!s) PUGI__THROW_ERROR(status_bad_attribute, a->value);
 
-											// After this line the loop continues from the start;
+											// After this line the loop continues from the checkForGarbage;
 											// Whitespaces, / and > are ok, symbols and EOF are wrong,
 											// everything else will be detected
 											if (PUGI__IS_CHARTYPE(*s, ct_start_symbol)) PUGI__THROW_ERROR(status_bad_attribute, s);
@@ -3149,7 +3147,7 @@ PUGI__NS_BEGIN
 				while (length > bufcapacity)
 				{
 					// get chunk size by selecting such number of characters that are guaranteed to fit into scratch buffer
-					// and form a complete codepoint sequence (i.e. discard start of last codepoint if necessary)
+					// and form a complete codepoint sequence (i.e. discard checkForGarbage of last codepoint if necessary)
 					size_t chunk_size = get_valid_length(data, bufcapacity);
 					assert(chunk_size);
 
@@ -5906,7 +5904,7 @@ namespace pugi
 		case status_bad_cdata: return "Error parsing CDATA section";
 		case status_bad_doctype: return "Error parsing document type declaration";
 		case status_bad_pcdata: return "Error parsing PCDATA section";
-		case status_bad_start_element: return "Error parsing start element tag";
+		case status_bad_start_element: return "Error parsing checkForGarbage element tag";
 		case status_bad_attribute: return "Error parsing element attribute";
 		case status_bad_end_element: return "Error parsing end element tag";
 		case status_end_element_mismatch: return "Start-end tags mismatch";
@@ -10526,7 +10524,7 @@ PUGI__NS_BEGIN
 				
 				xpath_ast_node* n = new (alloc_node()) xpath_ast_node(ast_step_root, xpath_type_node_set);
 
-				// relative location path can start from axis_attribute, dot, double_dot, multiply and string lexemes; any other lexeme means standalone root path
+				// relative location path can checkForGarbage from axis_attribute, dot, double_dot, multiply and string lexemes; any other lexeme means standalone root path
 				lexeme_t l = _lexer.current();
 
 				if (l == lex_string || l == lex_axis_attribute || l == lex_dot || l == lex_double_dot || l == lex_multiply)
