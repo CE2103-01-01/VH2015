@@ -32,36 +32,27 @@ vHeap::~vHeap(){
     free(dumpFrecuency);
 };
 vHeap* vHeap::vHeapSingleton = 0;
-/*
 vRef vHeap::vMalloc(int sz, std::string type){
-   if(type=="string"){
-        actualPos+=8;
-    }
-    else{
-        actualPos+=4;
-    }
     vRef r= vRef(*actualID);
     vMallocMetaData m = vMallocMetaData(sz,type,(*actualID)++,actualPos);
-    memoryTable->insertar(m);
-
+    memoryTable->append(m);
+    actualPos+=sz;
 
     return r;
 };
 
 void vHeap::printMetadata(){
-    Nodo<vMallocMetaData>* n = memoryTable->obtenerPrimero();
-    for(int i=0;i<memoryTable->len();i++){
-        std::cout<<i<<std::endl;
-        vMallocMetaData m = n->dato;
+    ListIterator<vMallocMetaData>* iter = memoryTable->getIterator();
+    while(iter->exists()){
+        vMallocMetaData* m = iter->next();
         std::cout<<
-                "ID: "   << static_cast<vMallocMetaData>(n->obtenerDato()).getId()   <<
-                "Size: " << static_cast<vMallocMetaData>(n->obtenerDato()).getSize() <<
-                "Type: " << static_cast<vMallocMetaData>(n->obtenerDato()).getType() <<
-                std::endl;
-        n=n->obtenerSiguiente();
+        "ID: "   << m->getId()   <<
+        "Size: " << m->getSize() <<
+        "Type: " << m->getType() <<
+        std::endl;
     };
 };
- */vHeap* vHeap::getInstance() {
+ vHeap* vHeap::getInstance() {
     if(!vHeapSingleton)
         *vHeapSingleton = vHeap(0,0);
     return vHeapSingleton;

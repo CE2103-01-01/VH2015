@@ -17,7 +17,7 @@ vGarbageCollector::vGarbageCollector(vHeap *pHeap, int freq) {
 void vGarbageCollector::checkForGarbage() {
     while(on)
     {
-        //myHeap->memoryTable
+        //myHeap->memoryTable;
         usleep(1/frequency);
     }
 }

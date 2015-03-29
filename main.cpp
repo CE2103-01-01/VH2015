@@ -16,7 +16,7 @@ int main(){
     }
     std::cout<<"Resultado Esperado: 2,3,4,5,6"<<std::endl;
     vHeap* vH = vHeap::getInstance();
-    //vRef r1 = vH->vMalloc(4,"t1");
+    vRef r1 = vH->vMalloc(4,"t1");
     //vRef r2 = vH->vMalloc(2,"t2");
     //vRef r3 = vH->vMalloc(8,"t3");
     //vH->printMetadata();

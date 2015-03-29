@@ -35,7 +35,7 @@ public:
     void startDumpThread();
     void printMetadata();
 };
-#endif //_VH2015_VHEAP_H_
+
 class Dump {
     Dump();
     ~Dump();
@@ -47,3 +47,6 @@ class Dump {
     std::string IntToStr(int n);
     void saveDumpFile();
 };
+
+
+#endif //_VH2015_VHEAP_H_
