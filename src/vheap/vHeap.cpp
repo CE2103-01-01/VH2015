@@ -3,6 +3,10 @@
 //
 
 #include "vHeap.h"
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <unistd.h>
 
 
 vHeap::vHeap(int s, float o){
@@ -19,7 +23,7 @@ vHeap::vHeap(int s, float o){
     new(memoryTable) List<vMallocMetaData>();
 
     vDebug=static_cast<bool*>(malloc(sizeof(bool)));
-    dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
+    dumpFrecuency;//solo hay que cargar desde xml
 };
 
 vHeap::~vHeap(){
@@ -27,7 +31,7 @@ vHeap::~vHeap(){
     free(vDebug);
     free(memoryTable);
     free(mainChunk);
-    free(dumpFrecuency);
+
 };
 /*
 vRef vHeap::vMalloc(int sz, std::string type){
@@ -59,8 +63,35 @@ void vHeap::printMetadata(){
     };
 };
  */vHeap* vHeap::getInstance() {
-    if(!vHeapSingleton)
-        *vHeapSingleton = vHeap(0,0);
-    return vHeapSingleton
+    if (!vHeapSingleton) {
+        *vHeapSingleton = vHeap(0, 0);
+        return vHeapSingleton;
+
+    }
+}
+dump::dump() {
+    //cargar directorio y frecuencia desde xml.
+    dump::dumpping = true;
+    dump::counter = 1;
 
 }
+std::string dump::IntToStr(int n) {
+    std::stringstream result;
+    result << n;
+    return result.str();
+}
+void dump::saveDump() {
+    int frecuency; //aqui se carga la frecuencia desde xml
+    while(dump::dumpping){
+        std::ofstream myfile(dump::directory);
+        myfile.open ("MemoryDump"+IntToStr(dump::counter)+".txt");
+        dump::counter++;
+        //falta accesar al heap y escritura al arhivo txt
+        myfile.close();
+
+        usleep(frecuency);
+    }
+
+}
+
+
