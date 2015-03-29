@@ -84,7 +84,7 @@ template<class T> Node<T>::Node(T *v){
 */
 template<class T> Node<T>::Node(T v){
     data=static_cast<T*>(malloc(sizeof(v)));
-    new(data) T(v);
+    *data=v;
 };
 /** @brief Destructor
 *
