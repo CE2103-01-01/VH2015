@@ -366,12 +366,13 @@ void List<T>::getIterator(ListIterator<T> *temp) {
 }
 template <class T>
 bool ListIterator<T>::hasNext() {
-    return myList->len()>position-1;
+    return position<myList->len();
 }
 
 template <class T>
 T* ListIterator<T>::next() {
     currentNode->getNextNode();
+    position++;
     return currentNode->getData();
 }
 
