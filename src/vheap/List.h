@@ -127,7 +127,9 @@ template<class T> void Node<T>::append(Node<T>* n){
     }else{
         next=n;
     };
-    n->add(this);
+    if(next->getPrevNode()!=this){
+        next->add(this);
+    };
 };
 /** @brief Inserta un nodo antes
 *
@@ -141,6 +143,7 @@ template<class T> void Node<T>::add(Node<T>* n){
     }else{
         prev=n
     };
+    if(prev->getNextNode()!=this)
     prev->append(this);
 };
 /** @brief Vacia nodo antes
