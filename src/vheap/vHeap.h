@@ -16,16 +16,16 @@
 class vHeap{
 friend class vGarbageCollector;
 private:
-    static vHeap* vHeapSingleton;
     bool* vDebug;
     int* dumpFrecuency;
-    static const vHeap* singleton;
     List<vMallocMetaData>* memoryTable;
     float* overweight;
     void* mainChunk;
     void* actualPos;
     int* actualID;
+
 public:
+    static vHeap* vHeapSingleton;
     vHeap(int s,float o);
     ~vHeap();
     vRef vMalloc(int, std::string);

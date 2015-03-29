@@ -5,6 +5,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES    main.cpp
                     src/vheap/vHeap.cpp
+                    src/vheap/vGarbageCollector.cpp
+                    src/vheap/vMallocMetaData.cpp
+                    src/vheap/vRef.cpp
                     )
 
 set(HEADERS_FILES
@@ -17,4 +20,4 @@ set(HEADERS_FILES
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES}  )
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES}  src/vheap/vRef.cpp src/vheap/vMallocMetaData.cpp)

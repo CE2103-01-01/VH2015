@@ -60,9 +60,10 @@ void vHeap::printMetadata(){
 };
 
 
+vHeap* vHeap::vHeapSingleton = 0;
 vHeap* vHeap::getInstance() {
     if(!vHeapSingleton)
-        *vHeapSingleton = vHeap(0,0);//TODO-ernesto obtener datos del xml
+        *vHeapSingleton = vHeap(100,100);//TODO-ernesto obtener datos del xml
     return vHeapSingleton;
 
 }
