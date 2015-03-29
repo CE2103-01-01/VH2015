@@ -11,9 +11,9 @@ template<class T> class List;
 template<class T> class Node;
 template <class T> class ListIterator{
 private:
-    int position;
-    List<T>* myList;
-    Node<T>* currentNode;
+    int position = 0;
+    List<T>* myList = 0;
+    Node<T>* currentNode = 0;
 public:
     ListIterator(List<T>*);
     virtual bool exists();
@@ -53,7 +53,7 @@ template<class T> class List
     Node<T>* _tail; //_tail nodo
     int l = 0; //longitud
 public:
-    virtual void getIterator(ListIterator<T>*);
+    virtual ListIterator<T>* getIterator();
     List(); //Constructor
     ~List(); //Destructor
     void add(T); //Inserta nodo al inicio
@@ -363,8 +363,9 @@ template<class T> void List<T>::print(){
 
 
 template <class T>
-void List<T>::getIterator(ListIterator<T> *temp) {
-    new(temp) ListIterator<T>(this);
+ListIterator<T>* List<T>::getIterator() {
+    return new ListIterator<T>(this);
+
 
 }
 template <class T>
@@ -377,7 +378,7 @@ T* ListIterator<T>::next() {
     if (!currentNode)
         currentNode =  myList->getNode(0);
     else
-        currentNode->getNextNode();
+        currentNode = currentNode->getNextNode();
     position++;
     return currentNode->getData();
 }

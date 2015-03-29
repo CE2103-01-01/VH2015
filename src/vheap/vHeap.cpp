@@ -31,6 +31,7 @@ vHeap::~vHeap(){
     free(mainChunk);
     free(dumpFrecuency);
 };
+vHeap* vHeap::vHeapSingleton = 0;
 /*
 vRef vHeap::vMalloc(int sz, std::string type){
    if(type=="string"){
@@ -72,7 +73,7 @@ std::string Dump::IntToStr(int n) {
     std::stringstream result;
         result << n;
         return result.str();
-
+  
 }
 void Dump::saveDumpFile() {
     while(Dump::dumpping){
