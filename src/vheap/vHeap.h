@@ -46,4 +46,4 @@ class Dump {
 
     std::string IntToStr(int n);
     void saveDumpFile();
-}
+};

@@ -37,8 +37,8 @@ public:
     T* getData(); //Devuelve el dato del objeto
     Node<T>* getNextNode(); //Accede al nodo next
     Node<T>* getPrevNode(); //Accede al nodo prev
-    void append(Node<T>*); //Inserta un nodo next
-    void add(Node<T>*); //Inserta un nodo prev
+    void insertAfter(Node<T> *); //Inserta un nodo next
+    void insertBefore(Node<T> *); //Inserta un nodo prev
     void vaciarDespues(); //Inserta un nodo next
     void vaciarAntes(); //Inserta un nodo prev
 };
@@ -118,32 +118,32 @@ template<class T> T* Node<T>::getData(){
 *
 * @param Node<T>*
 */
-template<class T> void Node<T>::append(Node<T>* n){
+template<class T> void Node<T>::insertAfter(Node<T> *n){
     if(next!=0){
         Node<T>* tmp = next;
         next = n;
-        next->append(tmp);
+        next->insertAfter(tmp);
     }else{
         next=n;
     };
     if(next->getPrevNode()!=this){
-        next->add(this);
+        next->insertBefore(this);
     };
 };
 /** @brief Inserta un nodo antes
 *
 * @param Node<T>*
 */
-template<class T> void Node<T>::add(Node<T>* n){
+template<class T> void Node<T>::insertBefore(Node<T> *n){
     if(prev!=0){
         Node<T>* tmp = prev;
         prev = n;
-        prev->add(tmp);
+        prev->insertBefore(tmp);
     }else{
-        prev=n
+        prev=n;
     };
     if(prev->getNextNode()!=this){
-        prev->append(this);
+        prev->insertAfter(this);
     }
 };
 /** @brief Vacia nodo antes
@@ -178,8 +178,8 @@ template<class T> List<T>::~List(){
 template<class T> void List<T>::add(T d){
     Node<T> *n = static_cast<Node<T>*>(malloc(sizeof(Node<T>)));
     new (n) Node<T>(d);
-    if(_head==0){
-        n->append(_head);
+    if(_head!=0){
+       _head->insertBefore(n);
         _head=n;
     }else{
         _head = n;
@@ -194,8 +194,8 @@ template<class T> void List<T>::add(T d){
 template<class T> void List<T>::append(T d){
     Node<T> *n = static_cast<Node<T>*>(malloc(sizeof(Node<T>)));
     new (n) Node<T>(d);
-    if(_head!=0){
-        n->add(_tail);
+    if(_tail!=0){
+        _tail->insertAfter(n);
         _tail=n;
     }else{
         _head=n;
@@ -212,7 +212,7 @@ template<class T> bool List<T>::deleteNodeByData(T d){
     for(int i=0; i<l; i++){
         if(*tmp->getData()()==d){
             if(i<l-1){
-                tmp->getPrevNode()->append(tmp->getNextNode());
+                tmp->getPrevNode()->insertAfter(tmp->getNextNode());
             }
             free(tmp);
             l--;
@@ -251,7 +251,7 @@ template<class T> bool List<T>::deleteNode(int d){
         free(tmp);
         ant->vaciarDespues();
         sig->vaciarAntes();
-        ant->append(sig);
+        ant->insertAfter(sig);
         l--;
         return true;
     }else{
