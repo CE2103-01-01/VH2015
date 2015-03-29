@@ -20,11 +20,10 @@ class vHeap{
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
-    List<vMallocMetaData>* memoryTable;
+    vMallocMetaData metaData;
     float* overweight;
     void* mainChunk;
     void* actualPos;
-    int* actualID;
 public:
     vHeap(int,float);
     ~vHeap();

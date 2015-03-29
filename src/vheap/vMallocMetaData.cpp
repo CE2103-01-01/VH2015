@@ -4,58 +4,71 @@
 
 #include "vMallocMetaData.h"
 
-vMallocMetaData::vMallocMetaData(int dataSize, std::string type,int id,void* offset)
-{
-    dataSize = dataSize;
-    type= type;
-    idRef = id;
-    offset = offset;
-    useFlag = true;
-    increaseCounter();
-}
+
 vMallocMetaData::vMallocMetaData() {
+    memoryTable=static_cast<List<vMallocMDEntry>*>(malloc(sizeof(List<vMallocMDEntry>)));
+    new(memoryTable) List<vMallocMDEntry>();
 }
 
 vMallocMetaData::~vMallocMetaData()
 {
-    decreaseCounter();
+
 }
-int vMallocMetaData::getCounter() {
+
+int vMallocMetaData::len() {
     return counter;
 }
+
 void vMallocMetaData::increaseCounter() {
     counter++;
 }
 void vMallocMetaData::decreaseCounter() {
     counter--;
 }
-void vMallocMetaData::setId(int id) {
-    idRef=id;
+
+vRef vMallocMetaData::addEntry(int size, std::string type, void *actualPos) {
+
+    memoryTable->append(vMallocMDEntry(actualID++,type,size,actualPos));
+    counter++;
+    return vRef(actualID);
 }
-void vMallocMetaData::setOffset(void* offs) {
-    offset=offs;
+
+vMallocMDEntry::vMallocMDEntry(int idRef, std::string &type, int dataSize, void *offset) : dataSize(dataSize), type(type),
+                                                                                           idRef(idRef), offset(offset)
+{
+
+
+
 }
-void vMallocMetaData::setSize(int size){
-    dataSize= size;
+/*
+void vMallocMetaData::printMetaData() {
+    ListIterator<vMallocMDEntry>* iter = memoryTable->getIterator();
+    while(iter->exists()) {
+        vMallocMDEntry *m = iter->next();
+        std::cout <<
+        "ID: " << m->getIdRef() <<
+        "Size: " << m->getDataSize <<
+        "Type: " << m->getType <<
+        std::endl;
+    }
 }
-void vMallocMetaData::setFlag(bool flag){
-    useFlag= flag;
-}
-void vMallocMetaData::setType(std::string Type){
-    type = Type;
-}
-int vMallocMetaData::getId(){
+*/
+int vMallocMDEntry::getIdRef() {
     return idRef;
 }
-void* vMallocMetaData::getOffset() {
+
+void *vMallocMDEntry::getOffSet() {
     return offset;
 }
-int vMallocMetaData::getSize(){
+
+std::string vMallocMDEntry::getType() {
+    return type;
+}
+
+int vMallocMDEntry::getDataSize() {
     return dataSize;
 }
-bool vMallocMetaData::getUseFlag(){
+
+bool vMallocMDEntry::getUseFlag() {
     return useFlag;
-}
-std::string vMallocMetaData::getType(){
-    return type;
 }

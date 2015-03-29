@@ -5,32 +5,40 @@
 #ifndef _VH2015_VMALLOCMETADATA_H_
 #define _VH2015_VMALLOCMETADATA_H_
 #include "vRef.h"
+#include "List.h"
 #include <iostream>
+class vMallocMDEntry;
 class vMallocMetaData {
-        int idRef;
-        void* offset;
-        std::string type;
-        int dataSize;
-        bool useFlag;
-        int counter = 0;
+private:
+    int counter = 0;
+    int actualID = 0;
+    List<vMallocMDEntry>* memoryTable;
+public:
+    vMallocMetaData();
+    ~vMallocMetaData();
+    int len();
+    void increaseCounter();
+    void decreaseCounter();
+    vRef addEntry(int sizes,std::string typei, void* actualPos);
+    void printMetaData();
+};
 
-    public:
-        vMallocMetaData();
-        vMallocMetaData(int,std::string, int, void*);
-        ~vMallocMetaData();
-        void setId(int id);
-        int getId();
-        void setOffset(void* offset);
-        void* getOffset();
-        void setType(std::string);
-        std::string getType();
-        void setSize(int);
-        int getSize();
-        void setFlag(bool);
-        bool getUseFlag();
-        int getCounter();
-        void increaseCounter();
-        void decreaseCounter();
+class vMallocMDEntry
+{
+private:
+    int idRef;
+    void* offset;
+    std::string type;
+    int dataSize;
+    bool useFlag;
+public:
+    vMallocMDEntry(int idRef, std::string &type, int dataSize, void *offset);
+    int getIdRef();
+    void* getOffSet();
+    std::string getType();
+    int getDataSize();
+    bool getUseFlag();
+
 };
 
 #endif //_VH2015_VMALLOCMETADATA_H_
