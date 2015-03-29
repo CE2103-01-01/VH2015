@@ -371,7 +371,10 @@ bool ListIterator<T>::hasNext() {
 
 template <class T>
 T* ListIterator<T>::next() {
-    currentNode->getNextNode();
+    if (!currentNode)
+        currentNode =  myList->getNode(0);
+    else
+        currentNode->getNextNode();
     position++;
     return currentNode->getData();
 }
@@ -379,7 +382,6 @@ T* ListIterator<T>::next() {
 template <class T>
 ListIterator<T>::ListIterator(List<T>* lista) {
     myList = lista;
-    currentNode = lista->getNode(0);
 }
 
 #endif //_VH2015_LIST
