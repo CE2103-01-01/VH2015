@@ -75,15 +75,14 @@ public:
 *
 */
 template<class T> Node<T>::Node(T *v){
-    data=static_cast<T*>(malloc(sizeof(v)));
+    data=static_cast<T*>(malloc(sizeof(T)));
     *data=*v;
-    free(v);
 };
 /** @brief Constructor
 *
 */
 template<class T> Node<T>::Node(T v){
-    data=static_cast<T*>(malloc(sizeof(v)));
+    data=static_cast<T*>(malloc(sizeof(T)));
     *data=v;
 };
 /** @brief Destructor
