@@ -21,7 +21,7 @@ public:
     vHeap(int,float);
     ~vHeap();
     vRef vMalloc(int, std::string);
-    void vFree();
+    void vFree(vRef r);
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();

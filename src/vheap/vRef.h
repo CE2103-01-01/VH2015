@@ -5,13 +5,20 @@
 #ifndef _VH2015_VREF_H_
 #define _VH2015_VREF_H_
 
+#include "vObject.h"
+
 class vRef {
-    int referenceID;
+    protected:
+        int* referenceID;
     public:
+        vRef();
         vRef(int ID);
         void changeID(int);
+        int getPtr();
         virtual ~vRef();
         int operator *();
+        void operator=(vRef ptr);
+        void operator=(vObject dato);
 };
 
 #endif //_VH2015_VREF_H_

@@ -5,7 +5,8 @@
 #include <fstream>
 #include <unistd.h>
 #include "vHeap.h"
-#include "XML/pugixml.hpp"
+#include "../../libs/pugixml.hpp"
+
 using namespace pugi;
 
 vHeap::vHeap(int s, float o){
@@ -33,6 +34,10 @@ vRef vHeap::vMalloc(int sz, std::string type){
     metaData.printMetaData();
     return r;
 };
+
+void vHeap::vFree(vRef r){
+
+}
 
  vHeap* vHeap::getInstance() {
     if(!vHeapSingleton) {
