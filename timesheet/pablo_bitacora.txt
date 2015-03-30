@@ -7,3 +7,5 @@ Reunion con Roberto. Se trabajo unificando vHeap.Arreglos en lista. Iterador de 
 28/03/2015
 Se arreglo el iterador. El problema de string listas. El segFault que causaba eso.Se cambio la estructura de MetaData
 por una mas agile.Se trabajo es eficiencia.
+29/03/2015
+Creacion de Aplicacion de Prueba.

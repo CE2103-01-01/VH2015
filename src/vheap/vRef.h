@@ -9,16 +9,24 @@
 #include "vHeap.h"
 
 class vRef {
-        int* referenceID;
-    public:
-        vRef();
-        vRef(int);
-        virtual ~vRef();
-        vObject operator *();
-        int operator !();
-        int operator=(int);
-        int operator=(vRef);
-        int operator=(vObject);
+private:
+    int *referenceID;
+public:
+    vRef();
+
+    vRef(int);
+
+    virtual ~vRef();
+
+    vObject operator*();
+
+    int operator!();
+
+    int operator=(int);
+
+    int operator=(vRef);
+
+    int operator=(vObject);
 };
 
 #endif //_VH2015_VREF_H_
