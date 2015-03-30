@@ -19,7 +19,7 @@ public:
     int len();
     void increaseCounter();
     void decreaseCounter();
-    vRef addEntry(int sizes,std::string typei, void* actualPos);
+    vRef addEntry(int,std::string,void*);
     void printMetaData();
 };
 
@@ -32,7 +32,7 @@ private:
     int dataSize;
     bool useFlag;
 public:
-    vMallocMDEntry(int idRef, std::string &type, int dataSize, void *offset);
+    vMallocMDEntry(int, std::string&, int, void*);
     int getIdRef();
     void* getOffSet();
     std::string getType();
