@@ -9,9 +9,9 @@ vLong::vLong(long data){
     *address = vHeap::getInstance()->vMalloc(sizeof(long),"vLong");
 };
 
-vLong::~vChar(){};
+vLong::~vLong(){};
 
-int vLong::operator +=(char){};
+int vLong::operator +=(long){};
 
 int vLong::operator --(){};
 

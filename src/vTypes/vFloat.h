@@ -3,12 +3,12 @@
 //
 
 
-#include "vheap/vRef.h"
-#include "vheap/vObject.h"
 
 #ifndef _VH2015_VFLOAT_H_
 #define _VH2015_VFLOAT_H_
 
+#include "vheap/vRef.h"
+#include "vheap/vObject.h"
 
 class vFloat {
     vRef* address;

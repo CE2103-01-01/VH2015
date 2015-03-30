@@ -2,12 +2,12 @@
 // Created by roberto on 30/03/15.
 //
 
-#include "vheap/vRef.h"
-#include "vheap/vObject.h"
-
 #ifndef _VH2015_VINT_H_
 #define _VH2015_VINT_H_
 
+
+#include "vheap/vRef.h"
+#include "vheap/vObject.h"
 
 class vInt {
     vRef* address;

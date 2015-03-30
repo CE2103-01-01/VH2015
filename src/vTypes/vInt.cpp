@@ -9,9 +9,9 @@ vInt::vInt(int data){
     *address = vHeap::getInstance()->vMalloc(sizeof(int),"vInt");
 };
 
-vInt::~vChar(){};
+vInt::~vInt(){};
 
-int vInt::operator +=(char){};
+int vInt::operator +=(int){};
 
 int vInt::operator --(){};
 

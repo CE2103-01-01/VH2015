@@ -4,14 +4,14 @@
 
 #include "vFloat.h"
 
-vFloat::vChar(float data){
+vFloat::vFloat(float data){
     address= static_cast<vRef*>(malloc(sizeof(vRef)));
     *address = vHeap::getInstance()->vMalloc(sizeof(float),"vFloat");
 };
 
-vFloat::~vChar(){};
+vFloat::~vFloat(){};
 
-int vFloat::operator +=(char){};
+int vFloat::operator +=(float){};
 
 int vFloat::operator --(){};
 
