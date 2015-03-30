@@ -5,15 +5,21 @@
 #include "vRef.h"
 
 vRef::vRef(int id){
-    referenceID=id;
+    *referenceID=id;
 };
 
 vRef::~vRef(){};
 
-void vRef::changeID(int id) {
-    referenceID = id;
+int vRef::operator*() {
+    return *referenceID;
+}
+
+int vRef::operator=(int id){
+    *referenceID=id;
+    return 0;
 };
 
-int vRef::operator*() {
-    return referenceID;
-}
+int vRef::operator=(vRef other){
+    *referenceID=*other;
+    return 0;
+};

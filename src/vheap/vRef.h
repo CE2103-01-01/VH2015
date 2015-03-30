@@ -8,17 +8,15 @@
 #include "vObject.h"
 
 class vRef {
-    protected:
         int* referenceID;
     public:
         vRef();
-        vRef(int ID);
-        void changeID(int);
-        int getPtr();
+        vRef(int);
         virtual ~vRef();
         int operator *();
-        void operator=(vRef ptr);
-        void operator=(vObject dato);
+        int operator=(int);
+        int operator=(vRef);
+        int operator=(vObject);
 };
 
 #endif //_VH2015_VREF_H_

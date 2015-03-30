@@ -9,13 +9,10 @@
 
 
 class vObject {
-    vRef* ref;
 public:
     vObject();
     ~vObject();
     int operator =(vObject);
-    vRef operator *();
-    bool operator ==(vObject);
 };
 
 

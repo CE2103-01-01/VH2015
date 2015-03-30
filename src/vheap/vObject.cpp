@@ -11,7 +11,3 @@ vObject::vObject(){
 vObject::~vObject(){
 
 };
-
-vRef vObject::operator *(){
-    return *ref;
-};
