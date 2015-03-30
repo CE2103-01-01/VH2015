@@ -2,12 +2,12 @@
 // Created by roberto on 29/03/15.
 //
 
-#include "vList.h"
-#include <iostream>
 
 #ifndef _VH2015_VSTRING_H_
 #define _VH2015_VSTRING_H_
 
+#include "vList.h"
+#include <iostream>
 
 class vString{
     vList<char> *word;
