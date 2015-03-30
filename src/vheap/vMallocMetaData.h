@@ -34,6 +34,7 @@ private:
     int dataSize = 0;
     bool useFlag = false;
 public:
+    vMallocMDEntry();
     vMallocMDEntry(int, int, void*);
     int getIdRef();
     void* getOffSet();

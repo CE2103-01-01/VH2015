@@ -16,8 +16,10 @@ private:
     Node<T>* currentNode = 0;
 public:
     ListIterator(List<T>*);
-    virtual bool exists();
-    virtual T* next();
+
+    bool exists();
+
+    T next();
 
 };
 
@@ -27,14 +29,14 @@ public:
 */
 template<class T> class Node{
     friend class List<T>; //Clase amiga lista
-    T *data; //Valor almacenado en el nodo
+    T data; //Valor almacenado en el nodo
     Node<T> *next; //Node next
     Node<T> *prev; //Node prev
 public:
     Node(T*); //Constructor
     Node(T); //Constructor
     ~Node(); //Destructor
-    T* getData(); //Devuelve el dato del objeto
+    T getData(); //Devuelve el dato del objeto
     Node<T>* getNextNode(); //Accede al nodo next
     Node<T>* getPrevNode(); //Accede al nodo prev
     void insertAfter(Node<T> *); //Inserta un nodo next
@@ -75,15 +77,13 @@ public:
 *
 */
 template<class T> Node<T>::Node(T *v){
-    data=static_cast<T*>(malloc(sizeof(v)));
-    *data=*v;
+    data = *v;
 };
 /** @brief Constructor
 *
 */
 template<class T> Node<T>::Node(T v){
-    data=static_cast<T*>(malloc(sizeof(v)));
-    *data = v;
+    data = v;
 }
 /** @brief Destructor
 *
@@ -111,7 +111,8 @@ template<class T> Node<T>* Node<T>::getPrevNode(){
 *
 * @return T
 */
-template<class T> T* Node<T>::getData(){
+template<class T>
+T Node<T>::getData() {
     return data;
 };
 /** @brief Inserta un nodo despues
@@ -372,7 +373,7 @@ bool ListIterator<T>::exists() {
 }
 
 template <class T>
-T* ListIterator<T>::next() {
+T ListIterator<T>::next() {
     if (!currentNode)
         currentNode =  myList->getNode(0);
     else

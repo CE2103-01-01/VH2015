@@ -46,10 +46,10 @@ void vMallocMetaData::printMetaData() {
     ListIterator<vMallocMDEntry>* iter = memoryTable->getIterator();
     std::cout <<"--Begin MetaData info--"<<std::endl;
     while(iter->exists()) {
-        vMallocMDEntry *m = iter->next();
+        vMallocMDEntry m = iter->next();
         std::cout <<
-        "ID: " << m->getIdRef() <<
-        " Size: " << m->getDataSize() <<
+                "ID: " << m.getIdRef() <<
+                " Size: " << m.getDataSize() <<
 
         std::endl;
 
@@ -76,3 +76,6 @@ int vMallocMDEntry::getIdRef() {
     return idRef;
 }
 
+vMallocMDEntry::vMallocMDEntry() {
+
+}

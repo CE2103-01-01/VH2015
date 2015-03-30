@@ -14,7 +14,7 @@ int main(){
     ListIterator<std::string>* i = lista->getIterator();
     while(i->exists())
     {
-        std::cout<<*i->next()<<std::endl;
+        std::cout << i->next() << std::endl;
     }
     std::cout<<"Resultado Esperado: 2,3,4,5,6"<<std::endl;
     vHeap* vH = vHeap::getInstance();
