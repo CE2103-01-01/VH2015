@@ -24,6 +24,7 @@ int vString::operator +=(std::string str){
     return 0;
 };
 
+
 char vString::operator [](int index){
     return *word->get(index);
 };
