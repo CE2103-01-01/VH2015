@@ -75,14 +75,14 @@ public:
 *
 */
 template<class T> Node<T>::Node(T *v){
-    data=static_cast<T*>(malloc(sizeof(T)));
+    data=static_cast<T*>(malloc(sizeof(v)));
     *data=*v;
 };
 /** @brief Constructor
 *
 */
 template<class T> Node<T>::Node(T v){
-    data=static_cast<T*>(malloc(sizeof(T)));
+    data=static_cast<T*>(malloc(sizeof(v)));
     *data = v;
 }
 /** @brief Destructor
@@ -176,8 +176,7 @@ template<class T> List<T>::~List(){
 * @param Node<T>*
 */
 template<class T> void List<T>::add(T d){
-    Node<T> *n = static_cast<Node<T>*>(malloc(sizeof(Node<T>)));
-    new (n) Node<T>(d);
+    Node<T> *n = new Node<T>(d);
     if(_head!=0){
        _head->insertBefore(n);
         _head=n;
@@ -192,8 +191,7 @@ template<class T> void List<T>::add(T d){
 * @param Node<T>*
 */
 template<class T> void List<T>::append(T d){
-    Node<T> *n = static_cast<Node<T>*>(malloc(sizeof(Node<T>)));
-    new (n) Node<T>(d);
+    Node<T> *n = new Node<T>(d);
     if(_tail!=0){
         _tail->insertAfter(n);
         _tail=n;

@@ -7,6 +7,8 @@
 #include "vRef.h"
 #include "List.h"
 #include <iostream>
+#include <typeinfo>
+
 class vMallocMDEntry;
 class vMallocMetaData {
 private:
@@ -28,12 +30,14 @@ class vMallocMDEntry
 private:
     int idRef =0;
     void* offset =0;
+    //std::type_info typeInfo;
     int dataSize = 0;
     bool useFlag = false;
 public:
     vMallocMDEntry(int, int, void*);
     int getIdRef();
     void* getOffSet();
+   // std::type_info getTypeInfo();
     int getDataSize();
     bool getUseFlag();
 

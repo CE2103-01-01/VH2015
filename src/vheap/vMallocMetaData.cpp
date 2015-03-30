@@ -33,29 +33,31 @@ vRef vMallocMetaData::addEntry(int size, std::string type, void *actualPos) {
     return vRef(actualID);
 }
 
-vMallocMDEntry::vMallocMDEntry(int idRef, int dataSize, void *offset) : dataSize(dataSize),
-                                                                                           idRef(idRef), offset(offset)
+vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset)
 {
+    idRef = pIdRef;
+    size_t a = typeid(1).hash_code();
 
-
-
+    dataSize = pDataSize;
+    offset = pOffset;
 }
 
 void vMallocMetaData::printMetaData() {
     ListIterator<vMallocMDEntry>* iter = memoryTable->getIterator();
+    std::cout <<"--Begin MetaData info--"<<std::endl;
     while(iter->exists()) {
         vMallocMDEntry *m = iter->next();
         std::cout <<
         "ID: " << m->getIdRef() <<
-        "Size: " << m->getDataSize() <<
-      //  "Type: " << m->getType() <<
+        " Size: " << m->getDataSize() <<
+
         std::endl;
+
     }
+    std::cout <<"---End MetaData info---"<<std::endl;
 }
 
-int vMallocMDEntry::getIdRef() {
-    return idRef;
-}
+
 
 void *vMallocMDEntry::getOffSet() {
     return offset;
@@ -69,3 +71,8 @@ int vMallocMDEntry::getDataSize() {
 bool vMallocMDEntry::getUseFlag() {
     return useFlag;
 }
+
+int vMallocMDEntry::getIdRef() {
+    return idRef;
+}
+
