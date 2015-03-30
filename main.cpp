@@ -1,5 +1,5 @@
 #include <iostream>
-#include "src/vheap/vHeap.h"
+#include "vHeap.h"
 #include "src/vTypes/vString.h"
 #include "src/vTypes/vSimpleList.h"
 #include "src/vTypes/vSimpleList.cpp"

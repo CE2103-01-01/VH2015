@@ -7,7 +7,7 @@
 
 #include "vheap/vRef.h"
 #include "vheap/vObject.h"
-#include "vheap/vHeap.h"
+#include "vHeap.h"
 #include <iostream>
 
 class vChar: public vObject{

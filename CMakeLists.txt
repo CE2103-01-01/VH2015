@@ -4,51 +4,51 @@ project(VH2015)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES    main.cpp
-                    src/vheap/vHeap.cpp
-                    src/vheap/vObject.cpp
-                    src/vheap/vGarbageCollector.cpp
-                    src/vheap/vMallocMetaData.cpp
-                    src/vheap/vRef.cpp
-                    src/vTypes/vChar.cpp
-                    src/vTypes/vFloat.cpp
-                    src/vTypes/vInt.cpp
-                    src/vTypes/vLong.cpp
-                    src/vTypes/vString.cpp
+                    src/vheap/Source/vHeap.cpp
+                    src/vheap/Source/vObject.cpp
+                    src/vheap/Source/vGarbageCollector.cpp
+                    src/vheap/Source/vMallocMetaData.cpp
+                    src/vheap/Source/vRef.cpp
+                    src/vTypes/Source/vChar.cpp
+                    src/vTypes/Source/vFloat.cpp
+                    src/vTypes/Source/vInt.cpp
+                    src/vTypes/Source/vLong.cpp
+                    src/vTypes/Source/vString.cpp
                     libs/pugixml.cpp
-                    src/vheap/vObject.cpp
-                    src/vTypes/vString.cpp
-                    src/vTypes/vInt.cpp
-                    src/vTypes/vChar.cpp
-                    src/vTypes/vFloat.cpp
-                    src/vTypes/vLong.cpp
+                    src/vheap/Source/vObject.cpp
+                    src/vTypes/Source/vString.cpp
+                    src/vTypes/Source/vInt.cpp
+                    src/vTypes/Source/vChar.cpp
+                    src/vTypes/Source/vFloat.cpp
+                    src/vTypes/Source/vLong.cpp
                     src/TestApplication.cpp
-                    src/vTypes/vSimpleList.cpp
-                    src/vTypes/vSimpleNode.cpp)
+                    src/vTypes/Source/vSimpleList.cpp
+                    src/vTypes/Source/vSimpleNode.cpp)
 
 set(HEADERS_FILES
-                    src/vheap/vHeap.h
-                    src/vheap/vObject.h
-                    src/vheap/vRef.h
-                    src/vheap/vMallocMetaData.h
-                    src/vheap/vGarbageCollector.h
-                    src/vTypes/vChar.cpp
-                    src/vTypes/vFloat.cpp
-                    src/vTypes/vInt.cpp
-                    src/vTypes/vList.h
-                    src/vTypes/vLong.cpp
-                    src/vTypes/vString.h
+                    src/vheap/Headers/vHeap.h
+                    src/vheap/Headers/vObject.h
+                    src/vheap/Headers/vRef.h
+                    src/vheap/Headers/vMallocMetaData.h
+                    src/vheap/Headers/vGarbageCollector.h
+                    src/vTypes/Source/vChar.cpp
+                    src/vTypes/Source/vFloat.cpp
+                    src/vTypes/Source/vInt.cpp
+                    src/vTypes/Headers/vList.h
+                    src/vTypes/Source/vLong.cpp
+                    src/vTypes/Headers/vString.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
-                    src/vheap/vObject.h
-                    src/vTypes/vString.h
-                    src/vTypes/vInt.h
-                    src/vTypes/vChar.h
-                    src/vTypes/vFloat.h
-                    src/vTypes/vLong.h
+                    src/vheap/Headers/vObject.h
+                    src/vTypes/Headers/vString.h
+                    src/vTypes/Headers/vInt.h
+                    src/vTypes/Headers/vChar.h
+                    src/vTypes/Headers/vFloat.h
+                    src/vTypes/Headers/vLong.h
                     src/TestApplication.h
-                    src/vTypes/vBinaryTree.h
-                    src/vTypes/vSimpleList.h
-                    src/vTypes/vSimpleNode.h)
+                    src/vTypes/Headers/vBinaryTree.h
+                    src/vTypes/Headers/vSimpleList.h
+                    src/vTypes/Headers/vSimpleNode.h)
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)

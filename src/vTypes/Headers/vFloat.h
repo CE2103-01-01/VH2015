@@ -2,24 +2,25 @@
 // Created by roberto on 30/03/15.
 //
 
-#ifndef _VH2015_VINT_H_
-#define _VH2015_VINT_H_
 
+
+#ifndef _VH2015_VFLOAT_H_
+#define _VH2015_VFLOAT_H_
 
 #include "vheap/vRef.h"
-#include "vheap/vHeap.h"
+#include "vHeap.h"
 #include "vheap/vObject.h"
 
-class vInt : public vObject{
+class vFloat : public vObject{
     vRef address;
 public:
-    vInt(int);
-    ~vInt();
-    int operator +=(int);
+    vFloat(float);
+    ~vFloat();
+    int operator +=(float);
     int operator --();
     int operator !();
     vRef operator &();
 };
 
 
-#endif //_VH2015_VINT_H_
+#endif //_VH2015_VFLOAT_H_
