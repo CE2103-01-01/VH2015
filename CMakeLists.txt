@@ -9,9 +9,12 @@ set(SOURCE_FILES    main.cpp
                     src/vheap/vGarbageCollector.cpp
                     src/vheap/vMallocMetaData.cpp
                     src/vheap/vRef.cpp
+                    src/vTypes/vChar.cpp
+                    src/vTypes/vFloat.cpp
+                    src/vTypes/vInt.cpp
+                    src/vTypes/vLong.cpp
                     src/vTypes/vString.cpp
-                    libs/pugixml.cpp
-                    )
+                    libs/pugixml.cpp)
 
 set(HEADERS_FILES
                     src/vheap/vHeap.h
@@ -19,7 +22,11 @@ set(HEADERS_FILES
                     src/vheap/vRef.h
                     src/vheap/vMallocMetaData.h
                     src/vheap/vGarbageCollector.h
+                    src/vTypes/vChar.cpp
+                    src/vTypes/vFloat.cpp
+                    src/vTypes/vInt.cpp
                     src/vTypes/vList.h
+                    src/vTypes/vLong.cpp
                     src/vTypes/vString.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp)
