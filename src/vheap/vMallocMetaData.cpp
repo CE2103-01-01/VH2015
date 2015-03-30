@@ -40,19 +40,19 @@ vMallocMDEntry::vMallocMDEntry(int idRef, std::string &type, int dataSize, void 
 
 
 }
-/*
+
 void vMallocMetaData::printMetaData() {
     ListIterator<vMallocMDEntry>* iter = memoryTable->getIterator();
     while(iter->exists()) {
         vMallocMDEntry *m = iter->next();
         std::cout <<
         "ID: " << m->getIdRef() <<
-        "Size: " << m->getDataSize <<
-        "Type: " << m->getType <<
+        "Size: " << m->getDataSize() <<
+        "Type: " << m->getType() <<
         std::endl;
     }
 }
-*/
+
 int vMallocMDEntry::getIdRef() {
     return idRef;
 }
