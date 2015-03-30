@@ -2,6 +2,8 @@
 // Created by roberto on 29/03/15.
 //
 
+#include "vRef.h"
+
 #ifndef _VH2015_VOBJECT_H_
 #define _VH2015_VOBJECT_H_
 
@@ -14,7 +16,6 @@ public:
     int operator =(vObject);
     vRef operator *();
     bool operator ==(vObject);
-    char const getInstance();
 };
 
 
