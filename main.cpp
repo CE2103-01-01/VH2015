@@ -51,14 +51,16 @@ void pruebaChar(){
 };
 
 int main() {
-   // pruebaVString();
+    /**
+    pruebaVString();
     vSimpleList<std::string> lista;
     lista.add_end("a");
     lista.add_end("l");
     lista.add_end("e");
     lista.add_end("x");
     lista.print();
-
+    */
+    
     pruebaChar();
     return 0;
 };
