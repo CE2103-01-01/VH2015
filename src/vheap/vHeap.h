@@ -25,7 +25,6 @@ public:
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
-    void printMetadata();
 };
 
 class Dump {

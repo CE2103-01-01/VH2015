@@ -5,7 +5,6 @@
 #include <fstream>
 #include <unistd.h>
 #include "vHeap.h"
-#include "XML/xmlReader.h"
 
 vHeap::vHeap(int s, float o){
     overweight=static_cast<float*>(malloc(sizeof(float)));
@@ -29,15 +28,16 @@ vHeap* vHeap::vHeapSingleton = 0;
 vRef vHeap::vMalloc(int sz, std::string type){
     vRef r= metaData.addEntry(sz,type,actualPos);// add Entry devuelve una referencia
     actualPos+=sz;
+    metaData.printMetaData();
     return r;
 };
 
  vHeap* vHeap::getInstance() {
     if(!vHeapSingleton) {
         vHeapSingleton = static_cast<vHeap *>(malloc(sizeof(vHeap)));
-        xmlReader xml;
-        Opciones datos = xml.vHeapOptions();
-        new(vHeapSingleton) vHeap(datos.size,datos.overweight);
+        //xmlReader xml;
+        //Opciones datos = xml.vHeapOptions();
+        new(vHeapSingleton) vHeap(100,100);
     }
 
     return vHeapSingleton;

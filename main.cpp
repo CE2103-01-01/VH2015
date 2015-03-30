@@ -4,13 +4,13 @@ using namespace std;
 
 int main(){
     std::cout<<"Hola"<<std::endl;
-    List<int>* lista = new List<int>();
-    lista->append(5);
-    lista->append(6);
-    lista->add(4);
-    lista->add(3);
-    lista->add(2);
-    ListIterator<int>* i = lista->getIterator();
+    List<std::string>* lista = new List<std::string>();
+    //lista->append("hoola");
+    //lista->append("as");
+    //lista->add("s");
+    //lista->add(3);
+    //lista->add(2);
+    ListIterator<std::string>* i = lista->getIterator();
     while(i->exists())
     {
         std::cout<<*i->next()<<std::endl;

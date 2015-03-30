@@ -26,16 +26,14 @@ public:
 class vMallocMDEntry
 {
 private:
-    int idRef;
-    void* offset;
-    std::string type;
-    int dataSize;
-    bool useFlag;
+    int idRef =0;
+    void* offset =0;
+    int dataSize = 0;
+    bool useFlag = false;
 public:
-    vMallocMDEntry(int, std::string&, int, void*);
+    vMallocMDEntry(int, int, void*);
     int getIdRef();
     void* getOffSet();
-    std::string getType();
     int getDataSize();
     bool getUseFlag();
 

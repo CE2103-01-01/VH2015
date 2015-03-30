@@ -28,12 +28,12 @@ void vMallocMetaData::decreaseCounter() {
 
 vRef vMallocMetaData::addEntry(int size, std::string type, void *actualPos) {
 
-    memoryTable->append(vMallocMDEntry(actualID++,type,size,actualPos));
+    memoryTable->append(vMallocMDEntry(actualID++,size,actualPos));
     counter++;
     return vRef(actualID);
 }
 
-vMallocMDEntry::vMallocMDEntry(int idRef, std::string &type, int dataSize, void *offset) : dataSize(dataSize), type(type),
+vMallocMDEntry::vMallocMDEntry(int idRef, int dataSize, void *offset) : dataSize(dataSize),
                                                                                            idRef(idRef), offset(offset)
 {
 
@@ -48,7 +48,7 @@ void vMallocMetaData::printMetaData() {
         std::cout <<
         "ID: " << m->getIdRef() <<
         "Size: " << m->getDataSize() <<
-        "Type: " << m->getType() <<
+      //  "Type: " << m->getType() <<
         std::endl;
     }
 }
@@ -61,9 +61,6 @@ void *vMallocMDEntry::getOffSet() {
     return offset;
 }
 
-std::string vMallocMDEntry::getType() {
-    return type;
-}
 
 int vMallocMDEntry::getDataSize() {
     return dataSize;
