@@ -19,7 +19,8 @@ private:
 public:
     vListIterator(vList<T> *);
     bool exists();
-    T next();
+
+    T *next();
 };
 /** @brief Declaracion de la clase nodo
 *
@@ -34,7 +35,7 @@ public:
     vNode(T *); //Constructor
     vNode(T); //Constructor
     ~vNode(); //Destructor
-    T getData(); //Devuelve el dato del objeto
+    T *getData(); //Devuelve el dato del objeto
     vNode<T> *getNextNode(); //Accede al nodo next
     vNode<T> *getPrevNode(); //Accede al nodo prev
     void insertAfter(vNode<T> *); //Inserta un nodo next
@@ -64,7 +65,7 @@ public:
     bool empty(); //True=vacia
     vNode<T> *search(T); //Busca dato T
     vNode<T> *getNode(int); //Busca getNode
-    T get(int); //Busca getNode
+    T *get(int); //Busca getNode
     int len(); //Devuelve longtiud
     vList<T>operator=(vList<T>); //Operador de asignacion
     void print(); //Imprime en consola
@@ -88,8 +89,8 @@ vNode<T>::vNode(T v) {
 */
 template<class T>
 vNode<T>::~vNode() {
-    next=0;
-    prev=0;
+    free(next);
+    free(prev);
     free(data);
 };
 
@@ -115,8 +116,8 @@ vNode<T> *vNode<T>::getPrevNode() {
 * @return T
 */
 template<class T>
-T vNode<T>::getData() {
-    return data;
+T *vNode<T>::getData() {
+    return &data;
 };
 
 /** @brief Inserta un nodo despues
@@ -245,14 +246,14 @@ template<class T>
 bool vList<T>::deleteNode(int d) {
     if(d==0){
         _head=_head->getNextNode();
-        _head->getPrevNode()->vNode();
+        (_head->getPrevNode())->~vNode;
         free(_head->getPrevNode());
         l--;
         return true;
     }else if(d==l-1){
         vNode<T> *tmp = _tail;
         _tail=_tail->getPrevNode();
-        _tail->getNextNode()->vNode();
+        _tail->getNextNode()->~vNode();
         free(_tail->getNextNode());
         l--;
         return true;
@@ -263,7 +264,7 @@ bool vList<T>::deleteNode(int d) {
         };
         vNode<T> *ant = tmp->getPrevNode();
         vNode<T> *sig = tmp->getNextNode();
-        tmp->vNode();
+        tmp->~vNode();
         free(tmp);
         ant->vaciarDespues();
         sig->vaciarAntes();
@@ -343,23 +344,23 @@ vNode<T> *vList<T>::getNode(int n) {
 * @return T*
 */
 template<class T>
-T vList<T>::get(int n) {
+T *vList<T>::get(int n) {
     if(n<l){
         if(n<l/2){
             vNode<T> *tmp = _head;
             for(int i=0; i<n; i++){
                 tmp=tmp->getNextNode();
             };
-            return *(tmp->getData()());
+            return (tmp->getData());
         }else{
             vNode<T> *tmp = _tail;
             for(int i=l-1; i>n; i--){
                 tmp=tmp->getPrevNode();
             };
-            return *(tmp->getData()());
+            return (tmp->getData());
         };
     }else{
-// return 0;
+
     };
 };
 /** Devuelve la longitud
@@ -394,7 +395,7 @@ bool vListIterator<T>::exists() {
     return position<myList->len();
 }
 template <class T>
-T vListIterator<T>::next() {
+T *vListIterator<T>::next() {
     if (!currentNode)
         currentNode = myList->getNode(0);
     else
@@ -406,3 +407,5 @@ template <class T>
 vListIterator<T>::vListIterator(vList<T> *lista) {
     myList = lista;
 }
+
+#endif
