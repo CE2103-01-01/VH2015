@@ -17,7 +17,7 @@ set(HEADERS_FILES
                     src/vheap/vRef.h
                     src/vheap/vMallocMetaData.h
                     src/vheap/vGarbageCollector.h
-                    src/vTypes/List.h
+                    src/vTypes/vList.h
                     src/vTypes/vString.h)
 
 include_directories(src headers vheap)

@@ -5,7 +5,7 @@
 #ifndef _VH2015_VMALLOCMETADATA_H_
 #define _VH2015_VMALLOCMETADATA_H_
 #include "vRef.h"
-#include "vTypes/List.h"
+#include "vHeap/vList.h"
 #include <iostream>
 #include <typeinfo>
 
@@ -14,7 +14,7 @@ class vMallocMetaData {
 private:
     int counter = 0;
     int actualID = 0;
-    List<vMallocMDEntry>* memoryTable;
+    vList <vMallocMDEntry> *memoryTable;
 public:
     vMallocMetaData();
     ~vMallocMetaData();

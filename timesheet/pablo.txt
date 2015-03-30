@@ -1,3 +1,4 @@
 18/03/2015 1 h Inicializar Repo con algunas clases
 19/03/2015 1 h Enum vObjectType y arreglo de cmake
 28/03/2015 5 h Cambios en lista y vHeap
+29/03/2015 5 h Arreglos en Lista y MetaData

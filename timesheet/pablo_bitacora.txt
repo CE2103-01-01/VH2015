@@ -4,3 +4,6 @@ Se crea la estructura principal y algunas clases.
 Se arreglo el cmake, se hizo un enum
 28/03/2015
 Reunion con Roberto. Se trabajo unificando vHeap.Arreglos en lista. Iterador de Lista. Investigacion templates, iterator
+28/03/2015
+Se arreglo el iterador. El problema de string listas. El segFault que causaba eso.Se cambio la estructura de MetaData
+por una mas agile.Se trabajo es eficiencia.

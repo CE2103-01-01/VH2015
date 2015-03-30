@@ -2,12 +2,13 @@
 // Created by pablo on 28/03/15.
 //
 
+#include <vTypes/vList.h>
 #include "vMallocMetaData.h"
 
 
 vMallocMetaData::vMallocMetaData() {
-    memoryTable=static_cast<List<vMallocMDEntry>*>(malloc(sizeof(List<vMallocMDEntry>)));
-    new(memoryTable) List<vMallocMDEntry>();
+    memoryTable = static_cast<vList<vMallocMDEntry> *>(malloc(sizeof(vList<vMallocMDEntry>)));
+    new(memoryTable) vList<vMallocMDEntry>();
 }
 
 vMallocMetaData::~vMallocMetaData()
@@ -46,10 +47,10 @@ void vMallocMetaData::printMetaData() {
     ListIterator<vMallocMDEntry>* iter = memoryTable->getIterator();
     std::cout <<"--Begin MetaData info--"<<std::endl;
     while(iter->exists()) {
-        vMallocMDEntry m = iter->next();
+        vMallocMDEntry *m = iter->next();
         std::cout <<
-                "ID: " << m.getIdRef() <<
-                " Size: " << m.getDataSize() <<
+                "ID: " << m->getIdRef() <<
+                " Size: " << m->getDataSize() <<
 
         std::endl;
 

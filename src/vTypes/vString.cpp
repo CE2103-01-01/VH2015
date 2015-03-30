@@ -5,8 +5,8 @@
 #include "vString.h"
 
 vString::vString(std::string str){
-    word = static_cast<List<char>*>(malloc(sizeof(List<char>)));
-    new(word) List<char>();
+    word = static_cast<vList<char> *>(malloc(sizeof(vList<char>)));
+    new(word) vList<char>();
     for(int i=0; i<str.length(); i++){
         word->append(static_cast<char>(str[i]));
     };
@@ -35,7 +35,7 @@ int vString::operator --(){
 };
 
 int vString::operator !(){
-    ListIterator<char>* iter = word->getIterator();
+    vListIterator<char> *iter = word->getIterator();
     while(iter->exists()){
         std::cout<<*(iter->next());
     };

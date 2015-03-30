@@ -18,16 +18,20 @@ int main(){
 
     /**
     std::cout<<"Hola"<<std::endl;
-    List<std::string>* lista = new List<std::string>();
+    vList<std::string>* lista = new vList<std::string>();
     //lista->append("hoola");
     //lista->append("as");
     //lista->add("s");
     //lista->add(3);
     //lista->add(2);
-    ListIterator<std::string>* i = lista->getIterator();
+    vListIterator<std::string>* i = lista->getIterator();
     while(i->exists())
     {
+<<<<<<< Updated upstream
         std::cout<<*i->next()<<std::endl;
+=======
+        std::cout <<* i->next() << std::endl;
+>>>>>>> Stashed changes
     }
     std::cout<<"Resultado Esperado: 2,3,4,5,6"<<std::endl;
     vHeap* vH = vHeap::getInstance();

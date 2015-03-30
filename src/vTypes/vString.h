@@ -2,7 +2,7 @@
 // Created by roberto on 29/03/15.
 //
 
-#include "List.h"
+#include "vList.h"
 #include <iostream>
 
 #ifndef _VH2015_VSTRING_H_
@@ -10,7 +10,7 @@
 
 
 class vString{
-    List<char>* word;
+    vList<char> *word;
     public:
         vString(std::string);
         ~vString();

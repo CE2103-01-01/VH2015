@@ -1,110 +1,113 @@
-//
-// Created by alex on 19/03/15.
-//
 #ifndef _VH2015_LIST_H
 #define _VH2015_LIST_H
-
 #include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
-template<class T> class List;
-template<class T> class Node;
-template <class T> class ListIterator{
+
+template<class T>
+class vList;
+
+template<class T>
+class vNode;
+
+template<class T>
+class vListIterator {
 private:
     int position = 0;
-    List<T>* myList = 0;
-    Node<T>* currentNode = 0;
+    vList<T> *myList = 0;
+    vNode<T> *currentNode = 0;
 public:
-    ListIterator(List<T>*);
-
+    vListIterator(vList<T> *);
     bool exists();
-
     T next();
-
 };
-
-
 /** @brief Declaracion de la clase nodo
 *
 */
-template<class T> class Node{
-    friend class List<T>; //Clase amiga lista
+template<class T>
+class vNode {
+    friend class vList<T>; //Clase amiga lista
     T data; //Valor almacenado en el nodo
-    Node<T> *next; //Node next
-    Node<T> *prev; //Node prev
+    vNode<T> *next; //vNode next
+    vNode<T> *prev; //vNode prev
 public:
-    Node(T*); //Constructor
-    Node(T); //Constructor
-    ~Node(); //Destructor
+    vNode(T *); //Constructor
+    vNode(T); //Constructor
+    ~vNode(); //Destructor
     T getData(); //Devuelve el dato del objeto
-    Node<T>* getNextNode(); //Accede al nodo next
-    Node<T>* getPrevNode(); //Accede al nodo prev
-    void insertAfter(Node<T> *); //Inserta un nodo next
-    void insertBefore(Node<T> *); //Inserta un nodo prev
+    vNode<T> *getNextNode(); //Accede al nodo next
+    vNode<T> *getPrevNode(); //Accede al nodo prev
+    void insertAfter(vNode<T> *); //Inserta un nodo next
+    void insertBefore(vNode<T> *); //Inserta un nodo prev
     void vaciarDespues(); //Inserta un nodo next
     void vaciarAntes(); //Inserta un nodo prev
 };
-
-
 /** @brief Declaracion de la clase nodo
 *
 */
-template<class T> class List
+template<class T>
+class vList
 {
-    Node<T>* _head; //primer nodo
-    Node<T>* _tail; //_tail nodo
+    vNode<T> *_head; //primer nodo
+    vNode<T> *_tail; //_tail nodo
     int l = 0; //longitud
 public:
-    virtual ListIterator<T>* getIterator();
-    List(); //Constructor
-    ~List(); //Destructor
+    virtual vListIterator<T> *getIterator();
+
+    vList(); //Constructor
+    ~vList(); //Destructor
     void add(T); //Inserta nodo al inicio
     void append(T); //Inserta nodo al final
     bool deleteNodeByData(T); //Busca nodo y lo borra
     bool deleteNode(int); //Busca nodo y lo borra
     void deleteAll(); //Borra all
     bool empty(); //True=vacia
-    Node<T>* search(T); //Busca dato T
-    Node<T>* getNode(int); //Busca getNode
+    vNode<T> *search(T); //Busca dato T
+    vNode<T> *getNode(int); //Busca getNode
     T get(int); //Busca getNode
     int len(); //Devuelve longtiud
-    List<T>operator=(List<T>); //Operador de asignacion
+    vList<T>operator=(vList<T>); //Operador de asignacion
     void print(); //Imprime en consola
 };
-
-
 /** @brief Constructor
 *
 */
-template<class T> Node<T>::Node(T *v){
+template<class T>
+vNode<T>::vNode(T *v) {
     data = *v;
 };
 /** @brief Constructor
 *
 */
-template<class T> Node<T>::Node(T v){
+template<class T>
+vNode<T>::vNode(T v) {
     data = v;
 }
 /** @brief Destructor
 *
 */
-template<class T> Node<T>::~Node(){
+template<class T>
+vNode<T>::~vNode() {
     next=0;
     prev=0;
     free(data);
 };
+
 /** @brief Devuelve el next nodo
 *
-* @return Node<T>
+* @return vNode<T>
 */
-template<class T> Node<T>* Node<T>::getNextNode(){
+template<class T>
+vNode<T> *vNode<T>::getNextNode() {
     return next;
 };
+
 /** @brief Devuelve el nodo prev
 *
-* @return Node<T>
+* @return vNode<T>
 */
-template<class T> Node<T>* Node<T>::getPrevNode(){
+template<class T>
+vNode<T> *vNode<T>::getPrevNode() {
     return prev;
 };
 /** @brief Devuelve el dato contenido
@@ -112,16 +115,18 @@ template<class T> Node<T>* Node<T>::getPrevNode(){
 * @return T
 */
 template<class T>
-T Node<T>::getData() {
+T vNode<T>::getData() {
     return data;
 };
+
 /** @brief Inserta un nodo despues
 *
-* @param Node<T>*
+* @param vNode<T>*
 */
-template<class T> void Node<T>::insertAfter(Node<T> *n){
+template<class T>
+void vNode<T>::insertAfter(vNode<T> *n) {
     if(next!=0){
-        Node<T>* tmp = next;
+        vNode<T> *tmp = next;
         next = n;
         next->insertAfter(tmp);
     }else{
@@ -131,13 +136,15 @@ template<class T> void Node<T>::insertAfter(Node<T> *n){
         next->insertBefore(this);
     };
 };
+
 /** @brief Inserta un nodo antes
 *
-* @param Node<T>*
+* @param vNode<T>*
 */
-template<class T> void Node<T>::insertBefore(Node<T> *n){
+template<class T>
+void vNode<T>::insertBefore(vNode<T> *n) {
     if(prev!=0){
-        Node<T>* tmp = prev;
+        vNode<T> *tmp = prev;
         prev = n;
         prev->insertBefore(tmp);
     }else{
@@ -150,36 +157,42 @@ template<class T> void Node<T>::insertBefore(Node<T> *n){
 /** @brief Vacia nodo antes
 *
 */
-template<class T> void Node<T>::vaciarAntes(){
+template<class T>
+void vNode<T>::vaciarAntes() {
     prev=0;
 };
 /** @brief Vacia nodo despues
 *
 */
-template<class T> void Node<T>::vaciarDespues(){
+template<class T>
+void vNode<T>::vaciarDespues() {
     next=0;
 };
 /** @brief Construye la lista
 *
 */
-template<class T> List<T>::List(){
+template<class T>
+vList<T>::vList() {
     _head=_tail=0;
 };
 /** @brief Destruye la lista
 *
 */
-template<class T> List<T>::~List(){
+template<class T>
+vList<T>::~vList() {
     deleteAll();
     free(&l);
 };
+
 /** @brief Inserta un nodo al inicio
 *
-* @param Node<T>*
+* @param vNode<T>*
 */
-template<class T> void List<T>::add(T d){
-    Node<T> *n = new Node<T>(d);
+template<class T>
+void vList<T>::add(T d) {
+    vNode<T> *n = new vNode<T>(d);
     if(_head!=0){
-       _head->insertBefore(n);
+        _head->insertBefore(n);
         _head=n;
     }else{
         _head = n;
@@ -187,12 +200,14 @@ template<class T> void List<T>::add(T d){
     };
     l++;
 };
+
 /** @brief Inserta un nodo al final
 *
-* @param Node<T>*
+* @param vNode<T>*
 */
-template<class T> void List<T>::append(T d){
-    Node<T> *n = new Node<T>(d);
+template<class T>
+void vList<T>::append(T d) {
+    vNode<T> *n = new vNode<T>(d);
     if(_tail!=0){
         _tail->insertAfter(n);
         _tail=n;
@@ -206,8 +221,9 @@ template<class T> void List<T>::append(T d){
 *
 * @param T d
 */
-template<class T> bool List<T>::deleteNodeByData(T d){
-    Node<T>* tmp=_head;
+template<class T>
+bool vList<T>::deleteNodeByData(T d) {
+    vNode<T> *tmp = _head;
     for(int i=0; i<l; i++){
         if(*tmp->getData()()==d){
             if(i<l-1){
@@ -225,28 +241,29 @@ template<class T> bool List<T>::deleteNodeByData(T d){
 *
 * @param int d
 */
-template<class T> bool List<T>::deleteNode(int d){
+template<class T>
+bool vList<T>::deleteNode(int d) {
     if(d==0){
         _head=_head->getNextNode();
-        _head->getPrevNode()->~Node();
+        _head->getPrevNode()->vNode();
         free(_head->getPrevNode());
         l--;
         return true;
     }else if(d==l-1){
-        Node<T>* tmp=_tail;
+        vNode<T> *tmp = _tail;
         _tail=_tail->getPrevNode();
-        _tail->getNextNode()->~Node();
+        _tail->getNextNode()->vNode();
         free(_tail->getNextNode());
         l--;
         return true;
     }else if(d<l){
-        Node<T>* tmp=_head;
+        vNode<T> *tmp = _head;
         for(int i=0; i<d; i++){
             tmp=tmp->getNextNode();
         };
-        Node<T>* ant=tmp->getPrevNode();
-        Node<T>* sig=tmp->getNextNode();
-        tmp->~Node();
+        vNode<T> *ant = tmp->getPrevNode();
+        vNode<T> *sig = tmp->getNextNode();
+        tmp->vNode();
         free(tmp);
         ant->vaciarDespues();
         sig->vaciarAntes();
@@ -260,9 +277,10 @@ template<class T> bool List<T>::deleteNode(int d){
 /** @brief Borra todos los nodos
 *
 */
-template<class T> void List<T>::deleteAll(){
+template<class T>
+void vList<T>::deleteAll() {
     for(int i=0; i<l; i++){
-        Node<T> *tmp=_head;
+        vNode<T> *tmp = _head;
         _head=_head->getNextNode();
         free(tmp);
     };
@@ -272,16 +290,19 @@ template<class T> void List<T>::deleteAll(){
 *
 * @return bool
 */
-template<class T> bool List<T>::empty(){
+template<class T>
+bool vList<T>::empty() {
     return (len()==0);
 };
+
 /** Busca un dato y devuelve el nodo que lo contiene
 *
 * @param T d, dato
-* @return Node<T>*
+* @return vNode<T>*
 */
-template<class T> Node<T>* List<T>::search(T d){
-    Node<T>* tmp=_head;
+template<class T>
+vNode<T> *vList<T>::search(T d) {
+    vNode<T> *tmp = _head;
     for(int i=0; i<l; i++){
         if(*tmp->getData()()==d){
             return tmp;
@@ -290,21 +311,23 @@ template<class T> Node<T>* List<T>::search(T d){
     };
     return 0;
 };
+
 /** Devuelve el nodo en la getNode que se indique
 *
 * @param int n, getNode
-* @return Node<T>*
+* @return vNode<T>*
 */
-template<class T> Node<T>* List<T>::getNode(int n){
+template<class T>
+vNode<T> *vList<T>::getNode(int n) {
     if(n<l){
         if(n<l/2){
-            Node<T>* tmp=_head;
+            vNode<T> *tmp = _head;
             for(int i=0; i<n; i++){
                 tmp=tmp->getNextNode();
             };
             return tmp;
         }else{
-            Node<T>* tmp=_tail;
+            vNode<T> *tmp = _tail;
             for(int i=l-1; i>n; i--){
                 tmp=tmp->getPrevNode();
             };
@@ -319,20 +342,21 @@ template<class T> Node<T>* List<T>::getNode(int n){
 * @param int n, getNode
 * @return T*
 */
-template<class T> T List<T>::get(int n){
+template<class T>
+T vList<T>::get(int n) {
     if(n<l){
         if(n<l/2){
-            Node<T>* tmp=_head;
+            vNode<T> *tmp = _head;
             for(int i=0; i<n; i++){
                 tmp=tmp->getNextNode();
             };
-            return *(tmp->getData());
+            return *(tmp->getData()());
         }else{
-            Node<T>* tmp=_tail;
+            vNode<T> *tmp = _tail;
             for(int i=l-1; i>n; i--){
                 tmp=tmp->getPrevNode();
             };
-            return *(tmp->getData());
+            return *(tmp->getData()());
         };
     }else{
 // return 0;
@@ -342,49 +366,43 @@ template<class T> T List<T>::get(int n){
 *
 * @return int;
 */
-template<class T> int List<T>::len(){
+template<class T>
+int vList<T>::len() {
     return l;
 };
 /** @brief Imprime la lista
 *
 */
-template<class T> void List<T>::print(){
+template<class T>
+void vList<T>::print() {
     if(len()>0){
-        Node<T>* tmp=_head;
+        vNode<T> *tmp = _head;
         for(int i=0; i<len(); i++){
-            std::cout<<*(tmp->getData())<<std::endl;
+            std::cout << *(tmp->getData()()) << std::endl;
             tmp=tmp->getNextNode();
         };
     }else{
         std::cout<<"La lista esta vacia"<<std::endl;
     };
 };
-
-
 template <class T>
-ListIterator<T>* List<T>::getIterator() {
-    return new ListIterator<T>(this);
-
-
+vListIterator<T> *vList<T>::getIterator() {
+    return new vListIterator<T>(this);
 }
 template <class T>
-bool ListIterator<T>::exists() {
+bool vListIterator<T>::exists() {
     return position<myList->len();
 }
-
 template <class T>
-T ListIterator<T>::next() {
+T vListIterator<T>::next() {
     if (!currentNode)
-        currentNode =  myList->getNode(0);
+        currentNode = myList->getNode(0);
     else
         currentNode = currentNode->getNextNode();
     position++;
     return currentNode->getData();
 }
-
 template <class T>
-ListIterator<T>::ListIterator(List<T>* lista) {
+vListIterator<T>::vListIterator(vList<T> *lista) {
     myList = lista;
 }
-
-#endif //_VH2015_LIST
