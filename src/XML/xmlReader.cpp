@@ -1,7 +1,3 @@
-#include <string>
-#include <iostream>
-#include "xmlReader.h"
-#include "XML/pugixml.hpp"
 using namespace std;
 using namespace pugi;
 
