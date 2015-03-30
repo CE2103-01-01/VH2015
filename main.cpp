@@ -1,5 +1,7 @@
 #include <iostream>
 #include "src/vheap/vHeap.h"
+using namespace std;
+
 int main(){
     std::cout<<"Hola"<<std::endl;
     List<int>* lista = new List<int>();
@@ -19,5 +21,7 @@ int main(){
     vRef r2 = vH->vMalloc(2,"t2");
     vRef r3 = vH->vMalloc(8,"t3");
     //vH->printMetadata();
+    
+    cout << "Termino" << endl;
     return 0;
 };

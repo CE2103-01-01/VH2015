@@ -7,7 +7,6 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
-#include "/src/XML/xmlReader.h"
 
 class vHeap{
     friend class Dump;
