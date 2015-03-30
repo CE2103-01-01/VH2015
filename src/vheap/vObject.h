@@ -1,24 +1,21 @@
-#include <typeinfo>
-template <class T>
+//
+// Created by roberto on 29/03/15.
+//
+
+#ifndef _VH2015_VOBJECT_H_
+#define _VH2015_VOBJECT_H_
+
+
 class vObject {
-protected:
-    void* valor;    //Deberia ser vRef si no me equivoco
+    vRef* ref;
 public:
-
-    void operator=(T dato){
-        valor = (void*)dato;
-    }
-
-    void operator=(vObject dato){
-        valor = dato.valor;
-    }
-
-    bool operator==(vObject dato){
-        return valor == dato.valor;
-    }
-
-    char const getInstance(void){
-        return (char const) typeid(valor).name();
-    }
-
+    vObject();
+    ~vObject();
+    int operator =(vObject);
+    vRef operator *();
+    bool operator ==(vObject);
+    char const getInstance();
 };
+
+
+#endif //_VH2015_VOBJECT_H_
