@@ -14,7 +14,7 @@ int vRef::operator!() {
     return *referenceID;
 };
 
-int vRef::operator*() {};
+vObject vRef::operator*() {};
 
 int vRef::operator=(int id){
     *referenceID=id;
