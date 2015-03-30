@@ -22,6 +22,5 @@ int main(){
     vRef r3 = vH->vMalloc(8,"t3");
     //vH->printMetadata();
     
-    cout << "Termino" << endl;
     return 0;
 };
