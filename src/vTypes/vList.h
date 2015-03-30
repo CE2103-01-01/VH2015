@@ -75,7 +75,7 @@ public:
 */
 template<class T>
 vNode<T>::vNode(T *v) {
-    data = *v;
+
 };
 /** @brief Constructor
 *
@@ -89,9 +89,8 @@ vNode<T>::vNode(T v) {
 */
 template<class T>
 vNode<T>::~vNode() {
-    free(next);
-    free(prev);
-    free(data);
+    next = 0;
+    prev = 0;
 };
 
 /** @brief Devuelve el next nodo
@@ -246,7 +245,7 @@ template<class T>
 bool vList<T>::deleteNode(int d) {
     if(d==0){
         _head=_head->getNextNode();
-        (_head->getPrevNode())->~vNode;
+        (_head->getPrevNode())->~vNode();
         free(_head->getPrevNode());
         l--;
         return true;
