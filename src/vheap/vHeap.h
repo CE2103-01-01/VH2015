@@ -7,7 +7,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
-
+class vRef;
+class vMallocMetaData;
 class vHeap{
     friend class Dump;
     bool* vDebug;

@@ -10,6 +10,7 @@
 #include <typeinfo>
 
 class vMallocMDEntry;
+class vRef;
 class vMallocMetaData {
 private:
     int counter = 0;
