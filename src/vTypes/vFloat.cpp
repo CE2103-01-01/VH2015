@@ -5,8 +5,8 @@
 #include "vFloat.h"
 
 vFloat::vFloat(float data){
-    address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(vFloat),"vFloat");
+    address = vHeap::getInstance()->vMalloc(sizeof(vFloat),"vFloat");
+    vHeap::getInstance()->vPlacement(address,this);
 };
 
 vFloat::~vFloat(){};
@@ -18,5 +18,5 @@ int vFloat::operator --(){};
 int vFloat::operator !(){};
 
 vRef vFloat::operator &(){
-    return *address;
+    return address;
 };

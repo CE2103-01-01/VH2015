@@ -6,11 +6,12 @@
 #define _VH2015_VLONG_H_
 
 #include "vheap/vRef.h"
+#include "vheap/vHeap.h"
 #include "vheap/vObject.h"
 
 
-class vLong {
-    vRef* address;
+class vLong : public vObject{
+    vRef address;
 public:
     vLong(long);
     ~vLong();

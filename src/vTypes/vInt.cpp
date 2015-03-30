@@ -5,8 +5,8 @@
 #include "vInt.h"
 
 vInt::vInt(int data){
-    address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(vInt),"vInt");
+    address = vHeap::getInstance()->vMalloc(sizeof(vInt),"vInt");
+    vHeap::getInstance()->vPlacement(address,this);
 };
 
 vInt::~vInt(){};
@@ -18,5 +18,5 @@ int vInt::operator --(){};
 int vInt::operator !(){};
 
 vRef vInt::operator &(){
-    return *address;
+    return address;
 };

@@ -7,10 +7,11 @@
 
 
 #include "vheap/vRef.h"
+#include "vheap/vHeap.h"
 #include "vheap/vObject.h"
 
-class vInt {
-    vRef* address;
+class vInt : public vObject{
+    vRef address;
 public:
     vInt(int);
     ~vInt();

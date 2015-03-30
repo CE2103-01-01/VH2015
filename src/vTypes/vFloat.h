@@ -8,10 +8,11 @@
 #define _VH2015_VFLOAT_H_
 
 #include "vheap/vRef.h"
+#include "vheap/vHeap.h"
 #include "vheap/vObject.h"
 
-class vFloat {
-    vRef* address;
+class vFloat : public vObject{
+    vRef address;
 public:
     vFloat(float);
     ~vFloat();

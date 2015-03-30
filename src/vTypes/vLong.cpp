@@ -5,8 +5,8 @@
 #include "vLong.h"
 
 vLong::vLong(long data){
-    address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(vLong),"vLong");
+    address = vHeap::getInstance()->vMalloc(sizeof(vLong),"vLong");
+    vHeap::getInstance()->vPlacement(address,this);
 };
 
 vLong::~vLong(){};
@@ -18,5 +18,5 @@ int vLong::operator --(){};
 int vLong::operator !(){};
 
 vRef vLong::operator &(){
-    return *address;
+    return address;
 };
