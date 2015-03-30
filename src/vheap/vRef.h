@@ -13,7 +13,8 @@ class vRef {
         vRef();
         vRef(int);
         virtual ~vRef();
-        int operator *();
+        vObject operator *();
+        int operator !();
         int operator=(int);
         int operator=(vRef);
         int operator=(vObject);

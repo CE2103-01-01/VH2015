@@ -10,9 +10,11 @@ vRef::vRef(int id){
 
 vRef::~vRef(){};
 
-int vRef::operator*() {
+int vRef::operator!() {
     return *referenceID;
-}
+};
+
+int vRef::operator*() {};
 
 int vRef::operator=(int id){
     *referenceID=id;
