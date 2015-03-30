@@ -327,13 +327,13 @@ template<class T> T List<T>::get(int n){
             for(int i=0; i<n; i++){
                 tmp=tmp->getNextNode();
             };
-            return *(tmp->getData()());
+            return *(tmp->getData());
         }else{
             Node<T>* tmp=_tail;
             for(int i=l-1; i>n; i--){
                 tmp=tmp->getPrevNode();
             };
-            return *(tmp->getData()());
+            return *(tmp->getData());
         };
     }else{
 // return 0;
@@ -353,7 +353,7 @@ template<class T> void List<T>::print(){
     if(len()>0){
         Node<T>* tmp=_head;
         for(int i=0; i<len(); i++){
-            std::cout<<*(tmp->getData()())<<std::endl;
+            std::cout<<*(tmp->getData())<<std::endl;
             tmp=tmp->getNextNode();
         };
     }else{
