@@ -22,6 +22,6 @@ int vRef::operator=(int id){
 };
 
 int vRef::operator=(vRef other){
-    *referenceID=*other;
+    *referenceID=!other;
     return 0;
 };
