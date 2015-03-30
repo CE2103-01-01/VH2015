@@ -6,6 +6,7 @@
 #define _VH2015_VREF_H_
 
 #include "vObject.h"
+#include "vHeap.h"
 
 class vRef {
         int* referenceID;

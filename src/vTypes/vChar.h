@@ -3,15 +3,20 @@
 //
 
 #include "vheap/vRef.h"
+#include "vheap/vObject.h"
 
 #ifndef _VH2015_VCHAR_H_
 #define _VH2015_VCHAR_H_
 
-class vChar {
-    char* value;
+class vChar: public vObject{
+        vRef* address;
     public:
-        vChar();
+        vChar(char);
         ~vChar();
+        int operator +=(char);
+        int operator --();
+        int operator !();
+        vRef operator &();
 };
 
 
