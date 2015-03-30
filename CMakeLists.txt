@@ -9,6 +9,8 @@ set(SOURCE_FILES    main.cpp
                     src/vheap/vGarbageCollector.cpp
                     src/vheap/vMallocMetaData.cpp
                     src/vheap/vRef.cpp
+                    src/vTypes/vSimpleList.cpp
+                    src/vTypes/vSimpleNode.cpp
                     src/vTypes/vChar.cpp
                     src/vTypes/vFloat.cpp
                     src/vTypes/vInt.cpp
@@ -21,6 +23,8 @@ set(HEADERS_FILES
                     src/vheap/vObject.h
                     src/vheap/vRef.h
                     src/vheap/vMallocMetaData.h
+                    src/vTypes/vSimpleList.h
+                    src/vTypes/vSimpleNode.h
                     src/vheap/vGarbageCollector.h
                     src/vTypes/vChar.cpp
                     src/vTypes/vFloat.cpp
@@ -33,4 +37,4 @@ set(HEADERS_FILES
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vTypes/vString.cpp src/vTypes/vString.h src/vheap/vObject.cpp src/vheap/vObject.h src/vTypes/vInt.cpp src/vTypes/vInt.h src/vTypes/vChar.cpp src/vTypes/vChar.h src/vTypes/vFloat.cpp src/vTypes/vFloat.h src/vTypes/vLong.cpp src/vTypes/vLong.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vTypes/vString.cpp src/vTypes/vString.h src/vheap/vObject.cpp src/vheap/vObject.h src/vTypes/vInt.cpp src/vTypes/vInt.h src/vTypes/vChar.cpp src/vTypes/vChar.h src/vTypes/vFloat.cpp src/vTypes/vFloat.h src/vTypes/vLong.cpp src/vTypes/vLong.h src/vTypes/vSimpleList.cpp src/vTypes/vSimpleList.h src/vTypes/vSimpleNode.cpp src/vTypes/vSimpleNode.h)

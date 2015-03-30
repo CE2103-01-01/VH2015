@@ -1,6 +1,8 @@
 #include <iostream>
 #include "src/vheap/vHeap.h"
 #include "src/vTypes/vString.h"
+#include "src/vTypes/vSimpleList.h"
+#include "src/vTypes/vSimpleList.cpp"
 using namespace std;
 
 void pruebaVHeap() {
@@ -44,6 +46,13 @@ void pruebaLista() {
 
 
 int main() {
-    pruebaVString();
+   // pruebaVString();
+    vSimpleList<std::string> lista;
+    lista.add_end("a");
+    lista.add_end("l");
+    lista.add_end("e");
+    lista.add_end("x");
+    lista.print();
+
     return 0;
 };
