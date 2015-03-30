@@ -1,8 +1,10 @@
 #include <iostream>
+#include "src/vheap/vHeap.h"
 #include "src/vTypes/vString.h"
 using namespace std;
 
 int main(){
+    /**
     vString* str = static_cast<vString*>(malloc(sizeof(vString)));
     new(str) vString("Hola");
     !(*str);
@@ -33,6 +35,8 @@ int main(){
         std::cout <<* i->next() << std::endl;
 >>>>>>> Stashed changes
     }
+     /**
+     */
     std::cout<<"Resultado Esperado: 2,3,4,5,6"<<std::endl;
     vHeap* vH = vHeap::getInstance();
     vRef r1 = vH->vMalloc(4,"t1");
@@ -40,7 +44,5 @@ int main(){
     vRef r3 = vH->vMalloc(8,"t3");
     //vH->printMetadata();
 
-    */
-    std::cin.get();
-    return 0;
+     return 0;
 };

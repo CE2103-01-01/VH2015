@@ -9,6 +9,7 @@ set(SOURCE_FILES    main.cpp
                     src/vheap/vMallocMetaData.cpp
                     src/vheap/vRef.cpp
                     src/vTypes/vString.cpp
+                    src/XML/pugixml.cpp
                     )
 
 set(HEADERS_FILES
@@ -18,7 +19,9 @@ set(HEADERS_FILES
                     src/vheap/vMallocMetaData.h
                     src/vheap/vGarbageCollector.h
                     src/vTypes/vList.h
-                    src/vTypes/vString.h)
+                    src/vTypes/vString.h
+                    src/XML/pugiconfig.hpp
+                    src/XML/pugixml.hpp)
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
