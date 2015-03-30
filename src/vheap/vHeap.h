@@ -14,7 +14,7 @@ class vHeap{
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
-    vMallocMetaData metaData;
+    vMallocMetaData* metaData;
     float* overweight;
     void* mainChunk;
     void* actualPos;

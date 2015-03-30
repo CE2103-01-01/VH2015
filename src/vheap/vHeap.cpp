@@ -29,9 +29,9 @@ vHeap::~vHeap(){
 };
 vHeap* vHeap::vHeapSingleton = 0;
 vRef vHeap::vMalloc(int sz, std::string type){
-    vRef r= metaData.addEntry(sz,type,actualPos);// add Entry devuelve una referencia
+    vRef r= metaData->addEntry(sz,type,actualPos);// add Entry devuelve una referencia
     actualPos+=sz;
-    metaData.printMetaData();
+    metaData->printMetaData();
     return r;
 };
 
