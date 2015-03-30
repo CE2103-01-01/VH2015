@@ -7,9 +7,10 @@
 
 #include "vheap/vRef.h"
 #include "vheap/vObject.h"
+#include <iostream>
 
 class vChar: public vObject{
-        vRef* address;
+        vRef address;
     public:
         vChar(char);
         ~vChar();

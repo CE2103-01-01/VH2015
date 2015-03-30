@@ -9,7 +9,7 @@
 #include "vHeap.h"
 
 class vRef {
-        int* referenceID;
+        int referenceID;
     public:
         vRef();
         vRef(int);

@@ -6,7 +6,7 @@
 
 vFloat::vFloat(float data){
     address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(float),"vFloat");
+    *address = vHeap::getInstance()->vMalloc(sizeof(vFloat),"vFloat");
 };
 
 vFloat::~vFloat(){};

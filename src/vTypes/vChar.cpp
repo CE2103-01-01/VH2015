@@ -5,8 +5,10 @@
 #include "vChar.h"
 
 vChar::vChar(char data){
-    address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(char),"vChar");
+    std::cout<<"address = vHeap::getInstance()->vMalloc(sizeof(vChar),\"vChar\");"<<std::endl;
+    address = vHeap::getInstance()->vMalloc(sizeof(vChar),"vChar");
+    std::cout<<"vHeap::getInstance()->vPlacement(address,this);"<<std::endl;
+    vHeap::getInstance()->vPlacement(address,this);
 };
 
 vChar::~vChar(){};
@@ -18,5 +20,5 @@ int vChar::operator --(){};
 int vChar::operator !(){};
 
 vRef vChar::operator &(){
-    return *address;
+    return address;
 };

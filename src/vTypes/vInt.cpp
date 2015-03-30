@@ -6,7 +6,7 @@
 
 vInt::vInt(int data){
     address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(int),"vInt");
+    *address = vHeap::getInstance()->vMalloc(sizeof(vInt),"vInt");
 };
 
 vInt::~vInt(){};

@@ -7,6 +7,8 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include <mutex>
+
 class vRef;
 class vMallocMetaData;
 class vHeap{
@@ -18,6 +20,7 @@ class vHeap{
     float* overweight;
     void* mainChunk;
     void* actualPos;
+    std::mutex memoryMutex;
 public:
     vHeap(int,float);
     ~vHeap();
@@ -26,6 +29,7 @@ public:
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
+    int vPlacement(vRef,vObject*);
 };
 
 class Dump {

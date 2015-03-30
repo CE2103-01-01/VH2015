@@ -6,7 +6,7 @@
 
 vLong::vLong(long data){
     address= static_cast<vRef*>(malloc(sizeof(vRef)));
-    *address = vHeap::getInstance()->vMalloc(sizeof(long),"vLong");
+    *address = vHeap::getInstance()->vMalloc(sizeof(vLong),"vLong");
 };
 
 vLong::~vLong(){};

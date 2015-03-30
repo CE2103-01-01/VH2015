@@ -12,7 +12,6 @@ class vObject {
 public:
     vObject();
     ~vObject();
-    int operator =(vObject);
 };
 
 

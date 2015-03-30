@@ -15,7 +15,7 @@ class vMallocMetaData {
 private:
     int counter = 0;
     int actualID = 0;
-    vList <vMallocMDEntry> *memoryTable;
+    vList <vMallocMDEntry>* memoryTable;
 public:
     vMallocMetaData();
     ~vMallocMetaData();
@@ -24,6 +24,7 @@ public:
     void decreaseCounter();
     vRef addEntry(int,std::string,void*);
     void printMetaData();
+    vList <vMallocMDEntry>* operator !();
 };
 
 class vMallocMDEntry

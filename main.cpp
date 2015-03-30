@@ -1,6 +1,8 @@
 #include <iostream>
 #include "src/vheap/vHeap.h"
 #include "src/vTypes/vString.h"
+#include "src/vTypes/vChar.h"
+
 using namespace std;
 
 void pruebaVHeap() {
@@ -42,8 +44,11 @@ void pruebaLista() {
     std::cout<<"Resultado Esperado: 2,3,4,5,6"<<std::endl;
 }
 
+void pruebaChar(){
+    vChar chr = vChar(60);
+};
 
 int main() {
-    pruebaVString();
+    pruebaChar();
     return 0;
 };

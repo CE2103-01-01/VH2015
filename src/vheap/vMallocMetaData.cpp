@@ -80,3 +80,7 @@ int vMallocMDEntry::getIdRef() {
 vMallocMDEntry::vMallocMDEntry() {
 
 }
+
+vList <vMallocMDEntry>* vMallocMetaData::operator !(){
+    return memoryTable;
+};

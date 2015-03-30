@@ -5,23 +5,25 @@
 #include "vRef.h"
 
 vRef::vRef(int id){
-    *referenceID=id;
+    referenceID=id;
 };
+
+vRef::vRef(){};
 
 vRef::~vRef(){};
 
 int vRef::operator!() {
-    return *referenceID;
+    return referenceID;
 };
 
 vObject vRef::operator*() {};
 
 int vRef::operator=(int id){
-    *referenceID=id;
+    referenceID=id;
     return 0;
 };
 
 int vRef::operator=(vRef other){
-    *referenceID=!other;
+    referenceID=!other;
     return 0;
 };
