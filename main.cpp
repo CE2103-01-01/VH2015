@@ -14,7 +14,9 @@ int main(){
 
     std::cout<<(*str)[0]<<std::endl;
 
-    (*str)+="aa";
+    std::string s="a";
+    (*str)+=s;
+    std::cout<<"aa"<<std::endl;
     !(*str);
 
 

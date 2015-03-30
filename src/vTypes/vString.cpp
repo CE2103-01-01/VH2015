@@ -18,6 +18,7 @@ vString::~vString() {
 
 int vString::operator +=(std::string str){
     for(int i=0; i<str.length(); i++){
+        std::cout<<i<<std::endl;
         word->append(static_cast<char>(str[i]));
     };
     return 0;
