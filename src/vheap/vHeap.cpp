@@ -31,10 +31,11 @@ vHeap::~vHeap(){
 vHeap* vHeap::vHeapSingleton = 0;
 
 vRef vHeap::vMalloc(int sz, std::string type){
+    std::cout<<std::endl;
+    std::cout<<"On vMalloc"<<std::endl;
     std::cout<<"memoryMutex.lock()"<<std::endl;
     memoryMutex.lock();
 
-    std::cout<<"on vMalloc"<<std::endl;
     std::cout<<"vRef r= metaData->addEntry(sz,type,actualPos)"<<std::endl;
     vRef r= metaData->addEntry(sz,type,actualPos);// add Entry devuelve una referencia
     std::cout<<"actualPos+=sz"<<std::endl;
@@ -46,6 +47,7 @@ vRef vHeap::vMalloc(int sz, std::string type){
     memoryMutex.unlock();
 
     std::cout<<"return r"<<std::endl;
+    std::cout<<std::endl;
     return r;
 };
 
@@ -86,7 +88,8 @@ void Dump::saveDumpFile() {
 }
 
 int vHeap::vPlacement(vRef memory, vObject* object){
-    std::cout<<"on vPlacement"<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"On vPlacement"<<std::endl;
 
     std::cout<<"memoryMutex.lock();"<<std::endl;
     memoryMutex.lock();
@@ -107,6 +110,7 @@ int vHeap::vPlacement(vRef memory, vObject* object){
             std::cout<<"memoryMutex.unlock()"<<std::endl;
             memoryMutex.unlock();
             std::cout<<"return 0"<<std::endl;
+            std::cout<<std::endl;
             return 0;
         };
     };
@@ -114,5 +118,6 @@ int vHeap::vPlacement(vRef memory, vObject* object){
     std::cout<<"memoryMutex.unlock()"<<std::endl;
     memoryMutex.unlock();
     std::cout<<"return 1"<<std::endl;
+    std::cout<<std::endl;
     return 1;
 };

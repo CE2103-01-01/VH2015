@@ -47,6 +47,7 @@ void pruebaLista() {
 }
 
 void pruebaChar(){
+    std::cout<<"vChar chr = vChar(60)"<<std::endl;
     vChar chr = vChar(60);
 };
 
@@ -60,7 +61,7 @@ int main() {
     lista.add_end("x");
     lista.print();
     */
-    
+
     pruebaChar();
     return 0;
 };
