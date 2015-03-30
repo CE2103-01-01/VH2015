@@ -26,4 +26,4 @@ set(HEADERS_FILES
 
 include_directories(src headers vheap)
 include_directories(src headers vheap XML)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vTypes/vString.cpp src/vTypes/vString.h src/vheap/vObject.cpp src/vheap/vObject.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} src/vTypes/vString.cpp src/vTypes/vString.h src/vheap/vObject.cpp src/vheap/vObject.h src/vTypes/vInt.cpp src/vTypes/vInt.h src/vTypes/vChar.cpp src/vTypes/vChar.h src/vTypes/vFloat.cpp src/vTypes/vFloat.h src/vTypes/vLong.cpp src/vTypes/vLong.h)
