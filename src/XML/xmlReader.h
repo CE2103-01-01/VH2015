@@ -3,13 +3,20 @@
 #include <string>
 using namespace std;
 
+struct Opciones {
+    bool activo;
+    string path;
+    int size;
+    float overweight;
+};
+
 class xmlReader {
 public:
     xmlReader();
     ~xmlReader();
-    string* vHeapOptions();
+    Opciones vHeapOptions();
 private:
-    string* opciones;
+    Opciones opciones;
 };
 
 #endif /* SRC_XMLREADER_H_ */

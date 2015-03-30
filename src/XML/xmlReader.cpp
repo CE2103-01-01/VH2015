@@ -6,23 +6,22 @@ using namespace std;
 using namespace pugi;
 
 xmlReader::xmlReader() {
-    opciones = new string[4];
 }
 
 xmlReader::~xmlReader() {
     delete this;
 }
 
-string* xmlReader::vHeapOptions() {
+Opciones xmlReader::vHeapOptions() {
 
     xml_document doc;
     doc.load_file("vHeap.xml");
     xml_node raiz = doc.child("VH2015");
 
-    opciones[0] = raiz.child("vdebug").attribute("activo").value();
-    opciones[1] = raiz.child("vdebug").attribute("vdebug-file-path").value();
-    opciones[2] = raiz.child("vHeap").attribute("size").value();
-    opciones[3] = raiz.child("vHeap").attribute("overweight").value();
+    opciones.activo = raiz.child("vdebug").attribute("activo").as_bool();
+    opciones.path = raiz.child("vdebug").attribute("vdebug-file-path").value();
+    opciones.size = raiz.child("vHeap").attribute("size").as_int();
+    opciones.overweight = raiz.child("vHeap").attribute("overweight").as_float();
 
     return opciones;
 }

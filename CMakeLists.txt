@@ -18,6 +18,6 @@ set(HEADERS_FILES
                     src/vheap/vGarbageCollector.h
                     src/vheap/List.h)
 
-include_directories(src headers vheap)
+include_directories(/ src headers vheap)
 include_directories(src headers vheap XML)
 add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES}  src/vheap/vRef.cpp src/vheap/vMallocMetaData.cpp)

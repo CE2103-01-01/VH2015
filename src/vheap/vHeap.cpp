@@ -5,7 +5,7 @@
 #include <fstream>
 #include <unistd.h>
 #include "vHeap.h"
-
+#include "XML/xmlReader.h"
 
 vHeap::vHeap(int s, float o){
     overweight=static_cast<float*>(malloc(sizeof(float)));
@@ -32,19 +32,18 @@ vRef vHeap::vMalloc(int sz, std::string type){
     return r;
 };
 
-
  vHeap* vHeap::getInstance() {
     if(!vHeapSingleton) {
-        vHeapSingleton = static_cast<vHeap *>(malloc(sizeof(vHeap)));//TODO-ernesto datos provienen del xml
-        new(vHeapSingleton) vHeap(100,100);
+        vHeapSingleton = static_cast<vHeap *>(malloc(sizeof(vHeap)));
+        xmlReader xml;
+        Opciones datos = xml.vHeapOptions();
+        new(vHeapSingleton) vHeap(datos.size,datos.overweight);
     }
 
     return vHeapSingleton;
+ }
 
-}
 std::string Dump::IntToStr(int n) {
-
-
     std::stringstream result;
         result << n;
         return result.str();

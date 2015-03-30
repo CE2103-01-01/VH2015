@@ -1,12 +1,5 @@
-//
-// Created by alex on 20/03/15.
-//
-
 #ifndef _VH2015_VHEAP_H_
 #define _VH2015_VHEAP_H_
-
-
-
 
 #include "vRef.h"
 #include "vMallocMetaData.h"
@@ -14,6 +7,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
+#include "/src/XML/xmlReader.h"
 
 class vHeap{
     friend class Dump;
@@ -46,6 +40,5 @@ class Dump {
     std::string IntToStr(int n);
     void saveDumpFile();
 };
-
 
 #endif //_VH2015_VHEAP_H_
