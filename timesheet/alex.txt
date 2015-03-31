@@ -1,4 +1,6 @@
 18/03/15 1.5h implemtar algunas clases e investigacion
 19/03/15 1h implementar las clases necesaria de una lista enlazada
-16/03/15    modificacion en la lista
+26/03/15    modificacion en la lista
 28/03/15    creacion de socket
+29/03/15    modificacion en la lista y vheap
+30/03/15    implementacion de lista simple

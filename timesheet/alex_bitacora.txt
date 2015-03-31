@@ -2,3 +2,11 @@
 se implementa algunas clases
 19/03/15
 se implementa la lista enlazada, investigacion
+26/03/15
+modifiicacion en la lista implementada, uiliza template
+28/03/15
+creacion de socket para la comunicacion de archivos, la creacion de dump imcompleta
+29/03/15
+problema en la lista con string, reunio con pablo para resolverlo
+30/03/15
+creacion de la estructura lista simple para la aplicacion de prueba

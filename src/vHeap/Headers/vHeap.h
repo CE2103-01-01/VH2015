@@ -19,12 +19,18 @@ class vHeap{
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
-    vMallocMetaData* metaData;
+
     float* overweight;
     void* mainChunk;
+    void* initPos;
+    void* finalPos;
     void* actualPos;
     std::mutex memoryMutex;
+    vMallocMetaData* metaData;
+
+
 public:
+
     vHeap(int,float);
     ~vHeap();
     vRef vMalloc(int, std::string);
@@ -32,10 +38,13 @@ public:
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
+   vMallocMetaData* getMetaData();
     int vPlacement(vRef,vObject*);
 };
 
 class Dump {
+public:
+    void startDump();
     Dump();
     ~Dump();
     int frecuency;

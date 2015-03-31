@@ -49,6 +49,9 @@ void pruebaChar(){
 };
 
 int main() {
-    pruebaChar();
+    pruebaVHeap();
+    Dump dump;
+    dump.saveDumpFile();
+    std::cout<<"save succefully"<<std::endl;
     return 0;
 };

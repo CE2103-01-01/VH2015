@@ -17,6 +17,9 @@ vMallocMetaData::~vMallocMetaData()
 {
 
 }
+vList <vMallocMDEntry>* vMallocMetaData::getMemoryTable() {
+    return memoryTable;
+}
 
 int vMallocMetaData::len() {
     return counter;
@@ -52,6 +55,7 @@ void vMallocMetaData::printMetaData() {
         std::cout <<
                 "ID: " << m->getIdRef() <<
                 " Size: " << m->getDataSize() <<
+                " offset: "<<m->getOffSet() <<
 
         std::endl;
 

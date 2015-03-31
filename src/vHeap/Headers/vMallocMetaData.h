@@ -19,6 +19,7 @@ private:
 public:
     vMallocMetaData();
     ~vMallocMetaData();
+    vList <vMallocMDEntry>* getMemoryTable();
     int len();
     void increaseCounter();
     void decreaseCounter();
