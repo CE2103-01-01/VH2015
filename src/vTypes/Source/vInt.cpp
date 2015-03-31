@@ -2,7 +2,7 @@
 // Created by roberto on 30/03/15.
 //
 
-#include "vInt.h"
+#include "vTypes/Headers/vInt.h"
 
 vInt::vInt(int data){
     address = vHeap::getInstance()->vMalloc(sizeof(vInt),"vInt");

@@ -2,8 +2,8 @@
 // Created by pablo on 28/03/15.
 //
 
-#include <vTypes/vList.h>
-#include "vMallocMetaData.h"
+#include <vTypes/Headers/vList.h>
+#include "vHeap/Headers/vMallocMetaData.h"
 
 
 vMallocMetaData::vMallocMetaData() {

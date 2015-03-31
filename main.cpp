@@ -1,9 +1,8 @@
 #include <iostream>
-#include "vHeap.h"
-#include "src/vTypes/vString.h"
-#include "src/vTypes/vSimpleList.h"
-#include "src/vTypes/vSimpleList.cpp"
-#include "src/vTypes/vChar.h"
+#include "vHeap/Headers/vHeap.h"
+#include "src/vTypes/Headers/vString.h"
+#include "src/vTypes/Headers/vSimpleList.h"
+#include "src/vTypes/Headers/vChar.h"
 
 using namespace std;
 

@@ -5,9 +5,9 @@
 #ifndef _VH2015_VCHAR_H_
 #define _VH2015_VCHAR_H_
 
-#include "vheap/vRef.h"
-#include "vheap/vObject.h"
-#include "vHeap.h"
+#include "vHeap/Headers/vRef.h"
+#include "vHeap/Headers/vObject.h"
+#include "vHeap/Headers/vHeap.h"
 #include <iostream>
 
 class vChar: public vObject{

@@ -3,11 +3,14 @@
 
 #include "vRef.h"
 #include "vMallocMetaData.h"
-#include "vTypes/vList.h"
+#include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <stdlib.h>
 #include <sstream>
 #include <mutex>
+#include <fstream>
+#include <unistd.h>
+#include "../libs/pugixml.hpp"
 
 class vRef;
 class vMallocMetaData;

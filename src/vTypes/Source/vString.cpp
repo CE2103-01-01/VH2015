@@ -2,7 +2,7 @@
 // Created by roberto on 29/03/15.
 //
 
-#include "vString.h"
+#include "vTypes/Headers/vString.h"
 
 vString::vString(std::string str){
     word = static_cast<vList<char> *>(malloc(sizeof(vList<char>)));

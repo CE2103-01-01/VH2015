@@ -1,7 +1,7 @@
 //
 // Created by pablo on 18/03/15.
 //
-#include "vGarbageCollector.h"
+#include "vHeap/Headers/vGarbageCollector.h"
 #include <unistd.h>
 
 

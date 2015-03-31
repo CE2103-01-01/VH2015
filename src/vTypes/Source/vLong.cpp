@@ -2,7 +2,7 @@
 // Created by roberto on 30/03/15.
 //
 
-#include "vLong.h"
+#include "vTypes/Headers/vLong.h"
 
 vLong::vLong(long data){
     address = vHeap::getInstance()->vMalloc(sizeof(vLong),"vLong");

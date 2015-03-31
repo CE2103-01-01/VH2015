@@ -6,9 +6,9 @@
 #define _VH2015_VINT_H_
 
 
-#include "vheap/vRef.h"
-#include "vHeap.h"
-#include "vheap/vObject.h"
+#include "vHeap/Headers/vRef.h"
+#include "vHeap/Headers/vObject.h"
+#include "vHeap/Headers/vHeap.h"
 
 class vInt : public vObject{
     vRef address;

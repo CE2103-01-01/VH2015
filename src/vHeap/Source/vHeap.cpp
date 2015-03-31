@@ -2,10 +2,7 @@
 // Created by alex on 20/03/15.
 //
 
-#include <fstream>
-#include <unistd.h>
-#include "vHeap.h"
-#include "../../libs/pugixml.hpp"
+#include "vHeap/Headers/vHeap.h"
 
 using namespace pugi;
 
