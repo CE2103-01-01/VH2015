@@ -20,7 +20,7 @@ set(SOURCE_FILES    main.cpp
                     src/vTypes/Source/vFloat.cpp
                     src/vTypes/Source/vLong.cpp
                     libs/pugixml.cpp
-                    src/TestApplication.cpp
+                    src/Test/Source/TestApplication.cpp
                     src/vTypes/Source/vSimpleList.cpp
                     src/vTypes/Source/vSimpleNode.cpp)
 
@@ -47,7 +47,7 @@ set(HEADERS_FILES
                     src/vTypes/Headers/vSimpleNode.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
-                    src/TestApplication.h)
+                    src/Test/Headers/TestApplication.h)
 
 include_directories(src headers vHeap)
 include_directories(src headers vHeap XML)

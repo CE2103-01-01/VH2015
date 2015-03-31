@@ -4,7 +4,7 @@
 
 #include<iostream>
 #include <vTypes/Headers/vString.h>
-#include "TestApplication.h"
+#include "Test/Headers/TestApplication.h"
 
 void TestApplication::main(vString type) {
     if (type == "vList") createVList();
