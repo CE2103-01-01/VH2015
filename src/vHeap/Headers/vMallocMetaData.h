@@ -13,7 +13,6 @@ class vMallocMDEntry;
 class vRef;
 class vMallocMetaData {
 private:
-    int counter = 0;
     int actualID = 0;
     vList <vMallocMDEntry>* memoryTable;
 public:
@@ -39,6 +38,8 @@ private:
 public:
     vMallocMDEntry();
     vMallocMDEntry(int, int, void*);
+    int operator !();
+    void* operator &();
     int getIdRef();
     void* getOffSet();
    // std::type_info getTypeInfo();

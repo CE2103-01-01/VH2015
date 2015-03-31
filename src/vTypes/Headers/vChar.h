@@ -17,7 +17,7 @@ class vChar: public vObject{
         ~vChar();
         int operator +=(char);
         int operator --();
-        int operator !();
+        char operator !();
         vRef operator &();
 };
 

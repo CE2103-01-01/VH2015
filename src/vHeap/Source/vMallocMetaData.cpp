@@ -8,7 +8,6 @@
 
 vMallocMetaData::vMallocMetaData() {
     actualID = 0;
-    counter = 0;
     memoryTable = static_cast<vList<vMallocMDEntry> *>(malloc(sizeof(vList<vMallocMDEntry>)));
     new(memoryTable) vList<vMallocMDEntry>();
 }
@@ -22,20 +21,19 @@ vList <vMallocMDEntry>* vMallocMetaData::getMemoryTable() {
 }
 
 int vMallocMetaData::len() {
-    return counter;
+    return actualID;
 }
 
 void vMallocMetaData::increaseCounter() {
-    counter++;
+    actualID++;
 }
 void vMallocMetaData::decreaseCounter() {
-    counter--;
+    actualID--;
 }
 
 vRef vMallocMetaData::addEntry(int size, std::string type, void *actualPos) {
-    memoryTable->append(vMallocMDEntry(actualID++,size,actualPos));
-    counter++;
-    return vRef(actualID);
+    memoryTable->append(vMallocMDEntry(actualID,size,actualPos));
+    return vRef(actualID++);
 }
 
 vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset)
@@ -88,4 +86,12 @@ vMallocMDEntry::vMallocMDEntry() {
 
 vList <vMallocMDEntry>* vMallocMetaData::operator !(){
     return memoryTable;
+};
+
+void* vMallocMDEntry::operator &(){
+    return offset;
+};
+
+int vMallocMDEntry::operator !(){
+    return idRef;
 };

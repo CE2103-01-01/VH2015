@@ -38,7 +38,7 @@ public:
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
-   vMallocMetaData* getMetaData();
+    vMallocMetaData* getMetaData();
     int vPlacement(vRef,vObject*);
 };
 

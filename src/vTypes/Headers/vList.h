@@ -23,7 +23,7 @@ class vListIterator {
 template<class T>
 class vNode {
     friend class vList<T>; //Clase amiga lista
-    T data; //Valor almacenado en el nodo
+    T* data; //Valor almacenado en el nodo
     vNode<T>* next; //vNode next
     vNode<T>* prev; //vNode prev
     public:
@@ -70,13 +70,16 @@ class vList {
 */
 template<class T>
 vNode<T>::vNode(T* v) {
+    data = static_cast<T*>(malloc(sizeof(T)));
+    *data = *v;
 };
 /** @brief Constructor
 *
 */
 template<class T>
 vNode<T>::vNode(T v) {
-    data = v;
+    data = static_cast<T*>(malloc(sizeof(T)));
+    *data = v;
 }
 /** @brief Destructor
 *
@@ -107,8 +110,8 @@ vNode<T> *vNode<T>::getPrevNode() {
 * @return T
 */
 template<class T>
-T *vNode<T>::getData() {
-    return &data;
+T* vNode<T>::getData() {
+    return data;
 };
 /** @brief Inserta un nodo despues
 *

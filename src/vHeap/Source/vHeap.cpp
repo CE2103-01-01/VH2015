@@ -104,7 +104,7 @@ std::string Dump::IntToStr(int n) {
   
 }
 void Dump::saveDumpFile() {
-        startDump();
+        //startDump();
         std::string path(getenv("HOME"));
         std::stringstream ss;
         ss<<counter;

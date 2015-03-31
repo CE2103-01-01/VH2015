@@ -45,13 +45,11 @@ void pruebaLista() {
 }
 
 void pruebaChar(){
-    vChar chr = vChar(60);
+    vChar chr = vChar(63);
+    std::cout<<"Valor del vChar chr: "<< !chr <<std::endl;
 };
 
 int main() {
-    pruebaVHeap();
-    Dump dump;
-    dump.saveDumpFile();
-    std::cout<<"save succefully"<<std::endl;
+    pruebaChar();
     return 0;
 };
