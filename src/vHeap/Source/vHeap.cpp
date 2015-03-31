@@ -13,7 +13,7 @@ vHeap::vHeap(int s, float o){
     mainChunk = malloc(s * 1024);
     actualPos=mainChunk;
 
-    metaData = new vMallocMetaData();
+    new(metaData) vMallocMetaData();
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
     //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
