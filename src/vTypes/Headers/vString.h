@@ -18,6 +18,8 @@ class vString{
         char operator [](int);
         int operator --();
         int operator !();
+
+    bool operator==(std::string);
 };
 
 

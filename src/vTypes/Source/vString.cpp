@@ -44,3 +44,13 @@ int vString::operator !(){
     std::cout<<std::endl;
     return 0;
 };
+
+bool vString::operator==(std::string string) {
+    if (string.length() != word->len()) return false;
+    else {
+        for (unsigned int i = 0; i < string.length(); i++) {
+            if (string[i] != *word->get(i)) return false;
+        }
+        return true;
+    }
+}

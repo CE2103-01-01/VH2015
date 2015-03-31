@@ -9,7 +9,7 @@ template<class T>
 class vNode;
 template<class T>
 class vListIterator {
-    int position = 0;
+    unsigned long position = 0;
     vList<T> *myList = 0;
     vNode<T> *currentNode = 0;
     public:
@@ -45,7 +45,7 @@ template<class T>
 class vList {
     vNode<T>* _head; //primer nodo
     vNode<T>* _tail; //_tail nodo
-    int l = 0; //longitud
+    unsigned long l = 0; //longitud
     public:
         virtual vListIterator<T>* getIterator();
         vList(); //Constructor
@@ -59,7 +59,7 @@ class vList {
         vNode<T> *search(T); //Busca dato T
         vNode<T> *getNode(int); //Busca getNode
         T *get(int); //Busca getNode
-        int len(); //Devuelve longtiud
+    unsigned long len(); //Devuelve longtiud
         vList<T>operator=(vList<T>); //Operador de asignacion
         void print(); //Imprime en consola
 };
@@ -352,7 +352,7 @@ T *vList<T>::get(int n) {
 * @return int;
 */
 template<class T>
-int vList<T>::len() {
+unsigned long vList<T>::len() {
     return l;
 };
 /** @brief Imprime la lista

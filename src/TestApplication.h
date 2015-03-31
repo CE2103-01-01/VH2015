@@ -8,9 +8,12 @@
 
 #include <iosfwd>
 #include <string>
+#include <vTypes/Headers/vString.h>
 
 class TestApplication {
-    void main(std::string type);
+    void main(vString type);
+
+    void createVList();
 };
 
 
