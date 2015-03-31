@@ -80,10 +80,23 @@ Dump::Dump() {
 }
 Dump::~Dump() {
 }
+/*
 void Dump::startDump() {
-    std::thread t(&Dump::saveDumpFile,Dump());
-}
+    vListIterator<vMallocMDEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
+    while(iter->exists()){
 
+        vMallocMDEntry *m = iter->next();
+        vMallocMDEntry *n = iter->next();
+        if(!n->getOffSet()==(m->getOffSet()+m->getDataSize())){
+            int counter = 1;
+            while(!n->getOffSet()==m->getOffSet()+m->getDataSize()+counter){
+                counter++;
+            }
+        }
+
+    }
+}
+*/
 std::string Dump::IntToStr(int n) {
     std::stringstream result;
         result << n;
@@ -91,16 +104,13 @@ std::string Dump::IntToStr(int n) {
   
 }
 void Dump::saveDumpFile() {
+        startDump();
         std::string path(getenv("HOME"));
         std::stringstream ss;
         ss<<counter;
         std::string s1 = ss.str();
         path += "/Desktop/DumpFile"+s1+".txt";
         std::ofstream myfile(path);
-        void* init = vHeap::getInstance()->initPos;
-        void* final = vHeap::getInstance()->finalPos;
-
-
         vListIterator<vMallocMDEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
         xml_document doc;
         doc.load_file("vHeap.xml");
