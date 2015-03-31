@@ -1,7 +1,6 @@
 #include <iostream>
 #include "vHeap/Headers/vHeap.h"
 #include "src/vTypes/Headers/vString.h"
-#include "src/vTypes/Headers/vSimpleList.h"
 #include "src/vTypes/Headers/vChar.h"
 
 using namespace std;
@@ -46,21 +45,10 @@ void pruebaLista() {
 }
 
 void pruebaChar(){
-    std::cout<<"vChar chr = vChar(60)"<<std::endl;
     vChar chr = vChar(60);
 };
 
 int main() {
-    /**
-    pruebaVString();
-    vSimpleList<std::string> lista;
-    lista.add_end("a");
-    lista.add_end("l");
-    lista.add_end("e");
-    lista.add_end("x");
-    lista.print();
-    */
-
     pruebaChar();
     return 0;
 };
