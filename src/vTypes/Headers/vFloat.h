@@ -16,6 +16,7 @@ class vFloat : public vObject{
     public:
         vFloat(float);
         ~vFloat();
+        float operator !();
         int operator +=(float);
 };
 

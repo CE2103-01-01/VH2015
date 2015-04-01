@@ -17,7 +17,7 @@ int vInt::operator +=(int pls){};
 
 int vObject::operator --(){};
 
-int vObject::operator !(){
+int vInt::operator !(){
     try{
         return *static_cast<int*>(*data);
     }catch(int e){

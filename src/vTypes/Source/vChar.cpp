@@ -17,7 +17,7 @@ int vChar::operator +=(char pls){};
 
 int vObject::operator --(){};
 
-char vObject::operator !(){
+char vChar::operator !(){
     try{
         return *static_cast<char*>(*data);
     }catch(int e){

@@ -15,6 +15,7 @@ class vLong : public vObject{
     public:
         vLong(long);
         ~vLong();
+        long operator !();
         int operator +=(long);
 };
 

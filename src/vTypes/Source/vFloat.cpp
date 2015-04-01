@@ -17,7 +17,7 @@ int vFloat::operator +=(float pls){};
 
 int vObject::operator --(){};
 
-int vObject::operator !(){
+int vFloat::operator !(){
     try{
         return *static_cast<float*>(*data);
     }catch(int e){

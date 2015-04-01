@@ -15,6 +15,7 @@ class vInt : public vObject{
     public:
         vInt(int);
         ~vInt();
+        int operator !();
         int operator +=(int);
 };
 

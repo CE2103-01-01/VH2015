@@ -17,7 +17,7 @@ int vLong::operator +=(long pls){};
 
 int vObject::operator --(){};
 
-int vObject::operator !(){
+int vLong::operator !(){
     try{
         return *static_cast<long*>(*data);
     }catch(int e){

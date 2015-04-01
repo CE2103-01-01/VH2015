@@ -13,7 +13,6 @@ class vObject {
     public:
         vObject();
         ~vObject();
-        int operator !();
         vRef operator &();
         int operator --();
 };
