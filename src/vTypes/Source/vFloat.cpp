@@ -11,10 +11,15 @@ vFloat::vFloat(float d){
 
 vFloat::~vFloat(){};
 
-int vFloat::operator +=(float){};
+int vFloat::operator +=(float pls){};
 
 int vFloat::operator --(){};
 
-int vFloat::operator !(){};
+int vFloat::operator !(){
+    try{
+        return *static_cast<float*>(vHeap::getInstance()->de_vReference(data));
+    }catch(int e){
+        return -1;
+    };};
 
 vRef vFloat::operator &(){};
