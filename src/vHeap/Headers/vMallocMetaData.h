@@ -4,6 +4,8 @@
 
 #ifndef _VH2015_VMALLOCMETADATA_H_
 #define _VH2015_VMALLOCMETADATA_H_
+
+#include "vMallocMDEntry.h"
 #include "vRef.h"
 #include "vTypes/Headers/vList.h"
 #include <iostream>
@@ -20,34 +22,15 @@ public:
     ~vMallocMetaData();
     vList <vMallocMDEntry>* getMemoryTable();
     int len();
-    void increaseCounter();
-    void decreaseCounter();
+
+    void increaseReference(unsigned int idRef);
+
+    void decreaseReference(unsigned int idRef);
     vRef addEntry(int,std::string,void*);
     void printMetaData();
     vList <vMallocMDEntry>* operator !();
 };
 
-class vMallocMDEntry
-{
-private:
-    int idRef;
-    void* offset;
-    //std::type_info typeInfo;
-    int dataSize;
-    bool useFlag;
-public:
-    vMallocMDEntry();
-    vMallocMDEntry(int, int, void*);
-    int operator !();
-    void changeFlag();
-    void* operator &();
-    int getIdRef();
-    void* getOffSet();
-   // std::type_info getTypeInfo();
-    int getDataSize();
-    bool getUseFlag();
-
-};
 
 #endif //_VH2015_VMALLOCMETADATA_H_
 

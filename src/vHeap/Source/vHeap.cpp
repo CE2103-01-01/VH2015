@@ -160,3 +160,15 @@ void* vHeap::de_vReference(vRef memory){
     memoryMutex.unlock();
     return 0;
 };
+
+void Dump::startDump() {
+
+}
+
+int vHeap::removeVRef(int idRef) {
+    return 0;
+}
+
+int vHeap::addVRef(int idRef) {
+    return 0;
+}

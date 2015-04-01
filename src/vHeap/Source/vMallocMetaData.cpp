@@ -2,7 +2,7 @@
 // Created by pablo on 28/03/15.
 //
 
-#include <vTypes/Headers/vList.h>
+
 #include "vHeap/Headers/vMallocMetaData.h"
 
 
@@ -24,11 +24,24 @@ int vMallocMetaData::len() {
     return actualID;
 }
 
-void vMallocMetaData::increaseCounter() {
-    actualID++;
+void vMallocMetaData::increaseReference(unsigned int idRef) {
+    vListIterator<vMallocMDEntry> *i = memoryTable->getIterator();
+    while (i->exists()) {
+        if (i->next()->getIdRef() == idRef) {
+            i->next()->increaseNumReferences();
+            break;
+        }
+    }
 }
-void vMallocMetaData::decreaseCounter() {
-    actualID--;
+
+void vMallocMetaData::decreaseReference(unsigned int idRef) {
+    vListIterator<vMallocMDEntry> *i = memoryTable->getIterator();
+    while (i->exists()) {
+        if (i->next()->getIdRef() == idRef) {
+            i->next()->decreaseNumReferences();
+            break;
+        }
+    }
 }
 
 vRef vMallocMetaData::addEntry(int size, std::string type, void *actualPos) {
@@ -36,14 +49,7 @@ vRef vMallocMetaData::addEntry(int size, std::string type, void *actualPos) {
     return vRef(actualID++);
 }
 
-vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset)
-{
-    idRef = pIdRef;
-    size_t a = typeid(1).hash_code();
 
-    dataSize = pDataSize;
-    offset = pOffset;
-}
 
 void vMallocMetaData::printMetaData() {
     vListIterator<vMallocMDEntry> *iter = memoryTable->getIterator();
@@ -63,43 +69,7 @@ void vMallocMetaData::printMetaData() {
 
 
 
-void *vMallocMDEntry::getOffSet() {
-    return offset;
-}
-
-
-int vMallocMDEntry::getDataSize() {
-    return dataSize;
-}
-
-bool vMallocMDEntry::getUseFlag() {
-    return useFlag;
-}
-
-int vMallocMDEntry::getIdRef() {
-    return idRef;
-}
-
-vMallocMDEntry::vMallocMDEntry() {
-
-}
 
 vList <vMallocMDEntry>* vMallocMetaData::operator !(){
     return memoryTable;
 };
-
-void* vMallocMDEntry::operator &(){
-    return offset;
-};
-
-int vMallocMDEntry::operator !(){
-    return idRef;
-};
-void vMallocMDEntry::changeFlag() {
-    if(useFlag){
-        useFlag=false;
-    }
-    else{
-        useFlag=true;
-    }
-}
