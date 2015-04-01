@@ -11,15 +11,11 @@
 #include "../libs/vheaplib.h"
 
 class vInt : public vObject{
-    vRef data;
-
-public:
-    vInt(int);
-    ~vInt();
-    int operator +=(int);
-    int operator --();
-    int operator !();
-    vRef operator &();
+        vRef data;
+    public:
+        vInt(int);
+        ~vInt();
+        int operator +=(int);
 };
 
 

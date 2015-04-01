@@ -9,13 +9,15 @@ vLong::vLong(long d){
     vPlacement(data,d);
 };
 
-vLong::~vLong(){};
+vLong::~vLong(){
+    vObject::~vObject();
+};
 
 int vLong::operator +=(long pls){};
 
-int vLong::operator --(){};
+int vObject::operator --(){};
 
-int vLong::operator !(){
+int vObject::operator !(){
     try{
         return *static_cast<long*>(*data);
     }catch(int e){
@@ -23,4 +25,4 @@ int vLong::operator !(){
     };
 };
 
-vRef vLong::operator &(){};
+vRef vObject::operator &(){};

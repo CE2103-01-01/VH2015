@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES    main.cpp
                     src/vHeap/Source/vHeap.cpp
-                    src/vHeap/Source/vObject.cpp
+                    src/vTypes/Source/vObject.cpp
                     src/vHeap/Source/vGarbageCollector.cpp
                     src/vHeap/Source/vMallocMetaData.cpp
                     src/vHeap/Source/vRef.cpp
@@ -28,11 +28,11 @@ set(SOURCE_FILES    main.cpp
 
 set(HEADERS_FILES
                     src/vHeap/Headers/vHeap.h
-                    src/vHeap/Headers/vObject.h
+                    src/vTypes/Headers/vObject.h
                     src/vHeap/Headers/vRef.h
                     src/vHeap/Headers/vMallocMetaData.h
                     src/vHeap/Headers/vGarbageCollector.h
-                    src/vHeap/Headers/vObject.h
+                    src/vTypes/Headers/vObject.h
                     src/vTypes/Source/vChar.cpp
                     src/vTypes/Source/vFloat.cpp
                     src/vTypes/Source/vInt.cpp

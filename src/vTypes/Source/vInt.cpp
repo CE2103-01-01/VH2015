@@ -9,13 +9,15 @@ vInt::vInt(int d){
     vPlacement(data,d);
 };
 
-vInt::~vInt(){};
+vInt::~vInt(){
+    vObject::~vObject();
+};
 
 int vInt::operator +=(int pls){};
 
-int vInt::operator --(){};
+int vObject::operator --(){};
 
-int vInt::operator !(){
+int vObject::operator !(){
     try{
         return *static_cast<int*>(*data);
     }catch(int e){
@@ -23,4 +25,4 @@ int vInt::operator !(){
     };
 };
 
-vRef vInt::operator &(){};
+vRef vObject::operator &(){};

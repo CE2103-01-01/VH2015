@@ -11,15 +11,11 @@
 
 
 class vLong : public vObject{
-    vRef data;
-
-public:
-    vLong(long);
-    ~vLong();
-    int operator +=(long);
-    int operator --();
-    int operator !();
-    vRef operator &();
+        vRef data;
+    public:
+        vLong(long);
+        ~vLong();
+        int operator +=(long);
 };
 
 

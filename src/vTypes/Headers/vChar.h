@@ -11,14 +11,10 @@
 #include <iostream>
 class vHeap;
 class vChar: public vObject{
-        vRef data;
     public:
         vChar(char);
         ~vChar();
         int operator +=(char);
-        int operator --();
-        char operator !();
-        vRef operator &();
 };
 
 

@@ -5,17 +5,19 @@
 #include "vTypes/Headers/vChar.h"
 
 vChar::vChar(char d){
-    *data = vMalloc(sizeof(d),"char");
+    data = vMalloc(sizeof(d),"char");
     vPlacement(data,d);
 };
 
-vChar::~vChar(){};
+vChar::~vChar(){
+    vObject::~vObject();
+};
 
 int vChar::operator +=(char pls){};
 
-int vChar::operator --(){};
+int vObject::operator --(){};
 
-char vChar::operator !(){
+char vObject::operator !(){
     try{
         return *static_cast<char*>(*data);
     }catch(int e){
@@ -23,4 +25,4 @@ char vChar::operator !(){
     };
 };
 
-vRef vChar::operator &(){};
+vRef vObject::operator &(){};

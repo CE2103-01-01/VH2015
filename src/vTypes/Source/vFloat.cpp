@@ -9,17 +9,19 @@ vFloat::vFloat(float d){
     vPlacement(data,d);
 };
 
-vFloat::~vFloat(){};
+vFloat::~vFloat(){
+    vObject::~vObject();
+};
 
 int vFloat::operator +=(float pls){};
 
-int vFloat::operator --(){};
+int vObject::operator --(){};
 
-int vFloat::operator !(){
+int vObject::operator !(){
     try{
         return *static_cast<float*>(*data);
     }catch(int e){
         return -1;
     };};
 
-vRef vFloat::operator &(){};
+vRef vObject::operator &(){};
