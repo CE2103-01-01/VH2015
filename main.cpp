@@ -2,7 +2,6 @@
 #include "vHeap/Headers/vHeap.h"
 #include "src/vTypes/Headers/vString.h"
 #include "src/vTypes/Headers/vChar.h"
-#include "Test/Headers/TestApplication.h"
 
 using namespace std;
 
@@ -56,8 +55,7 @@ void pruebaDumpTxt(){
 }
 
 int main() {
-    pruebaChar();
-    pruebaDumpTxt();
-    start(vString("vList"));
+    pruebaVHeap();
+
     return 0;
 };

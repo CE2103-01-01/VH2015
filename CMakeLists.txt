@@ -23,7 +23,8 @@ set(SOURCE_FILES    main.cpp
                     src/Test/Source/TestApplication.cpp
                     src/vTypes/Source/vSimpleList.cpp
                     src/vTypes/Source/vSimpleNode.cpp
-                    book.txt)
+                    src/vHeap/Source/vMallocMDEntry.cpp
+                    )
 
 set(HEADERS_FILES
                     src/vHeap/Headers/vHeap.h
@@ -48,12 +49,13 @@ set(HEADERS_FILES
                     src/vTypes/Headers/vSimpleNode.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
-                    src/Test/Headers/TestApplication.h)
+                    src/Test/Headers/TestApplication.h
+                    src/vHeap/Headers/vMallocMDEntry.h)
 
 file(GLOB RES_FILES res/book.txt
-                vHeap.xml)
+                    res/vHeap.xml)
 
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES} )
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  )
 include_directories(res)

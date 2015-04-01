@@ -13,7 +13,8 @@ class vRef {
     public:
         vRef();
         vRef(int);
-        virtual ~vRef();
+
+    ~vRef();
         vObject operator *();
         int operator !();
         int operator=(int);
