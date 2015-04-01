@@ -16,30 +16,18 @@ private:
 
 public:
     vMallocMDEntry();
-
     vMallocMDEntry(int, int, void *);
-
     int operator!();
-
     void changeFlag();
-
     void *operator&();
-
     int getIdRef();
-
     void *getOffSet();
-
     // std::type_info getTypeInfo();
     int getDataSize();
-
     bool getUseFlag();
-
     unsigned int getNumReferences();
-
     void decreaseNumReferences();
-
     void increaseNumReferences();
-
 };
 
 

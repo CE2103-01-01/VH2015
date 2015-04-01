@@ -5,8 +5,8 @@
 #include "vTypes/Headers/vInt.h"
 
 vInt::vInt(int d){
-    data = vHeap::getInstance()->vMalloc(sizeof(d),"int");
-    vHeap::getInstance()->vPlacement(data,d);
+    data = vMalloc(sizeof(d),"int");
+    vPlacement(data,d);
 };
 
 vInt::~vInt(){};

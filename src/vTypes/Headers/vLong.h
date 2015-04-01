@@ -7,7 +7,7 @@
 
 #include "vHeap/Headers/vRef.h"
 #include "vHeap/Headers/vObject.h"
-#include "vHeap/Headers/vHeap.h"
+#include "../libs/vheaplib.h"
 
 
 class vLong : public vObject{

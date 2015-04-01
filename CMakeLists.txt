@@ -57,5 +57,5 @@ file(GLOB RES_FILES res/book.txt
 
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  )
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  libs/vheaplib.h libs/vheaplib.cpp)
 include_directories(res)
