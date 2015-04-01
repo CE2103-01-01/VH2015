@@ -5,31 +5,37 @@
 #ifndef _VH2015_VMALLOCMETADATA_H_
 #define _VH2015_VMALLOCMETADATA_H_
 
-#include "vMallocMDEntry.h"
+#include "vEntry.h"
 
 #include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <typeinfo>
 #include "vRef.h"
 
-class vMallocMDEntry;
+class vEntry;
 class vRef;
-class vMallocMetaData {
+
+class vMetaData {
 private:
     int actualID;
-    vList <vMallocMDEntry>* memoryTable;
+    vList<vEntry> *memoryTable;
 public:
-    vMallocMetaData();
-    ~vMallocMetaData();
-    vList <vMallocMDEntry>* getMemoryTable();
+    vMetaData();
+
+    ~vMetaData();
+
+    vList<vEntry> *getMemoryTable();
     int len();
 
     void increaseReference(unsigned int idRef);
 
     void decreaseReference(unsigned int idRef);
     vRef addEntry(int,std::string,void*);
+
+    void removeEntry(int idRef);
     void printMetaData();
-    vList <vMallocMDEntry>* operator !();
+
+    vList<vEntry> *operator!();
 };
 
 

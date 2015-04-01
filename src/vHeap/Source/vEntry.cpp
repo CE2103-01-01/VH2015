@@ -2,10 +2,10 @@
 // Created by pablo on 31/03/15.
 //
 
-#include <vHeap/Headers/vMallocMDEntry.h>
+#include "vHeap/Headers/vEntry.h"
 #include <vHeap/Headers/vGarbageCollector.h>
 
-vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset) {
+vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
     idRef = pIdRef;
     //size_t a = typeid(1).hash_code();
 
@@ -13,36 +13,36 @@ vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset) {
     offset = pOffset;
 }
 
-void *vMallocMDEntry::getOffSet() {
+void *vEntry::getOffSet() {
     return offset;
 }
 
 
-int vMallocMDEntry::getDataSize() {
+int vEntry::getDataSize() {
     return dataSize;
 }
 
-bool vMallocMDEntry::getUseFlag() {
+bool vEntry::getUseFlag() {
     return useFlag;
 }
 
-int vMallocMDEntry::getIdRef() {
+int vEntry::getIdRef() {
     return idRef;
 }
 
-vMallocMDEntry::vMallocMDEntry() {
+vEntry::vEntry() {
     numReferences = 1;
 }
 
-void *vMallocMDEntry::operator&() {
+void *vEntry::operator&() {
     return offset;
 };
 
-int vMallocMDEntry::operator!() {
+int vEntry::operator!() {
     return idRef;
 };
 
-void vMallocMDEntry::changeFlag() {
+void vEntry::changeFlag() {
     if (useFlag) {
         useFlag = false;
     }
@@ -51,21 +51,22 @@ void vMallocMDEntry::changeFlag() {
     }
 }
 
-unsigned int vMallocMDEntry::getNumReferences() {
+unsigned int vEntry::getNumReferences() {
     return numReferences;
 }
 
-void vMallocMDEntry::decreaseNumReferences() {
+void vEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
         vGarbageCollector::deallocate(idRef);
         vGarbageCollector::startDumop();
     }
 }
-void vMallocMDEntry::setOffset(void * newOffset) {
+
+void vEntry::setOffset(void *newOffset) {
     offset=newOffset;
 }
 
-void vMallocMDEntry::increaseNumReferences() {
+void vEntry::increaseNumReferences() {
     numReferences++;
 }

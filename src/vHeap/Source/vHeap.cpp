@@ -17,7 +17,7 @@ vHeap::vHeap(int s, float o){
     std::cout<<initPos<<std::endl;
     finalPos = initPos+s*1024;
     std::cout<<finalPos<<std::endl;
-    metaData = new vMallocMetaData();
+    metaData = new vMetaData();
 
 
 
@@ -56,12 +56,12 @@ void vHeap::vFree(vRef r){
 
 
 void vHeap::vFree(unsigned int idRef) {
-    memoryMutex.lock();
-
+    memoryMutex.lock();//TODO-roberto terminar vFree
+    metaData->removeEntry(idRef);
     memoryMutex.unlock();
 }
 
-vMallocMetaData* vHeap::getMetaData() {
+vMetaData *vHeap::getMetaData() {
     return metaData;
 }
 
@@ -86,6 +86,26 @@ Dump::Dump() {
 Dump::~Dump() {
 }
 
+void Dump::startDump() {
+    vListIterator<vEntry> *iter = vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
+    while(iter->exists()){
+
+        vEntry *m = iter->next();
+        vEntry *n = iter->next();
+        int prev =*(int*)  m->getOffSet();
+        int next = *(int*) n->getOffSet();
+        if(!next==prev+m->getDataSize()){
+            vEntry *temp = m;
+            int distance = m->getDataSize()+1;
+            while(n!=temp){
+                temp+=distance;
+                distance++;
+            }
+            m->setOffset(temp);
+        }
+
+    }
+}
 
 std::string Dump::IntToStr(int n) {
     std::stringstream result;
@@ -101,14 +121,14 @@ void Dump::saveDumpFile() {
         std::string s1 = ss.str();
         path += "/Desktop/DumpFile"+s1+".txt";
         std::ofstream myfile(path);
-        vListIterator<vMallocMDEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
+    vListIterator<vEntry> *iter = vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
         xml_document doc;
         doc.load_file("vHeap.xml");
     std::cout<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
         myfile<< "Total size of Memory: "<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
         while(iter->exists()){
 
-            vMallocMDEntry *m = iter->next();
+            vEntry *m = iter->next();
             if(m->getUseFlag()==0) {
 
                 myfile << "Memory direction: " << m->getOffSet() << "\n";
@@ -127,10 +147,10 @@ void Dump::saveDumpFile() {
 void* vHeap::de_vReference(vRef memory){
     memoryMutex.lock();
 
-    vListIterator<vMallocMDEntry>* iter = (!*metaData)->getIterator();
+    vListIterator<vEntry> *iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
-        vMallocMDEntry* entry = iter->next();
+        vEntry *entry = iter->next();
     if(!*entry==!memory){
             memoryMutex.unlock();
             return &*entry;

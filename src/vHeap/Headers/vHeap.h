@@ -2,7 +2,7 @@
 #define _VH2015_VHEAP_H_
 
 
-#include "vMallocMetaData.h"
+#include "vMetaData.h"
 #include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <stdlib.h>
@@ -14,7 +14,7 @@
 #include "../libs/pugixml.hpp"
 
 
-class vMallocMetaData;
+class vMetaData;
 class vRef;
 class vHeap{
     friend class Dump;
@@ -28,7 +28,7 @@ class vHeap{
     void* finalPos;
     void* actualPos;
     std::mutex memoryMutex;
-    vMallocMetaData* metaData;
+    vMetaData *metaData;
 public:
     vHeap(int,float);
     ~vHeap();
@@ -39,7 +39,8 @@ public:
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
-    vMallocMetaData* getMetaData();
+
+    vMetaData *getMetaData();
 
     int removeVRef(int idRef);
 

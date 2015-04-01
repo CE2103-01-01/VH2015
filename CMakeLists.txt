@@ -6,9 +6,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES    main.cpp
                     src/vHeap/Source/vHeap.cpp
                     src/vHeap/Source/vGarbageCollector.cpp
-                    src/vHeap/Source/vMallocMetaData.cpp
+                    src/vHeap/Source/vMetaData.cpp
                     src/vHeap/Source/vRef.cpp
-                    src/vHeap/Source/vMallocMDEntry.cpp
+                    src/vHeap/Source/vEntry.cpp
                     libs/pugixml.cpp
                     libs/vheaplib.cpp
                     src/vTypes/Source/vObject.cpp
@@ -24,9 +24,9 @@ set(SOURCE_FILES    main.cpp
 set(HEADERS_FILES
                     src/vHeap/Headers/vHeap.h
                     src/vHeap/Headers/vRef.h
-                    src/vHeap/Headers/vMallocMetaData.h
+                    src/vHeap/Headers/vMetaData.h
                     src/vHeap/Headers/vGarbageCollector.h
-                    src/vHeap/Headers/vMallocMDEntry.h
+                    src/vHeap/Headers/vEntry.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
                     libs/vheaplib.h
