@@ -11,10 +11,16 @@ vLong::vLong(long d){
 
 vLong::~vLong(){};
 
-int vLong::operator +=(long){};
+int vLong::operator +=(long pls){};
 
 int vLong::operator --(){};
 
-int vLong::operator !(){};
+int vLong::operator !(){
+    try{
+        return *static_cast<long*>(vHeap::getInstance()->de_vReference(data));
+    }catch(int e){
+        return -1;
+    };
+};
 
 vRef vLong::operator &(){};

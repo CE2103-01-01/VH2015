@@ -11,19 +11,16 @@ vChar::vChar(char d){
 
 vChar::~vChar(){};
 
-int vChar::operator +=(char pls){
+int vChar::operator +=(char pls){};
 
-};
-
-int vChar::operator --(){
-
-};
+int vChar::operator --(){};
 
 char vChar::operator !(){
-
+    try{
+        return *static_cast<char*>(vHeap::getInstance()->de_vReference(data));
+    }catch(int e){
+        return -1;
+    };
 };
 
-vRef vChar::operator &(){
-
-    return 0;
-};
+vRef vChar::operator &(){};

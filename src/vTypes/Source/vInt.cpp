@@ -11,10 +11,16 @@ vInt::vInt(int d){
 
 vInt::~vInt(){};
 
-int vInt::operator +=(int){};
+int vInt::operator +=(int pls){};
 
 int vInt::operator --(){};
 
-int vInt::operator !(){};
+int vInt::operator !(){
+    try{
+        return *static_cast<int*>(vHeap::getInstance()->de_vReference(data));
+    }catch(int e){
+        return -1;
+    };
+};
 
 vRef vInt::operator &(){};
