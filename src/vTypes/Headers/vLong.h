@@ -6,7 +6,7 @@
 #define _VH2015_VLONG_H_
 
 #include "vHeap/Headers/vRef.h"
-#include "vHeap/Headers/vObject.h"
+#include "vObject.h"
 #include "../libs/vheaplib.h"
 
 

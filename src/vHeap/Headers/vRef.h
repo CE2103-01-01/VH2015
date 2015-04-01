@@ -5,7 +5,6 @@
 #ifndef _VH2015_VREF_H_
 #define _VH2015_VREF_H_
 
-#include "vObject.h"
 #include "vHeap.h"
 
 class vRef {
@@ -18,7 +17,6 @@ class vRef {
         int operator !();
         int operator=(int);
         int operator=(vRef);
-       // int operator=(vObject);
 };
 
 #endif //_VH2015_VREF_H_
