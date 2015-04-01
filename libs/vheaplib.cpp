@@ -4,18 +4,18 @@
 
 #include "vheaplib.h"
 
-vRef vMalloc(int, std::string){
-    vHeap::getInstance()->vMalloc(int, std::string);
+vRef vMalloc(int vSize, std::string vType){
+    vHeap::getInstance()->vMalloc(vSize, vType);
 };
-void vFree(vRef){
-    vHeap::getInstance()->vFree(vRef);
+void vFree(vRef toFree){
+    vHeap::getInstance()->vFree(toFree);
 };
-void vFree(unsigned int){
-    vHeap::getInstance()->vFree(unsigned int);
+void vFree(unsigned int toFree){
+    vHeap::getInstance()->vFree(toFree);
 };
-template <typename T> int vPlacement(vRef,T){
-    vHeap::getInstance()->vPlacement(vRef,T);
+template <typename T> int vPlacement(vRef vR, T toPlace){
+    vHeap::getInstance()->vPlacement(vR,toPlace);
 };
-void *de_vReference(vRef){
-    vHeap::getInstance()->*de_vReference(vRef);
+void* de_vReference(vRef toDeRef){
+    return vHeap::getInstance()->de_vReference(toDeRef);
 };
