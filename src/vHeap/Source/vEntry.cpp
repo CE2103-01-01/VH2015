@@ -59,6 +59,7 @@ void vEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
         vGarbageCollector::deallocate(idRef);
+        vGarbageCollector::startDumop();
     }
 }
 

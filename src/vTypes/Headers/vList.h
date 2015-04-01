@@ -80,6 +80,7 @@ template<class T>
 vNode<T>::vNode(T* v) {
     data = static_cast<T*>(malloc(sizeof(T)));
     *data = *v;
+    next = 0;
 };
 /** @brief Constructor
 *
@@ -88,6 +89,7 @@ template<class T>
 vNode<T>::vNode(T v) {
     data = static_cast<T*>(malloc(sizeof(T)));
     *data = v;
+    next = 0;
 }
 /** @brief Destructor
 *
