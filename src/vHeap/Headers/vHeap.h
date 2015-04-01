@@ -1,20 +1,21 @@
 #ifndef _VH2015_VHEAP_H_
 #define _VH2015_VHEAP_H_
 
-#include "vRef.h"
+
 #include "vMallocMetaData.h"
 #include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <stdlib.h>
+#include "vRef.h"
 #include <sstream>
 #include <mutex>
 #include <fstream>
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
 
-class vRef;
-class vMallocMetaData;
 
+class vMallocMetaData;
+class vRef;
 class vHeap{
     friend class Dump;
     bool* vDebug;
@@ -43,16 +44,16 @@ public:
     int removeVRef(int idRef);
 
     int addVRef(int idRef);
-    template <typename T> int vPlacement(vRef,T);
+    template <typename T> int vPlacement(vRef*,T);
 
     void *de_vReference(vRef);
 };
 
 
-template <typename T> int vHeap::vPlacement(vRef memory, T object){
+template <typename T> int vHeap::vPlacement(vRef* memory, T object){
     memoryMutex.lock();
     try{
-        *static_cast<T*>(de_vReference(memory)) = object;
+        *static_cast<T*>(de_vReference(*memory)) = object;
         memoryMutex.unlock();
         return 0;
     }catch(int error){

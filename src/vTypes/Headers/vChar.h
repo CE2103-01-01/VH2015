@@ -9,9 +9,9 @@
 #include "vHeap/Headers/vObject.h"
 #include "../libs/vheaplib.h"
 #include <iostream>
-
+class vHeap;
 class vChar: public vObject{
-        vRef data;
+        vRef* data;
     public:
         vChar(char);
         ~vChar();

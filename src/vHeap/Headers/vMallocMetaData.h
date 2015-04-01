@@ -6,10 +6,11 @@
 #define _VH2015_VMALLOCMETADATA_H_
 
 #include "vMallocMDEntry.h"
-#include "vRef.h"
+
 #include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <typeinfo>
+#include "vRef.h"
 
 class vMallocMDEntry;
 class vRef;
