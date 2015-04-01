@@ -40,8 +40,6 @@ public:
     void startDumpThread();
     vMallocMetaData* getMetaData();
 
-    int vPlacement(vRef, vObject *);
-
     int removeVRef(int idRef);
 
     int addVRef(int idRef);

@@ -51,7 +51,7 @@ vRef vHeap::vMalloc(int sz, std::string type){
 };
 
 void vHeap::vFree(vRef r){
-    vFree(r.getId());
+    vFree(!r);
 }
 
 
