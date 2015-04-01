@@ -51,3 +51,27 @@ int vLong::operator =(long var){
         return -1;
     };
 };
+
+bool vLong::operator <(vLong other){
+    return *static_cast<long*>(*data) < !other;
+};
+
+bool vLong::operator <=(vLong other){
+    return *static_cast<long*>(*data) <= !other;
+};
+
+bool vLong::operator >(vLong other){
+    return *static_cast<long*>(*data) > !other;
+};
+
+bool vLong::operator >=(vLong other){
+    return *static_cast<long*>(*data) >= !other;
+};
+
+bool vLong::operator ==(vLong other){
+    return *static_cast<long*>(*data) == !other;
+};
+
+bool vLong::operator !=(vLong other){
+    return *static_cast<long*>(*data) != !other;
+};

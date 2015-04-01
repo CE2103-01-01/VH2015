@@ -20,6 +20,12 @@ class vLong : public vObject{
         vRef operator &();
         int operator --();
         int operator =(long);
+    bool operator <(vLong);
+    bool operator <=(vLong);
+    bool operator >(vLong);
+    bool operator >=(vLong);
+    bool operator ==(vLong);
+    bool operator !=(vLong);
 };
 
 

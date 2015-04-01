@@ -6,7 +6,7 @@
 
 vRef::vRef(int id){
     referenceID=id;
-    //vHeap::getInstance()->addVRef(id); // aumenta contador de referencias
+    vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
 };
 
 vRef::vRef(){
@@ -14,7 +14,7 @@ vRef::vRef(){
 };
 
 vRef::~vRef() {
-    //vHeap::getInstance()->removeVRef(referenceID); // disminuye contador de referencias
+    vHeap::getInstance()->removeVRef(referenceID); // disminuye contador de referencias
 };
 
 int vRef::operator!() {
@@ -22,15 +22,17 @@ int vRef::operator!() {
 };
 
 void* vRef::operator*() {
-   // return vHeap::getInstance()->de_vReference(data);
+    return vHeap::getInstance()->de_vReference(data);
 };
 
 int vRef::operator=(int id){
     referenceID=id;
+    vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
     return 0;
 };
 
 int vRef::operator=(vRef other){
     referenceID=!other;
+    vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
     return 0;
 };

@@ -51,3 +51,27 @@ int vFloat::operator =(float var){
         return -1;
     };
 };
+
+bool vFloat::operator <(vFloat other){
+    return *static_cast<float*>(*data) < !other;
+};
+
+bool vFloat::operator <=(vFloat other){
+    return *static_cast<float*>(*data) <= !other;
+};
+
+bool vFloat::operator >(vFloat other){
+    return *static_cast<float*>(*data) > !other;
+};
+
+bool vFloat::operator >=(vFloat other){
+    return *static_cast<float*>(*data) >= !other;
+};
+
+bool vFloat::operator ==(vFloat other){
+    return *static_cast<float*>(*data) == !other;
+};
+
+bool vFloat::operator !=(vFloat other){
+    return *static_cast<float*>(*data) != !other;
+};

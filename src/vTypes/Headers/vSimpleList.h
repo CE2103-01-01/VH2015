@@ -19,12 +19,12 @@ public:
     vSimpleNode();
     vSimpleNode(T);
     ~vSimpleNode();
-    vRef operator !();
-    vRef operator ->();
-    int operator *=(T);
-    int operator [](vRef);
-    int operator +(vRef);
-    int operator +(vSimpleNode);
+    vRef operator !();          //get Data
+    vRef operator ->();         //get Next
+    int operator *=(T);         //assign
+    int operator [](vRef);      //swap
+    int operator +(vRef);       //add
+    int operator +(vSimpleNode);//add
 };
 
 template <class T> vSimpleNode<T>::vSimpleNode(){
@@ -92,19 +92,58 @@ template <class T> int vSimpleNode<T>::operator +(vSimpleNode node){
 
 template <class T> class vSimpleList {
 private:
-    vInt m_num_nodes;
+    vInt m_len;
     vRef m_head;
+    vRef m_tail;
 
 public:
     vSimpleList();
     ~vSimpleList();
-    int operator +(T);
-    int operator -(T);
-    int operator -(vInt);
-    int operator [](vInt);
-    int operator --();
-    vRef operator !();
+    int operator +(T);              //add
+    int operator -(T);              //delete
+    int operator [](vInt);          //getPos
+    int operator --();              //delete all
+    vRef operator ++(vSimpleList);  //get head
+    vRef operator ++();             //get tail
     void print();
 };
+
+template <class T> vSimpleList::vSimpleList(){
+    m_len = vInt(0);
+    m_head = vRef();
+    m_tail = vRef();
+};
+
+template <class T> vSimpleList::~vSimpleList(){};
+
+template <class T> vSimpleList::int operator +(T data){
+    vRef r = vMalloc(sizeof(T),data);
+    vPlacement(r,data);
+    if(0 != !m_tail){
+        *static_cast<vSimpleNode*>(*m_tail) + r;
+        m_tail=r;
+        return 0;
+    }else if(0 != !m_head){
+        m_tail = r;
+        *static_cast<vSimpleNode*>(*m_head) + m_tail;
+        return 0;
+    }else{
+        m_head = r;
+        return 0;
+    };
+    return 1;
+};
+
+template <class T> vSimpleList::int operator -(T data){};
+
+template <class T> vSimpleList::int operator [](vInt pos){};
+
+template <class T> vSimpleList::int operator --(){};
+
+template <class T> vSimpleList::vRef operator ++(vSimpleList){};
+
+template <class T> vSimpleList::vRef operator ++(){};
+
+template <class T> vSimpleList::void print(){};
 
 #endif //_VH2015_VSIMPLELIST_H_

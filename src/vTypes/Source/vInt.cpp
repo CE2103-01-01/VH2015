@@ -51,3 +51,27 @@ int vInt::operator =(int var){
         return -1;
     };
 };
+
+bool vInt::operator <(vInt other){
+    return *static_cast<int*>(*data) < !other;
+};
+
+bool vInt::operator <=(vInt other){
+    return *static_cast<int*>(*data) <= !other;
+};
+
+bool vInt::operator >(vInt other){
+    return *static_cast<int*>(*data) > !other;
+};
+
+bool vInt::operator >=(vInt other){
+    return *static_cast<int*>(*data) >= !other;
+};
+
+bool vInt::operator ==(vInt other){
+    return *static_cast<int*>(*data) == !other;
+};
+
+bool vInt::operator !=(vInt other){
+    return *static_cast<int*>(*data) != !other;
+};

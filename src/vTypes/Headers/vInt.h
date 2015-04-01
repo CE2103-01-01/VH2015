@@ -20,6 +20,12 @@ class vInt : public vObject{
         vRef operator &();
         int operator --();
         int operator =(int);
+        bool operator <(vInt);
+        bool operator <=(vInt);
+        bool operator >(vInt);
+        bool operator >=(vInt);
+        bool operator ==(vInt);
+        bool operator !=(vInt);
 };
 
 

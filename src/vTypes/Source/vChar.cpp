@@ -50,3 +50,27 @@ int vChar::operator =(char var){
         return -1;
     };
 };
+
+bool vChar::operator <(vChar other){
+    return *static_cast<char*>(*data) < !other;
+};
+
+bool vChar::operator <=(vChar other){
+    return *static_cast<char*>(*data) <= !other;
+};
+
+bool vChar::operator >(vChar other){
+    return *static_cast<char*>(*data) > !other;
+};
+
+bool vChar::operator >=(vChar other){
+    return *static_cast<char*>(*data) >= !other;
+};
+
+bool vChar::operator ==(vChar other){
+    return *static_cast<char*>(*data) == !other;
+};
+
+bool vChar::operator !=(vChar other){
+    return *static_cast<char*>(*data) != !other;
+};

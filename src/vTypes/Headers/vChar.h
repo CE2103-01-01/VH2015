@@ -11,7 +11,7 @@
 #include <iostream>
 
 class vChar: public vObject{
-    vRef data;
+        vRef data;
     public:
         vChar(char);
         ~vChar();
@@ -20,6 +20,12 @@ class vChar: public vObject{
         int operator +=(char);
         vRef operator &();
         int operator --();
+        bool operator <(vChar);
+        bool operator <=(vChar);
+        bool operator >(vChar);
+        bool operator >=(vChar);
+        bool operator ==(vChar);
+        bool operator !=(vChar);
 };
 
 

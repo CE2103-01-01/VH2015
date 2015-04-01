@@ -21,6 +21,12 @@ class vFloat : public vObject{
         vRef operator &();
         int operator --();
         int operator =(float);
+        bool operator <(vFloat);
+        bool operator <=(vFloat);
+        bool operator >(vFloat);
+        bool operator >=(vFloat);
+        bool operator ==(vFloat);
+        bool operator !=(vFloat);
 };
 
 
