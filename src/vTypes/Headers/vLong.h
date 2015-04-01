@@ -11,7 +11,7 @@
 
 
 class vLong : public vObject{
-    vRef address;
+    vRef data;
 public:
     vLong(long);
     ~vLong();

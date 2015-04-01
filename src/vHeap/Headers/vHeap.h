@@ -34,12 +34,14 @@ public:
     vHeap(int,float);
     ~vHeap();
     vRef vMalloc(int, std::string);
-    void vFree(vRef r);
+    void vFree(vRef);
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
     vMallocMetaData* getMetaData();
     int vPlacement(vRef,vObject*);
+    template <typename T> int vPlacement(vRef,T);
+    void* de_vReference(vRef);
 };
 
 class Dump {

@@ -131,21 +131,30 @@ void Dump::saveDumpFile() {
     }
 
 
-int vHeap::vPlacement(vRef memory, vObject* object){
+template <typename T> int vHeap::vPlacement(vRef memory, T object){
+    memoryMutex.lock();
+    try{
+        *static_cast<T*>(de_vReference(memory)) = object;
+        memoryMutex.unlock();
+        return 0;
+    }catch(int error){
+        memoryMutex.unlock();
+        return -1;
+    };
+};
+
+void* vHeap::de_vReference(vRef memory){
     memoryMutex.lock();
 
-    vListIterator<vMallocMDEntry>* iter = (!(*metaData))->getIterator();
+    vListIterator<vMallocMDEntry>* iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
         vMallocMDEntry* entry = iter->next();
-
-        if(entry->getIdRef()==!memory){
-            *( static_cast<vObject*>(entry->getOffSet()) ) = *object;
+    if(!*entry==!memory){
             memoryMutex.unlock();
-            return 0;
+            return &*entry;
         };
     };
-
+    return 0;
     memoryMutex.unlock();
-    return 1;
 };

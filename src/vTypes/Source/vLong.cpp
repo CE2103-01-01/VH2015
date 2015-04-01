@@ -4,9 +4,9 @@
 
 #include "vTypes/Headers/vLong.h"
 
-vLong::vLong(long data){
-    address = vHeap::getInstance()->vMalloc(sizeof(vLong),"vLong");
-    vHeap::getInstance()->vPlacement(address,this);
+vLong::vLong(long d){
+    data = vHeap::getInstance()->vMalloc(sizeof(d),"vlong");
+    vHeap::getInstance()->vPlacement(data,d);
 };
 
 vLong::~vLong(){};
@@ -17,6 +17,4 @@ int vLong::operator --(){};
 
 int vLong::operator !(){};
 
-vRef vLong::operator &(){
-    return address;
-};
+vRef vLong::operator &(){};

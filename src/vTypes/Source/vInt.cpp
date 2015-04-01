@@ -4,9 +4,9 @@
 
 #include "vTypes/Headers/vInt.h"
 
-vInt::vInt(int data){
-    address = vHeap::getInstance()->vMalloc(sizeof(vInt),"vInt");
-    vHeap::getInstance()->vPlacement(address,this);
+vInt::vInt(int d){
+    data = vHeap::getInstance()->vMalloc(sizeof(d),"int");
+    vHeap::getInstance()->vPlacement(data,d);
 };
 
 vInt::~vInt(){};
@@ -17,6 +17,4 @@ int vInt::operator --(){};
 
 int vInt::operator !(){};
 
-vRef vInt::operator &(){
-    return address;
-};
+vRef vInt::operator &(){};

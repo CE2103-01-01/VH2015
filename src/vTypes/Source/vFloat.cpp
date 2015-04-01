@@ -4,9 +4,9 @@
 
 #include "vTypes/Headers/vFloat.h"
 
-vFloat::vFloat(float data){
-    address = vHeap::getInstance()->vMalloc(sizeof(vFloat),"vFloat");
-    vHeap::getInstance()->vPlacement(address,this);
+vFloat::vFloat(float d){
+    data = vHeap::getInstance()->vMalloc(sizeof(d),"float");
+    vHeap::getInstance()->vPlacement(data,d);
 };
 
 vFloat::~vFloat(){};
@@ -17,6 +17,4 @@ int vFloat::operator --(){};
 
 int vFloat::operator !(){};
 
-vRef vFloat::operator &(){
-    return address;
-};
+vRef vFloat::operator &(){};

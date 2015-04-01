@@ -13,7 +13,7 @@ class vMallocMDEntry;
 class vRef;
 class vMallocMetaData {
 private:
-    int actualID = 0;
+    int actualID;
     vList <vMallocMDEntry>* memoryTable;
 public:
     vMallocMetaData();
@@ -30,11 +30,11 @@ public:
 class vMallocMDEntry
 {
 private:
-    int idRef =0;
-    void* offset =0;
+    int idRef;
+    void* offset;
     //std::type_info typeInfo;
-    int dataSize = 0;
-    bool useFlag = false;
+    int dataSize;
+    bool useFlag;
 public:
     vMallocMDEntry();
     vMallocMDEntry(int, int, void*);

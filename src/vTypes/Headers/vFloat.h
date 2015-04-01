@@ -12,7 +12,7 @@
 #include "vHeap/Headers/vHeap.h"
 
 class vFloat : public vObject{
-    vRef address;
+    vRef data;
 public:
     vFloat(float);
     ~vFloat();

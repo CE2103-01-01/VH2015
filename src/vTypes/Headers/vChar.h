@@ -11,7 +11,7 @@
 #include <iostream>
 
 class vChar: public vObject{
-        vRef address;
+        vRef data;
     public:
         vChar(char);
         ~vChar();
