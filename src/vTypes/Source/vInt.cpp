@@ -13,9 +13,27 @@ vInt::~vInt(){
     vFree(data);
 };
 
-int vInt::operator +=(int pls){};
+int vInt::operator +=(int pls){
+    try{
+        *static_cast<int*>(*data)+pls;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
 
-int vInt::operator --(){};
+vRef vInt::operator &(){
+    return data;
+};
+
+int vInt::operator --(){
+    try{
+        *static_cast<int*>(*data)-1;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
 
 int vInt::operator !(){
     try{
@@ -25,4 +43,11 @@ int vInt::operator !(){
     };
 };
 
-vRef vInt::operator &(){};
+int vInt::operator =(int var){
+    try{
+        *static_cast<int*>(*data)=var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};

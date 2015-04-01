@@ -15,6 +15,7 @@ class vChar: public vObject{
     public:
         vChar(char);
         ~vChar();
+        int operator =(char);
         char operator !();
         int operator +=(char);
         vRef operator &();

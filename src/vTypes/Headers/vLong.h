@@ -19,6 +19,7 @@ class vLong : public vObject{
         int operator +=(long);
         vRef operator &();
         int operator --();
+        int operator =(long);
 };
 
 

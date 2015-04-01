@@ -19,6 +19,7 @@ class vInt : public vObject{
         int operator +=(int);
         vRef operator &();
         int operator --();
+        int operator =(int);
 };
 
 

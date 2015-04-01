@@ -12,10 +12,27 @@ vChar::vChar(char d){
 vChar::~vChar(){
     vFree(data);
 };
+vRef vChar::operator &(){
+    return data;
+};
 
-int vChar::operator +=(char pls){};
+int vChar::operator +=(char pls){
+    try{
+        *static_cast<char*>(*data)+pls;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
 
-int vChar::operator --(){};
+int vChar::operator --(){
+    try{
+        *static_cast<char*>(*data)-1;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
 
 char vChar::operator !(){
     try{
@@ -25,4 +42,11 @@ char vChar::operator !(){
     };
 };
 
-vRef vChar::operator &(){};
+int vChar::operator =(char var){
+    try{
+        *static_cast<char*>(*data)=var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};

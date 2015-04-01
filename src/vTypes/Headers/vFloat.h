@@ -20,6 +20,7 @@ class vFloat : public vObject{
         int operator +=(float);
         vRef operator &();
         int operator --();
+        int operator =(float);
 };
 
 

@@ -13,15 +13,41 @@ vFloat::~vFloat(){
     vFree(data);
 };
 
-int vFloat::operator +=(float pls){};
+vRef vFloat::operator &(){
+    return data;
+};
 
-int vFloat::operator --(){};
+int vFloat::operator +=(float pls){
+    try{
+        *static_cast<float*>(*data)+pls;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vFloat::operator --(){
+    try{
+        *static_cast<float*>(*data)-1;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
 
 float vFloat::operator !(){
     try{
         return *static_cast<float*>(*data);
     }catch(int e){
         return -1;
-    };};
+    };
+};
 
-vRef vFloat::operator &(){};
+int vFloat::operator =(float var){
+    try{
+        *static_cast<float*>(*data)=var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
