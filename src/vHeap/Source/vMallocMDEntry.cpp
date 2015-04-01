@@ -3,11 +3,10 @@
 //
 
 #include <vHeap/Headers/vMallocMDEntry.h>
-#include <stddef.h>
 
 vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset) {
     idRef = pIdRef;
-    size_t a = typeid(1).hash_code();
+    //size_t a = typeid(1).hash_code();
 
     dataSize = pDataSize;
     offset = pOffset;

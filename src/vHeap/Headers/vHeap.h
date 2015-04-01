@@ -15,6 +15,7 @@
 class vRef;
 class vMallocMetaData;
 class vHeap{
+private:
     friend class Dump;
     bool* vDebug;
     int* dumpFrecuency;
@@ -27,8 +28,6 @@ class vHeap{
     void* actualPos;
     std::mutex memoryMutex;
     vMallocMetaData* metaData;
-
-
 public:
 
     vHeap(int,float);
@@ -40,9 +39,7 @@ public:
     void startDumpThread();
     vMallocMetaData* getMetaData();
     int vPlacement(vRef,vObject*);
-
     int removeVRef(int idRef);
-
     int addVRef(int idRef);
     template <typename T> int vPlacement(vRef,T);
     void* de_vReference(vRef);
