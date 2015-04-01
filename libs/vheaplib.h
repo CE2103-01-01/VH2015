@@ -11,7 +11,7 @@ vRef vMalloc(int, std::string);
 void vFree(vRef);
 void vFree(unsigned int);
 template <typename T> int vPlacement(vRef,T);
-void *de_vReference(vRef);
+void* de_vReference(vRef);
 
 
 #endif //_VH2015_HEAP_H_
