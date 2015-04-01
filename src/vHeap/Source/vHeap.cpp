@@ -85,23 +85,28 @@ Dump::Dump() {
 }
 Dump::~Dump() {
 }
-/*
+
 void Dump::startDump() {
     vListIterator<vMallocMDEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
     while(iter->exists()){
 
         vMallocMDEntry *m = iter->next();
         vMallocMDEntry *n = iter->next();
-        if(!n->getOffSet()==(m->getOffSet()+m->getDataSize())){
-            int counter = 1;
-            while(!n->getOffSet()==m->getOffSet()+m->getDataSize()+counter){
-                counter++;
+        int prev =*(int*)  m->getOffSet();
+        int next = *(int*) n->getOffSet();
+        if(!next==prev+m->getDataSize()){
+            vMallocMDEntry *temp = m;
+            int distance = m->getDataSize()+1;
+            while(n!=temp){
+                temp+=distance;
+                distance++;
             }
+            m->setOffset(temp);
         }
 
     }
 }
-*/
+
 std::string Dump::IntToStr(int n) {
     std::stringstream result;
         result << n;
@@ -155,9 +160,6 @@ void* vHeap::de_vReference(vRef memory){
     return 0;
 };
 
-void Dump::startDump() {
-
-}
 
 int vHeap::removeVRef(int idRef) {
     metaData->decreaseReference(idRef);

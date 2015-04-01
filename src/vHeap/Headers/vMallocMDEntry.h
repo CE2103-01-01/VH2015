@@ -26,6 +26,7 @@ public:
     int getDataSize();
     bool getUseFlag();
     unsigned int getNumReferences();
+    void setOffset(void*);
     void decreaseNumReferences();
     void increaseNumReferences();
 };

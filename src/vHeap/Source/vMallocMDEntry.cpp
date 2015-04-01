@@ -61,6 +61,9 @@ void vMallocMDEntry::decreaseNumReferences() {
         vGarbageCollector::deallocate(idRef);
     }
 }
+void vMallocMDEntry::setOffset(void * newOffset) {
+    offset=newOffset;
+}
 
 void vMallocMDEntry::increaseNumReferences() {
     numReferences++;
