@@ -86,26 +86,7 @@ Dump::Dump() {
 Dump::~Dump() {
 }
 
-void Dump::startDump() {
-    vListIterator<vEntry> *iter = vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
-    while(iter->exists()){
 
-        vEntry *m = iter->next();
-        vEntry *n = iter->next();
-        int prev =*(int*)  m->getOffSet();
-        int next = *(int*) n->getOffSet();
-        if(!next==prev+m->getDataSize()){
-            vEntry *temp = m;
-            int distance = m->getDataSize()+1;
-            while(n!=temp){
-                temp+=distance;
-                distance++;
-            }
-            m->setOffset(temp);
-        }
-
-    }
-}
 
 std::string Dump::IntToStr(int n) {
     std::stringstream result;
