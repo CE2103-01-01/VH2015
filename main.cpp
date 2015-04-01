@@ -2,6 +2,7 @@
 #include "vHeap/Headers/vHeap.h"
 #include "src/vTypes/Headers/vString.h"
 #include "src/vTypes/Headers/vChar.h"
+#include "Test/Headers/TestApplication.h"
 
 using namespace std;
 
@@ -48,8 +49,15 @@ void pruebaChar(){
     vChar chr = vChar(63);
     std::cout<<"Valor del vChar chr: "<< !chr <<std::endl;
 };
+void pruebaDumpTxt(){
+    Dump dump;
+    dump.saveDumpFile();
+
+}
 
 int main() {
     pruebaChar();
+    pruebaDumpTxt();
+    start(vString("vList"));
     return 0;
 };

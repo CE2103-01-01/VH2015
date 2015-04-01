@@ -199,6 +199,7 @@ void vList<T>::add(T d) {
 template<class T>
 void vList<T>::append(T d) {
     vNode<T> *n = new vNode<T>(d);
+    std::cout<<"node direction: "<<n<<std::endl;
     if(_tail!=0){
         _tail->insertAfter(n);
         _tail=n;

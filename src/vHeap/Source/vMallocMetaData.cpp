@@ -95,3 +95,11 @@ void* vMallocMDEntry::operator &(){
 int vMallocMDEntry::operator !(){
     return idRef;
 };
+void vMallocMDEntry::changeFlag() {
+    if(useFlag){
+        useFlag=false;
+    }
+    else{
+        useFlag=true;
+    }
+}

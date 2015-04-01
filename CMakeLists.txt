@@ -22,7 +22,8 @@ set(SOURCE_FILES    main.cpp
                     libs/pugixml.cpp
                     src/Test/Source/TestApplication.cpp
                     src/vTypes/Source/vSimpleList.cpp
-                    src/vTypes/Source/vSimpleNode.cpp)
+                    src/vTypes/Source/vSimpleNode.cpp
+                    book.txt)
 
 set(HEADERS_FILES
                     src/vHeap/Headers/vHeap.h
@@ -49,6 +50,10 @@ set(HEADERS_FILES
                     libs/pugixml.hpp
                     src/Test/Headers/TestApplication.h)
 
-include_directories(src headers vHeap)
-include_directories(src headers vHeap XML)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} )
+file(GLOB RES_FILES res/book.txt
+                vHeap.xml)
+
+file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+include_directories(src res libs)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES} )
+include_directories(res)

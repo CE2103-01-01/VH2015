@@ -10,11 +10,9 @@
 #include <string>
 #include <vTypes/Headers/vString.h>
 
-class TestApplication {
-    void main(vString type);
 
+int start(vString type);
     void createVList();
-};
 
 
 #endif //_VH2015_TESTAPPLICATION_H_

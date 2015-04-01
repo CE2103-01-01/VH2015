@@ -118,10 +118,12 @@ void Dump::saveDumpFile() {
         while(iter->exists()){
 
             vMallocMDEntry *m = iter->next();
+            if(m->getUseFlag()==0) {
 
-            myfile << "Memory direction: "<<m->getOffSet()  <<"\n";
-            myfile << "Size of data containing: "<<m->getDataSize()  <<"\n";
-            myfile << "falg in use: "<<m->getUseFlag()<<"\n";
+                myfile << "Memory direction: " << m->getOffSet() << "\n";
+                myfile << "Size of data containing: " << m->getDataSize() << "\n";
+                myfile << "falg in use: " << true << "\n";
+            }
         }
 
 
@@ -155,6 +157,6 @@ void* vHeap::de_vReference(vRef memory){
             return &*entry;
         };
     };
-    return 0;
     memoryMutex.unlock();
+    return 0;
 };
