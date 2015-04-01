@@ -125,7 +125,7 @@ void Dump::saveDumpFile() {
     }
 
 
-void* vHeap::de_vReference(vRef memory){
+void *vHeap::de_vReference(vRef *memory) {
     memoryMutex.lock();
 
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();

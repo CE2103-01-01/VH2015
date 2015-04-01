@@ -13,7 +13,8 @@ void vFree(unsigned int);
 
 template<typename T>
 int vPlacement(vRef *, T);
-void* de_vReference(vRef);
+
+void *de_vReference(vRef *);
 
 template<typename T>
 int vPlacement(vRef *vR, T toPlace) {
