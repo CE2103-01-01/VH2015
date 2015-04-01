@@ -15,7 +15,7 @@ int start(vString type) {
 }
 
 void createVList() {
-    vList<string> palabras;
+    vList<string> palabras = vList<string>();
     fstream myFile;
     myFile.open(txtPath);
     string line;
@@ -26,7 +26,7 @@ void createVList() {
             do {
                 string sub;
                 iss >> sub;
-
+                palabras.append(sub);
             } while (iss);
         }
         myFile.close();

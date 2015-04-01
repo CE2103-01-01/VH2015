@@ -27,15 +27,15 @@ void pruebaVString() {
 }
 
 void pruebaLista() {
-
-    std::cout<<"Hola"<<std::endl;
-    vList<std::string>* lista = new vList<std::string>();
-    lista->append("hoola");
-    lista->append("as");
-    lista->add("s");
-    //lista->add(3);
-    //lista->add(2);
-    vListIterator<std::string>* i = lista->getIterator();
+    std::cout << "Resultado Esperado: 2,3,4,5,6" << std::endl;
+    vList<int> *lista = new vList<int>();
+    lista->append(5);
+    lista->append(6);
+    lista->add(4);
+    lista->add(2);
+    lista->add(3);
+    lista->swap(0, 1);
+    vListIterator<int> *i = lista->getIterator();
     while(i->exists())
     {
         std::cout<<*i->next()<<std::endl;
@@ -55,8 +55,9 @@ void pruebaDumpTxt(){
 }
 
 int main() {
-    pruebaVHeap();
-    start(vString("vList"));
+    pruebaLista();
+    //pruebaVHeap();
+    //start(vString("vList"));
 
     return 0;
 };
