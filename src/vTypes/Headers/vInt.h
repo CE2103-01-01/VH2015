@@ -17,6 +17,8 @@ class vInt : public vObject{
         ~vInt();
         int operator !();
         int operator +=(int);
+        vRef operator &();
+        int operator --();
 };
 
 

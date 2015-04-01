@@ -10,12 +10,12 @@ vChar::vChar(char d){
 };
 
 vChar::~vChar(){
-    vObject::~vObject();
+    vFree(data);
 };
 
 int vChar::operator +=(char pls){};
 
-int vObject::operator --(){};
+int vChar::operator --(){};
 
 char vChar::operator !(){
     try{
@@ -25,4 +25,4 @@ char vChar::operator !(){
     };
 };
 
-vRef vObject::operator &(){};
+vRef vChar::operator &(){};

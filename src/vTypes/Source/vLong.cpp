@@ -10,14 +10,14 @@ vLong::vLong(long d){
 };
 
 vLong::~vLong(){
-    vObject::~vObject();
+    vFree(data);
 };
 
 int vLong::operator +=(long pls){};
 
-int vObject::operator --(){};
+int vLong::operator --(){};
 
-int vLong::operator !(){
+long vLong::operator !(){
     try{
         return *static_cast<long*>(*data);
     }catch(int e){
@@ -25,4 +25,4 @@ int vLong::operator !(){
     };
 };
 
-vRef vObject::operator &(){};
+vRef vLong::operator &(){};

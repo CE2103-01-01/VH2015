@@ -10,12 +10,12 @@ vInt::vInt(int d){
 };
 
 vInt::~vInt(){
-    vObject::~vObject();
+    vFree(data);
 };
 
 int vInt::operator +=(int pls){};
 
-int vObject::operator --(){};
+int vInt::operator --(){};
 
 int vInt::operator !(){
     try{
@@ -25,4 +25,4 @@ int vInt::operator !(){
     };
 };
 
-vRef vObject::operator &(){};
+vRef vInt::operator &(){};

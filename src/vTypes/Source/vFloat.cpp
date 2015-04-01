@@ -10,18 +10,18 @@ vFloat::vFloat(float d){
 };
 
 vFloat::~vFloat(){
-    vObject::~vObject();
+    vFree(data);
 };
 
 int vFloat::operator +=(float pls){};
 
-int vObject::operator --(){};
+int vFloat::operator --(){};
 
-int vFloat::operator !(){
+float vFloat::operator !(){
     try{
         return *static_cast<float*>(*data);
     }catch(int e){
         return -1;
     };};
 
-vRef vObject::operator &(){};
+vRef vFloat::operator &(){};

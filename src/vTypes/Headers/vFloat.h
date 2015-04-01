@@ -18,6 +18,8 @@ class vFloat : public vObject{
         ~vFloat();
         float operator !();
         int operator +=(float);
+        vRef operator &();
+        int operator --();
 };
 
 

@@ -6,6 +6,4 @@
 
 vObject::vObject(){};
 
-vObject::~vObject(){
-    vFree(data);
-};
+vObject::~vObject(){};

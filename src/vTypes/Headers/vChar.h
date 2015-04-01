@@ -7,13 +7,18 @@
 
 #include "vHeap/Headers/vRef.h"
 #include "../libs/vheaplib.h"
+#include "vObject.h"
 #include <iostream>
-class vHeap;
+
 class vChar: public vObject{
+    vRef data;
     public:
         vChar(char);
         ~vChar();
+        char operator !();
         int operator +=(char);
+        vRef operator &();
+        int operator --();
 };
 
 

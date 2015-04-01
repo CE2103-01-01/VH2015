@@ -9,7 +9,6 @@
 #include "../libs/vheaplib.h"
 
 class vObject {
-        vRef data;
     public:
         vObject();
         ~vObject();
