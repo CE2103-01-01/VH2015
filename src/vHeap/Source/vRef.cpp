@@ -30,3 +30,7 @@ int vRef::operator=(vRef other){
     referenceID=!other;
     return 0;
 };
+
+unsigned int vRef::getId() {
+    return referenceID;
+}

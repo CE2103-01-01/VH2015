@@ -51,6 +51,11 @@ vRef vHeap::vMalloc(int sz, std::string type){
 };
 
 void vHeap::vFree(vRef r){
+    vFree(r.getId());
+}
+
+
+void vHeap::vFree(unsigned int idRef) {
     memoryMutex.lock();
 
     memoryMutex.unlock();
@@ -160,3 +165,5 @@ int vHeap::removeVRef(int idRef) {
 int vHeap::addVRef(int idRef) {
     metaData->increaseReference(idRef);
 }
+
+

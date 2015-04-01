@@ -20,6 +20,8 @@ class vRef {
         int operator=(int);
         int operator=(vRef);
         int operator=(vObject);
+
+    unsigned int getId();
 };
 
 #endif //_VH2015_VREF_H_

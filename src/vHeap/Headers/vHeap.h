@@ -28,20 +28,26 @@ class vHeap{
     void* actualPos;
     std::mutex memoryMutex;
     vMallocMetaData* metaData;
-    
 public:
     vHeap(int,float);
     ~vHeap();
     vRef vMalloc(int, std::string);
     void vFree(vRef);
+
+    void vFree(unsigned int);
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
     vMallocMetaData* getMetaData();
-    int removeVRef(int);
-    int addVRef(int);
-    void* de_vReference(vRef);
+
+    int vPlacement(vRef, vObject *);
+
+    int removeVRef(int idRef);
+
+    int addVRef(int idRef);
     template <typename T> int vPlacement(vRef,T);
+
+    void *de_vReference(vRef);
 };
 
 

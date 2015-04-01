@@ -10,12 +10,9 @@
 
 class vGarbageCollector {
 private:
-    vHeap* myHeap;
-    int frequency;
-    bool on;
-    void checkForGarbage();
+
 public:
-    vGarbageCollector(vHeap *pHeap, int frequency);
+    static void deallocate(int idRef);
 };
 
 

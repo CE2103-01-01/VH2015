@@ -3,6 +3,7 @@
 //
 
 #include <vHeap/Headers/vMallocMDEntry.h>
+#include <vHeap/Headers/vGarbageCollector.h>
 
 vMallocMDEntry::vMallocMDEntry(int pIdRef, int pDataSize, void *pOffset) {
     idRef = pIdRef;
@@ -56,6 +57,9 @@ unsigned int vMallocMDEntry::getNumReferences() {
 
 void vMallocMDEntry::decreaseNumReferences() {
     numReferences--;
+    if (numReferences == 0) {
+        vGarbageCollector::deallocate(idRef);
+    }
 }
 
 void vMallocMDEntry::increaseNumReferences() {
