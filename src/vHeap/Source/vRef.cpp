@@ -6,12 +6,13 @@
 
 vRef::vRef(int id){
     referenceID=id;
+    vHeap::getInstance()->addVRef(id); // aumenta contador de referencias
 };
 
 vRef::vRef(){};
 
 vRef::~vRef() {
-
+    vHeap::getInstance()->removeVRef(referenceID); // disminuye contador de referencias
 };
 
 int vRef::operator!() {

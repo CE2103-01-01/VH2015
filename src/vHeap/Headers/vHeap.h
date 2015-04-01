@@ -28,10 +28,8 @@ class vHeap{
     void* actualPos;
     std::mutex memoryMutex;
     vMallocMetaData* metaData;
-
-
+    
 public:
-
     vHeap(int,float);
     ~vHeap();
     vRef vMalloc(int, std::string);

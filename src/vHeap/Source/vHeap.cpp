@@ -154,9 +154,9 @@ void Dump::startDump() {
 }
 
 int vHeap::removeVRef(int idRef) {
-    return 0;
+    metaData->decreaseReference(idRef);
 }
 
 int vHeap::addVRef(int idRef) {
-    return 0;
+    metaData->increaseReference(idRef);
 }
