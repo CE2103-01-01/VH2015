@@ -2,16 +2,26 @@
 // Created by Pablo Rodriguez Quesada on 3/30/15.
 //
 
-#include<iostream>
+
 #include <vTypes/Headers/vString.h>
+#include <fstream>
 #include "Test/Headers/TestApplication.h"
 
-void TestApplication::main(vString type) {
+int start(vString type) {
     if (type == "vList") createVList();
-
+    return 0;
 }
 
-void TestApplication::createVList() {
-    //fstream myReadFile;
-    //myReadFile.open("text.txt");
+void createVList() {
+    std::fstream myFile;
+    myFile.open("book.txt");
+    std::string line;
+    if (myFile.is_open()) {
+        while (getline(myFile, line)) {
+            std::cout << line << '\n';
+        }
+        myFile.close();
+    }
+
+    else std::cout << "Unable to open file";
 }

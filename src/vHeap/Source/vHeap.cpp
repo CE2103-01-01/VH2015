@@ -151,3 +151,7 @@ int vHeap::vPlacement(vRef memory, vObject* object){
     memoryMutex.unlock();
     return 1;
 };
+
+void Dump::startDump() {
+
+}
