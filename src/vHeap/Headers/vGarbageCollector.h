@@ -11,8 +11,10 @@
 class vGarbageCollector {
 private:
 
+
 public:
     static void deallocate(int idRef);
+    static void startDumop();
 };
 
 

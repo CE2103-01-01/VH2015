@@ -59,6 +59,7 @@ void vMallocMDEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
         vGarbageCollector::deallocate(idRef);
+        vGarbageCollector::startDumop();
     }
 }
 void vMallocMDEntry::setOffset(void * newOffset) {

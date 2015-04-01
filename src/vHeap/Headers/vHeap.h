@@ -65,7 +65,7 @@ template <typename T> int vHeap::vPlacement(vRef* memory, T object){
 
 class Dump {
 public:
-    void startDump();
+
     Dump();
     ~Dump();
     int frecuency;

@@ -72,7 +72,7 @@ vMallocMetaData* vHeap::getMetaData() {
         doc.load_file("vHeap.xml");
         int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
         float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
-        new(vHeapSingleton) vHeap(100, 100);
+        new(vHeapSingleton) vHeap(size, over);
     }
 
 
@@ -86,26 +86,6 @@ Dump::Dump() {
 Dump::~Dump() {
 }
 
-void Dump::startDump() {
-    vListIterator<vMallocMDEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
-    while(iter->exists()){
-
-        vMallocMDEntry *m = iter->next();
-        vMallocMDEntry *n = iter->next();
-        int prev =*(int*)  m->getOffSet();
-        int next = *(int*) n->getOffSet();
-        if(!next==prev+m->getDataSize()){
-            vMallocMDEntry *temp = m;
-            int distance = m->getDataSize()+1;
-            while(n!=temp){
-                temp+=distance;
-                distance++;
-            }
-            m->setOffset(temp);
-        }
-
-    }
-}
 
 std::string Dump::IntToStr(int n) {
     std::stringstream result;
