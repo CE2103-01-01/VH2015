@@ -11,13 +11,13 @@
 
 template <typename T>
 vSimpleList<T>::vSimpleList() {
-    vSimpleList::m_num_nodes = 0;
-    vSimpleList::m_head = NULL;
-}
+    vSimpleList::m_num_nodes = vInt(0);
+    vSimpleList::m_head = vRef();
+};
 
 // Insertar al inicio
 template <typename T>
-void vSimpleList<T>::add_head(T data_) {
+void vSimpleList<T>::add(T data_) {
     vSimpleNode<T> *new_node = new vSimpleNode<T> (data_);
     vSimpleNode<T> *temp = vSimpleList::m_head;
 
@@ -32,30 +32,14 @@ void vSimpleList<T>::add_head(T data_) {
         }
     }
     vSimpleList::m_num_nodes++;
-}
-
-// Insertar al final
-template <typename T>
-void vSimpleList<T>::add_end(T data_) {
-    vSimpleNode<T> *new_node = new vSimpleNode<T> (data_);
-    vSimpleNode<T> *temp = vSimpleList::m_head;
-    if (!vSimpleList::m_head) {
-        vSimpleList::m_head = new_node;
-    } else {
-        while (temp->next != NULL) {
-            temp = temp->next;
-        }
-        temp->next = new_node;
-    }
-    m_num_nodes++;
-}
+};
 
 // Eliminar todos los nodos
 template < typename T>
 void vSimpleList<T>::del_all() {
     m_head->delete_all();
     m_head = 0;
-}
+};
 
 // Eliminar por data del nodo
 template<typename T>
@@ -86,7 +70,7 @@ void vSimpleList<T>::del_by_data(T data_) {
     if (cont == 0) {
         std::cout << "No existe el dato " << std::endl;
     }
-}
+};
 
 // Eliminar por posición del nodo
 template<typename T>
@@ -111,7 +95,7 @@ void vSimpleList<T>::del_by_position(int pos)
             temp1 = temp1->next;
         }
     }
-}
+};
 
 // Imprimir la Lista
 template<typename T>
@@ -127,10 +111,10 @@ void vSimpleList<T>::print() {
         }
     }
     std::cout << std::endl << std::endl;
-}
+};
 // Buscar el dato de un nodo
 template<typename T>
-void vSimpleList<T>::Search(T data_) {
+void vSimpleList<T>::vSearch(T data_) {
     vSimpleNode<T> *temp = m_head;
     int cont = 1;
     int cont2 = 0;
@@ -148,13 +132,13 @@ void vSimpleList<T>::Search(T data_) {
         std::cout << "No existe el dato " <<std::endl;
     }
     std::cout << std::endl << std::endl;
-}
+};
 
 // Destructuor por defecto
 template<typename T>
 vSimpleList<T>::~vSimpleList() {
 
-}
+};
 
 
 
