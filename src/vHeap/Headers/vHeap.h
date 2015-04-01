@@ -14,6 +14,7 @@
 
 class vRef;
 class vMallocMetaData;
+
 class vHeap{
     friend class Dump;
     bool* vDebug;
@@ -39,14 +40,25 @@ public:
     bool makeDump();
     void startDumpThread();
     vMallocMetaData* getMetaData();
-    int vPlacement(vRef,vObject*);
-
     int removeVRef(int idRef);
-
     int addVRef(int idRef);
     template <typename T> int vPlacement(vRef,T);
     void* de_vReference(vRef);
 };
+
+
+template <typename T> int vHeap::vPlacement(vRef memory, T object){
+    memoryMutex.lock();
+    try{
+        *static_cast<T*>(de_vReference(memory)) = object;
+        memoryMutex.unlock();
+        return 0;
+    }catch(int error){
+        memoryMutex.unlock();
+        return -1;
+    };
+};
+
 
 class Dump {
 public:

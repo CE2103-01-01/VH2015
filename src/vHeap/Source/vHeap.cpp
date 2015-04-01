@@ -133,18 +133,6 @@ void Dump::saveDumpFile() {
     }
 
 
-template <typename T> int vHeap::vPlacement(vRef memory, T object){
-    memoryMutex.lock();
-    try{
-        *static_cast<T*>(de_vReference(memory)) = object;
-        memoryMutex.unlock();
-        return 0;
-    }catch(int error){
-        memoryMutex.unlock();
-        return -1;
-    };
-};
-
 void* vHeap::de_vReference(vRef memory){
     memoryMutex.lock();
 
