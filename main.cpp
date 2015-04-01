@@ -55,7 +55,7 @@ void pruebaDumpTxt(){
 }
 
 int main() {
-    start(vString("vList"));
-
+  //  start(vString("vList"));
+    pruebaVHeap();
     return 0;
 };
