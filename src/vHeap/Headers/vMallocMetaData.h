@@ -39,6 +39,7 @@ public:
     vMallocMDEntry();
     vMallocMDEntry(int, int, void*);
     int operator !();
+    void changeFlag();
     void* operator &();
     int getIdRef();
     void* getOffSet();

@@ -48,8 +48,14 @@ void pruebaChar(){
     vChar chr = vChar(63);
     std::cout<<"Valor del vChar chr: "<< !chr <<std::endl;
 };
+void pruebaDumpTxt(){
+    Dump dump;
+    dump.saveDumpFile();
+
+}
 
 int main() {
     pruebaChar();
+    pruebaDumpTxt();
     return 0;
 };

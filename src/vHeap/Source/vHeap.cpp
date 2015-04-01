@@ -118,10 +118,12 @@ void Dump::saveDumpFile() {
         while(iter->exists()){
 
             vMallocMDEntry *m = iter->next();
+            if(m->getUseFlag()==0) {
 
-            myfile << "Memory direction: "<<m->getOffSet()  <<"\n";
-            myfile << "Size of data containing: "<<m->getDataSize()  <<"\n";
-            myfile << "falg in use: "<<m->getUseFlag()<<"\n";
+                myfile << "Memory direction: " << m->getOffSet() << "\n";
+                myfile << "Size of data containing: " << m->getDataSize() << "\n";
+                myfile << "falg in use: " << true << "\n";
+            }
         }
 
 
