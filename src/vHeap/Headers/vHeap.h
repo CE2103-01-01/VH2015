@@ -38,10 +38,10 @@ public:
     bool makeDump();
     void startDumpThread();
     vMallocMetaData* getMetaData();
-    int removeVRef(int idRef);
-    int addVRef(int idRef);
-    template <typename T> int vPlacement(vRef,T);
+    int removeVRef(int);
+    int addVRef(int);
     void* de_vReference(vRef);
+    template <typename T> int vPlacement(vRef,T);
 };
 
 
