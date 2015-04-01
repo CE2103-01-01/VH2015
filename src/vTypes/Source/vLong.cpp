@@ -17,7 +17,7 @@ int vLong::operator --(){};
 
 int vLong::operator !(){
     try{
-        return *static_cast<long*>(vHeap::getInstance()->de_vReference(data));
+        return *static_cast<long*>(*data);
     }catch(int e){
         return -1;
     };

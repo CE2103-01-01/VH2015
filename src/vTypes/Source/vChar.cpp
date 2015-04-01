@@ -17,7 +17,7 @@ int vChar::operator --(){};
 
 char vChar::operator !(){
     try{
-        return *static_cast<char*>(vHeap::getInstance()->de_vReference(data));
+        return *static_cast<char*>(*data);
     }catch(int e){
         return -1;
     };

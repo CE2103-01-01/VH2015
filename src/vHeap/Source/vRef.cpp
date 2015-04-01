@@ -9,7 +9,9 @@ vRef::vRef(int id){
     vHeap::getInstance()->addVRef(id); // aumenta contador de referencias
 };
 
-vRef::vRef(){};
+vRef::vRef(){
+    referenceID=0;
+};
 
 vRef::~vRef() {
     vHeap::getInstance()->removeVRef(referenceID); // disminuye contador de referencias
@@ -19,7 +21,9 @@ int vRef::operator!() {
     return referenceID;
 };
 
-vObject vRef::operator*() {};
+void* vRef::operator*() {
+    return vHeap::getInstance()->de_vReference(data);
+};
 
 int vRef::operator=(int id){
     referenceID=id;

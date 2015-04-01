@@ -17,7 +17,7 @@ int vInt::operator --(){};
 
 int vInt::operator !(){
     try{
-        return *static_cast<int*>(vHeap::getInstance()->de_vReference(data));
+        return *static_cast<int*>(*data);
     }catch(int e){
         return -1;
     };

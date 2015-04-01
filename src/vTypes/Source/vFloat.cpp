@@ -17,7 +17,7 @@ int vFloat::operator --(){};
 
 int vFloat::operator !(){
     try{
-        return *static_cast<float*>(vHeap::getInstance()->de_vReference(data));
+        return *static_cast<float*>(*data);
     }catch(int e){
         return -1;
     };};

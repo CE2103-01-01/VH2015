@@ -13,9 +13,8 @@ class vRef {
     public:
         vRef();
         vRef(int);
-
-    ~vRef();
-        vObject operator *();
+        ~vRef();
+        void* operator *();
         int operator !();
         int operator=(int);
         int operator=(vRef);
