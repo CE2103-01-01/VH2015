@@ -11,7 +11,7 @@
 #include "../libs/vheaplib.h"
 
 class vInt : public vObject{
-    vRef* data;
+    vRef data;
 
 public:
     vInt(int);

@@ -11,7 +11,7 @@
 #include <iostream>
 class vHeap;
 class vChar: public vObject{
-        vRef* data;
+        vRef data;
     public:
         vChar(char);
         ~vChar();
