@@ -5,7 +5,7 @@
 #include "vTypes/Headers/vChar.h"
 
 vChar::vChar(char d){
-    data = vHeap::getInstance()->vMalloc(sizeof(d),"char");
+    *data = vHeap::getInstance()->vMalloc(sizeof(d),"char");
     vHeap::getInstance()->vPlacement(data,d);
 };
 

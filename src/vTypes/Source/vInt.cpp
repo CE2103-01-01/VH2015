@@ -3,9 +3,9 @@
 //
 
 #include "vTypes/Headers/vInt.h"
-
+class vHeap;
 vInt::vInt(int d){
-    data = vHeap::getInstance()->vMalloc(sizeof(d),"int");
+    *data = vHeap::getInstance()->vMalloc(sizeof(d),"int");
     vHeap::getInstance()->vPlacement(data,d);
 };
 

@@ -5,7 +5,7 @@
 #include "vTypes/Headers/vFloat.h"
 
 vFloat::vFloat(float d){
-    data = vHeap::getInstance()->vMalloc(sizeof(d),"float");
+    *data = vHeap::getInstance()->vMalloc(sizeof(d),"float");
     vHeap::getInstance()->vPlacement(data,d);
 };
 

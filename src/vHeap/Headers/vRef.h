@@ -18,7 +18,7 @@ class vRef {
         int operator !();
         int operator=(int);
         int operator=(vRef);
-        int operator=(vObject);
+       // int operator=(vObject);
 };
 
 #endif //_VH2015_VREF_H_

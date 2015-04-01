@@ -10,3 +10,4 @@ creacion de socket para la comunicacion de archivos, la creacion de dump imcompl
 problema en la lista con string, reunio con pablo para resolverlo
 30/03/15
 creacion de la estructura lista simple para la aplicacion de prueba
+31/03/15

@@ -5,13 +5,14 @@
 #ifndef _VH2015_VINT_H_
 #define _VH2015_VINT_H_
 
-
+#include "vHeap/Headers/vHeap.h"
 #include "vHeap/Headers/vRef.h"
 #include "vHeap/Headers/vObject.h"
-#include "vHeap/Headers/vHeap.h"
+
 
 class vInt : public vObject{
-    vRef data;
+    vRef* data;
+
 public:
     vInt(int);
     ~vInt();
