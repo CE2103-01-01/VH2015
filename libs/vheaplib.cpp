@@ -13,9 +13,7 @@ void vFree(vRef toFree){
 void vFree(unsigned int toFree){
     vHeap::getInstance()->vFree(toFree);
 };
-template <typename T> int vPlacement(vRef vR, T toPlace){
-    vHeap::getInstance()->vPlacement(vR,toPlace);
-};
+
 void* de_vReference(vRef toDeRef){
     return vHeap::getInstance()->de_vReference(toDeRef);
 };

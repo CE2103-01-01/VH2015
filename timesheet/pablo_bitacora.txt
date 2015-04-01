@@ -12,4 +12,5 @@ Creacion de Aplicacion de Prueba.
 30/03/2015
 Debug del error con vMetaDAta. creacion arbol binario.
 31/03/2015
-Creacion Aplicacion de Prueba
+Creacion Aplicacion de Prueba. Arreglos en la Metadata y en el garbage collector. Destructor del vRef y metodos para
+usar numeros de referencias.

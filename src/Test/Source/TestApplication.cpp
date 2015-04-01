@@ -5,23 +5,31 @@
 
 #include <vTypes/Headers/vString.h>
 #include <fstream>
+#include <sstream>
 #include "Test/Headers/TestApplication.h"
 
+using namespace std;
 int start(vString type) {
     if (type == "vList") createVList();
     return 0;
 }
 
 void createVList() {
-    std::fstream myFile;
+    fstream myFile;
     myFile.open("book.txt");
-    std::string line;
+    string line;
     if (myFile.is_open()) {
         while (getline(myFile, line)) {
-            std::cout << line << '\n';
+
+            istringstream iss(line);
+            do {
+                string sub;
+                iss >> sub;
+                cout << sub << endl;
+            } while (iss);
         }
         myFile.close();
     }
 
-    else std::cout << "Unable to open file";
+    else cout << "Unable to open file";
 }

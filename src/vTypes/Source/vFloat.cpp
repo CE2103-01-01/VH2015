@@ -6,7 +6,7 @@
 
 vFloat::vFloat(float d){
     data = vMalloc(sizeof(d),"float");
-    vPlacement(data,d);
+    vPlacement(&data, d);
 };
 
 vFloat::~vFloat(){

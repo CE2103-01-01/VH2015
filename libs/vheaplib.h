@@ -10,8 +10,14 @@
 vRef vMalloc(int, std::string);
 void vFree(vRef);
 void vFree(unsigned int);
-template <typename T> int vPlacement(vRef,T);
+
+template<typename T>
+int vPlacement(vRef *, T);
 void* de_vReference(vRef);
 
+template<typename T>
+int vPlacement(vRef *vR, T toPlace) {
+    vHeap::getInstance()->vPlacement(vR, toPlace);
+};
 
 #endif //_VH2015_HEAP_H_

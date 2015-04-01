@@ -6,7 +6,7 @@
 
 vInt::vInt(int d){
     data = vMalloc(sizeof(d),"int");
-    vPlacement(data,d);
+    vPlacement(&data, d);
 };
 
 vInt::~vInt(){

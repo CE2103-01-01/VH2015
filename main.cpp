@@ -1,6 +1,6 @@
 #include <iostream>
+#include <Test/Headers/TestApplication.h>
 #include "vHeap/Headers/vHeap.h"
-#include "src/vTypes/Headers/vString.h"
 #include "src/vTypes/Headers/vChar.h"
 
 using namespace std;
@@ -55,7 +55,7 @@ void pruebaDumpTxt(){
 }
 
 int main() {
-    pruebaVHeap();
+    start(vString("vList"));
 
     return 0;
 };

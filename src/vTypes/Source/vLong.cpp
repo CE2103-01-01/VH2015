@@ -6,7 +6,7 @@
 
 vLong::vLong(long d){
     data = vMalloc(sizeof(d),"long");
-    vPlacement(data,d);
+    vPlacement(&data, d);
 };
 
 vLong::~vLong(){
