@@ -6,6 +6,10 @@
 #define _VH2015_TESTAPPLICATION_H_
 
 
+static char const *const txtPath = "book.txt";
+
+static char const *const readError = "Unable to open file";
+
 #include <iosfwd>
 #include <string>
 #include <vTypes/Headers/vString.h>

@@ -16,6 +16,8 @@ class vListIterator {
         vListIterator(vList<T> *);
         bool exists();
         T* next();
+
+    unsigned long getPosition();
 };
 /** @brief Declaracion de la clase nodo
 *
@@ -35,8 +37,8 @@ class vNode {
         vNode<T>* getPrevNode(); //Accede al nodo prev
         void insertAfter(vNode<T>*); //Inserta un nodo next
         void insertBefore(vNode<T>*); //Inserta un nodo prev
-        void vaciarDespues(); //Inserta un nodo next
-        void vaciarAntes(); //Inserta un nodo prev
+    void freeNext(); //Inserta un nodo next
+    void freePrev(); //Inserta un nodo prev
 };
 /** @brief Declaracion de la clase nodo
 *
@@ -53,7 +55,7 @@ class vList {
         void add(T); //Inserta nodo al inicio
         void append(T); //Inserta nodo al final
         bool deleteNodeByData(T); //Busca nodo y lo borra
-        bool deleteNode(int); //Busca nodo y lo borra
+    bool deleteNode(unsigned int); //Busca nodo y lo borra
         void deleteAll(); //Borra all
         bool empty(); //True=vacia
         vNode<T> *search(T); //Busca dato T
@@ -151,14 +153,14 @@ void vNode<T>::insertBefore(vNode<T> *n) {
 *
 */
 template<class T>
-void vNode<T>::vaciarAntes() {
+void vNode<T>::freePrev() {
     prev=0;
 };
 /** @brief Vacia nodo despues
 *
 */
 template<class T>
-void vNode<T>::vaciarDespues() {
+void vNode<T>::freeNext() {
     next=0;
 };
 /** @brief Construye la lista
@@ -234,11 +236,12 @@ bool vList<T>::deleteNodeByData(T d) {
 * @param int d
 */
 template<class T>
-bool vList<T>::deleteNode(int d) {
+bool vList<T>::deleteNode(unsigned int d) {
     if(d==0){
         _head=_head->getNextNode();
         (_head->getPrevNode())->~vNode();
         free(_head->getPrevNode());
+        _head->freePrev();
         l--;
         return true;
     }else if(d==l-1){
@@ -246,6 +249,7 @@ bool vList<T>::deleteNode(int d) {
         _tail=_tail->getPrevNode();
         _tail->getNextNode()->~vNode();
         free(_tail->getNextNode());
+        _tail->freeNext();
         l--;
         return true;
     }else if(d<l){
@@ -257,8 +261,8 @@ bool vList<T>::deleteNode(int d) {
         vNode<T> *sig = tmp->getNextNode();
         tmp->~vNode();
         free(tmp);
-        ant->vaciarDespues();
-        sig->vaciarAntes();
+        ant->freeNext();
+        sig->freePrev();
         ant->insertAfter(sig);
         l--;
         return true;
@@ -396,4 +400,10 @@ vListIterator<T>::vListIterator(vList<T> *lista) {
     myList = lista;
 }
 
+template<class T>
+unsigned long vListIterator<T>::getPosition() {
+    return position;
+}
 #endif
+
+

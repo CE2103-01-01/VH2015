@@ -6,7 +6,7 @@
 #define VH2015_VMALLOCMDENTRY_H
 
 
-class vMallocMDEntry {
+class vEntry {
 private:
     unsigned int idRef = 0;
     void *offset = 0;
@@ -15,8 +15,9 @@ private:
     unsigned int numReferences;
 
 public:
-    vMallocMDEntry();
-    vMallocMDEntry(int, int, void *);
+    vEntry();
+
+    vEntry(int, int, void *);
     int operator!();
     void changeFlag();
     void *operator&();

@@ -15,8 +15,9 @@ int start(vString type) {
 }
 
 void createVList() {
+    vList<string> palabras;
     fstream myFile;
-    myFile.open("book.txt");
+    myFile.open(txtPath);
     string line;
     if (myFile.is_open()) {
         while (getline(myFile, line)) {
@@ -25,11 +26,11 @@ void createVList() {
             do {
                 string sub;
                 iss >> sub;
-                cout << sub << endl;
+
             } while (iss);
         }
         myFile.close();
     }
 
-    else cout << "Unable to open file";
+    else cout << readError;
 }

@@ -1,6 +1,8 @@
 using namespace std;
 using namespace pugi;
 
+static char const *const xmlPath = "vHeap.xml";
+
 xmlReader::xmlReader() {
 }
 
@@ -11,7 +13,7 @@ xmlReader::~xmlReader() {
 Opciones xmlReader::vHeapOptions() {
 
     xml_document doc;
-    doc.load_file("vHeap.xml");
+    doc.load_file(xmlPath);
     xml_node raiz = doc.child("VH2015");
 
     opciones.activo = raiz.child("vdebug").attribute("activo").as_bool();
