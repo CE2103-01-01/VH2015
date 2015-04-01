@@ -5,7 +5,7 @@
 #include "vTypes/Headers/vLong.h"
 
 vLong::vLong(long d){
-    data = vHeap::getInstance()->vMalloc(sizeof(d),"vlong");
+    data = vHeap::getInstance()->vMalloc(sizeof(d),"long");
     vHeap::getInstance()->vPlacement(data,d);
 };
 
