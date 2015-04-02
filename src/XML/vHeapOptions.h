@@ -19,9 +19,13 @@ class vHeapOptions {
         static char const *const xmlPath = "vHeap.xml";
         ~vHeapOptions();
         int operator[](std::string);
-        int operator[](bool);
-        int operator[](int);
-        int operator[](float);
+        int operator[](bool*);
+        int operator[](int*);
+        int operator[](float*);
+        int operator +(std::string);
+        int operator +(bool);
+        int operator +(int);
+        int operator +(float);
 };
 
 

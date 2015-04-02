@@ -17,17 +17,33 @@ vHeapOptions::~vHeapOptions(){
 };
 
 int vHeapOptions::operator[](std::string var){
+    var=path;
+};
+
+int vHeapOptions::operator[](bool* var){
+    *var=*active;
+};
+
+int vHeapOptions::operator[](int* var){
+    *var=*size;
+};
+
+int vHeapOptions::operator[](float* var){
+    *var=*overweight;
+};
+
+int vHeapOptions::operator+(std::string var){
     path=var;
 };
 
-int vHeapOptions::operator[](bool var){
+int vHeapOptions::operator+(bool var){
     *active=var;
 };
 
-int vHeapOptions::operator[](int var){
+int vHeapOptions::operator+(int var){
     *size=var;
 };
 
-int vHeapOptions::operator[](float var){
+int vHeapOptions::operator+(float var){
     *overweight=var;
 };
