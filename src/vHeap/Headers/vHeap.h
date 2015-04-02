@@ -48,13 +48,13 @@ public:
 };
 
 template <typename T> int vHeap::vPlacement(vRef memory, T object){
-    memoryMutex.lock();
+    pthread_mutex_lock(&memoryMutex);
     try{
         *static_cast<T *>(de_vReference(!memory)) = object;
-        memoryMutex.unlock();
+        pthread_mutex_unlock(&memoryMutex);
         return 0;
     }catch(int error){
-        memoryMutex.unlock();
+        pthread_mutex_unlock(&memoryMutex);
         return -1;
     };
 };
