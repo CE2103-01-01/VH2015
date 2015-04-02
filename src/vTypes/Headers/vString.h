@@ -15,11 +15,14 @@ class vString{
         vString(std::string);
         ~vString();
         int operator +=(std::string);
+        int operator +=(vString);
+	    int operator =(vString);
+	    int operator =(std::string);
         char operator [](int);
         int operator --();
-        int operator !();
-
-    bool operator==(std::string);
+        vList<char>* operator !();
+	    bool operator==(std::string);
+	    bool operator==(vString);
 };
 
 

@@ -36,13 +36,8 @@ int vString::operator --(){
     return 0;
 };
 
-int vString::operator !(){
-    vListIterator<char> *iter = word->getIterator();
-    while(iter->exists()){
-        std::cout<<*(iter->next());
-    };
-    std::cout<<std::endl;
-    return 0;
+vList<char>* vString::operator !(){
+    return word;
 };
 
 bool vString::operator==(std::string string) {
@@ -53,4 +48,62 @@ bool vString::operator==(std::string string) {
         }
         return true;
     }
-}
+};
+
+bool vString::operator==(vString str) {
+    if ((!str)->len() != word->len()){
+        return false;
+    }else {
+        vListIterator<char>* iter1 = word->getIterator();
+        vListIterator<char>* iter2 = (!str)->getIterator();
+        while(iter1->exists()){
+                if(iter1->next() != iter2->next()){
+                    return false;
+	        };
+        };
+        return true;
+    }
+};
+
+int vString::operator +=(vString str){
+    vListIterator<char>* iter = (!str)->getIterator();
+    while(iter->exists()){
+        word->append(*static_cast<char*>(iter->next()));
+    };
+    return 0;
+};
+
+int vString::operator =(vString str){
+	if(word!=0){
+	    vListIterator<char>* iter = (!str)->getIterator();
+	    word->deleteAll();
+	    while(iter->exists()){
+	        word->append(*static_cast<char*>(iter->next()));
+    	    };
+            return 0;
+	}else{    
+            word = static_cast<vList<char> *>(malloc(sizeof(vList<char>)));
+            new(word) vList<char>();
+	    vListIterator<char>* iter = (!str)->getIterator();
+            while(iter->exists()){
+	        word->append(*static_cast<char*>(iter->next()));
+    	    };
+            return 0;
+	};
+};
+
+int vString::operator =(std::string str){
+	if(word!=0){
+	    word->deleteAll();
+        for(int index=0; index<str.length(); index++){
+            word->append(static_cast<char>(str[index]));
+        }
+	}else{    
+        word = static_cast<vList<char> *>(malloc(sizeof(vList<char>)));
+        new(word) vList<char>();
+        for(int i=0; i<str.length(); i++){
+            word->append(static_cast<char>(str[i]));
+        }
+        return 0;
+	};
+};
