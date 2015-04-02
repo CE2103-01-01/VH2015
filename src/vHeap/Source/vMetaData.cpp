@@ -5,7 +5,9 @@
 
 #include "vHeap/Headers/vMetaData.h"
 
-
+/**
+* inicializa valores y crea la lista
+*/
 vMetaData::vMetaData() {
     actualID = 0;
     memoryTable = static_cast<vList<vEntry> *>(malloc(sizeof(vList<vEntry>)));
@@ -24,6 +26,9 @@ int vMetaData::len() {
     return actualID;
 }
 
+/**
+*Busca un id y aumenta num de Referencias
+*/
 void vMetaData::increaseReference(unsigned int idRef) {
     vListIterator<vEntry> *i = memoryTable->getIterator();
     while (i->exists()) {
@@ -35,6 +40,9 @@ void vMetaData::increaseReference(unsigned int idRef) {
     }
 }
 
+/**
+* Busca un id y disminuye num de referencias
+*/
 void vMetaData::decreaseReference(unsigned int idRef) {
     vListIterator<vEntry> *i = memoryTable->getIterator();
     while (i->exists()) {
@@ -46,12 +54,17 @@ void vMetaData::decreaseReference(unsigned int idRef) {
     }
 }
 
+/**
+* en la tabla de memoria agrega una entrada y devuelve una nuevca instancia de vRef
+*/
 vRef vMetaData::addEntry(int size, std::string type, void *actualPos) {
     memoryTable->append(vEntry(actualID, size, actualPos));
     return vRef(actualID++);
 }
 
-
+/**
+* Imprime la metadata
+*/
 void vMetaData::printMetaData() {
     vListIterator<vEntry> *iter = memoryTable->getIterator();
     std::cout << "--Begin MetaData info--" << std::endl;
@@ -68,11 +81,16 @@ void vMetaData::printMetaData() {
     std::cout << "---End MetaData info---" << std::endl;
 }
 
-
+/**
+* Devuelve la lista de la tabla de memoria
+*/
 vList<vEntry> *vMetaData::operator!() {
     return memoryTable;
 };
 
+/**
+* Elimina una entrada de la tabla de momoria
+*/
 void vMetaData::removeEntry(int idRef) {
     vListIterator<vEntry> *i = memoryTable->getIterator();
     while (i->exists()) {

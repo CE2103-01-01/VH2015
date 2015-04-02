@@ -30,6 +30,9 @@ int vEntry::getIdRef() {
     return idRef;
 }
 
+/**
+* Constructor pone en 1 el numero de referencias
+*/
 vEntry::vEntry() {
     numReferences = 1;
 }
@@ -55,6 +58,10 @@ unsigned int vEntry::getNumReferences() {
     return numReferences;
 }
 
+/**
+* Hace una disminucion en 1 al numero de referencias de una entrada
+* LLama al garbage collector si el numero es igual a 0.
+*/
 void vEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
@@ -67,6 +74,9 @@ void vEntry::setOffset(void *newOffset) {
     offset=newOffset;
 }
 
+/**
+Aumenta en 1 al numero de referencias de una entrada
+**/
 void vEntry::increaseNumReferences() {
     numReferences++;
 }

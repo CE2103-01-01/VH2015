@@ -1,0 +1,19 @@
+Clase vNodeTree
+
+public:
+
+vNodeTree(vNodeTree *parent, T data)
+Le asigna el padre a un nodo y el dato
+
+void insert(T pData)
+Se inserta un dato en un nodo buscando los extremos y nodos inferiores
+
+Clase vBinaryTree
+
+public:
+
+void insert(T pDato)
+Inserta un dato en un arbol binario
+
+T find(T compare)
+Busca un dato en un arbol binario y si existe lo devuelve o si no retorna nullptr

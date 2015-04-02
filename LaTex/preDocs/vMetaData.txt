@@ -1,0 +1,23 @@
+Clase vMetaData
+
+public:
+vMetaData()
+Inicializa valores y crea la lista
+
+void increaseReference(unsigned int idRef)
+Busca un id y aumenta num de Referencias.
+
+void decreaseReference(unsigned int idRef)
+Busca un id y disminuye num de referencias
+
+vRef addEntry(int size, std::string type, void *actualPos)
+En la tabla de memoria agrega una entrada y devuelve una nuevca instancia de vRef
+
+void vMetaData::printMetaData()
+Imprime la metadata
+
+vList<vEntry> *operator!()
+Devuelve la lista de la tabla de memoria
+
+void removeEntry(int idRef)
+Elimina una entrada de la tabla de memoria

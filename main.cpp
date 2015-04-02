@@ -3,7 +3,6 @@
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vSimpleList.h"
-#include "libs/vheaplib.h"
 
 using namespace std;
 
@@ -63,6 +62,8 @@ void pruebaListaSimple(){
 };
 
 int main() {
+    int i = 0;
+    cout << i++ << endl;
     pruebaListaSimple();
     //pruebaLista();
     //pruebaVHeap();
