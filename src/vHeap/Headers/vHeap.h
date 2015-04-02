@@ -6,9 +6,10 @@
 #include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <stdlib.h>
+#include <pthread.h>
+#include <stdio.h>
 #include "vRef.h"
 #include <sstream>
-#include <mutex>
 #include <fstream>
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
@@ -16,6 +17,7 @@
 
 class vMetaData;
 class vRef;
+class Dump;
 class vHeap{
     friend class Dump;
     bool* vDebug;
@@ -27,7 +29,7 @@ class vHeap{
     void* initPos;
     void* finalPos;
     void* actualPos;
-    std::mutex memoryMutex;
+    pthread_mutex_t memoryMutex;
     vMetaData *metaData;
 public:
     vHeap(int,float);

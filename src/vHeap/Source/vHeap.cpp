@@ -10,18 +10,12 @@ using namespace pugi;
 vHeap::vHeap(int s, float o){
     overweight=static_cast<float*>(malloc(sizeof(float)));
     *overweight=o;
-
+    memoryMutex=PTHREAD_MUTEX_INITIALIZER;
     mainChunk = malloc(s * 1024);
     actualPos=mainChunk;
     initPos=mainChunk;
-    std::cout<<initPos<<std::endl;
     finalPos = initPos+s*1024;
-    std::cout<<finalPos<<std::endl;
     metaData = new vMetaData();
-
-
-
-
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
     //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
@@ -38,27 +32,29 @@ vHeap* vHeap::vHeapSingleton = 0;
 
 vRef vHeap::vMalloc(int sz, std::string type){
 
-    memoryMutex.lock();
+    pthread_mutex_lock(&memoryMutex);
 
     vRef r= metaData->addEntry(sz,type,actualPos);// add Entry devuelve una referencia
     actualPos+=sz;
     metaData->printMetaData();
 
 
-    memoryMutex.unlock();
+    pthread_mutex_unlock(&memoryMutex);
 
     return r;
 };
 
 void vHeap::vFree(vRef r){
-    vFree(!r);
+    pthread_mutex_lock(&memoryMutex);
+    metaData->removeEntry(!r);
+    pthread_mutex_unlock(&memoryMutex);;
 }
 
 
 void vHeap::vFree(unsigned int idRef) {
-    memoryMutex.lock();//TODO-roberto terminar vFree
+    pthread_mutex_lock(&memoryMutex);
     metaData->removeEntry(idRef);
-    memoryMutex.unlock();
+    pthread_mutex_unlock(&memoryMutex);;
 }
 
 vMetaData *vHeap::getMetaData() {
@@ -126,18 +122,18 @@ void Dump::saveDumpFile() {
 
 
 void *vHeap::de_vReference(int id) {
-    memoryMutex.lock();
+   pthread_mutex_lock(&memoryMutex);
 
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
         vEntry *entry = iter->next();
     if(!*entry==id){
-            memoryMutex.unlock();
+            pthread_mutex_unlock(&memoryMutex);
             return &*entry;
         };
     };
-    memoryMutex.unlock();
+    pthread_mutex_unlock(&memoryMutex);
     return 0;
 };
 
