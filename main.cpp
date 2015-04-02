@@ -31,11 +31,11 @@ void pruebaLista() {
     std::cout << "Resultado Esperado: 2,3,4,5,6" << std::endl;
     vList<int> *lista = new vList<int>();
     lista->append(5);
-    lista->append(6);
+    lista->append(2);
     lista->add(4);
-    lista->add(2);
     lista->add(3);
-    lista->swap(0, 1);
+    lista->add(6);
+    lista->swap(0, 5);
     vListIterator<int> *i = lista->getIterator();
     while(i->exists())
     {

@@ -11,7 +11,7 @@ vRef vMalloc(int, std::string);
 void vFree(vRef);
 void vFree(unsigned int);
 
-template<typename T> int vPlacement(vRef *, T);
+template<typename T> int vPlacement(vRef, T);
 void* de_vReference(vRef);
 
 template<typename T>

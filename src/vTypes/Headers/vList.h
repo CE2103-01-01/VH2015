@@ -421,7 +421,7 @@ bool vList<T>::swap(unsigned int i, unsigned int j) {
 
     vNode<T> *iNode = getNode(i);
     vNode<T> *jNode = getNode(j);
-    
+
     T *dataI = iNode->data;
     iNode->data = jNode->data;
     jNode->data = dataI;

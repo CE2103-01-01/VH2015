@@ -47,14 +47,14 @@ public:
     int addVRef(int idRef);
     template <typename T> int vPlacement(vRef*,T);
 
-    void *de_vReference(vRef);
+    void *de_vReference(vRef *);
 };
 
 
 template <typename T> int vHeap::vPlacement(vRef* memory, T object){
     memoryMutex.lock();
     try{
-        *static_cast<T*>(de_vReference(*memory)) = object;
+        *static_cast<T *>(de_vReference(memory)) = object;
         memoryMutex.unlock();
         return 0;
     }catch(int error){
