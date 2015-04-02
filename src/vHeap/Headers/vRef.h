@@ -15,8 +15,10 @@ class vRef {
         ~vRef();
         void* operator *();
         int operator !();
-        int operator=(int);
-        int operator=(vRef);
+        int operator =(int);
+        int operator =(vRef);
+        int operator ++();
+        int operator --();
 };
 
 #endif //_VH2015_VREF_H_

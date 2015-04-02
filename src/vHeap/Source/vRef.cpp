@@ -36,3 +36,13 @@ int vRef::operator=(vRef other){
     vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
     return 0;
 };
+
+int vRef::operator ++(){
+    referenceID++;
+    return 0;
+};
+
+int vRef::operator --(){
+    referenceID--;
+    return 0;
+};

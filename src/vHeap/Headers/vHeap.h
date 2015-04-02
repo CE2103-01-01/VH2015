@@ -34,22 +34,16 @@ public:
     ~vHeap();
     vRef vMalloc(int, std::string);
     void vFree(vRef);
-
     void vFree(unsigned int);
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
-
     vMetaData *getMetaData();
-
-    int removeVRef(int idRef);
-
-    int addVRef(int idRef);
-    template <typename T> int vPlacement(vRef,T);
-
+    int removeVRef(int);
+    int addVRef(int);
+    template <typename T> int vPlacement(vRef, T);
     void *de_vReference(int);
 };
-
 
 template <typename T> int vHeap::vPlacement(vRef memory, T object){
     memoryMutex.lock();
