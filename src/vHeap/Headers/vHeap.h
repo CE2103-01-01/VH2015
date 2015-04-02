@@ -23,7 +23,6 @@ class vHeap{
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
-
     float* overweight;
     void* mainChunk;
     void* initPos;
@@ -60,18 +59,21 @@ template <typename T> int vHeap::vPlacement(vRef memory, T object){
 };
 
 
+//DUMP
+
 class Dump {
-public:
-
-    Dump();
-    ~Dump();
-    int frecuency;
-    int counter;
+    friend class vHeap;
+    int* frecuency;
+    int* counter;
     std::string directory;
-    bool dumpping;
-
-    std::string IntToStr(int n);
-    void saveDumpFile();
+    bool* dumpping;
+    
+    public:
+        Dump();
+        ~Dump();
+        std::string IntToStr(int);
+        void saveDumpFile();
+	bool getDumppingState();
 };
 
 #endif //_VH2015_VHEAP_H_
