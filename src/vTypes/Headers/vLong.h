@@ -19,13 +19,21 @@ class vLong : public vObject{
         int operator +=(long);
         vRef operator &();
         int operator --();
+        int operator ++();
         int operator =(long);
-    bool operator <(vLong);
-    bool operator <=(vLong);
-    bool operator >(vLong);
-    bool operator >=(vLong);
-    bool operator ==(vLong);
-    bool operator !=(vLong);
+        int operator =(vLong);
+        bool operator <(vLong);
+        bool operator <=(vLong);
+        bool operator >(vLong);
+        bool operator >=(vLong);
+        bool operator ==(vLong);
+        bool operator !=(vLong);
+        bool operator <(long);
+        bool operator <=(long);
+        bool operator >(long);
+        bool operator >=(long);
+        bool operator ==(long);
+        bool operator !=(long);
 };
 
 

@@ -27,7 +27,16 @@ int vChar::operator +=(char pls){
 
 int vChar::operator --(){
     try{
-        *static_cast<char*>(*data)-1;
+        (*static_cast<char*>(*data))--;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vChar::operator ++(){
+    try{
+        (*static_cast<char*>(*data))++;
         return 0;
     }catch(int e){
         return -1;
@@ -45,6 +54,15 @@ char vChar::operator !(){
 int vChar::operator =(char var){
     try{
         *static_cast<char*>(*data)=var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vChar::operator =(vChar var){
+    try{
+        *static_cast<char*>(*data) = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -73,4 +91,28 @@ bool vChar::operator ==(vChar other){
 
 bool vChar::operator !=(vChar other){
     return *static_cast<char*>(*data) != !other;
+};
+
+bool vChar::operator <(char other){
+    return *static_cast<char*>(*data) < other;
+};
+
+bool vChar::operator <=(char other){
+    return *static_cast<char*>(*data) <= other;
+};
+
+bool vChar::operator >(char other){
+    return *static_cast<char*>(*data) > other;
+};
+
+bool vChar::operator >=(char other){
+    return *static_cast<char*>(*data) >= other;
+};
+
+bool vChar::operator ==(char other){
+    return *static_cast<char*>(*data) == other;
+};
+
+bool vChar::operator !=(char other){
+    return *static_cast<char*>(*data) != other;
 };

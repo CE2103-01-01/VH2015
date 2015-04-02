@@ -28,7 +28,16 @@ int vLong::operator +=(long pls){
 
 int vLong::operator --(){
     try{
-        *static_cast<long*>(*data)-1;
+        (*static_cast<long*>(*data))--;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vLong::operator ++(){
+    try{
+        (*static_cast<long*>(*data))++;
         return 0;
     }catch(int e){
         return -1;
@@ -45,7 +54,16 @@ long vLong::operator !(){
 
 int vLong::operator =(long var){
     try{
-        *static_cast<long*>(*data)=var;
+        *static_cast<long*>(*data) = var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vLong::operator =(vLong var){
+    try{
+        *static_cast<long*>(*data) = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -74,4 +92,28 @@ bool vLong::operator ==(vLong other){
 
 bool vLong::operator !=(vLong other){
     return *static_cast<long*>(*data) != !other;
+};
+
+bool vLong::operator <(long other){
+    return *static_cast<long*>(*data) < other;
+};
+
+bool vLong::operator <=(long other){
+    return *static_cast<long*>(*data) <= other;
+};
+
+bool vLong::operator >(long other){
+    return *static_cast<long*>(*data) > other;
+};
+
+bool vLong::operator >=(long other){
+    return *static_cast<long*>(*data) >= other;
+};
+
+bool vLong::operator ==(long other){
+    return *static_cast<long*>(*data) == other;
+};
+
+bool vLong::operator !=(long other){
+    return *static_cast<long*>(*data) != other;
 };

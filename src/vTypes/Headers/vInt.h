@@ -19,13 +19,21 @@ class vInt : public vObject{
         int operator +=(int);
         vRef operator &();
         int operator --();
+        int operator ++();
         int operator =(int);
+        int operator =(vInt);
         bool operator <(vInt);
         bool operator <=(vInt);
         bool operator >(vInt);
         bool operator >=(vInt);
         bool operator ==(vInt);
         bool operator !=(vInt);
+        bool operator <(int);
+        bool operator <=(int);
+        bool operator >(int);
+        bool operator >=(int);
+        bool operator ==(int);
+        bool operator !=(int);
 };
 
 

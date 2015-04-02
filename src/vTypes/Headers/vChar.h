@@ -16,16 +16,24 @@ class vChar: public vObject{
         vChar(char);
         ~vChar();
         int operator =(char);
+        int operator =(vChar);
         char operator !();
         int operator +=(char);
         vRef operator &();
         int operator --();
+        int operator ++();
         bool operator <(vChar);
         bool operator <=(vChar);
         bool operator >(vChar);
         bool operator >=(vChar);
         bool operator ==(vChar);
         bool operator !=(vChar);
+        bool operator <(char);
+        bool operator <=(char);
+        bool operator >(char);
+        bool operator >=(char);
+        bool operator ==(char);
+        bool operator !=(char);
 };
 
 

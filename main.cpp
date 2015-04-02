@@ -1,15 +1,16 @@
 #include <iostream>
 #include <Test/Headers/TestApplication.h>
-#include "vHeap/Headers/vHeap.h"
+#include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
+#include "src/vTypes/Headers/vSimpleList.h"
+#include "libs/vheaplib.h"
 
 using namespace std;
 
 void pruebaVHeap() {
-    vHeap *vH = vHeap::getInstance();
-    vRef r1 = vH->vMalloc(4, "t1");
-    vRef r2 = vH->vMalloc(2, "t2");
-    vRef r3 = vH->vMalloc(8, "t3");
+    vRef r1 = vMalloc(4, "t1");
+    vRef r2 = vMalloc(2, "t2");
+    vRef r3 = vMalloc(8, "t3");
 }
 
 void pruebaVString() {
@@ -54,8 +55,16 @@ void pruebaDumpTxt(){
 
 }
 
+void pruebaListaSimple(){
+    vRef lista = vMalloc(sizeof(vSimpleList<vChar>), "vSimpleList");
+    vSimpleList<vChar> l = vSimpleList<vChar>();
+    vPlacement(lista, l);
+
+};
+
 int main() {
-    pruebaLista();
+    pruebaListaSimple();
+    //pruebaLista();
     //pruebaVHeap();
     //start(vString("vList"));
 

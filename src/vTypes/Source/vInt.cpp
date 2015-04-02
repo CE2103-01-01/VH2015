@@ -28,7 +28,16 @@ vRef vInt::operator &(){
 
 int vInt::operator --(){
     try{
-        *static_cast<int*>(*data)-1;
+        (*static_cast<int*>(*data))--;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vInt::operator ++(){
+    try{
+        (*static_cast<int*>(*data))++;
         return 0;
     }catch(int e){
         return -1;
@@ -45,7 +54,16 @@ int vInt::operator !(){
 
 int vInt::operator =(int var){
     try{
-        *static_cast<int*>(*data)=var;
+        *static_cast<int*>(*data) = var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vInt::operator =(vInt var){
+    try{
+        *static_cast<int*>(*data) = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -74,4 +92,28 @@ bool vInt::operator ==(vInt other){
 
 bool vInt::operator !=(vInt other){
     return *static_cast<int*>(*data) != !other;
+};
+
+bool vInt::operator <(int other){
+    return *static_cast<int*>(*data) < other;
+};
+
+bool vInt::operator <=(int other){
+    return *static_cast<int*>(*data) <= other;
+};
+
+bool vInt::operator >(int other){
+    return *static_cast<int*>(*data) > other;
+};
+
+bool vInt::operator >=(int other){
+    return *static_cast<int*>(*data) >= other;
+};
+
+bool vInt::operator ==(int other){
+    return *static_cast<int*>(*data) == other;
+};
+
+bool vInt::operator !=(int other){
+    return *static_cast<int*>(*data) != other;
 };

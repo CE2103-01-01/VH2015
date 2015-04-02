@@ -16,8 +16,6 @@ set(SOURCE_FILES    main.cpp
                     src/vTypes/Source/vString.cpp
                     src/vTypes/Source/vChar.cpp
                     src/vTypes/Source/vFloat.cpp
-                    src/vTypes/Source/vSimpleList.cpp
-                    src/vTypes/Source/vSimpleNode.cpp
                     src/vTypes/Source/vLong.cpp
                     src/Test/Source/TestApplication.cpp)
 
@@ -39,7 +37,6 @@ set(HEADERS_FILES
                     src/vTypes/Headers/vLong.h
                     src/vTypes/Headers/vBinaryTree.h
                     src/vTypes/Headers/vSimpleList.h
-                    src/vTypes/Headers/vSimpleNode.h
                     src/Test/Headers/TestApplication.h)
 
 file(GLOB RES_FILES res/book.txt

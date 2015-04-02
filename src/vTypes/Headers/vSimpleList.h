@@ -20,7 +20,7 @@ public:
     vSimpleNode(T);
     ~vSimpleNode();
     vRef operator !();          //get Data
-    vRef operator ->();         //get Next
+    vRef operator ++();         //get Next
     int operator *=(T);         //assign
     int operator [](vRef);      //swap
     int operator +(vRef);       //add
@@ -44,7 +44,7 @@ template <class T>vRef vSimpleNode<T>::operator !(){
     return data;
 };
 
-template <class T> vRef vSimpleNode<T>::operator ->(){
+template <class T> vRef vSimpleNode<T>::operator ++(){
     return next;
 };
 
@@ -101,31 +101,31 @@ public:
     ~vSimpleList();
     int operator +(T);              //add
     int operator -(T);              //delete
-    int operator [](vInt);          //getPos
+    T operator [](vInt);            //getPos
     int operator --();              //delete all
-    vRef operator ++(vSimpleList);  //get head
-    vRef operator ++();             //get tail
+    vRef operator *();              //get head
+    vRef operator &();              //get tail
     void print();
 };
 
-template <class T> vSimpleList::vSimpleList(){
+template <class T> vSimpleList<T>::vSimpleList(){
     m_len = vInt(0);
     m_head = vRef();
     m_tail = vRef();
 };
 
-template <class T> vSimpleList::~vSimpleList(){};
+template <class T> vSimpleList<T>::~vSimpleList<T>(){};
 
-template <class T> vSimpleList::int operator +(T data){
+template <class T> int vSimpleList<T>::operator +(T data){
     vRef r = vMalloc(sizeof(T),data);
     vPlacement(r,data);
     if(0 != !m_tail){
-        *static_cast<vSimpleNode*>(*m_tail) + r;
+        *static_cast<vSimpleNode<T>*>(*m_tail) + r;
         m_tail=r;
         return 0;
     }else if(0 != !m_head){
         m_tail = r;
-        *static_cast<vSimpleNode*>(*m_head) + m_tail;
+        *static_cast<vSimpleNode<T>*>(*m_head) + m_tail;
         return 0;
     }else{
         m_head = r;
@@ -134,16 +134,56 @@ template <class T> vSimpleList::int operator +(T data){
     return 1;
 };
 
-template <class T> vSimpleList::int operator -(T data){};
+template <class T> int vSimpleList<T>::operator -(T data){
+    if(*static_cast<T*>(!*static_cast<vSimpleNode<T>*>(*m_head)) == data){
+        if(m_len>1){
+            m_head = (*static_cast<vSimpleNode<T>*>(*m_head))++;
+            return 0;
+        }else{
+            m_head.~vRef();
+            m_head=0;
+            return 0;
+        };
+    }else if(m_len>1){
+        vRef tmp = m_head;
+        vRef tmpB = (*static_cast<vSimpleNode<T>*>(*tmp))++;
+        for(vInt i = 1; i<m_len; ++i){
+            if(*static_cast<T*>(!*static_cast<vSimpleNode<T>*>(*tmpB)) == data){
+                (*static_cast<vSimpleNode<T>*>(*tmp)) + (*static_cast<vSimpleNode<T>*>(*tmpB))++;
+                vFree(tmpB);
+                return 0;
+            };
+            tmp = (*static_cast<vSimpleNode<T>*>(*tmp))++;
+            tmpB = (*static_cast<vSimpleNode<T>*>(*tmpB))++;
+        };
+        return -1;
+    }else{
+        return -2;
+    };
+};
 
-template <class T> vSimpleList::int operator [](vInt pos){};
+template <class T> T vSimpleList<T>::operator [](vInt pos){
+    if(pos<m_len){
+        vRef tmp = m_head;
+        for(vInt i = 0; i<pos; ++i){
+            tmp = (*static_cast<vSimpleNode<T>*>(*tmp))++;
+        };
+        return *static_cast<T*>(*(!(*static_cast<vSimpleNode<T>*>(*tmp))));
+    };
+};
 
-template <class T> vSimpleList::int operator --(){};
+template <class T> int vSimpleList<T>::operator --(){
+    ~vSimpleList();
+};
 
-template <class T> vSimpleList::vRef operator ++(vSimpleList){};
+template <class T> vRef vSimpleList<T>::operator *(){
+    return *m_head;
+};
 
-template <class T> vSimpleList::vRef operator ++(){};
+template <class T> vRef vSimpleList<T>::operator &(){
+    return *m_tail;
+};
 
-template <class T> vSimpleList::void print(){};
+template <class T> void vSimpleList<T>::print(){};
 
 #endif //_VH2015_VSIMPLELIST_H_
