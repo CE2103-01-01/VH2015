@@ -1,0 +1,7 @@
+Biblioteca pugixml
+
+load_file()
+Se usa cara cargar el archivo xml
+
+as_bool()/as_int()/as_float()...
+Se busca un elemento de la etructura xml y se hace un casteo a el tipo seleccionado
