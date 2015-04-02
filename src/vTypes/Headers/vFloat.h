@@ -14,6 +14,7 @@
 class vFloat : public vObject{
         vRef data;
     public:
+        vFloat();
         vFloat(float);
         ~vFloat();
         float operator !();

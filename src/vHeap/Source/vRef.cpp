@@ -22,7 +22,7 @@ int vRef::operator!() {
 };
 
 void* vRef::operator*() {
-    return vHeap::getInstance()->de_vReference(*this);
+    return vHeap::getInstance()->de_vReference(referenceID);
 };
 
 int vRef::operator=(int id){

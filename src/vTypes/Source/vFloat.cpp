@@ -4,9 +4,13 @@
 
 #include "vTypes/Headers/vFloat.h"
 
+vFloat::vFloat(){
+    data = vMalloc(sizeof(float),"float");
+};
+
 vFloat::vFloat(float d){
     data = vMalloc(sizeof(d),"float");
-    vPlacement(&data, d);
+    vPlacement(data, d);
 };
 
 vFloat::~vFloat(){

@@ -13,6 +13,7 @@
 class vLong : public vObject{
         vRef data;
     public:
+        vLong();
         vLong(long);
         ~vLong();
         long operator !();

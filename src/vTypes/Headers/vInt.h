@@ -13,6 +13,7 @@
 class vInt : public vObject{
         vRef data;
     public:
+        vInt();
         vInt(int);
         ~vInt();
         int operator !();

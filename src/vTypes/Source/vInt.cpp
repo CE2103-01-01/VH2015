@@ -4,9 +4,13 @@
 
 #include "vTypes/Headers/vInt.h"
 
+vInt::vInt(){
+    data = vMalloc(sizeof(int),"int");
+};
+
 vInt::vInt(int d){
     data = vMalloc(sizeof(d),"int");
-    vPlacement(&data, d);
+    vPlacement(data, d);
 };
 
 vInt::~vInt(){

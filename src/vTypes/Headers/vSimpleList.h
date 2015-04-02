@@ -114,7 +114,7 @@ template <class T> vSimpleList<T>::vSimpleList(){
     m_tail = vRef();
 };
 
-template <class T> vSimpleList<T>::~vSimpleList<T>(){};
+template <class T> vSimpleList<T>::~vSimpleList(){};
 
 template <class T> int vSimpleList<T>::operator +(T data){
     vRef r = vMalloc(sizeof(T),data);

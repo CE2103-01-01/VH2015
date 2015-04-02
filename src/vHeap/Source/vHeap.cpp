@@ -125,14 +125,14 @@ void Dump::saveDumpFile() {
     }
 
 
-void *vHeap::de_vReference(vRef *memory) {
+void *vHeap::de_vReference(int id) {
     memoryMutex.lock();
 
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
         vEntry *entry = iter->next();
-    if(!*entry==!memory){
+    if(!*entry==id){
             memoryMutex.unlock();
             return &*entry;
         };

@@ -15,7 +15,7 @@ template<typename T> int vPlacement(vRef, T);
 void* de_vReference(vRef);
 
 template<typename T>
-int vPlacement(vRef *vR, T toPlace) {
+int vPlacement(vRef vR, T toPlace) {
     vHeap::getInstance()->vPlacement(vR, toPlace);
 };
 

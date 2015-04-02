@@ -4,9 +4,13 @@
 
 #include "vTypes/Headers/vChar.h"
 
+vChar::vChar(){
+    data = vMalloc(sizeof(char),"char");
+};
+
 vChar::vChar(char d){
     data = vMalloc(sizeof(d),"char");
-    vPlacement(&data, d);
+    vPlacement(data, d);
 };
 
 vChar::~vChar(){

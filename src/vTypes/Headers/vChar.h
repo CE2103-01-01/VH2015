@@ -13,6 +13,7 @@
 class vChar: public vObject{
         vRef data;
     public:
+        vChar();
         vChar(char);
         ~vChar();
         int operator =(char);

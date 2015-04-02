@@ -4,9 +4,13 @@
 
 #include "vTypes/Headers/vLong.h"
 
+vLong::vLong(){
+    data = vMalloc(sizeof(long),"long");
+};
+
 vLong::vLong(long d){
     data = vMalloc(sizeof(d),"long");
-    vPlacement(&data, d);
+    vPlacement(data, d);
 };
 
 vLong::~vLong(){
