@@ -1,0 +1,47 @@
+template <class T> class vSimpleList
+
+Ámbito privado:
+
+vInt m_len: longitud de la lista.
+vRef m_head: primer elemento de la lista.
+vRef m_tail: ultimo elemento de la lista.
+
+public:
+
+vSimpleList();
+Proceso realizado: 
+Inicializa las variables necesarias.
+
+~vSimpleList();
+Proceso realizado:
+Elimina uno a uno los nodos mediante vFree.
+
+int operator +(T);             
+Parámetros:
+T: dato a agregar.
+Proceso realizado:
+Se crea una referencia con vMalloc y se le introduce el dato tipo T mediante vPlacement. Si ya hay cabeza y cola se inserta al final y se coloca como nueva cola. Si solo hay cabeza se crea el enlace y se coloca en la cola. Si no hay nodos se agrega como cabeza. Retorna 0 si el proceso es exitoso.
+
+int operator -(T);    
+Parámetros:
+T: dato a borrar..
+Proceso realizado:
+Se busca el dato entre los nodos, si se encuentra se hace el reacomodo respectivo y se elimina con vFree. Retorna 0 si el proceso es exitoso, -1 si no lo encuentra y -2 si la lista está vacía.
+
+T operator [](vInt);           
+Parámetros:
+vInt: posición a obtener.
+Proceso realizado:
+Recorre los nodos, iniciando en la cabeza, hasta llegar a la posición que indica el parámetro, donde retorna el nodo.
+
+int operator --();
+Proceso realizado:
+Ejecuta el código del destructor, vaciando la lista.
+
+vRef operator *();             
+Proceso realizado:
+Retorna la cabeza de la lista.
+
+vRef operator &();            
+Proceso realizado:
+Retorna la cola de la lista.

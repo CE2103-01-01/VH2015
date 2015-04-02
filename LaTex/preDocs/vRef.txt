@@ -1,0 +1,50 @@
+class vRef 
+
+Ámbito privado:
+
+int referenceID: numero único que sirve como identidad en el metadato.
+ 
+
+Ámbito público:
+
+vRef();
+Proceso realizado:
+Inicializa el id en 0.
+
+vRef(int);
+Parámetros:
+int: ID a asignar.
+Proceso realizado:
+Inicializa el referenceID con el valor de parámetro.
+
+~vRef();
+Proceso realizado:
+Disminuye el contador de referencias.
+
+void* operator *();
+Proceso realizado:
+Devuelve el espacio de memoria donde se encuentra el objeto referenciado.
+
+int operator !();
+Proceso realizado:
+Retorna el valor de referenceID.
+
+int operator =(int);
+Parámetros:
+int: ID a asignar.
+Proceso realizado:
+Asigna al referenceID el valor de parámetro.
+
+int operator =(vRef);
+Parámetros:
+vRef: referencia a asignar.
+Proceso realizado:
+Asigna el ID del parámetro a referenceID.
+
+int operator ++();
+Proceso realizado:
+Aumenta el referenceID.
+
+int operator --();
+Proceso realizado:
+Disminuye el referenceID.
