@@ -4,6 +4,8 @@
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vSimpleList.h"
 #include "../libs/vheaplib.h"
+#include "../libs/vheaplib.h"
+#include "../libs/vheaplibpp.h"
 
 using namespace std;
 
