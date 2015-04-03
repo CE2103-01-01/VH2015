@@ -55,14 +55,6 @@ void vMetaData::decreaseReference(unsigned int idRef) {
 }
 
 /**
-* en la tabla de memoria agrega una entrada y devuelve una nuevca instancia de vRef
-*/
-vRef vMetaData::addEntry(int size, std::string type, void *actualPos) {
-    memoryTable->append(vEntry(actualID, size, actualPos));
-    return vRef(actualID++);
-}
-
-/**
 * Imprime la metadata
 */
 void vMetaData::printMetaData() {

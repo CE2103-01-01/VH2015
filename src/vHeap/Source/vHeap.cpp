@@ -6,15 +6,16 @@
 
 using namespace pugi;
 
-vHeap::vHeap(int s, float o){
+vHeap::vHeap(int, float){
     overweight=static_cast<float*>(malloc(sizeof(float)));
     *overweight=o;
-    pthread_mutex_init(&memoryMutex,0);
     mainChunk = malloc(s * 1024);
     actualPos=mainChunk;
     initPos=mainChunk;
     finalPos = initPos+s*1024;
-    metaData = new vMetaData();
+    pthread_mutex_init(&memoryMutex,0);
+    metaData = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
+    new(metaData) vMetaData();
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
     //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
@@ -28,27 +29,6 @@ vHeap::~vHeap(){
 };
 
 vHeap* vHeap::vHeapSingleton = 0;
-
-vRef vHeap::vMalloc(int sz, std::string type){
-
-    pthread_mutex_lock(&memoryMutex);
-
-    vRef r= metaData->addEntry(sz,type,actualPos);// add Entry devuelve una referencia
-    actualPos+=sz;
-    metaData->printMetaData();
-
-
-    pthread_mutex_unlock(&memoryMutex);
-
-    return r;
-};
-
-void vHeap::vFree(vRef r){
-    pthread_mutex_lock(&memoryMutex);
-    metaData->removeEntry(!r);
-    pthread_mutex_unlock(&memoryMutex);;
-}
-
 
 void vHeap::vFree(unsigned int idRef) {
     pthread_mutex_lock(&memoryMutex);
@@ -69,8 +49,6 @@ vMetaData *vHeap::getMetaData() {
         float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
         new(vHeapSingleton) vHeap(size, over);
     }
-
-
     return vHeapSingleton;
  }
 

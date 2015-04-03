@@ -14,15 +14,13 @@
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
 
-
-class vMetaData;
-class vRef;
 class Dump;
 class vHeap{
     friend class Dump;
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
+    int* vSize;
     float* overweight;
     void* mainChunk;
     void* initPos;
@@ -33,20 +31,20 @@ class vHeap{
 public:
     vHeap(int,float);
     ~vHeap();
-    vRef vMalloc(int, std::string);
-    void vFree(vRef);
+    template <class T> vRef<T> vMalloc(int, std::string);
+    template <class T> void vFree(vRef<T>);
     void vFree(unsigned int);
     static vHeap* getInstance();
     bool makeDump();
     void startDumpThread();
-    vMetaData *getMetaData();
+    vMetaData* getMetaData();
     int removeVRef(int);
     int addVRef(int);
-    template <typename T> int vPlacement(vRef, T);
-    void *de_vReference(int);
+    template <class T> int vPlacement(vRef<T>, T);
+    void* de_vReference(int);
 };
 
-template <typename T> int vHeap::vPlacement(vRef memory, T object){
+template <class T> int vHeap::vPlacement(vRef<T> memory, T object){
     pthread_mutex_lock(&memoryMutex);
     try{
         *static_cast<T *>(de_vReference(!memory)) = object;
@@ -59,6 +57,28 @@ template <typename T> int vHeap::vPlacement(vRef memory, T object){
 };
 
 
+template <class T> vRef<T> vHeap::vMalloc(int sz, std::string type){
+
+    pthread_mutex_lock(&memoryMutex);
+
+    vRef<T> r= metaData->addEntry<T>(sz,type,actualPos);// add Entry devuelve una referencia
+    actualPos+=sz;
+    metaData->printMetaData();
+
+    pthread_mutex_unlock(&memoryMutex);
+
+    return r;
+};
+
+
+template <class T> void vHeap::vFree(vRef<T> r){
+    pthread_mutex_lock(&memoryMutex);
+    metaData->removeEntry(!r);
+    pthread_mutex_unlock(&memoryMutex);;
+}
+
+
+/***********************************************************************************************************/
 //DUMP
 
 class Dump {

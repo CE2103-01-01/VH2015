@@ -5,16 +5,16 @@
 #include "vTypes/Headers/vLong.h"
 
 vLong::vLong(){
-    data = vMalloc(sizeof(long),"long");
+    data = vMalloc<long>(sizeof(long),"long");
 };
 
 vLong::vLong(long d){
-    data = vMalloc(sizeof(d),"long");
-    vPlacement(data, d);
+    data = vMalloc<long>(sizeof(d),"long");
+    vPlacement<long>(data, d);
 };
 
 vLong::~vLong(){
-    vFree(data);
+    vFree(!data);
 };
 
 vRef vLong::operator &(){
@@ -23,7 +23,7 @@ vRef vLong::operator &(){
 
 int vLong::operator +=(long pls){
     try{
-        *static_cast<long*>(*data)+pls;
+        *data+pls;
         return 0;
     }catch(int e){
         return -1;
@@ -32,7 +32,7 @@ int vLong::operator +=(long pls){
 
 int vLong::operator --(){
     try{
-        (*static_cast<long*>(*data))--;
+        (*data)--;
         return 0;
     }catch(int e){
         return -1;
@@ -41,7 +41,7 @@ int vLong::operator --(){
 
 int vLong::operator ++(){
     try{
-        (*static_cast<long*>(*data))++;
+        (*data)++;
         return 0;
     }catch(int e){
         return -1;
@@ -50,7 +50,7 @@ int vLong::operator ++(){
 
 long vLong::operator !(){
     try{
-        return *static_cast<long*>(*data);
+        return *data;
     }catch(int e){
         return -1;
     };
@@ -58,7 +58,7 @@ long vLong::operator !(){
 
 int vLong::operator =(long var){
     try{
-        *static_cast<long*>(*data) = var;
+        *data = var;
         return 0;
     }catch(int e){
         return -1;
@@ -67,7 +67,7 @@ int vLong::operator =(long var){
 
 int vLong::operator =(vLong var){
     try{
-        *static_cast<long*>(*data) = !var;
+        *data = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -75,49 +75,49 @@ int vLong::operator =(vLong var){
 };
 
 bool vLong::operator <(vLong other){
-    return *static_cast<long*>(*data) < !other;
+    return *data < !other;
 };
 
 bool vLong::operator <=(vLong other){
-    return *static_cast<long*>(*data) <= !other;
+    return *data <= !other;
 };
 
 bool vLong::operator >(vLong other){
-    return *static_cast<long*>(*data) > !other;
+    return *data > !other;
 };
 
 bool vLong::operator >=(vLong other){
-    return *static_cast<long*>(*data) >= !other;
+    return *data >= !other;
 };
 
 bool vLong::operator ==(vLong other){
-    return *static_cast<long*>(*data) == !other;
+    return *data == !other;
 };
 
 bool vLong::operator !=(vLong other){
-    return *static_cast<long*>(*data) != !other;
+    return *data != !other;
 };
 
 bool vLong::operator <(long other){
-    return *static_cast<long*>(*data) < other;
+    return *data < other;
 };
 
 bool vLong::operator <=(long other){
-    return *static_cast<long*>(*data) <= other;
+    return *data <= other;
 };
 
 bool vLong::operator >(long other){
-    return *static_cast<long*>(*data) > other;
+    return *data > other;
 };
 
 bool vLong::operator >=(long other){
-    return *static_cast<long*>(*data) >= other;
+    return *data >= other;
 };
 
 bool vLong::operator ==(long other){
-    return *static_cast<long*>(*data) == other;
+    return *data == other;
 };
 
 bool vLong::operator !=(long other){
-    return *static_cast<long*>(*data) != other;
+    return *data != other;
 };

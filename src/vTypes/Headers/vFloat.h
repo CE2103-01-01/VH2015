@@ -12,14 +12,14 @@
 #include "../libs/vheaplib.h"
 
 class vFloat : public vObject{
-        vRef data;
+        vRef<float> data;
     public:
         vFloat();
         vFloat(float);
         ~vFloat();
         float operator !();
         int operator +=(float);
-        vRef operator &();
+        vRef<float> operator &();
         int operator --();
         int operator ++();
         int operator =(float);

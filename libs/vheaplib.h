@@ -7,16 +7,20 @@
 
 #include "../src/vHeap/Headers/vHeap.h"
 
-vRef vMalloc(int, std::string);
-void vFree(vRef);
+template<class T> vRef<T> vMalloc(int, std::string);
+template<class T> void vFree(vRef<T>);
+template<class T> int vPlacement(vRef<T>, T);
 void vFree(unsigned int);
 
-template<typename T> int vPlacement(vRef, T);
-void* de_vReference(vRef);
+template<class T> vRef<T> vMalloc(int vSize, std::string vType){
+    vHeap::getInstance()->vMalloc<T>(vSize, vType);
+};
+template<class T> void vFree(vRef<T> toFree){
+    vHeap::getInstance()->vFree<T>(toFree);
+};
 
-template<typename T>
-int vPlacement(vRef vR, T toPlace) {
-    vHeap::getInstance()->vPlacement(vR, toPlace);
+template<class T> int vPlacement(vRef<T> vR, T toPlace) {
+    vHeap::getInstance()->vPlacement<T>(vR, toPlace);
 };
 
 #endif //_VH2015_HEAP_H_

@@ -5,34 +5,34 @@
 #include "vTypes/Headers/vInt.h"
 
 vInt::vInt(){
-    data = vMalloc(sizeof(int),"int");
+    data = vMalloc<int>(sizeof(int),"int");
 };
 
 vInt::vInt(int d){
-    data = vMalloc(sizeof(d),"int");
-    vPlacement(data, d);
+    data = vMalloc<int>(sizeof(d),"int");
+    vPlacement<int>(data, d);
 };
 
 vInt::~vInt(){
-    vFree(data);
+    vFree(!data);
 };
 
 int vInt::operator +=(int pls){
     try{
-        *static_cast<int*>(*data)+pls;
+        *data+pls;
         return 0;
     }catch(int e){
         return -1;
     };
 };
 
-vRef vInt::operator &(){
+vRef<int> vInt::operator &(){
     return data;
 };
 
 int vInt::operator --(){
     try{
-        (*static_cast<int*>(*data))--;
+        (*data)--;
         return 0;
     }catch(int e){
         return -1;
@@ -41,7 +41,7 @@ int vInt::operator --(){
 
 int vInt::operator ++(){
     try{
-        (*static_cast<int*>(*data))++;
+        (*data)++;
         return 0;
     }catch(int e){
         return -1;
@@ -50,7 +50,7 @@ int vInt::operator ++(){
 
 int vInt::operator !(){
     try{
-        return *static_cast<int*>(*data);
+        return *data;
     }catch(int e){
         return -1;
     };
@@ -58,7 +58,7 @@ int vInt::operator !(){
 
 int vInt::operator =(int var){
     try{
-        *static_cast<int*>(*data) = var;
+        *data = var;
         return 0;
     }catch(int e){
         return -1;
@@ -67,7 +67,7 @@ int vInt::operator =(int var){
 
 int vInt::operator =(vInt var){
     try{
-        *static_cast<int*>(*data) = !var;
+        *data = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -75,49 +75,49 @@ int vInt::operator =(vInt var){
 };
 
 bool vInt::operator <(vInt other){
-    return *static_cast<int*>(*data) < !other;
+    return *data < !other;
 };
 
 bool vInt::operator <=(vInt other){
-    return *static_cast<int*>(*data) <= !other;
+    return *data <= !other;
 };
 
 bool vInt::operator >(vInt other){
-    return *static_cast<int*>(*data) > !other;
+    return *data > !other;
 };
 
 bool vInt::operator >=(vInt other){
-    return *static_cast<int*>(*data) >= !other;
+    return *data >= !other;
 };
 
 bool vInt::operator ==(vInt other){
-    return *static_cast<int*>(*data) == !other;
+    return *data == !other;
 };
 
 bool vInt::operator !=(vInt other){
-    return *static_cast<int*>(*data) != !other;
+    return *data != !other;
 };
 
 bool vInt::operator <(int other){
-    return *static_cast<int*>(*data) < other;
+    return *data < other;
 };
 
 bool vInt::operator <=(int other){
-    return *static_cast<int*>(*data) <= other;
+    return *data <= other;
 };
 
 bool vInt::operator >(int other){
-    return *static_cast<int*>(*data) > other;
+    return *data > other;
 };
 
 bool vInt::operator >=(int other){
-    return *static_cast<int*>(*data) >= other;
+    return *data >= other;
 };
 
 bool vInt::operator ==(int other){
-    return *static_cast<int*>(*data) == other;
+    return *data == other;
 };
 
 bool vInt::operator !=(int other){
-    return *static_cast<int*>(*data) != other;
+    return *data != other;
 };

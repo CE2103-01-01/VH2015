@@ -2,6 +2,7 @@
 #define SRC_XMLREADER_H_
 
 #include "vHeapOptions.h"
+#include "../libs/pugixml.hpp"
 
 class xmlReader {
 public:

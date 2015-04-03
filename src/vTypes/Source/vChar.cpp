@@ -5,24 +5,24 @@
 #include "vTypes/Headers/vChar.h"
 
 vChar::vChar(){
-    data = vMalloc(sizeof(char),"char");
+    data = vMalloc<char>(sizeof(char),"char");
 };
 
 vChar::vChar(char d){
-    data = vMalloc(sizeof(d),"char");
-    vPlacement(data, d);
+    data = vMalloc<char>(sizeof(d),"char");
+    vPlacement<char>(data, d);
 };
 
 vChar::~vChar(){
-    vFree(data);
+    vFree(!data);
 };
-vRef vChar::operator &(){
+vRef<char> vChar::operator &(){
     return data;
 };
 
 int vChar::operator +=(char pls){
     try{
-        *static_cast<char*>(*data)+pls;
+        *data + pls;
         return 0;
     }catch(int e){
         return -1;
@@ -31,7 +31,7 @@ int vChar::operator +=(char pls){
 
 int vChar::operator --(){
     try{
-        (*static_cast<char*>(*data))--;
+        *data--;
         return 0;
     }catch(int e){
         return -1;
@@ -40,7 +40,7 @@ int vChar::operator --(){
 
 int vChar::operator ++(){
     try{
-        (*static_cast<char*>(*data))++;
+        *data++;
         return 0;
     }catch(int e){
         return -1;
@@ -49,7 +49,7 @@ int vChar::operator ++(){
 
 char vChar::operator !(){
     try{
-        return *static_cast<char*>(*data);
+        return *data;
     }catch(int e){
         return -1;
     };
@@ -57,7 +57,7 @@ char vChar::operator !(){
 
 int vChar::operator =(char var){
     try{
-        *static_cast<char*>(*data)=var;
+        *data = var;
         return 0;
     }catch(int e){
         return -1;
@@ -66,7 +66,7 @@ int vChar::operator =(char var){
 
 int vChar::operator =(vChar var){
     try{
-        *static_cast<char*>(*data) = !var;
+        *data = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -74,49 +74,49 @@ int vChar::operator =(vChar var){
 };
 
 bool vChar::operator <(vChar other){
-    return *static_cast<char*>(*data) < !other;
+    return *data < !other;
 };
 
 bool vChar::operator <=(vChar other){
-    return *static_cast<char*>(*data) <= !other;
+    return *data <= !other;
 };
 
 bool vChar::operator >(vChar other){
-    return *static_cast<char*>(*data) > !other;
+    return *data > !other;
 };
 
 bool vChar::operator >=(vChar other){
-    return *static_cast<char*>(*data) >= !other;
+    return *data >= !other;
 };
 
 bool vChar::operator ==(vChar other){
-    return *static_cast<char*>(*data) == !other;
+    return *data == !other;
 };
 
 bool vChar::operator !=(vChar other){
-    return *static_cast<char*>(*data) != !other;
+    return *data != !other;
 };
 
 bool vChar::operator <(char other){
-    return *static_cast<char*>(*data) < other;
+    return *data < other;
 };
 
 bool vChar::operator <=(char other){
-    return *static_cast<char*>(*data) <= other;
+    return *data <= other;
 };
 
 bool vChar::operator >(char other){
-    return *static_cast<char*>(*data) > other;
+    return *data > other;
 };
 
 bool vChar::operator >=(char other){
-    return *static_cast<char*>(*data) >= other;
+    return *data >= other;
 };
 
 bool vChar::operator ==(char other){
-    return *static_cast<char*>(*data) == other;
+    return *data == other;
 };
 
 bool vChar::operator !=(char other){
-    return *static_cast<char*>(*data) != other;
+    return *data != other;
 };

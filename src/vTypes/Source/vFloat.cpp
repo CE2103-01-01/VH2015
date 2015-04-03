@@ -5,25 +5,25 @@
 #include "vTypes/Headers/vFloat.h"
 
 vFloat::vFloat(){
-    data = vMalloc(sizeof(float),"float");
+    data = vMalloc<float>(sizeof(float),"float");
 };
 
 vFloat::vFloat(float d){
-    data = vMalloc(sizeof(d),"float");
-    vPlacement(data, d);
+    data = vMalloc<float>(sizeof(d),"float");
+    vPlacement<float>(data, d);
 };
 
 vFloat::~vFloat(){
-    vFree(data);
+    vFree(!data);
 };
 
-vRef vFloat::operator &(){
+vRef<float> vFloat::operator &(){
     return data;
 };
 
 int vFloat::operator +=(float pls){
     try{
-        *static_cast<float*>(*data)+pls;
+        *data + pls;
         return 0;
     }catch(int e){
         return -1;
@@ -32,7 +32,7 @@ int vFloat::operator +=(float pls){
 
 int vFloat::operator --(){
     try{
-        (*static_cast<float*>(*data))--;
+        (*data)--;
         return 0;
     }catch(int e){
         return -1;
@@ -41,7 +41,7 @@ int vFloat::operator --(){
 
 int vFloat::operator ++(){
     try{
-        (*static_cast<float*>(*data))++;
+        (*data)++;
         return 0;
     }catch(int e){
         return -1;
@@ -50,7 +50,7 @@ int vFloat::operator ++(){
 
 float vFloat::operator !(){
     try{
-        return *static_cast<float*>(*data);
+        return *data;
     }catch(int e){
         return -1;
     };
@@ -58,7 +58,7 @@ float vFloat::operator !(){
 
 int vFloat::operator =(float var){
     try{
-        *static_cast<float*>(*data) = var;
+        *data = var;
         return 0;
     }catch(int e){
         return -1;
@@ -67,7 +67,7 @@ int vFloat::operator =(float var){
 
 int vFloat::operator =(vFloat var){
     try{
-        *static_cast<float*>(*data) = !var;
+        *data = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -75,49 +75,49 @@ int vFloat::operator =(vFloat var){
 };
 
 bool vFloat::operator <(vFloat other){
-    return *static_cast<float*>(*data) < !other;
+    return *data < !other;
 };
 
 bool vFloat::operator <=(vFloat other){
-    return *static_cast<float*>(*data) <= !other;
+    return *data <= !other;
 };
 
 bool vFloat::operator >(vFloat other){
-    return *static_cast<float*>(*data) > !other;
+    return *data > !other;
 };
 
 bool vFloat::operator >=(vFloat other){
-    return *static_cast<float*>(*data) >= !other;
+    return *data >= !other;
 };
 
 bool vFloat::operator ==(vFloat other){
-    return *static_cast<float*>(*data) == !other;
+    return *data == !other;
 };
 
 bool vFloat::operator !=(vFloat other){
-    return *static_cast<float*>(*data) != !other;
+    return *data != !other;
 };
 
 bool vFloat::operator <(float other){
-    return *static_cast<float*>(*data) < other;
+    return *data < other;
 };
 
 bool vFloat::operator <=(float other){
-    return *static_cast<float*>(*data) <= other;
+    return *data <= other;
 };
 
 bool vFloat::operator >(float other){
-    return *static_cast<float*>(*data) > other;
+    return *data > other;
 };
 
 bool vFloat::operator >=(float other){
-    return *static_cast<float*>(*data) >= other;
+    return *data >= other;
 };
 
 bool vFloat::operator ==(float other){
-    return *static_cast<float*>(*data) == other;
+    return *data == other;
 };
 
 bool vFloat::operator !=(float other){
-    return *static_cast<float*>(*data) != other;
+    return *data != other;
 };

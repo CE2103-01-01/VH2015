@@ -104,7 +104,7 @@ vNode<T>::~vNode() {
 * @return vNode<T>
 */
 template<class T>
-vNode<T> *vNode<T>::getNextNode() {
+vNode<T>* vNode<T>::getNextNode() {
     return next;
 };
 /** @brief Devuelve el nodo prev
@@ -112,7 +112,7 @@ vNode<T> *vNode<T>::getNextNode() {
 * @return vNode<T>
 */
 template<class T>
-vNode<T> *vNode<T>::getPrevNode() {
+vNode<T>* vNode<T>::getPrevNode() {
     return prev;
 };
 /** @brief Devuelve el dato contenido
