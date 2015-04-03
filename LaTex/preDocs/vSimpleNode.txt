@@ -1,0 +1,56 @@
+template <class T> class vSimpleNode
+
+Ámbito privado:
+
+vRef next;
+vRef data;
+
+
+
+Ámbito publico:
+
+vSimpleNode();
+Proceso realizado:
+Hace un vMalloc para el dato que contendrá e inicializa la referencia al siguiente nodo.
+
+vSimpleNode(T);
+Parametros:
+T: dato a insertar.
+Proceso realizado:
+Hace un vMalloc para el dato que contendrá, lo inserta con un vPlacement e inicializa la referencia al siguiente nodo.
+
+~vSimpleNode();
+Proceso realizado:
+Hace un vFree sobre la referencia al dato.
+
+vRef operator !();       
+Proceso realizado:
+Retorna la referencia al dato contenido.
+
+vRef operator ++(); 
+Proceso realizado:
+Retorna la referencia al nodo siguiente.
+
+int operator *=(T);         
+Parametros:
+T: dato a asignar.
+Proceso realizado:
+Asigna un elemento tipo T a la referencia data por medio de un vPlacement. 
+
+int operator [](vRef);      
+Parametros:
+vRef: referencia a intercambiar.
+Proceso realizado:
+Realiza un swap con el dato del vSimpleNode de la vRef recibida como parámetro.
+
+int operator +(vRef);       
+Parametros:
+vRef: referencia al vSimpleNode que se desea agregar al lado.
+Proceso realizado:
+Asigna el parámetro como vSimpleNode siguiente.
+
+int operator +(vSimpleNode);
+Parametros:
+vSimpleNode: variable que se desea agregar como siguiente.
+Proceso realizado:
+Hace un vMalloc sobre la vRef next y un vPlacement del parámetro, asignándolo como siguiente.

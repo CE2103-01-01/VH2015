@@ -1,0 +1,40 @@
+class Dump 
+
+
+Ámbito privado:
+
+friend class vHeap: se declara como amiga a la clase vHeap para eliminar la privacidad.
+
+int* frecuency: puntero a la variable que indica la frecuencia con la que se hara el dump.
+
+int* counter: puntero al contador de dumps.
+
+bool* dumpping: puntero al booleano que indica si se esta realizando un dump.
+
+std::string directory: directorio donde se guardarán los dumps.
+
+
+
+Ámbito público:
+
+ Dump();
+Proceso realizado:
+Inicializa las variables utilizadas en su valor por defecto.
+
+~Dump();
+Proceso realizado:
+Hace un free sobre los punteros almacenados para liberar la memoria.
+
+std::string IntToStr(int);
+Parámetros:
+int: numero a convertir.
+Proceso realizado:
+Convierte un int a string utilizando la biblioteca string y stringstream.
+
+void saveDumpFile();
+Proceso realizado:
+Lee las entradas de los metadatos del vHeap y las escribe en un archivo XML.
+
+bool getDumppingState();
+Proceso realizado:
+Retorna la bandera que indica si se está realizando un dump.
