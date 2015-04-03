@@ -14,7 +14,8 @@ private:
 
 public:
     static void deallocate(int idRef);
-    static void startDumop();
+
+    static void startDump();
 };
 
 

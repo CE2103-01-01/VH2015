@@ -3,11 +3,19 @@
 //
 #include "vHeap/Headers/vGarbageCollector.h"
 
-
+/**
+* Ejecuta vFree de un vRef sin uso
+*/
 void vGarbageCollector::deallocate(int idRef) {
     vHeap::getInstance()->vFree(idRef);
+    startDump();
 }
-void vGarbageCollector::startDumop() {
+
+/**
+* Inicia el dump cuando se ejecuta el deallocate
+*/
+
+void vGarbageCollector::startDump() {
     vListIterator<vEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
     while(iter->exists()){
 

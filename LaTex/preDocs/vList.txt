@@ -1,0 +1,34 @@
+Clase vNode
+
+void insertAfter(vNode<T> *n)
+Inserta un nodo despues
+
+void insertBefore(vNode<T> *n)
+Inserta un nodo antes
+
+void freePrev()
+Set de nullptr a puntero prev.
+
+Clase vList
+
+
+void add(T d)
+Inserta un nodo al inicio
+
+void append(T d)
+Inserta un nodo al Final
+
+bool deleteNode(unsigned int d)
+borrar nodo en la posicion
+
+vNode<T> *getNode(int n)
+Obtener el nodo en la posicion
+
+T get(int n)
+Obtener el nodo en posicion
+
+vListIterator<T> *getIterator()
+Obtener el iterador de la lista
+
+bool swap(unsigned int i, unsigned int j)
+Cambia de lugar dos nodos en la lista
