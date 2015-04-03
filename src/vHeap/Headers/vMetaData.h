@@ -11,6 +11,7 @@
 #include <typeinfo>
 #include "vRef.h"
 
+template <class T> class vRef;
 class vEntry;
 
 class vMetaData {

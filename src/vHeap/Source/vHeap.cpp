@@ -6,7 +6,7 @@
 
 using namespace pugi;
 
-vHeap::vHeap(int, float){
+vHeap::vHeap(int s, float o){
     overweight=static_cast<float*>(malloc(sizeof(float)));
     *overweight=o;
     mainChunk = malloc(s * 1024);

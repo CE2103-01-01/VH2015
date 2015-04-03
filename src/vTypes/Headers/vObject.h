@@ -12,8 +12,6 @@ class vObject {
     public:
         vObject();
         ~vObject();
-        vRef operator &();
-        int operator --();
 };
 
 

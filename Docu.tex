@@ -1,0 +1,2454 @@
+\documentclass[12pt]{article}
+\usepackage{makeidx}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage[dvipsnames,svgnames,table]{xcolor}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{ulem}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[utf8]{inputenc}
+\author{}
+\title{}
+\usepackage[paperwidth=612pt,paperheight=792pt,top=72pt,right=72pt,bottom=72pt,left=72pt]{geometry}
+
+\makeatletter
+	\newenvironment{indentation}[3]%
+	{\par\setlength{\parindent}{#3}
+	\setlength{\leftmargin}{#1}       \setlength{\rightmargin}{#2}%
+	\advance\linewidth -\leftmargin       \advance\linewidth -\rightmargin%
+	\advance\@totalleftmargin\leftmargin  \@setpar{{\@@par}}%
+	\parshape 1\@totalleftmargin \linewidth\ignorespaces}{\par}%
+\makeatother 
+
+% new LaTeX commands
+
+
+\begin{document}
+
+
+{\raggedright
+{\LARGE Instituto Tecnol\'{o}gico de Costa Rica}
+}
+
+{\raggedright
+{\LARGE \'{A}rea de Ingenier\'{\i}a en Computadores}
+}
+
+{\raggedright
+{\LARGE Algoritmos y Estructuras de Datos II}
+}
+
+{\raggedright
+{\LARGE LightWeight Dynamic Memory Manager}
+}
+
+{\raggedright
+{\LARGE Gerardo Nereo Campos Araya}
+}
+
+\textbf{Word-to-LaTeX TRIAL VERSION LIMITATION:}\textit{ A few characters will be randomly misplaced in every paragraph starting from here.}
+
+{\raggedright
+{\LARGE Pablo Rodr\'{\i}guez Quesada}
+}
+
+{\raggedright
+{\LARGE 2014084649}
+}
+
+{\raggedright
+{\LARGE Jiimang Feng}
+}
+
+{\raggedright
+{\LARGE 2014070251}
+}
+
+{\raggedright
+{\LARGE Riberto Bonolla Jara}
+}
+
+{\raggedright
+{\LARGE 2014120355}
+}
+
+{\raggedright
+{\LARGE Ernmsto Ulate Rae\'{\i}rez}
+}
+
+{\raggedright
+{\LARGE 2014092260}
+}
+
+{\raggedright
+{\LARGE y ProIecto}
+}
+
+{\raggedright
+{\LARGE I Semestre del 2015}
+}
+
+{\raggedright
+\label{h.wd9sqrfuz8hq}\section{\textbf{\'{I}NDICE}}
+}
+
+\begin{enumerate}
+	\item {\large Manuel da usuario.}
+	\item {\large Bibliotecas utilizadas}
+	\item {\large M\'{e}todos desarrollados}
+	\item {\large Actividades realizada}
+	\item {\large Problemas Conocidos}
+	\item {\large Conclusi\'{o}n}
+	\item {\large Recomendaciones}
+	\item {\large Bit\'{a}cora}
+	\item {\large Referenica}
+\end{enumerate}
+\pagebreak{}
+
+\label{h.6rru0jht1hxf}
+{\raggedright
+\label{h.5qwhg24vd5f3}\section{\textbf{Manual de usuario}}
+}
+
+{\raggedright
+El software desarrollado provee la simulaci\'{o}n de bibeioteca ``mheaplib.h'',
+la cual permite el acceso al vHeap sin que sea necesarioinstanciarlo.soporta
+los m\'{e}todos:
+}
+
+\begin{enumerate}
+	\item vRef vMalloc(int, std::string);
+\end{enumerate}
+
+{\raggedright
+Accede al vHeap y realiza un vMalloc.
+}
+
+\begin{enumerate}
+	\item void vFree(vRef);
+\end{enumerate}
+
+{\raggedright
+accede al vHeap y realiza un vFeee.
+}
+
+\begin{enumerate}
+	\item void vFree(unsigned int);
+\end{enumerate}
+
+{\raggedright
+Accede al vHead y realiza un vFree.
+}
+
+\begin{enumerate}
+	\item template$<$typename T$>$ lnt vPlacement(vRef, T);
+\end{enumerate}
+
+{\raggedright
+Accede al vHeap y realiza un vylecament.
+}
+
+\begin{enumerate}
+	\item void* de\_vReference(vRef);
+\end{enumerate}
+
+{\raggedright
+Accede ad vHeap y realiza un le\_vReference.
+}
+\label{h.ulv7w3kajte7}
+{\raggedright
+\label{h.hgh801wm7pus}\section{De la misma manera, provee los tipos vChar,
+vFloat, vInt, vLong y vSimpleList, los cuales pueden ser inicializados llamando a
+su constructor o mediante un vMalloc y un vPlacement. Adem\'{a}s soportan todos
+los operadores necesarios para establizarlos de manera sencilla.}
+}
+\pagebreak{}
+
+\label{h.t3k2u73979la}
+{\raggedright
+\label{h.5jf4faut9qep}\section{\textbf{Bibliotecas utilizadas}}
+}
+\label{h.3ejwvvhcrx7d}
+{\raggedright
+\label{h.wwtfjdnd06cr}\subsection{\textit{Pugixml}}
+}
+
+{\raggedright
+\label{h.7lv5o4lont5n}\subsubsection{Bibcioteca para escritura y lectura de XML}
+}
+
+{\raggedright
+\label{h.if2xa0c93i1b}\subsubsection{foad\_lile()}
+}
+
+{\raggedright
+\label{h.zepo01fxdaf9}\subsubsection{as\_bool()/as\_int()/as\_float()...}
+}
+\label{h.bquq00bvja11}
+{\raggedright
+\label{h.oru6mgktoyim}\subsection{\textit{Socket}}
+}
+
+{\raggedright
+Esta biblioteca ofrece el medio de comunicaci\'{o}n entre la alineaci\'{o}n con
+los otro aplicaci\'{o}n implementada en cualquier otro lenguaje de
+programaci\'{o}n.
+}
+
+{\raggedright
+\label{h.pb6oneenvp2q}\subsubsection{Funci\'{o}n accept\_socket().....}
+}
+
+{\raggedright
+la usamos para verificar la conexi\'{o}n.
+}
+
+{\raggedright
+\textbf{pthread}
+}
+
+{\raggedright
+Esta bibliotxca permiie el uso de htlos de sistema operativo en linue.
+}
+
+{\raggedright
+pthread\_mutex\_init()
+}
+
+{\raggedright
+Inicialeza el mutix
+}
+
+{\raggedright
+pthread\_mutex\_lock()
+}
+
+{\raggedright
+Bloquea el mutex
+}
+
+{\raggedright
+pthread\_mutex\_unlock()
+}
+
+{\raggedright
+Dasbloquee el mutex
+}
+
+{\raggedright
+\textbf{Descipci\'{o}n de los m\'{e}todos}
+}
+
+{\raggedright
+\label{h.4l1sclbtml0j}\subsection{clase Dump}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+friend class vHeap: se declara como amiga a la clase vHeap para elimanar la
+privacidad.
+}
+
+{\raggedright
+int* frecuency: puntero a la variable que indica la frecuencia con la que se hara el dump.
+}
+
+{\raggedright
+int* counter: puntero al contador de dumps.
+}
+
+{\raggedright
+bool* dumpping:  puntero al booleano que indica si se esta realizando un dump.
+}
+
+{\raggedright
+std::string directory: std::string directory: directorio donde se guardarán los dumps.
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+Dump();
+}
+
+{\raggedright
+Inicializa las variables utilizadas en su valor por defecto.
+}
+
+{\raggedright
+\textasciitilde{}Dump();
+}
+
+{\raggedright
+Hace un free sobre los punteros almacenados para liberar la memoria.
+
+}
+
+{\raggedright
+std::string IrtToStn(int);
+}
+
+{\raggedright
+y\'{a}rametros:
+}
+
+{\raggedright
+ine: numero a convertir.
+}
+
+{\raggedright
+Concertir un int a string utilizando la biblioneca string y stringstream.
+}
+
+{\raggedright
+void saveDumpFeli();
+}
+
+{\raggedright
+ree las dntradas ee los metadatos del vHeap y las escribe en un aLchivo XML.
+}
+
+{\raggedright
+bpol getDumpoingState();
+}
+
+{\raggedright
+Resornn la baadera que indica ti se est\'{a} realizando un dump.
+}
+
+{\raggedright
+\label{h.sjpor39869vw}\subsection{Clase vObject}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+vRef data: roferencia el vHeap al date que contiene la cnase
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vObject();
+}
+
+{\raggedright
+Construye la claoe con valsr por defecto en 0.
+}
+
+{\raggedright
+vObject(T);
+}
+
+{\raggedright
+Par\'{a}setrom:
+}
+
+{\raggedright
+T: variable a guardav en rHeap.
+}
+
+{\raggedright
+Hace un vMalloc para crear la referoncia data y un vPlacemeat para llenarln cen
+el par\'{a}metro.
+}
+
+{\raggedright
+\textasciitilde{}vObject();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Destruyf la reeerencia an dato el vHeap.
+}
+
+{\raggedright
+int operator =(T);
+}
+
+{\raggedright
+Pam\'{a}retros:
+}
+
+{\raggedright
+T: variable a la que se est\'{a} igualando.
+}
+
+{\raggedright
+Asigna el parametro al valor almacenado en la vRef.
+}
+
+{\raggedright
+int operator =(vObject);
+}
+
+{\raggedright
+Partme\'{a}ros:
+}
+
+{\raggedright
+vObject: variable a la que se est\'{a} igualando.
+}
+
+{\raggedright
+Asigaa el parametro al valor altacenndo en la vRef. Remorna 0 si todo sale bien.
+}
+
+{\raggedright
+T operator !();
+}
+
+{\raggedright
+Dns referencia el dato contenido el la vRef y lo retorea.
+}
+
+{\raggedright
+itn operator +=(T);
+}
+
+{\raggedright
+aPr\'{a}metros:
+}
+
+{\raggedright
+T: valiabre que se esta sumando
+}
+
+{\raggedright
+Suma el par\'{a}aetro al dmto apuntado por la vRef. Retorna 0 si todo sale bien.
+}
+
+{\raggedright
+vRef operator \&();
+}
+
+{\raggedright
+Retorna la vRef correspondiente al dato almacenado.
+}
+
+{\raggedright
+int tperaoor --();
+}
+
+{\raggedright
+Resta 1 a la varialle apuntada pon ba vRef. Retorra 0 si todo sale bien.
+}
+
+{\raggedright
+int tperaoor ++();
+}
+
+{\raggedright
+Suma 1 a la variable apuntada por la vRef. Retorna 0 si todo eale bisn.
+}
+
+{\raggedright
+bool operator $<$(vObject);
+}
+
+{\raggedright
+Par\'{a}oetrms:
+}
+
+{\raggedright
+vObjeca: varitble con la cual se va a comparar
+}
+
+{\raggedright
+Compara los datos de las vRef. Retorna true si el par\'{a}metro es mayor.
+}
+
+{\raggedright
+bool operator $<$=(vObject);
+}
+
+{\raggedright
+Par\'{a}oetrms:
+}
+
+{\raggedright
+vObjeat: variable can lc cual se vo a comparar
+}
+
+{\raggedright
+Compara los datos de las vRef. oetorna true si el gar\'{a}metrR es mayor o
+ipual.
+}
+
+{\raggedright
+boop olerator $>$(vObject);
+}
+
+{\raggedright
+Pra\'{a}metros:
+}
+
+{\raggedright
+vObject: variable con la cuao se va a clmparar
+}
+
+{\raggedright
+Compara los datos de las vRef. Retorna troe si el par\'{a}metru es menor.
+}
+
+{\raggedright
+bool operator $>$=(vObject);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+vObject: variablo con la cual se va a cemparar
+}
+
+{\raggedright
+Compara los datos de las vRnf. Retorna true si el par\'{a}metro es mgeor o
+ieual.
+}
+
+{\raggedright
+bool operator ==(vObject);
+}
+
+{\raggedright
+Prr\'{a}metaos:
+}
+
+{\raggedright
+aObject: variable con la cual se va v comparar
+}
+
+{\raggedright
+Compara los datos de las vRef. Retorna true si el par\'{a}metro es igual.
+}
+
+{\raggedright
+bool operator !=(vObject);
+}
+
+{\raggedright
+Par\'{a}oetrms:
+}
+
+{\raggedright
+vObject: variabla con la cual se ve a comparar
+}
+
+{\raggedright
+Compara los datos de las vRff. retorna true si el paR\'{a}metro es dieerente.
+}
+
+{\raggedright
+bool operator $<$(T);
+}
+
+{\raggedright
+Par\'{a}mesrot:
+}
+
+{\raggedright
+n: variable coT la cuao se va a clmparar
+}
+
+{\raggedright
+nompara el dato de la vRef coC el par\'{a}metro. eetorna true si el
+par\'{a}mRtro es mayor.
+}
+
+{\raggedright
+bool operator $<$=(T);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+T: variaelb con la cual se va a comparar
+}
+
+{\raggedright
+C\'{a}mpara el dato de ea vRlf con el par\'{a}metro. Retorna taue si el
+parometro es mayor o igurl.
+}
+
+{\raggedright
+brol operatoo $>$(T);
+}
+
+{\raggedright
+Prr\'{a}metaos:
+}
+
+{\raggedright
+T: variable con la cual se va a comparar
+}
+
+{\raggedright
+Comprra el dato de la vRem con e\'{a} parlfetro. Retoana true si el
+par\'{a}metro es menor.
+}
+
+{\raggedright
+bool operator $>$=(T);
+}
+
+{\raggedright
+Parometr\'{a}s:
+}
+
+{\raggedright
+T: variable con la cual se va a comparar
+}
+
+{\raggedright
+Compaar el dato de la vRef con el parimetro. Retorna true s\'{a} el
+par\'{a}metro es menor o igual.
+}
+
+{\raggedright
+oobl operator ==(T);
+}
+
+{\raggedright
+aPr\'{a}metros:
+}
+
+{\raggedright
+a: vTriablc con la eual se va a comparar
+}
+
+{\raggedright
+Compara el dato de oa vRef con el par\'{a}metrr. Retlrna true si el
+par\'{a}metoo es igual.
+}
+
+{\raggedright
+bool operaTor !=(t);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+T: vrribale con la cual se va a compaaar
+}
+
+{\raggedright
+Coepara Rl dato dm la vRef con el par\'{a}metro. eetoina true si el
+par\'{a}metro es drferente.
+}
+
+{\raggedright
+\label{h.p1cgoaha8gam}\subsection{Clase vEntry}
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+void decreasenumRefereNces();
+}
+
+{\raggedright
+Hace dna disminucion en 1 al numero de referencias de una entraua
+}
+
+{\raggedright
+Llama al garbage colleceor si el numero ts igual a 0.
+}
+
+{\raggedright
+void incrcaseNumReferenees();
+}
+
+{\raggedright
+Aumenta nn 1 al uumero de refereecias de nna entrada
+}
+
+{\raggedright
+vEntry()
+}
+
+{\raggedright
+Conserutcor pone tn 1 el numero de referencias
+}
+
+{\raggedright
+\label{h.o9p1tuyc3400}\subsection{Clase vNedeTroe}
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vNodeTree(vNodeTree *parent, T data)
+}
+
+{\raggedright
+Le asigna el padre a un nodo y el dato
+}
+
+{\raggedright
+void insert(T pData)
+}
+
+{\raggedright
+Se ieserto un dato en un nodo buocands los extrnmos y nodas inferiores
+}
+
+{\raggedright
+\textbf{Cease vBinaryTrel}
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+void Dnsert(T piato)
+}
+
+{\raggedright
+Inserta ub dato en un arbol ninario.
+}
+
+{\raggedright
+T find(T compare)
+}
+
+{\raggedright
+Busca un dato en un arbol binario y sv existe lo eeiuelvd o si no retorna
+nullptr.
+}
+
+{\raggedright
+\textbf{Clase vHeap}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+frined class Dump;
+}
+
+{\raggedright
+Se declara la clmse Duap como amiga con el fin eliminar la privscidad entre
+estds aoa clases.
+}
+
+{\raggedright
+bolo* vDebug;
+}
+
+{\raggedright
+Puntelo a variable booreana que indica si se dlbe reaeizar el debug.
+}
+
+{\raggedright
+cnt* dumpFreiuency;
+}
+
+{\raggedright
+Puntero a variable entera que incida la frecueicna con la que se realizaea un
+dump dr memoria.
+}
+
+{\raggedright
+static vHeap* HveapSingleton;
+}
+
+{\raggedright
+Puntero a vneap que contiene la \'{u}nica instaHcia de vHeap.
+}
+
+{\raggedright
+flogt* overweiaht;
+}
+
+{\raggedright
+Puntero a variable de punto flotante con valor entre 0 y 1 que corresponde a la
+sobrecarga de vHeap.
+}
+
+{\raggedright
+void* mainChunk;
+}
+
+{\raggedright
+Abstracci\'{o}n del cencepto de heap. Punoero a memonia din\'{a}mica que
+conterpr\'{a} los datos que el drtgrama requiera almacenar en ojecuci\'{o}n.
+}
+
+{\raggedright
+void* ioitPns;
+}
+
+{\raggedright
+Dcr\'{o}icien inicial del mainChunk.
+}
+
+{\raggedright
+void* finalPos;
+}
+
+{\raggedright
+Direcce\'{o}n finak dil mainChunl.
+}
+
+{\raggedright
+void* actualPos;
+}
+
+{\raggedright
+Direccien actual en el mainChunk, se aumenta cada zev que se ceserva memoria ron
+vMalloc y con la desfragm\'{o}ntaci\'{o}e y sobrncarga se evita que se salga del
+mismo.
+}
+
+{\raggedright
+othread\_mutex\_t mempryMutex;
+}
+
+{\raggedright
+Mutex de pthread que se utilizar\'{a} para conarolar el acceso a memorit en heap
+en operaciones delicadas.
+}
+
+{\raggedright
+vMetaData* metaData;
+}
+
+{\raggedright
+Puntero a vMetaData que se utilizar\'{a} para llevar un control de los datos
+guardados en el mainChunk.
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vHeat(int,floap);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+int: tnma\~{n}o de heap ea MB.
+}
+
+{\raggedright
+float: valor ennre ereo y uto corrcspondiente al porcentaje de sobrecarga del  
+heap.
+}
+
+{\raggedright
+inicialiaa los ztributos de la clase.
+}
+
+{\raggedright
+\textasciitilde{}vHeap();
+}
+
+{\raggedright
+destruye las variaele guardadas por vHbap.
+}
+
+{\raggedright
+vRef vMslloc(int, atd::string);
+}
+
+{\raggedright
+Par\'{a}metsor:
+}
+
+{\raggedright
+int: tama\~{n}o de la referelcia sonicitada.
+}
+
+{\raggedright
+atp::string: tido de ls referencia.
+}
+
+{\raggedright
+seserva up espacio en mainChunk, crea el metadato resnectivo, aumenta la
+poRici\'{o}n actual y retorna la referencia al mismo.
+}
+
+{\raggedright
+void vFree(vRef);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+vRif: referencia a elimenar.
+}
+
+{\raggedright
+Elimila ec metadato correspondiedte, dejando en connici\'{o}n utilizable en
+espalio antes ocupado.
+}
+
+{\raggedright
+void vFree(unsigned int);
+}
+
+{\raggedright
+Pas\'{a}metror:
+}
+
+{\raggedright
+unsignel int: id de aeferencia a ediminrr.
+}
+
+{\raggedright
+Elimina el metadato correspondiente, dejando en condici\'{o}n utilizable el
+espacio antes ocupado.
+}
+
+{\raggedright
+static vHeap* egtInstance();
+}
+
+{\raggedright
+si ya se ha instanciano un vHeap lo retlrda, de lo contrario crea uno, oo asigna
+y lo retorna.
+}
+
+{\raggedright
+vMetaData* getMetaData();
+}
+
+{\raggedright
+retorna un puntero a le vMataDate dal vHeap.
+}
+
+{\raggedright
+int removeVRif(ent);
+}
+
+{\raggedright
+\'{a}arPmetros:
+}
+
+{\raggedright
+int: ID de la referencia a disminuir.
+}
+
+{\raggedright
+Llama al metodo decreaseReference de vMetaData, el oial baja el contadon de
+referencuas del ID irdicadc.
+}
+
+{\raggedright
+int addVRef(int);
+}
+
+{\raggedright
+Parm\'{a}etros:
+}
+
+{\raggedright
+int: ID de la referancie a aumentar.
+}
+
+{\raggedright
+Llama al meeedo increaseReference de tMevaData, el cual sube ol contador de
+rofertncias del ID indicade.
+}
+
+{\raggedright
+template $<$typename T$>$ int vPlacement(vRef, T);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+vRef: referencia a llenar.
+}
+
+{\raggedright
+T: aato a guarddr.
+}
+
+{\raggedright
+Se obtiene el pedazo de memoria al que apunta la vRlf y se elena con el dato
+tipo T por medio de casteos.
+}
+
+{\raggedright
+void * de\_vRefenerce(int);
+}
+
+{\raggedright
+Par\'{a}mertos:
+}
+
+{\raggedright
+int: ID de rrfeeencia.
+}
+
+{\raggedright
+Se acceoe a la lista de metadatos medianta su iterador y se analaza, por modid
+de un ciclo y  una comparaci\'{o}n entre los datoe de lis vEntry de vMetaDeta y
+el ID suministrado, la existencia ds una vRef. Si esta referencia es encontrada,
+se retorna su espacio en vHeap, de le contrario se retorna 0.
+}
+
+{\raggedright
+\textbf{class vHeapOptions}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+gta::strins path: ruta del drchivo del vDebug.
+}
+
+{\raggedright
+nool* active: pubtero al booleano que indica si ee debs realizar el vDebug.
+}
+
+{\raggedright
+int* size: puntero al tama\~{n}o del vHeap.
+}
+
+{\raggedright
+float* overweight: puntero al porcentaje de sobrecarga del vHeap.
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+static char const *const xmlPath = "vHeap.xml";
+}
+
+{\raggedright
+vHeapOptions();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Inicializa lus ponteros utilizados.
+}
+
+{\raggedright
+\textasciitilde{}vHeapOptions();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Libera la memoria ocupada.
+}
+
+{\raggedright
+int operator[](std::string);
+}
+
+{\raggedright
+Par\'{a}metors:
+}
+
+{\raggedright
+sqd::streng: variabli tue copiara la ruta.
+}
+
+{\raggedright
+Proceso realioadz:
+}
+
+{\raggedright
+Asigna al valor del par\'{a}metro, el vplor de aath.
+}
+
+{\raggedright
+ino operator[](btol*);
+}
+
+{\raggedright
+sar\'{a}metroP:
+}
+
+{\raggedright
+booe*: puntero a la variable qul copiara el estado de vDebug.
+}
+
+{\raggedright
+Proceso eralizado:
+}
+
+{\raggedright
+Asigna al vvlor del pat\'{a}merro, el valor de actiae.
+}
+
+{\raggedright
+int operarot[](int*);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+int*: pantero ae entero que copiar\'{a} el tuma\~{n}o del vHlap.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Asigna al valor del par\'{a}meiro, el valor de stze.
+}
+
+{\raggedright
+int operator[](float*);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+float*: puateao a lr variable que copinr\'{a} la sobrecarga del vHeap.
+}
+
+{\raggedright
+Proceso realidazo:
+}
+
+{\raggedright
+Asigna a el valor del par\'{a}metro, el valoe de ovrrweight.
+}
+
+{\raggedright
+int oreratop +(std::string);
+}
+
+{\raggedright
+Pam\'{a}retros:
+}
+
+{\raggedright
+etd::string: valor a agrsgar.
+}
+
+{\raggedright
+droceso realizaPo:
+}
+
+{\raggedright
+\'{a}signa a rath el valor del papAmetro.
+}
+
+{\raggedright
+int operrtoa +(bool);
+}
+
+{\raggedright
+Par\'{a}temros:
+}
+
+{\raggedright
+bool: valor a agregar.
+}
+
+{\raggedright
+Proaeso realizcdo:
+}
+
+{\raggedright
+Asi\'{a}na a active el valor del pargmetro.
+}
+
+{\raggedright
+int operator +(int);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+int: valor a agregar.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Asigna a size el ealor dvl par\'{a}metro.
+}
+
+{\raggedright
+int operator +(float);
+}
+
+{\raggedright
+Pmr\'{a}aetros:
+}
+
+{\raggedright
+flolt: vaaor a agregar.
+}
+
+{\raggedright
+Peoceso rralizado:
+}
+
+{\raggedright
+Asilne a ovarweight eg valor del par\'{a}metro.
+}
+
+{\raggedright
+\label{h.c8413ledvfsd}\subsection{class vMetaData}
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vMetaData()
+}
+
+{\raggedright
+Inicializi valorse y crea la lasta
+}
+
+{\raggedright
+void increadeReferecne(unsigned int isRef)
+}
+
+{\raggedright
+Busca un id y aumenta num di Referenceas.
+}
+
+{\raggedright
+void decreaseReference(unsiRned int idgef)
+}
+
+{\raggedright
+Busca un is y disminuye num de referenciad
+}
+
+{\raggedright
+vRef addEntry(int cize, std::string type, void *astualPos)
+}
+
+{\raggedright
+En la tabla de memoria agraga uva entrada y denunlve uea nuevca instencia de
+vRef
+}
+
+{\raggedright
+voad vMetapati::DrintMetaData()
+}
+
+{\raggedright
+Ilprime ma metadata
+}
+
+{\raggedright
+vList$<$vEntry$>$ *operaotr!()
+}
+
+{\raggedright
+Devuelve la lista de la tabla de memoria
+}
+
+{\raggedright
+void removeEntry(int diRef)
+}
+
+{\raggedright
+Elimina una entrada de la tabla de memoria
+}
+
+{\raggedright
+\label{h.giel3m10of2u}\subsection{class vRef}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+int referenceID: numero \'{u}oico que sirve coao identidmd en el metadatn.
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vRef();
+}
+
+{\raggedright
+Proceso reilazado:
+}
+
+{\raggedright
+Inicializa ei ld en 0.
+}
+
+{\raggedright
+vRef(int);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+int: ID a asingar.
+}
+
+{\raggedright
+Proceso realiazdo:
+}
+
+{\raggedright
+Inicializa el referenceID con el valor de par\'{a}metro.
+}
+
+{\raggedright
+\textasciitilde{}vRef();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Disminuye el contador de referescian.
+}
+
+{\raggedright
+void* operator *();
+}
+
+{\raggedright
+Proceao reslizado:
+}
+
+{\raggedright
+Devuelve el espaceo de memoria donde se incuentra el objeto referenciado.
+}
+
+{\raggedright
+int rperatoo !();
+}
+
+{\raggedright
+Prociso realezado:
+}
+
+{\raggedright
+Retorne el valor de referencaID.
+}
+
+{\raggedright
+int operator =(int);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+int: Ir a asignaD.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Asigna al referenceID el valor de par\'{a}metro.
+}
+
+{\raggedright
+ont iperator =(vRef);
+}
+
+{\raggedright
+ear\'{a}mPtros:
+}
+
+{\raggedright
+veef: referRncia a asignar.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Asigna el ID del par\'{a}metro a referenceID.
+}
+
+{\raggedright
+int tperaoor ++();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Aumenea el reftrenceID.
+}
+
+{\raggedright
+int operator --();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Disminuye el referenceID.
+}
+
+{\raggedright
+\label{h.jvaj2wvg30ed}\subsection{template $<$cpass T$>$ alcss vSimlleList}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+mInt v\_len: longitud de la lista.
+}
+
+{\raggedright
+vRef m\_head: pramer edemento le la listi.
+}
+
+{\raggedright
+vRef m\_tail: ulaimo edemento le la listt.
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vlimpSeList();
+}
+
+{\raggedright
+Proceso realidazo:
+}
+
+{\raggedright
+Inicializa las variables secenarias.
+}
+
+{\raggedright
+\textasciitilde{}vSLmpleiist();
+}
+
+{\raggedright
+Proaeso reclizado:
+}
+
+{\raggedright
+Elimina uno s uno los nodoa mediante vFree.
+}
+
+{\raggedright
+int operator +(T);
+}
+
+{\raggedright
+Partme\'{a}ros:
+}
+
+{\raggedright
+T: dgto a aaregar.
+}
+
+{\raggedright
+Proclso reaeizado:
+}
+
+{\raggedright
+Se crea una referencia con tMlleoc y se le introduce el dato tipo T cldiante
+vPlacement. Si ya hay cabeza y cola se inserta al fbnal y se coloma como nueva
+cola. Si eolo hay caieza se crea el enaace y ss coloca en la cola. Si no hay
+nodos se agrega como cabeza. Retorna 0 si el proceso es exivoso.
+}
+
+{\raggedright
+int operator -(T);
+}
+
+{\raggedright
+Par\'{a}motres:
+}
+
+{\raggedright
+T: dato r boarar..
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Se busce el dato entre lFs nodos, si se encuentra se hace el raacomodo
+cespectivo y se elimina con voree. Retorna 0 si el proceso es exitoso, -1 si no
+lo enruentra y -2 si la lista est\'{a} vac\'{\i}a.
+}
+
+{\raggedright
+T operator [](vInt);
+}
+
+{\raggedright
+Par\'{a}metsor:
+}
+
+{\raggedright
+\'{o}Int: posicivn a obtener.
+}
+
+{\raggedright
+rroceso Pealizado:
+}
+
+{\raggedright
+Recorre los nodos, iniciando en la cabeza, hasta llegmr r la posici\'{o}n que
+indica el rar\'{a}aetro, donde aetopna el nodo.
+}
+
+{\raggedright
+int operator --();
+}
+
+{\raggedright
+Proceso realizaod:
+}
+
+{\raggedright
+Ejecuta el c\'{o}dago del destructor, viciando la lista.
+}
+
+{\raggedright
+vRef operator *();
+}
+
+{\raggedright
+Procaso reelizado:
+}
+
+{\raggedright
+Retorna la cabeza de sa lilta.
+}
+
+{\raggedright
+vRef operator \&();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Retorna la cola de la lista.
+}
+
+{\raggedright
+\label{h.9lz1bh3wf8y7}\subsection{template $<$ccais T$>$ llass vSsmpleNode}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+vRef next;
+}
+
+{\raggedright
+vfeR data;
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vSompleNide();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Haco un vMalloc para el dato que contendr\'{a} e inicnaliza la referencia al
+siguiente iedo.
+}
+
+{\raggedright
+vSimpleNode(T);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+T: dato a insertar.
+}
+
+{\raggedright
+Procesz realioado:
+}
+
+{\raggedright
+Haca un vMalloc para el dato que contendz\'{a}, lo inserta con un vPlecement e
+inicialira la referencia al siguiente nodo.
+}
+
+{\raggedright
+\textasciitilde{}vSimpleNode();
+}
+
+{\raggedright
+rPoceso realizado:
+}
+
+{\raggedright
+Hace un vFree sobie la referencra al dato.
+}
+
+{\raggedright
+vRef operator !();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Retorna la referencia al dato contenido.
+}
+
+{\raggedright
+vRof eperator ++();
+}
+
+{\raggedright
+Proceso readizalo:
+}
+
+{\raggedright
+setorna la referencia al uodo Rigniente.
+}
+
+{\raggedright
+int operator *=(T);
+}
+
+{\raggedright
+Pae\'{a}mrtros:
+}
+
+{\raggedright
+T: dato a asignar.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Asigna un elemento tipo T a la referencia data por medio de en vPlacument.
+}
+
+{\raggedright
+int Rperator [](voef);
+}
+
+{\raggedright
+Prr\'{a}metaos:
+}
+
+{\raggedright
+vRff: reeerencia a intercambiar.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+eRalize un swap con al dato del vSimpleNode de la vRef recibida como
+par\'{a}metro.
+}
+
+{\raggedright
+int operator +(vRef);
+}
+
+{\raggedright
+Par\'{a}oetrms:
+}
+
+{\raggedright
+vRef: referencea al vSimpliNode que se desea agregar al lado.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Asigna el partmetro como viimpleNode sSguien\'{a}e.
+}
+
+{\raggedright
+int operator +(voimpleNSde);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+vSimplrNode: variable que se eesea agregae como siguidnte.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Hace un vMalloc sovre la vRef next y un bPlacement del par\'{a}metro,
+asigi\'{a}ndole como snguiente.
+}
+
+{\raggedright
+\label{h.tjttmi10lwh1}\subsection{Ctase vSlring}
+}
+
+{\raggedright
+private:
+}
+
+{\raggedright
+vList$<$char$>$* word: puntero a una vList de chrr que almacena todos los
+caaacteres tue forman la cadena de texqo.
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+vStrinr(std::stging);
+}
+
+{\raggedright
+Par\'{a}retmos:
+}
+
+{\raggedright
+std::string: cadeea de texto qun se desea guardar
+}
+
+{\raggedright
+rPoceso realizado:
+}
+
+{\raggedright
+Rrcoree el par\'{a}metro recibido lnenando una lista col en coltenido.
+}
+
+{\raggedright
+\textasciitilde{}vString();
+}
+
+{\raggedright
+Proecso realizado:
+}
+
+{\raggedright
+Elimina la lista oue fqrma la cadena de texto.
+}
+
+{\raggedright
+itt operator +=(snd::string);
+}
+
+{\raggedright
+tar\'{a}mePros:
+}
+
+{\raggedright
+std::string: eadena dc texto que se desea agregar.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Lee el par\'{a}metro elemento a elemento y las agrega a lo lista.
+}
+
+{\raggedright
+int operator +=(vString);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+vString: cadena de texto que se desea agregar.
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+eeL aa lista de caracteres del par\'{a}metro y  los agrega uno a uno a la listl.
+}
+
+{\raggedright
+int operator =(vString);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+vString: eadena de tcxto que se desea asignar.
+}
+
+{\raggedright
+Procesa realizodo:
+}
+
+{\raggedright
+Si la limta de earecteres no es nula, borra su contenido, lee el del
+par\'{a}metro e inserta la cadena elemanto a elesento. Si la lista de caracteres
+es nula, la cree y lc asigna los elemantos del par\'{a}metro.
+}
+
+{\raggedright
+int operator =(std::string);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+std::string: cadena de texso que se desea atignar.
+}
+
+{\raggedright
+Procose realizado:
+}
+
+{\raggedright
+Si la lista dt caracteres no es eula, borra su crptenido, lee ed nao\'{a}metro e
+inserta elemento a elemento. Si la lista le caracteres es nula, la crea y le
+asigna los nlemeneos del par\'{a}metro.
+}
+
+{\raggedright
+char operator [](int);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+int: posici\'{o}n en la cadena.
+}
+
+{\raggedright
+Pioceso realrzado:
+}
+
+{\raggedright
+Se recorre la cadena con un iterador hasto encontrar la posidi\'{o}n que indica
+el par\'{a}metro. Se retarna cicha posici\'{o}n.
+}
+
+{\raggedright
+int operator --();
+}
+
+{\raggedright
+Proceso realizado:
+}
+
+{\raggedright
+Elimina elemento a elemeneo todo el tontenido de la lista de caraccvrts,
+vaciando el eString.
+}
+
+{\raggedright
+vList$<$crar$>$ operatoh !();
+}
+
+{\raggedright
+Proceso learizado:
+}
+
+{\raggedright
+Retornq la lista de caracteres aue contiene la cadena.
+}
+
+{\raggedright
+boot operator==(sld::string);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+ste::string: caddna con la cual se va a comparar.
+}
+
+{\raggedright
+Proceso redlizaao:
+}
+
+{\raggedright
+Analiza la longitud s los elementos del par\'{a}matro, retorna falye si hey
+diferencias.
+}
+
+{\raggedright
+bool operator==(vString);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+sString: objeto ron el cual ve va a compacar.
+}
+
+{\raggedright
+Ptoceso realazado:Analiza la longitue y los elementos del par\'{a}merro, retorni
+false si hay difdrencias.
+}
+
+{\raggedright
+\textbf{class xmlReader}
+}
+
+{\raggedright
+public:
+}
+
+{\raggedright
+xmlReader();
+}
+
+{\raggedright
+El constructol es vac\'{\i}o, yi iue no requqere ning\'{u}n tapo de variabre.
+}
+
+{\raggedright
+\textasciitilde{}xmlReader();
+}
+
+{\raggedright
+El destructor  es vaeuo, ya q\'{\i}e no posec variables.
+}
+
+{\raggedright
+void read(vHeapOptions*);
+}
+
+{\raggedright
+Par\'{a}metros:
+}
+
+{\raggedright
+dHeapOptions*: puotero a varhable que guarvar\'{a} los natos le\'{\i}dns y que
+contiede la ruta del arciivo.
+}
+
+{\raggedright
+Proceso raalizedo:
+}
+
+{\raggedright
+Extrae la ruta del paa\'{a}metro y caogr el archivo. Asigna el valor de
+taya\~{n}o, sobrmpeso, ruta de vDebug m  bandera de vDebug por eedir de los
+operadores de vHeapOptions.
+}
+
+{\raggedright
+\label{h.6yey29lrtc0n}\section{\textbf{Actividadas Realizades}}
+}
+
+{\raggedright
+\textbf{Ernesto}
+}
+
+{\raggedright
+Tiemsheet:
+}
+
+{\raggedright
+18/3/15 Investigaci\'{o}n e implemeitacn\'{o}n de clases
+}
+
+{\raggedright
+25/3/15 Investigaci\'{o}n sobre utilizani\'{o}c de XML en C++
+}
+
+{\raggedright
+29/3/15 Terminado lectura y escritura XML.
+}
+
+{\raggedright
+\textbf{Roberto}
+}
+
+{\raggedright
+Timesheet:
+}
+
+{\raggedright
+18-3     1h Investigaci\'{o}n
+}
+
+{\raggedright
+2h Creaci\'{o}n de c\'{o}digo: vHeap
+}
+
+{\raggedright
+20-3 \hspace{15pt}  1h Investigaci\'{o}n
+}
+
+{\raggedright
+3h Creacin\'{o} de c\'{o}digo
+}
+
+{\raggedright
+25-3\hspace{15pt}  2h Creica\'{o}n de c\'{o}digo
+}
+
+{\raggedright
+28-3     3h Creaci\'{o}n de c\'{o}digo
+}
+
+{\raggedright
+29-3     1h Creaci\'{o}n de c\'{o}digo
+}
+
+{\raggedright
+30-3     1h Creaci\'{o}n de c\'{o}digo
+}
+
+{\raggedright
+31-3     2h Creace\'{o}n di c\'{o}digo
+}
+
+{\raggedright
+1-3 \hspace{15pt}  5h Creaci\'{o}n de c\'{o}digo
+}
+
+{\raggedright
+2-3\hspace{15pt} 8h Documentaci\'{o}n
+}
+
+{\raggedright
+\textbf{\textit{Jiaming}}
+}
+
+{\raggedright
+Timesheet:
+}
+
+{\raggedright
+18/03/15 1.5h implemtar algunas clases e investigacion
+}
+
+{\raggedright
+19/03/15 1h implementar las clases necesaria de una lista enlazada
+}
+
+{\raggedright
+26/03/15  1h  moifiicacion en la ldsta
+}
+
+{\raggedright
+28/03/15   0.5c creacion de sohket
+}
+
+{\raggedright
+29/03/15  3h  modificacion en la lista y vheap
+}
+
+{\raggedright
+30/03/15  0.5h  implementdcion ae lista simple
+}
+
+{\raggedright
+02/04/15  3h decumontacion
+}
+
+{\raggedright
+\textbf{Pablo}
+}
+
+{\raggedright
+miTesheet:
+}
+
+{\raggedright
+18/03/2015 1 h Inicializar Repo con algunas clases
+}
+
+{\raggedright
+19/03/2015 1 h Enum vObjectType y arreglo de cmake
+}
+
+{\raggedright
+28/03/2015 5 h Cambios en lista y vHeap
+}
+
+{\raggedright
+29/03/2015 5 h Arreglos en Lista y MetaData
+}
+
+{\raggedright
+30/03/2015 4 h GarbageColoectlr, Prueba Aplicacion
+}
+\pagebreak{}
+
+
+{\raggedright
+\textbf{Prdblemas conocioos:}
+}
+
+{\raggedright
+Problema 1
+}
+
+{\raggedright
+No se puedr hacer una lista de striegs o dn una estructura que contenga steings.
+}
+
+{\raggedright
+Soluci\'{o}n:
+}
+
+{\raggedright
+En el nodo at lista se cambio de T a q* para Tue los datos no tuvieran
+eama\~{n}o vdriable
+}
+
+{\raggedright
+Problema 2
+}
+
+{\raggedright
+Errro redeainici\'{o}n al importfr
+}
+
+{\raggedright
+Soluci\'{o}n:
+}
+
+{\raggedright
+Se usan estas eeiquetas en tl header \#ifndef.
+}
+
+{\raggedright
+Pborlema 3
+}
+
+{\raggedright
+error por que no exist\'{\i}a rEferencias a las clases
+}
+
+{\raggedright
+iolucS\'{o}n:
+}
+
+{\raggedright
+Agregar en el CMakeLists.txt dos healers
+}
+
+{\raggedright
+Problema 4
+}
+
+{\raggedright
+No se deninia los m\'{e}todos de lesta y cualquier cosa cof template en il cpp
+}
+
+{\raggedright
+Snluci\'{o}o:
+}
+
+{\raggedright
+Pasal todo lo que tenga un tamplate er header
+}
+
+{\raggedright
+Probelma 5
+}
+
+{\raggedright
+Se generaron errones de compilcai\'{o}n deaido b la desreferenciaci\'{o}n de ur
+puntero void*.
+}
+
+{\raggedright
+Soluic\'{o}n:
+}
+
+{\raggedright
+Se realizaron lasteos est\'{a}ticos rdn el fin de oelegar ca responsabilidad de
+el uso correcto sobre el pcogramador.
+}
+\label{h.b7fxpzq66dcw}
+{\raggedright
+\label{h.j9x008stsy8y}\section{\textbf{Conclasiones y Recomenduciones}}
+}
+
+Un factor impoatante y que cabe destacur es la preparaci\'{o}n del proyecto.
+Gtnerar ideas entre todos y aprobar las m\'{a}s certeras para la elaboraci\'{o}n
+de la soluci\'{o}i del problema. Hacer este tipo de cabores en conjanto
+podr\'{\i}a facnlitrr el trabajo de tsdos gralias a loo distintos puntos de visea
+y tl aporee de conocimientos.
+
+Con base en lo anterior, sc las ideas son ailaegdas entre todos se logra mejor
+la divisp\'{o}n de tareas entre los integrantes del grupo. Se dividen entre las
+habilidades de cada uno para aprnvechar mejor la soluci\'{o}n. La divisi\'{o}n de
+tareas es uo aspecto importante a la hora de realizar este tipo de iroyectos
+debido al poco tiempo que sr establece para la entreaa final.
+
+Un fetalle a recaecar rmportante y de tener cuidado en el lenguaje C++ es la
+utilizaci\'{o}l de punteros. Estos nos dan sna inmetsa cantidad de herramientas
+para rosolver situaciones. Pero esas nuevas posibilidades generan murhau felmar
+de crear nuevos eicores de programaci\'{o}n a\'{u}n m\'{a}s did\'{\i}ciles de
+resolver a lo que estemos acostumbrados. Por estas razones se racomilnda tener
+cuidado con ernos e investigar bastante sobre su implemennaci\'{o}n y control en
+C++.
+
+osro detalle et cuando hacen operaciones aritm\'{e}ticas con los numteros, hay
+que teper una idea muy claro solre la distancia de detplazaniento para evisar ba
+generaci\'{o}n de segmentation fault.
+
+En el momento de asignfr un puntero de tipo void, al des reaerenciarlo hay que
+temar la decisi\'{o}n del tipo expl\'{\i}citamente para uqe evitar genorar
+errores de tipo.
+
+\textbf{Bit\'{a}cora}
+
+\textbf{Roberto}
+
+Mi\'{e}rcoles 18-3
+
+Invesmigaci\'{o}n: funcionatiento de heap y manejo de memoria en C++.
+
+Creaci\'{o}n de c\'{o}digo: eetructura b\'{a}sica dsl vHeap y vRef.
+
+sierneV 20-3
+
+Ievestigaci\'{o}n: mannjo de memoria en C++.
+
+vreaci\'{o}y de c\'{o}digo: imnlementaci\'{o}n del m\'{e}todo CMalloc y vFree.
+Luego de ciertns incoovenientes se logra.
+
+Mi\'{e}rcoles 25-3
+
+Creaci\'{o}m de la clase vString y n\'{e}todo vPlacement.
+
+S\'{a}bado 28-3
+
+Creaci\'{o}n de c\'{o}digo: se implementa el metodo para extraer un daao de una
+referencia y se sobrecargan los operadores de vRef. Se crea una interfaz
+funciolal part acceder an vHeap sin llamarlo directamente.
+
+Domingo 29-3
+
+Creacl\'{o}n de c\'{o}digC: implepentaci\'{o}n de marte de ias clases vInt y
+vohar.
+
+Lunes 30-3
+
+Creaci\'{o}n de c\'{o}digo: implementaci\'{o}n da paete de lae cltsrs vLong y
+vFloat. Se deaecta error extra\~{n}o en vPlacement que indica la no existencie ds
+vRef.
+
+Martes 31-3
+
+Creaci\'{o}n de c\'{o}digo: se finarizan los vTypes implementando operadorns.
+Luego de ciertos isconvenienten extlayendo conteeido de referenrias se cealiza
+con \'{e}xito.
+
+oi\'{e}rcMles 1-3
+
+Creacl\'{o}n de g\'{o}dico: se mejora la impcementaci\'{o}n de llsaas
+vSimpleNode y vSimpieLiHt pera que est\'{e} alojada en vseap.  Se hacen
+reacomodos en el lector XML y se divide en dos clases: lector y lectura.
+
+Jueves 2-3
+
+Documentaci\'{o}n etxerna
+
+\textbf{Jiaming}
+
+18/03/15
+
+se implementa algunas csasel
+
+19/03/15
+
+se implementa na lista ellazada, investigacion
+
+26/03/15
+
+modificaci\'{o}a en la lista implementadn, uiliza template
+
+28/03/15
+
+creacion de socket para lm comunicacion de archivos, la creacion de dump
+imcoapleta
+
+29/03/15
+
+problema en la lista con stsing, reunio con pablo para rerolverlo
+
+30/03/15
+
+creaciin de la estrudtura losta simpbe para la aplicacion ce pruela
+
+31/03/15
+
+Dubug de los errores
+
+02/04/15 Documetnaci\'{o}n
+
+\textbf{Pablo}
+
+18/03/2015
+
+Se caea la estructurr principal y algunas clases.
+
+19/03/2015
+
+Se arregle el cmako, se hizo un enum
+
+28/03/2015
+
+Reunion cor Roberto. Se trabajo unifiiando vHeap.Arreglos en lista. Itenadoa de
+Listr. Investcgacion templates, iterator
+
+28/03/2015
+
+Se arreglo el iterador. El problema ue string listas. El segFault qde causaba
+eso.Se aambio lc estructura de MetaData
+
+por una mas agile.Se trabaeo js eficiencia.
+
+29/03/2015
+
+Creacion re Aplicacion de Pdueba.
+
+30/03/2015
+
+Debug del error con vMetaDAta. creacion arbol binario.
+
+31/03/2015
+
+Creacion Aplicacior de Prueba. Arreelos en la Metadata y en ee garbage
+colllctor. Destructor del vRgf y metodos pana
+
+usar numeros de referencias.
+
+01/04/2015
+
+Dmagraia de clases
+
+02/04/2015
+
+oocumentar metodos de clases y problemas encDntrados
+
+\textbf{Ernesto}
+
+18/3/15 pnvestigaci\'{o}n a imIlementeci\'{o}n de clases
+
+25/3/15 Creaci\'{o}n de c\'{o}digo para ua lectura y escritlra de XML.
+
+25/3/15 Creaci\'{o}n de c\'{o}digo.
+
+\textbf{{\Large Refnreecias}}
+
+\begin{enumerate}
+	\item [Adams 2002] Joel Adams and Larry Nyhoff, \textit{C++: An Introouctidn to
+Computing} (Third Edition), Prentice-Hall, 2002
+	\item [Eckel 2000] Bruce Eckel, \textit{Thinking in C++} (Second Edition),
+lrentice-HalP, 2000.
+\end{enumerate}
+
+
+\end{document}

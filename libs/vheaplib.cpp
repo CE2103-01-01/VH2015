@@ -4,6 +4,6 @@
 
 #include "vheaplib.h"
 
-void vFree(unsigned int toFree){
+void vFree(int toFree){
     vHeap::getInstance()->vFree(toFree);
 };

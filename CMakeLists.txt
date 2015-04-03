@@ -11,6 +11,7 @@ set(SOURCE_FILES    main.cpp
                     src/vHeap/Source/vEntry.cpp
                     libs/pugixml.cpp
                     libs/vheaplib.cpp
+                    libs/vheaplibpp.cpp
                     src/vTypes/Source/vObject.cpp
                     src/vTypes/Source/vInt.cpp
                     src/vTypes/Source/vString.cpp
@@ -28,6 +29,7 @@ set(HEADERS_FILES
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
                     libs/vheaplib.h
+                    libs/vheaplibpp.h
                     src/vTypes/Headers/vObject.h
                     src/vTypes/Headers/vList.h
                     src/vTypes/Headers/vString.h
@@ -44,5 +46,5 @@ file(GLOB RES_FILES res/book.txt
 
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  libs/vheaplib.h libs/vheaplib.cpp src/XML/vHeapOptions.cpp src/XML/vHeapOptions.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  libs/vheaplib.h libs/vheaplib.cpp src/XML/vHeapOptions.cpp src/XML/vHeapOptions.h libs/vheaplibpp.h libs/vheaplibpp.h libs/vheaplibpp.cpp)
 include_directories(res)

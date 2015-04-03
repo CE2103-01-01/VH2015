@@ -3,13 +3,12 @@
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vSimpleList.h"
+#include "../libs/vheaplib.h"
 
 using namespace std;
 
 void pruebaVHeap() {
-    vRef r1 = vMalloc(4, "t1");
-    vRef r2 = vMalloc(2, "t2");
-    vRef r3 = vMalloc(8, "t3");
+    vRef<int> r1 = vMalloc<int>(sizeof(int), "int");
 }
 
 void pruebaVString() {
@@ -55,9 +54,9 @@ void pruebaDumpTxt(){
 }
 
 void pruebaListaSimple(){
-    vRef lista = vMalloc(sizeof(vSimpleList<vChar>), "vSimpleList");
+    vRef<vSimpleList<vChar>> lista = vMalloc<vSimpleList<vChar>>(sizeof(vSimpleList<vChar>), "vSimpleList");
     vSimpleList<vChar> l = vSimpleList<vChar>();
-    vPlacement(lista, l);
+    vPlacement<vSimpleList<vChar>>(lista, l);
 
 };
 
