@@ -14,13 +14,13 @@ void vGarbageCollector::deallocate(int idRef) {
 /**
 * Inicia el dump cuando se ejecuta el deallocate
 */
-
+/**
 void vGarbageCollector::startDump() {
     vListIterator<vEntry> *iter= vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
     while(iter->exists()){
 
         vEntry *m = iter->next();
-       vEntry *n = iter->next();
+        vEntry *n = iter->next();
         int prev =*(int*)  m->getOffSet();
         int next = *(int*) n->getOffSet();
         if(!next==prev+m->getDataSize()){
@@ -30,9 +30,10 @@ void vGarbageCollector::startDump() {
                 temp+=distance;
                 distance++;
             }
-            m->setOffset(temp);
+            *m[temp];  //set offset
         }
 
     }
 }
 
+*/

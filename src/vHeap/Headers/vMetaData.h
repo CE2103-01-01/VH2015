@@ -12,6 +12,7 @@ static const unsigned int initialId = 1;
 #include <iostream>
 #include <typeinfo>
 
+class vEntry;
 
 class vMetaData {
     unsigned int actualID;
@@ -37,12 +38,14 @@ public:
 */
 unsigned int vMetaData::addEntry(int size, void *actualPos) {
     if(deletedIDS->len()==0){
-        memoryTable->append(vEntry(actualID, size, actualPos));
+        vEntry e = vEntry(actualID, size, actualPos);
+        memoryTable->append(e);
         return actualID++;
     }else{
         int id = *(deletedIDS->get(0));
         deletedIDS->deleteNode(0);
-        memoryTable->append(vEntry(id, size, actualPos));
+        vEntry e = vEntry(id, size, actualPos);
+        memoryTable->append(e);
         return id;
     };
 }

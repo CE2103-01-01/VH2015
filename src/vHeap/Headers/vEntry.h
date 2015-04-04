@@ -2,8 +2,8 @@
 // Created by pablo on 31/03/15.
 //
 
-#ifndef VH2015_VMALLOCMDENTRY_H
-#define VH2015_VMALLOCMDENTRY_H
+#ifndef VH2015_VENTRY_H
+#define VH2015_VENTRY_H
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -36,4 +36,4 @@ public:
 };
 
 
-#endif //VH2015_VMALLOCMDENTRY_H
+#endif //VH2015_VENTRY_H

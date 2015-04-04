@@ -34,7 +34,6 @@ class vHeap{
 public:
     vHeap(int,float);
     ~vHeap();
-
     unsigned int vMalloc(int);
     template <class T> void vFree(vRef<T>);
     void vFree(unsigned int);
