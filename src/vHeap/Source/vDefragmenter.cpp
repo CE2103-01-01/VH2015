@@ -34,7 +34,7 @@ void vDefragmenter::vDefragment(){
 };
 
 void vDefragmenter::finishDefragment(vListIterator<vEntry>* iter, int counter){
-    while(iter->exists){
+    while (iter->exists()) {
         (*(iter->next()))[counter++];
     };
 };

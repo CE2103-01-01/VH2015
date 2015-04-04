@@ -96,3 +96,17 @@ void vMetaData::removeEntry(int idRef) {
         }
     }
 }
+
+unsigned int vMetaData::addEntry(int size, void *actualPos) {
+    if (deletedIDS->len() == 0) {
+        vEntry e = vEntry(actualID, size, actualPos);
+        memoryTable->append(e);
+        return actualID++;
+    } else {
+        int id = *(deletedIDS->get(0));
+        deletedIDS->deleteNode(0);
+        vEntry e = vEntry(id, size, actualPos);
+        memoryTable->append(e);
+        return id;
+    };
+}

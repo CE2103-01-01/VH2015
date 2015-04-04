@@ -6,16 +6,14 @@
 
 static const unsigned int initialId = 1;
 
+
+#include <iostream>
+#include <vTypes/Headers/vList.h>
 #include "vEntry.h"
 
-#include "vTypes/Headers/vList.h"
-#include <iostream>
-#include <typeinfo>
-
-class vEntry;
 
 class vMetaData {
-    unsigned int actualID;
+    unsigned int actualID = initialId;
     vList<vEntry> *memoryTable;
     vList<unsigned int> *deletedIDS;
 public:
@@ -36,19 +34,7 @@ public:
 /**
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
-unsigned int vMetaData::addEntry(int size, void *actualPos) {
-    if(deletedIDS->len()==0){
-        vEntry e = vEntry(actualID, size, actualPos);
-        memoryTable->append(e);
-        return actualID++;
-    }else{
-        int id = *(deletedIDS->get(0));
-        deletedIDS->deleteNode(0);
-        vEntry e = vEntry(id, size, actualPos);
-        memoryTable->append(e);
-        return id;
-    };
-}
+
 
 
 #endif //_VH2015_VMALLOCMETADATA_H_
