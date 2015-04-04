@@ -3,13 +3,9 @@
 //
 
 #include "vHeap/Headers/vEntry.h"
-#include <vHeap/Headers/vGarbageCollector.h>
 
 vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
-    idRef = static_cast<int*>(malloc(sizeof(int)));
-    *idRef = pIdRef;
-    //size_t a = typeid(1).hash_code();
-
+    idRef = pIdRef;
     dataSize = pDataSize;
     offset = pOffset;
 }
@@ -17,7 +13,6 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
 void *vEntry::getOffSet() {
     return offset;
 }
-
 
 int vEntry::getDataSize() {
     return dataSize;
@@ -28,7 +23,7 @@ bool vEntry::getUseFlag() {
 }
 
 int vEntry::getIdRef() {
-    return *idRef;
+    return idRef;
 }
 
 /**
@@ -43,7 +38,7 @@ void *vEntry::operator&() {
 };
 
 int vEntry::operator!() {
-    return *idRef;
+    return idRef;
 };
 
 void vEntry::changeFlag() {
@@ -67,7 +62,7 @@ void vEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
         vGarbageCollector::deallocate(idRef);
-        vGarbageCollector::startDumop();
+        vGarbageCollector::startDump();
     }
 }
 
@@ -78,12 +73,14 @@ void vEntry::increaseNumReferences() {
     numReferences++;
 }
 
-int operator[](int var){
-    *idRef = var;
+int vEntry::operator[](int var){
+    idRef = var;
+    return 0;
 };
 
-int operator[](void* var){
+int vEntry::operator[](void* var){
     var=realloc(var,dataSize);
-    memcpy(var,offset,dataSize);
+    var=memcpy(var,offset,dataSize);
     offset=var;
+    return 0;
 };

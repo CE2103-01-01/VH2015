@@ -7,18 +7,19 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <vHeap/Headers/vGarbageCollector.h>
 
 class vEntry {
 private:
-    int* idRef = 0;
-    void* offset = 0;
-    unsigned int dataSize = 0;
-    bool useFlag = false;
+    int idRef;
+    void* offset;
+    unsigned int dataSize;
+    bool useFlag;
     unsigned int numReferences;
 
 public:
     vEntry();
-
     vEntry(int, int, void*);
     void changeFlag();
     int getIdRef();

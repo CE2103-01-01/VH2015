@@ -10,7 +10,7 @@
 
 template <class T> class vRef;
 template <class T> class vRef {
-        int referenceID;    //TODO: pasar a int*
+        int referenceID;
     public:
         vRef();
         vRef(int);

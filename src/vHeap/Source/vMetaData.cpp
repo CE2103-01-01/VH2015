@@ -10,8 +10,10 @@
 */
 vMetaData::vMetaData() {
     actualID = 0;
-    memoryTable = static_cast<vList<vEntry> *>(malloc(sizeof(vList<vEntry>)));
+    memoryTable = static_cast<vList<vEntry>*>(malloc(sizeof(vList<vEntry>)));
     new(memoryTable) vList<vEntry>();
+    deletedIDS = static_cast<vList<int>*>(malloc(sizeof(vList<int>)));
+    new(deletedIDS) vList<int>();
 }
 
 vMetaData::~vMetaData() {
@@ -23,7 +25,7 @@ vList<vEntry> *vMetaData::getMemoryTable() {
 }
 
 int vMetaData::len() {
-    return actualID;
+    return actualID - deletedIDS->len();
 }
 
 /**
@@ -89,6 +91,7 @@ void vMetaData::removeEntry(int idRef) {
         vEntry *next = i->next();
         if (next->getIdRef() == idRef) {
             memoryTable->deleteNode(i->getPosition() - 1);
+            deletedIDS->append(idRef);
             break;
         }
     }

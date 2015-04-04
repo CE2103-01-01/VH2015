@@ -17,6 +17,7 @@ class vEntry;
 class vMetaData {
     int actualID;
     vList<vEntry> *memoryTable;
+    vList<int> *deletedIDS;
 public:
     vMetaData();
     ~vMetaData();
@@ -35,8 +36,15 @@ public:
 * en la tabla de memoria agrega una entrada y devuelve una nuevca instancia de vRef
 */
 template <class T> vRef<T> vMetaData::addEntry(int size, std::string type, void *actualPos) {
-    memoryTable->append(vEntry(actualID, size, actualPos));
-    return vRef<T>(actualID++);
+    if(deletedIDS->len()==0){
+        memoryTable->append(vEntry(actualID, size, actualPos));
+        return vRef<T>(actualID++);
+    }else{
+        int id = *(deletedIDS->get(0));
+        deletedIDS->deleteNode(0);
+        memoryTable->append(vEntry(id, size, actualPos));
+        return vRef<T>(id);
+    };
 }
 
 
