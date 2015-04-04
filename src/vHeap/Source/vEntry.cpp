@@ -6,7 +6,8 @@
 #include <vHeap/Headers/vGarbageCollector.h>
 
 vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
-    idRef = pIdRef;
+    idRef = static_cast<int*>(malloc(sizeof(int)));
+    *idRef = pIdRef;
     //size_t a = typeid(1).hash_code();
 
     dataSize = pDataSize;
@@ -27,7 +28,7 @@ bool vEntry::getUseFlag() {
 }
 
 int vEntry::getIdRef() {
-    return idRef;
+    return *idRef;
 }
 
 /**
@@ -42,7 +43,7 @@ void *vEntry::operator&() {
 };
 
 int vEntry::operator!() {
-    return idRef;
+    return *idRef;
 };
 
 void vEntry::changeFlag() {
@@ -70,13 +71,19 @@ void vEntry::decreaseNumReferences() {
     }
 }
 
-void vEntry::setOffset(void *newOffset) {
-    offset=newOffset;
-}
-
 /**
 Aumenta en 1 al numero de referencias de una entrada
 **/
 void vEntry::increaseNumReferences() {
     numReferences++;
 }
+
+int operator[](int var){
+    *idRef = var;
+};
+
+int operator[](void* var){
+    var=realloc(var,dataSize);
+    memcpy(var,offset,dataSize);
+    offset=var;
+};

@@ -5,11 +5,13 @@
 #ifndef VH2015_VMALLOCMDENTRY_H
 #define VH2015_VMALLOCMDENTRY_H
 
+#include <stdlib.h>
+#include <stdio.h>
 
 class vEntry {
 private:
-    unsigned int idRef = 0;
-    void *offset = 0;
+    int* idRef = 0;
+    void* offset = 0;
     unsigned int dataSize = 0;
     bool useFlag = false;
     unsigned int numReferences;
@@ -17,19 +19,19 @@ private:
 public:
     vEntry();
 
-    vEntry(int, int, void *);
-    int operator!();
+    vEntry(int, int, void*);
     void changeFlag();
-    void *operator&();
     int getIdRef();
-    void *getOffSet();
-    // std::type_info getTypeInfo();
+    void* getOffSet();
     int getDataSize();
     bool getUseFlag();
     unsigned int getNumReferences();
-    void setOffset(void*);
     void decreaseNumReferences();
     void increaseNumReferences();
+    int operator!();                //idRef
+    void* operator&();              //Offset
+    int operator[](int);            //setID
+    int operator[](void*);          //setOffset
 };
 
 
