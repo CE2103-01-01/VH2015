@@ -15,7 +15,9 @@
 #include "../libs/pugixml.hpp"
 
 template<class T>
-class vRef<T>;
+class vRef;
+
+class vMetaData;
 class Dump;
 class vHeap{
     friend class Dump;

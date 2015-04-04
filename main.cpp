@@ -54,7 +54,7 @@ void pruebaDumpTxt(){
 }
 
 void pruebaListaSimple(){
-    vRef<vSimpleList<vChar>> lista = vMalloc<vSimpleList<vChar>>(sizeof(vSimpleList<vChar>), "vSimpleList");
+    vRef<vSimpleList<vChar>> lista = vRef<vSimpleList<vChar>>(vMalloc(sizeof(vSimpleList<vChar>)));
     vSimpleList<vChar> l = vSimpleList<vChar>();
     vPlacement<vSimpleList<vChar>>(lista, l);
 

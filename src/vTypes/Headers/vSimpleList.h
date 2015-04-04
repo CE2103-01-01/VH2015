@@ -28,12 +28,12 @@ public:
 };
 
 template <class T> vSimpleNode<T>::vSimpleNode(){
-    data = vMalloc<T>(sizeof(T),"T");
+    data = vRef<T>(vMalloc(sizeof(T)));
     next = vRef<vSimpleNode>();
 };
 
 template <class T> vSimpleNode<T>::vSimpleNode(T dt){
-    data = vMalloc<T>(sizeof(T),"T");
+    data = vRef<T>(vMalloc(sizeof(T)));
     vPlacement<T>(data,dt);
     next = vRef<vSimpleNode>();
 };
@@ -81,7 +81,7 @@ template <class T> int vSimpleNode<T>::operator +(vRef<vSimpleNode> vR){
 
 template <class T> int vSimpleNode<T>::operator +(vSimpleNode node){
     try{
-        next=vMalloc<vSimpleNode>(sizeof(vSimpleNode),"vSimpleNode");
+        next = vRef<vSimpleNode>(vMalloc(sizeof(vSimpleNode)));
         vPlacement(next,node);
         return 0;
     }catch(int e){
@@ -119,16 +119,16 @@ template <class T> vSimpleList<T>::vSimpleList(){
 };
 
 template <class T> vSimpleList<T>::~vSimpleList(){
-	 vRef<vSimpleNode<T>> tmp = m_head;
+    vRef<vSimpleNode<T>> tmp = m_head;
         for(vInt i = 0; i<m_len; ++i){
-	        vRef<vSimpleNode<T>> tmp2 = tmp;
+            vRef<vSimpleNode<T>> tmp2 = tmp;
             tmp = ++(*tmp);
-	        vFree(!tmp2);
+            vFree(!tmp2);
         };
 };
 
 template <class T> int vSimpleList<T>::operator +(T data){
-    vRef<T> r = vMalloc<T>(sizeof(T),data);
+    vRef<T> r = vRef<T>(vMalloc(sizeof(T)));
     vPlacement<T>(r,data);
     if(0 != !m_tail){
         (*m_tail) + r;
