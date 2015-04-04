@@ -13,8 +13,7 @@ class vPager {
         vPager();
         ~vPager();
         std::string pageDown(void*, int, int);
-        void* pageUp(std::string);
+        void pageUp(std::string, int, void*);
 };
-
 
 #endif //VH2015_VPAGER_H

@@ -3,6 +3,7 @@
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vSimpleList.h"
+#include "src/vHeap/Headers/vPager.h"
 #include "../libs/vheaplibpp.h"
 
 using namespace std;
@@ -60,11 +61,26 @@ void pruebaListaSimple(){
 
 };
 
+void pruebaPager(){
+    vPager* vP = static_cast<vPager*>(malloc(sizeof(vPager)));
+    new(vP) vPager();
+
+    void* d = malloc(sizeof(int));
+    *static_cast<int*>(d) = 8;
+
+    string path = vP->pageDown(d,1,sizeof(d));
+
+    void* dPaged = malloc(sizeof(int));
+    vP->pageUp(path, sizeof(int), dPaged);
+
+    cout<<"Ruta: "<<path<<endl;
+    cout<<"Dato en RAM: "<<*static_cast<int*>(d)<<endl;
+    cout<<"Dato leido del HD: "<<*static_cast<int*>(dPaged)<<endl;
+};
+
 int main() {
-    vHeap::getInstance();
-    int i = 0;
-    cout << i++ << endl;
-    pruebaListaSimple();
+    pruebaPager();
+    //pruebaListaSimple();
     //pruebaLista();
     //pruebaVHeap();
     //start(vString("vList"));
