@@ -1,118 +1,45 @@
-% THIS IS AN EXAMPLE DOCUMENT FOR VLDB 2012
-% based on ACM SIGPROC-SP.TEX VERSION 2.7
-% Modified by  Gerald Weber <gerald@cs.auckland.ac.nz>
-% Removed the requirement to include *bbl file in here. (AhmetSacan, Sep2012)
-% Fixed the equation on page 3 to prevent line overflow. (AhmetSacan, Sep2012)
 
 \documentclass{vldb}
 \usepackage{graphicx}
-\usepackage{balance}  % for  \balance command ON LAST PAGE  (only there!)
+\usepackage{balance}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+% for  \balance command ON LAST PAGE  (only there!)
 
 
 \begin{document}
 
 % ****************** TITLE ****************************************
 
-\title{A Sample {\ttlit Proceedings of the VLDB Endowment} Paper in LaTeX
-Format\titlenote{for use with vldb.cls}}
-
-% possible, but not really needed or used for PVLDB:
-%\subtitle{[Extended Abstract]
-%\titlenote{A full version of this paper is available as\textit{Author's Guide to Preparing ACM SIG Proceedings Using \LaTeX$2_\epsilon$\ and BibTeX} at \texttt{www.acm.org/eaddress.htm}}}
+\title{LightWeigth Dynamic Memory Managment}
 
 % ****************** AUTHORS **************************************
 
-% You need the command \numberofauthors to handle the 'placement
-% and alignment' of the authors beneath the title.
-%
-% For aesthetic reasons, we recommend 'three authors at a time'
-% i.e. three 'name/affiliation blocks' be placed beneath the title.
-%
-% NOTE: You are NOT restricted in how many 'rows' of
-% "name/affiliations" may appear. We just ask that you restrict
-% the number of 'columns' to three.
-%
-% Because of the available 'opening page real-estate'
-% we ask you to refrain from putting more than six authors
-% (two rows with three columns) beneath the article title.
-% More than six makes the first-page appear very cluttered indeed.
-%
-% Use the \alignauthor commands to handle the names
-% and affiliations for an 'aesthetic maximum' of six authors.
-% Add names, affiliations, addresses for
-% the seventh etc. author(s) as the argument for the
-% \additionalauthors command.
-% These 'additional authors' will be output/set for you
-% without further effort on your part as the last section in
-% the body of your article BEFORE References or any Appendices.
-
-\numberofauthors{8} %  in this sample file, there are a *total*
-% of EIGHT authors. SIX appear on the 'first-page' (for formatting
-% reasons) and the remaining two appear in the \additionalauthors section.
+\numberofauthors{4}
 
 \author{
-% You can go ahead and credit any number of authors here,
-% e.g. one 'row of three' or two rows (consisting of one row of three
-% and a second row of one, two or three).
-%
-% The command \alignauthor (no curly braces needed) should
-% precede each author name, affiliation/snail-mail address and
-% e-mail address. Additionally, tag each line of
-% affiliation/address with \affaddr, and tag the
-% e-mail address with \email.
-%
 % 1st. author
 \alignauthor
-Ben Trovato\titlenote{Dr.~Trovato insisted his name be first.}\\
-       \affaddr{Institute for Clarity in Documentation}\\
-       \affaddr{1932 Wallamaloo Lane}\\
-       \affaddr{Wallamaloo, New Zealand}\\
-       \email{trovato@corporation.com}
-% 2nd. author
+Pablo Rodriguez\\
+       \affaddr{Instituto Tecnologico de Costa Rica}\\
+       \affaddr{Heredia, Costa Rica}\\
+       \email{paroque28@gmail.com}
+% 2nd.
 \alignauthor
-G.K.M. Tobin\titlenote{The secretary disavows
-any knowledge of this author's actions.}\\
-       \affaddr{Institute for Clarity in Documentation}\\
-       \affaddr{P.O. Box 1212}\\
-       \affaddr{Dublin, Ohio 43017-6221}\\
-       \email{webmaster@marysville-ohio.com}
+Jiaming Feng\\
+       \affaddr{Instituto Tecnologico de Costa Rica}\\
+       \affaddr{San Jose, Costa RIca}\\
+       \email{alexfengli23@gmail.com}
+\and
 % 3rd. author
-\alignauthor Lars Th{\Large{\sf{\o}}}rv{$\ddot{\mbox{a}}$}ld\titlenote{This author is the
-one who did all the really hard work.}\\
-       \affaddr{The Th{\large{\sf{\o}}}rv{$\ddot{\mbox{a}}$}ld Group}\\
-       \affaddr{1 Th{\large{\sf{\o}}}rv{$\ddot{\mbox{a}}$}ld Circle}\\
-       \affaddr{Hekla, Iceland}\\
-       \email{larst@affiliation.org}
-\and  % use '\and' if you need 'another row' of author names
-% 4th. author
-\alignauthor Lawrence P. Leipuner\\
-       \affaddr{Brookhaven Laboratories}\\
-       \affaddr{Brookhaven National Lab}\\
-       \affaddr{P.O. Box 5000}\\
-       \email{lleipuner@researchlabs.org}
-% 5th. author
-\alignauthor Sean Fogarty\\
-       \affaddr{NASA Ames Research Center}\\
-       \affaddr{Moffett Field}\\
-       \affaddr{California 94035}\\
-       \email{fogartys@amesres.org}
-% 6th. author
-\alignauthor Charles Palmer\\
-       \affaddr{Palmer Research Laboratories}\\
-       \affaddr{8600 Datapoint Drive}\\
-       \affaddr{San Antonio, Texas 78229}\\
-       \email{cpalmer@prl.com}
+\alignauthor Roberto Bonilla\\
+       \affaddr{Instituto Tecnológico de Costa Rica}\\
+       \affaddr{Heredia, Costa Rica}\\
+       \email{rbj1504@hotmail.com}
 }
-% There's nothing stopping you putting the seventh, eighth, etc.
-% author on the opening page (as the 'third row') but we ask,
-% for aesthetic reasons that you place these 'additional authors'
-% in the \additional authors block, viz.
-\additionalauthors{Additional authors: John Smith (The Th{\o}rv\"{a}ld Group, {\texttt{jsmith@affiliation.org}}), Julius P.~Kumquat
-(The \raggedright{Kumquat} Consortium, {\small \texttt{jpkumquat@consortium.net}}), and Ahmet Sacan (Drexel University, {\small \texttt{ahmetdevel@gmail.com}})}
-\date{30 July 1999}
-% Just remember to make sure that the TOTAL number of authors
-% is the number that will appear on the first page PLUS the
-% number that will appear in the \additionalauthors section.
+
+
+%%%ABSTRACT
 
 
 \maketitle
@@ -124,7 +51,7 @@ Note that after the notification of acceptance, there will be an updated style f
 \end{abstract}
 
 
-
+%%%%%%%%%%%%INTRODUCCION
 
 \section{Introduction}
 The \textit{proceedings} are the records of a conference.
@@ -153,92 +80,140 @@ specifically available for denoting the structure of a
 proceedings paper, rather than with giving rigorous descriptions
 or explanations of such commands.
 
-\section{The {\secit Body} of The Paper}
-Typically, the body of a paper is organized
-into a hierarchical structure, with numbered or unnumbered
-headings for sections, subsections, sub-subsections, and even
-smaller sections.  The command \texttt{{\char'134}section} that
-precedes this paragraph is part of such a
-hierarchy.\footnote{This is the second footnote.  It
-starts a series of three footnotes that add nothing
-informational, but just give an idea of how footnotes work
-and look. It is a wordy one, just so you see
-how a longish one plays out.} \LaTeX\ handles the numbering
-and placement of these headings for you, when you use
-the appropriate heading commands around the titles
-of the headings.  If you want a sub-subsection or
-smaller part to be unnumbered in your output, simply append an
-asterisk to the command name.  Examples of both
-numbered and unnumbered headings will appear throughout the
-balance of this sample document.
+%%%%%%%%%%%%%%%%%%%%%%CLASES DISEÑADAS
 
-Because the entire article is contained in
-the \textbf{document} environment, you can indicate the
-start of a new paragraph with a blank line in your
-input file; that is why this sentence forms a separate paragraph.
+\section{Clases diseñadas}
 
-\subsection{Type Changes and {\subsecit Special} Characters}
-We have already seen several typeface changes in this sample.  You
-can indicate italicized words or phrases in your text with
-the command \texttt{{\char'134}textit}; emboldening with the
-command \texttt{{\char'134}textbf}
-and typewriter-style (for instance, for computer code) with
-\texttt{{\char'134}texttt}.  But remember, you do not
-have to indicate typestyle changes when such changes are
-part of the \textit{structural} elements of your
-article; for instance, the heading of this subsection will
-be in a sans serif\footnote{A third footnote, here.
-Let's make this a rather short one to
-see how it looks.} typeface, but that is handled by the
-document class file. Take care with the use
-of\footnote{A fourth, and last, footnote.}
-the curly braces in typeface changes; they mark
-the beginning and end of
-the text that is to be in the different typeface.
 
-You can use whatever symbols, accented characters, or
-non-English characters you need anywhere in your document;
-you can find a complete list of what is
-available in the \textit{\LaTeX\
-User's Guide}\cite{Lamport:LaTeX}.
+%%%%%%%%%%%%%%%%%  vChar
+\subsection{class vChar;}
 
-\subsection{Math Equations}
-You may want to display math equations in three distinct styles:
-inline, numbered or non-numbered display.  Each of
-the three are discussed in the next sections.
 
-\subsubsection{Inline (In-text) Equations}
-A formula that appears in the running text is called an
-inline or in-text formula.  It is produced by the
-\textbf{math} environment, which can be
-invoked with the usual \texttt{{\char'134}begin. . .{\char'134}end}
-construction or with the short form \texttt{\$. . .\$}. You
-can use any of the symbols and structures,
-from $\alpha$ to $\omega$, available in
-\LaTeX\cite{Lamport:LaTeX}; this section will simply show a
-few examples of in-text equations in context. Notice how
-this equation: \begin{math}\lim_{n\rightarrow \infty}x=0\end{math},
-set here in in-line math style, looks slightly different when
-set in display style.  (See next section).
+\subsubsection{Ámbito privado}
 
-\subsubsection{Display Equations}
-A numbered display equation -- one set off by vertical space
-from the text and centered horizontally -- is produced
-by the \textbf{equation} environment. An unnumbered display
-equation is produced by the \textbf{displaymath} environment.
+\subsubsubsection{vRef data;}
+referencia en vHeap al dato que contiene la clase
 
-Again, in either environment, you can use any of the symbols
-and structures available in \LaTeX; this section will just
-give a couple of examples of display equations in context.
-First, consider the equation, shown as an inline equation above:
-\begin{equation}\lim_{n\rightarrow \infty}x=0\end{equation}
-Notice how it is formatted somewhat differently in
-the \textbf{displaymath}
-environment.  Now, we'll enter an unnumbered equation:
-\begin{displaymath}\sum_{i=0}^{\infty} x + 1\end{displaymath}
-and follow it with another numbered equation:
-\begin{equation}\sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f\end{equation}
-just to demonstrate \LaTeX's able handling of numbering.
+
+\subsubsection{Ámbito público}
+
+\subsubsubsection{vChar();}
+\subsubsubsubsection{Proceso realizado:}
+Construye la clase con valor por defecto en 0.
+
+\subsubsubsection{vChar(char);}
+\subsubsubsubsection{Parámetros}
+char: variable a guardar en vHeap.
+\subsubsubsubsection{Proceso realizado:}
+Hace un vMalloc para crear la referencia data y un vPlacement para llenarla con el parámetro.
+
+\subsubsubsection{~vChar();}
+\subsubsubsubsection{Proceso realizado:}
+Destruye la referencia al dato en vHeap.
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+\subsubsubsubsection{}
+\subsubsubsubsection{}
+
+\subsubsubsection{}
+
+\subsubsubsection{}
+
+\subsubsubsection{}
+
+\subsubsubsection{}
+
+\subsubsubsection{}
+
+\subsubsubsection{}
+
+\subsubsubsection{}
+
+
+\subsection{class vHeap;}
+
+\subsubsection{Ámbito privado}
+
+\subsubsubsection{friend class Dump;}
+Se declara la clase Dump como amiga con el fin eliminar la privacidad entre estas dos clases.
+\subsubsubsection{bool* vDebug;}
+Puntero a variable booleana que indica si se debe realizar el debug.
+\subsubsubsection{int* dumpFrecuency;}
+Puntero a variable entera que indica la frecuencia con la que se realizara un dump de memoria.
+\subsubsubsection{static vHeap* vHeapSingleton;}
+Puntero a vHeap que contiene la única instancia de vHeap.
+\subsubsubsection{float* overweight; }
+Puntero a variable de punto flotante con valor entre 0 y 1 que corresponde a la sobrecarga de vHeap.
+\subsubsubsection{void* mainChunk;}
+Abstracción del concepto de heap. Puntero a memoria dinámica que contendrá los datos que el programa requiera almacenar en ejecución.
+\subsubsubsection{void* initPos;}
+Dirección inicial del mainChunk.
+\subsubsubsection{void* finalPos;}
+Dirección final del mainChunk.
+\subsubsubsection{void* actualPos;}
+Dirección actual en el mainChunk, se aumenta cada vez que se reserva memoria con vMalloc y con la desfragmentación y sobrecarga se evita que se salga del mismo.
+\subsubsubsection{pthread_mutex_t memoryMutex; }
+Mutex de pthread que se utilizará para controlar el acceso a memoria en heap en operaciones delicadas.
+\subsubsubsection{vMetaData* metaData;}
+Puntero a vMetaData que se utilizará para llevar un control de los datos guardados en el mainChunk.
+\subsubsection{Ámbito público}
+
+\subsubsubsection{}
+
+\subsection{}
+
+\subsubsection{Ámbito privado}
+
+\subsubsubsection{}
+
+\subsubsection{Ámbito público}
+
+\subsubsubsection{}
+
 
 \subsection{Citations}
 Citations to articles \cite{bowman:reasoning, clark:pct, braams:babel, herlihy:methodology},
