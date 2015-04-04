@@ -4,5 +4,5 @@
 29/03/2015 5 h Arreglos en Lista y MetaData
 30/03/2015 4 h GarbageCollector, Prueba Aplicacion
 31/03/2015 2 h Creacion Aplicacion de Prueba. Arreglos en la Metadata y  garbage collector
-01/04/2015 1 h Diagrama de clases
+01/04/2015 3 h Diagrama de clases Trabajo en arreglo de Bugs, App Prueba y vList.
 02/04/2015 3 h Documentar metodos de clases y problemas encontrados.

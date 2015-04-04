@@ -12,11 +12,11 @@
 
 class vEntry {
 private:
-    int idRef;
-    void* offset;
-    unsigned int dataSize;
+    unsigned int idRef = 0;
+    void *offset = 0;
+    unsigned int dataSize = 0;
     bool useFlag;
-    unsigned int numReferences;
+    unsigned int numReferences = 0;
 
 public:
     vEntry();

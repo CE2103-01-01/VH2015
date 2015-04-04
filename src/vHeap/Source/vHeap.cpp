@@ -40,7 +40,7 @@ vMetaData *vHeap::getMetaData() {
     return metaData;
 }
 
- vHeap* vHeap::getInstance() {
+vHeap *vHeap::getInstance() {
     if(!vHeapSingleton) {
         vHeapSingleton = static_cast<vHeap *>(malloc(sizeof(vHeap)));
         xml_document doc;
