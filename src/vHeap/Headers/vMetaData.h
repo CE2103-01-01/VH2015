@@ -13,8 +13,6 @@ static const unsigned int initialId = 1;
 #include <typeinfo>
 
 
-class vEntry;
-
 class vMetaData {
     unsigned int actualID;
     vList<vEntry> *memoryTable;
