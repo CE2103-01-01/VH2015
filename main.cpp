@@ -8,7 +8,7 @@
 using namespace std;
 
 void pruebaVHeap() {
-    vRef<int> r1 = vMalloc<int>(sizeof(int), "int");
+    vRef<int> r1 = vRef<int>(vMalloc(sizeof(int)));
 }
 
 void pruebaVString() {

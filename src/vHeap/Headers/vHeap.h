@@ -16,7 +16,6 @@
 
 template<class T>
 class vRef;
-
 class vMetaData;
 class Dump;
 class vHeap{
@@ -49,38 +48,8 @@ public:
     void* de_vReference(int);
 };
 
-template <class T> int vHeap::vPlacement(vRef<T> memory, T object){
-    pthread_mutex_lock(&memoryMutex);
-    try{
-        *static_cast<T *>(de_vReference(!memory)) = object;
-        pthread_mutex_unlock(&memoryMutex);
-        return 0;
-    }catch(int error){
-        pthread_mutex_unlock(&memoryMutex);
-        return -1;
-    };
-};
 
 
-unsigned int vHeap::vMalloc(int sz) {
-
-    pthread_mutex_lock(&memoryMutex);
-
-    unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
-    actualPos+=sz;
-    metaData->printMetaData();
-
-    pthread_mutex_unlock(&memoryMutex);
-
-    return id;
-};
-
-
-template <class T> void vHeap::vFree(vRef<T> r){
-    pthread_mutex_lock(&memoryMutex);
-    metaData->removeEntry(!r);
-    pthread_mutex_unlock(&memoryMutex);;
-}
 
 
 /***********************************************************************************************************/

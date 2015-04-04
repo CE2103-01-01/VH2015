@@ -28,6 +28,40 @@ vHeap::~vHeap(){
     free(dumpFrecuency);
 };
 
+unsigned int vHeap::vMalloc(int sz) {
+
+    pthread_mutex_lock(&memoryMutex);
+
+    unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
+    actualPos += sz;
+    metaData->printMetaData();
+
+    pthread_mutex_unlock(&memoryMutex);
+
+    return id;
+};
+
+
+template<class T>
+void vHeap::vFree(vRef<T> r) {
+    pthread_mutex_lock(&memoryMutex);
+    metaData->removeEntry(!r);
+    pthread_mutex_unlock(&memoryMutex);;
+}
+
+template<class T>
+int vHeap::vPlacement(vRef<T> memory, T object) {
+    pthread_mutex_lock(&memoryMutex);
+    try {
+        *static_cast<T *>(de_vReference(!memory)) = object;
+        pthread_mutex_unlock(&memoryMutex);
+        return 0;
+    } catch (int error) {
+        pthread_mutex_unlock(&memoryMutex);
+        return -1;
+    };
+};
+
 vHeap* vHeap::vHeapSingleton = 0;
 
 void vHeap::vFree(unsigned int idRef) {
@@ -88,13 +122,13 @@ Dump::Dump() {
 };
 
 Dump::~Dump() {
-	free(dumpping);
-	free(frecuency);
-	free(counter);
+    free(dumpping);
+    free(frecuency);
+    free(counter);
 };
 
 bool Dump::getDumppingState(){
-	return *dumpping;
+    return *dumpping;
 };
 
 std::string Dump::IntToStr(int n) {
