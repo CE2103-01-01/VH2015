@@ -27,7 +27,8 @@ public:
     int len();
     void increaseReference(unsigned int idRef);
     void decreaseReference(unsigned int idRef);
-    template <class T> vRef<T> addEntry(int,std::string,void*);
+
+    unsigned int addEntry(int, void *);
     void removeEntry(int idRef);
     void printMetaData();
     vList<vEntry> *operator!();
@@ -37,15 +38,15 @@ public:
 /**
 * en la tabla de memoria agrega una entrada y devuelve una nuevca instancia de vRef
 */
-template <class T> vRef<T> vMetaData::addEntry(int size, std::string type, void *actualPos) {
+unsigned int vMetaData::addEntry(int size, void *actualPos) {
     if(deletedIDS->len()==0){
         memoryTable->append(vEntry(actualID, size, actualPos));
-        return vRef<T>(actualID++);
+        return actualID++;
     }else{
         int id = *(deletedIDS->get(0));
         deletedIDS->deleteNode(0);
         memoryTable->append(vEntry(id, size, actualPos));
-        return vRef<T>(id);
+        return id;
     };
 }
 

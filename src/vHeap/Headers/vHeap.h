@@ -14,7 +14,8 @@
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
 
-class vRef;
+template<class T>
+class vRef<T>;
 class Dump;
 class vHeap{
     friend class Dump;
@@ -32,7 +33,8 @@ class vHeap{
 public:
     vHeap(int,float);
     ~vHeap();
-    template <class T> vRef<T> vMalloc(int, std::string);
+
+    unsigned int vMalloc(int);
     template <class T> void vFree(vRef<T>);
     void vFree(unsigned int);
     static vHeap* getInstance();
@@ -58,17 +60,17 @@ template <class T> int vHeap::vPlacement(vRef<T> memory, T object){
 };
 
 
-template <class T> vRef<T> vHeap::vMalloc(int sz, std::string type){
+unsigned int vHeap::vMalloc(int sz) {
 
     pthread_mutex_lock(&memoryMutex);
 
-    vRef<T> r= metaData->addEntry<T>(sz,type,actualPos);// add Entry devuelve una referencia
+    unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
     actualPos+=sz;
     metaData->printMetaData();
 
     pthread_mutex_unlock(&memoryMutex);
 
-    return r;
+    return id;
 };
 
 
