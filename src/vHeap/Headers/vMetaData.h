@@ -11,9 +11,8 @@ static const unsigned int initialId = 1;
 #include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <typeinfo>
-#include "vRef.h"
 
-template <class T> class vRef;
+
 class vEntry;
 
 class vMetaData {
@@ -36,7 +35,7 @@ public:
 
 
 /**
-* en la tabla de memoria agrega una entrada y devuelve una nuevca instancia de vRef
+* en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
 unsigned int vMetaData::addEntry(int size, void *actualPos) {
     if(deletedIDS->len()==0){

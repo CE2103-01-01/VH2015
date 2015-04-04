@@ -12,8 +12,8 @@ vHeap *heap = vHeap::getInstance();
 
 void vFree(int toFree);
 
-template<class T> vRef<T> vMalloc(int vSize, std::string vType){
-    return vHeap::getInstance()->vMalloc<T>(vSize, vType);
+unsigned int vMalloc(int vSize) {
+    return vHeap::getInstance()->vMalloc(vSize);
 };
 template<class T> void vFree(vRef<T> toFree){
     vHeap::getInstance()->vFree(toFree);
