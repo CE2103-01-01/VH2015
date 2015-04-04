@@ -9,6 +9,8 @@ set(SOURCE_FILES    main.cpp
                     src/vHeap/Source/vMetaData.cpp
                     src/vHeap/Source/vRef.cpp
                     src/vHeap/Source/vEntry.cpp
+                    src/vHeap/Source/vDefragmenter.cpp
+                    src/vHeap/Source/vPager.cpp
                     libs/pugixml.cpp
                     libs/vheaplib.cpp
                     libs/vheaplibpp.cpp
@@ -26,6 +28,8 @@ set(HEADERS_FILES
                     src/vHeap/Headers/vMetaData.h
                     src/vHeap/Headers/vGarbageCollector.h
                     src/vHeap/Headers/vEntry.h
+                    src/vHeap/Headers/vDefragmenter.h
+                    src/vHeap/Headers/vPager.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
                     libs/vheaplib.h
@@ -46,5 +50,5 @@ file(GLOB RES_FILES res/book.txt
 
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  libs/vheaplib.h libs/vheaplib.cpp src/XML/vHeapOptions.cpp src/XML/vHeapOptions.h libs/vheaplibpp.h libs/vheaplibpp.h libs/vheaplibpp.cpp src/vHeap/Source/vDefragmenter.cpp src/vHeap/Headers/vDefragmenter.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  libs/vheaplib.h libs/vheaplib.cpp src/XML/vHeapOptions.cpp src/XML/vHeapOptions.h libs/vheaplibpp.h libs/vheaplibpp.h libs/vheaplibpp.cpp src/vHeap/Source/vDefragmenter.cpp src/vHeap/Headers/vDefragmenter.h src/vHeap/Source/vPager.cpp src/vHeap/Headers/vPager.h)
 include_directories(res)
