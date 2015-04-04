@@ -61,8 +61,8 @@ unsigned int vEntry::getNumReferences() {
 void vEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
-        vGarbageCollector::deallocate(idRef);
-        vGarbageCollector::startDump();
+        //vGarbageCollector::deallocate(idRef);
+        //vGarbageCollector::startDump();
     }
 }
 

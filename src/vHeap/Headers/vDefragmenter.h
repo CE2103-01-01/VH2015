@@ -19,7 +19,7 @@ class vDefragmenter {
     void finishDefragment(vListIterator<vEntry>*, int);
 
     public:
-        vDefragmenter(void*, void*, void*, void*, int*, vListIterator<vEntry>*);
+    vDefragmenter(void *mChunk, void *iPos, void *fPos, void *aPos, vList<vEntry> *mem);
         ~vDefragmenter();
         void vDefragment();
 };

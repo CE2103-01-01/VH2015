@@ -96,3 +96,20 @@ void vMetaData::removeEntry(int idRef) {
         }
     }
 }
+
+/**
+* en la tabla de memoria agrega una entrada y devuelve un int de la posicion
+*/
+unsigned int vMetaData::addEntry(int size, void *actualPos) {
+    if (deletedIDS->len() == 0) {
+        vEntry e = vEntry(actualID, size, actualPos);
+        memoryTable->append(e);
+        return actualID++;
+    } else {
+        int id = *(deletedIDS->get(0));
+        deletedIDS->deleteNode(0);
+        vEntry e = vEntry(id, size, actualPos);
+        memoryTable->append(e);
+        return id;
+    };
+}

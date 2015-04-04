@@ -17,7 +17,7 @@ vDefragmenter::~vDefragmenter(){};
 void vDefragmenter::vDefragment(){
     vListIterator<vEntry>* iter = memoryT->getIterator();
     int counter = 1;
-    while(iter->exists){
+    while (iter->exists()) {
         vEntry* tmp = iter->next();
         if(tmp->getDataSize() + actualPos < finalPos){
             if(&*tmp != actualPos){
@@ -34,7 +34,7 @@ void vDefragmenter::vDefragment(){
 };
 
 void vDefragmenter::finishDefragment(vListIterator<vEntry>* iter, int counter){
-    while(iter->exists){
+    while (iter->exists()) {
         (*(iter->next()))[counter++];
     };
 };
