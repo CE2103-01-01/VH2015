@@ -5,11 +5,11 @@
 #include "vTypes/Headers/vChar.h"
 
 vChar::vChar(){
-    data = vMalloc<char>(sizeof(char),"char");
+    data = vRef<char>(vMalloc(sizeof(char)));
 };
 
 vChar::vChar(char d){
-    data = vMalloc<char>(sizeof(d),"char");
+    data = vRef<char>(vMalloc(sizeof(char)));
     vPlacement<char>(data, d);
 };
 
@@ -31,7 +31,7 @@ int vChar::operator +=(char pls){
 
 int vChar::operator --(){
     try{
-        *data--;
+        (*data)--;
         return 0;
     }catch(int e){
         return -1;
@@ -40,7 +40,7 @@ int vChar::operator --(){
 
 int vChar::operator ++(){
     try{
-        *data++;
+        (*data)++;
         return 0;
     }catch(int e){
         return -1;

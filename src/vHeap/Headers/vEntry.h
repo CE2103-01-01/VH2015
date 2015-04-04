@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <vHeap/Headers/vGarbageCollector.h>
+
 
 class vEntry {
 private:

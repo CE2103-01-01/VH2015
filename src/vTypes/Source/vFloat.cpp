@@ -5,11 +5,11 @@
 #include "vTypes/Headers/vFloat.h"
 
 vFloat::vFloat(){
-    data = vMalloc<float>(sizeof(float),"float");
+    data = vRef<float>(vMalloc(sizeof(float)));
 };
 
 vFloat::vFloat(float d){
-    data = vMalloc<float>(sizeof(d),"float");
+    data = vRef<float>(vMalloc(sizeof(float)));
     vPlacement<float>(data, d);
 };
 

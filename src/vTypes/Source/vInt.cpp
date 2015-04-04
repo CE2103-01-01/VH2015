@@ -5,11 +5,11 @@
 #include "vTypes/Headers/vInt.h"
 
 vInt::vInt(){
-    data = vMalloc<int>(sizeof(int),"int");
+    data = vRef<int>(vMalloc(sizeof(int)));
 };
 
 vInt::vInt(int d){
-    data = vMalloc<int>(sizeof(d),"int");
+    data = vRef<int>(vMalloc(sizeof(int)));
     vPlacement<int>(data, d);
 };
 

@@ -7,9 +7,11 @@
 static const unsigned int initialId = 1;
 
 
+#include "vEntry.h"
+
+
 #include <iostream>
 #include <vTypes/Headers/vList.h>
-#include "vEntry.h"
 
 
 class vMetaData {
@@ -29,11 +31,6 @@ public:
     void printMetaData();
     vList<vEntry> *operator!();
 };
-
-
-/**
-* en la tabla de memoria agrega una entrada y devuelve un int de la posicion
-*/
 
 
 

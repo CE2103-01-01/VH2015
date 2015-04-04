@@ -5,11 +5,11 @@
 #include "vTypes/Headers/vLong.h"
 
 vLong::vLong(){
-    data = vMalloc<long>(sizeof(long),"long");
+    data = vRef<long>(vMalloc(sizeof(long)));
 };
 
 vLong::vLong(long d){
-    data = vMalloc<long>(sizeof(d),"long");
+    data = vRef<long>(vMalloc(sizeof(long)));
     vPlacement<long>(data, d);
 };
 
@@ -18,7 +18,7 @@ vLong::~vLong(){
 };
 
 vRef vLong::operator &(){
-    return data;
+    return *data;
 };
 
 int vLong::operator +=(long pls){
