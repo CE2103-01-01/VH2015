@@ -9,10 +9,10 @@
 * inicializa valores y crea la lista
 */
 vMetaData::vMetaData() {
-    actualID = 0;
+    actualID = initialId;
     memoryTable = static_cast<vList<vEntry>*>(malloc(sizeof(vList<vEntry>)));
     new(memoryTable) vList<vEntry>();
-    deletedIDS = static_cast<vList<int>*>(malloc(sizeof(vList<int>)));
+    deletedIDS = static_cast<vList<unsigned int> *>(malloc(sizeof(vList<unsigned int>)));
     new(deletedIDS) vList<int>();
 }
 

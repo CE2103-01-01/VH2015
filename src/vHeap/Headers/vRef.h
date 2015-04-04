@@ -5,10 +5,10 @@
 #ifndef _VH2015_VREF_H_
 #define _VH2015_VREF_H_
 
-#include "../libs/vheaplib.h"
-#include "../libs/vheaplibpp.h"
 
-template <class T> class vRef;
+#include "vHeap.h"
+
+class vHeap;
 template <class T> class vRef {
         int referenceID;
     public:
@@ -25,7 +25,7 @@ template <class T> class vRef {
 
 template<class T> vRef<T>::vRef(int id){
     referenceID=id;
-    addVRef(referenceID); // aumenta contador de referencias
+    vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
 };
 
 template<class T> vRef<T>::vRef(){
@@ -33,7 +33,7 @@ template<class T> vRef<T>::vRef(){
 };
 
 template<class T> vRef<T>::~vRef() {
-    removeVRef(referenceID); // disminuye contador de referencias
+    vHeap::getInstance()->removeVRef(referenceID); // disminuye contador de referencias
 };
 
 template<class T>int vRef<T>::operator!() {
@@ -41,28 +41,33 @@ template<class T>int vRef<T>::operator!() {
 };
 
 template<class T> T vRef<T>::operator*() {
-    return *static_cast<T*>(de_vReference(referenceID));
+    return *static_cast<T *>(vHeap::getInstance()->de_vReference(referenceID));
 };
 
 template<class T>int vRef<T>::operator=(int id){
     referenceID=id;
-    addVRef(referenceID); // aumenta contador de referencias
+    vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
     return 0;
 };
 
 template<class T> int vRef<T>::operator=(vRef other){
+    if (referenceID)vHeap::getInstance()->removeVRef(referenceID);
     referenceID=!other;
-    addVRef(referenceID); // aumenta contador de referencias
+    vHeap::getInstance()->addVRef(referenceID); // aumenta contador de referencias
     return 0;
 };
 
 template<class T> int vRef<T>::operator ++(){
+    if (referenceID)vHeap::getInstance()->removeVRef(referenceID);
     referenceID++;
+    vHeap::getInstance()->addVRef(referenceID);
     return 0;
 };
 
 template<class T> int vRef<T>::operator --(){
+    if (referenceID) vHeap::getInstance()->removeVRef(referenceID);
     referenceID--;
+    if (referenceID) vHeap::getInstance()->addVRef(referenceID);
     return 0;
 };
 

@@ -8,10 +8,9 @@
 #include "../src/vHeap/Headers/vHeap.h"
 #include "../src/vHeap/Headers/vRef.h"
 
-template<class T> class vRef;
-class vHeap;
+vHeap *heap = vHeap::getInstance();
 
-void vFree(int);
+void vFree(int toFree);
 
 template<class T> vRef<T> vMalloc(int vSize, std::string vType){
     return vHeap::getInstance()->vMalloc<T>(vSize, vType);
@@ -22,6 +21,10 @@ template<class T> void vFree(vRef<T> toFree){
 
 template<class T> int vPlacement(vRef<T> vR, T toPlace) {
     return vHeap::getInstance()->vPlacement<T>(vR, toPlace);
+};
+
+void vFree(int toFree) {
+    vHeap::getInstance()->vFree(toFree);
 };
 
 #endif //_VH2015_HEAP_H_

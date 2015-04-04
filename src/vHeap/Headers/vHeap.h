@@ -14,9 +14,8 @@
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
 
+class vRef;
 class Dump;
-class vMetadata;
-template <class T> class vRef;
 class vHeap{
     friend class Dump;
     bool* vDebug;
@@ -95,7 +94,11 @@ class Dump {
         ~Dump();
         std::string IntToStr(int);
         void saveDumpFile();
-	bool getDumppingState();
+
+    bool getDumppingState();
 };
 
 #endif //_VH2015_VHEAP_H_
+
+
+

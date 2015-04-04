@@ -4,6 +4,8 @@
 #ifndef _VH2015_VMALLOCMETADATA_H_
 #define _VH2015_VMALLOCMETADATA_H_
 
+static const unsigned int initialId = 1;
+
 #include "vEntry.h"
 
 #include "vTypes/Headers/vList.h"
@@ -15,9 +17,9 @@ template <class T> class vRef;
 class vEntry;
 
 class vMetaData {
-    int actualID;
+    unsigned int actualID;
     vList<vEntry> *memoryTable;
-    vList<int> *deletedIDS;
+    vList<unsigned int> *deletedIDS;
 public:
     vMetaData();
     ~vMetaData();
