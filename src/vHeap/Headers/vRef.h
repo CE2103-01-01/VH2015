@@ -14,7 +14,7 @@ template <class T> class vRef {
         vRef();
         vRef(int);
         ~vRef();
-        T operator *();
+        T* operator *();
         int operator !();
         int operator =(int);
         int operator =(vRef<T>);

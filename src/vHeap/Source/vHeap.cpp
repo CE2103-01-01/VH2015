@@ -92,7 +92,7 @@ void *vHeap::de_vReference(int id) {
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
-        vEntry *entry = iter->next();
+        vEntry* entry = iter->next();
     if(!*entry==id){
             pthread_mutex_unlock(&memoryMutex);
             return &*entry;

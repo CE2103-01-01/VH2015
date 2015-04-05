@@ -22,8 +22,8 @@ int vRef<T>::operator!() {
 };
 
 template<class T>
-T vRef<T>::operator*() {
-    return *static_cast<T *>(vHeap::getInstance()->de_vReference(referenceID));
+T* vRef<T>::operator*() {
+    return static_cast<T *>(vHeap::getInstance()->de_vReference(referenceID));
 };
 
 template<class T>
