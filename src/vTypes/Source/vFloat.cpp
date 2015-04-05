@@ -6,10 +6,9 @@
 
 vFloat::vFloat(){
     data = 0;
-    ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-    new(ref) vRef(vMalloc(sizeof(vFloat)));
+    ref = vMalloc(sizeof(vFloat));
     vFloat* ret = this;
-    vPlacement(*ref,*ret);
+    vPlacement(ref,*ret);
 };
 
 vFloat::~vFloat(){
@@ -19,10 +18,9 @@ vFloat::~vFloat(){
 vFloat vFloat::operator = (float var){
     if(!ref){
         data = var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-        new(ref) vRef(vMalloc(sizeof(vFloat)));
+        ref = vMalloc(sizeof(vFloat));
         vFloat* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = var;
@@ -34,10 +32,9 @@ vFloat vFloat::operator = (float var){
 vFloat vFloat::operator =(vFloat var){
     if(!ref){
         data = !var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-        new(ref) vRef(vMalloc(sizeof(vFloat)));
+        ref = vMalloc(sizeof(vFloat));
         vFloat* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = !var;
@@ -47,7 +44,7 @@ vFloat vFloat::operator =(vFloat var){
 };
 
 vRef vFloat::operator &() {
-    return vRef(!*ref);
+    return vRef(ref);
 };
 void vFloat::operator +=(float pls){
     data += pls;

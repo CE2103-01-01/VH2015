@@ -51,6 +51,7 @@ public:
     int removeVRef(int);
     int addVRef(int);
     int vPlacement(vRef, vObject);
+    int vPlacement(int, vObject);
     void* de_vReference(int);
 };
 

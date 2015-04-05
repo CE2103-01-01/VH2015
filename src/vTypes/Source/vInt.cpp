@@ -6,10 +6,9 @@
 
 vInt::vInt(){
     data = 0;
-    ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-    new(ref) vRef(vMalloc(sizeof(vInt)));
+    ref = vMalloc(sizeof(vInt));
     vInt* ret = this;
-    vPlacement(*ref,*ret);
+    vPlacement(ref,*ret);
 };
 
 vInt::~vInt(){
@@ -19,10 +18,9 @@ vInt::~vInt(){
 vInt vInt::operator = (int var){
     if(!ref){
         data = var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-        new(ref) vRef(vMalloc(sizeof(vInt)));
+        ref = vMalloc(sizeof(vInt));
         vInt* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = var;
@@ -34,10 +32,9 @@ vInt vInt::operator = (int var){
 vInt vInt::operator =(vInt var){
     if(!ref){
         data = !var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-        new(ref) vRef(vMalloc(sizeof(vInt)));
+        ref = vMalloc(sizeof(vInt));
         vInt* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = !var;
@@ -47,7 +44,7 @@ vInt vInt::operator =(vInt var){
 };
 
 vRef vInt::operator &() {
-    return vRef(!*ref);
+    return vRef(ref);
 
 }
 void vInt::operator +=(int pls){

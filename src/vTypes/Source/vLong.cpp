@@ -6,10 +6,9 @@
 
 vLong::vLong(){
     data = 0;
-    ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-    new(ref) vRef(vMalloc(sizeof(vLong)));
+    ref = vMalloc(sizeof(vLong));
     vLong* ret = this;
-    vPlacement(*ref,*ret);
+    vPlacement(ref,*ret);
 };
 
 vLong::~vLong(){
@@ -19,10 +18,9 @@ vLong::~vLong(){
 vLong vLong::operator = (long var){
     if(!ref){
         data = var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-        new(ref) vRef(vMalloc(sizeof(vLong)));
+        ref = vMalloc(sizeof(vLong));
         vLong* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = var;
@@ -34,10 +32,9 @@ vLong vLong::operator = (long var){
 vLong vLong::operator =(vLong var){
     if(!ref){
         data = !var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-        new(ref) vRef(vMalloc(sizeof(vLong)));
+        ref = vMalloc(sizeof(vLong));
         vLong* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = !var;
@@ -47,7 +44,7 @@ vLong vLong::operator =(vLong var){
 };
 
 vRef vLong::operator &() {
-    return vRef(!*ref);
+    return vRef(ref);
 };
 
 void vLong::operator +=(long pls){

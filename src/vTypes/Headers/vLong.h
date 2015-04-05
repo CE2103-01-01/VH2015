@@ -12,7 +12,7 @@
 
 class vLong: public vObject{
     long data;
-    vRef* ref;
+    int ref=0;
 public:
     vLong();
     ~vLong();

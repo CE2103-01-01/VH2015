@@ -12,7 +12,7 @@
 
 class vChar: public vObject{
         char data;
-        vRef* ref;
+        int ref=0;
     public:
         vChar();
         ~vChar();

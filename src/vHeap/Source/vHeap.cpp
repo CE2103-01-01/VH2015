@@ -71,6 +71,18 @@ int vHeap::vPlacement(vRef memory, vObject object) {
     };
 };
 
+int vHeap::vPlacement(int mem, vObject object) {
+    pthread_mutex_lock(memoryMutex);
+    try {
+        *static_cast<vObject*>(de_vReference(mem)) = object;
+        pthread_mutex_unlock(memoryMutex);
+        return 0;
+    } catch (int error) {
+        pthread_mutex_unlock(memoryMutex);
+        return -1;
+    };
+};
+
 vHeap* vHeap::vHeapSingleton = 0;
 
 void vHeap::vFree(unsigned int idRef) {

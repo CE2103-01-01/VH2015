@@ -6,10 +6,9 @@
 
 vChar::vChar(){
     data = 0;
-    ref = static_cast<vRef*>(malloc(sizeof(vRef)));
-    new(ref) vRef(vMalloc(sizeof(vChar)));
+    ref = vMalloc(sizeof(vChar));
     vChar* ret = this;
-    vPlacement(*ref,*ret);
+    vPlacement(ref,*ret);
 };
 
 vChar::~vChar(){
@@ -17,12 +16,11 @@ vChar::~vChar(){
 };
 
 vChar vChar::operator = (char var){
-    if(!ref){
+    if(ref==0){
         data = var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));;
-        new(ref) vRef(vMalloc(sizeof(vChar)));
+        ref = vMalloc(sizeof(vChar));
         vChar* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = var;
@@ -34,10 +32,9 @@ vChar vChar::operator = (char var){
 vChar vChar::operator =(vChar var){
     if(!ref){
         data = !var;
-        ref = static_cast<vRef*>(malloc(sizeof(vRef)));;
-        new(ref) vRef(vMalloc(sizeof(vChar)));
+        ref = vMalloc(sizeof(vChar));
         vChar* ret = this;
-        vPlacement(*ref,*ret);
+        vPlacement(ref,*ret);
         return *ret;
     }else{
         data = !var;
@@ -47,7 +44,7 @@ vChar vChar::operator =(vChar var){
 };
 
 vRef vChar::operator &() {
-    return vRef(!*ref);
+    return vRef(ref);
 
 };
 void vChar::operator +=(char pls){

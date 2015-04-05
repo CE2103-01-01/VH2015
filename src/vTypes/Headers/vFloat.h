@@ -13,7 +13,7 @@
 
 class vFloat: public vObject{
     float data;
-    vRef* ref;
+    int ref=0;
 public:
     vFloat();
     ~vFloat();

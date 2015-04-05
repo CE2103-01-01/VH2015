@@ -19,3 +19,7 @@ void vFree(vRef toFree) {
 int vPlacement(vRef vR, vObject toPlace) {
     return vHeap::getInstance()->vPlacement(vR, toPlace);
 };
+
+int vPlacement(int vR, vObject toPlace) {
+    return vHeap::getInstance()->vPlacement(vR, toPlace);
+};

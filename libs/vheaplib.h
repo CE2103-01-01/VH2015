@@ -13,13 +13,15 @@ class vRef;
 class vObject;
 
 
-void vFree(int toFree);
+void vFree(int);
 
-void vFree(vRef toFree);
+void vFree(vRef);
 
 unsigned int vMalloc(unsigned int);
 
-int vPlacement(vRef vR, vObject toPlace);
+int vPlacement(vRef, vObject);
+
+int vPlacement(int, vObject);
 
 
 #endif //_VH2015_HEAP_H_

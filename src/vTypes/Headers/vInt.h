@@ -12,7 +12,7 @@
 
 class vInt: public vObject{
     int data;
-    vRef* ref;
+    int ref=0;
 public:
     vInt();
     ~vInt();
