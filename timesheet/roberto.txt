@@ -42,18 +42,19 @@ Sábado 4-4
 Bitácora
 
 Miércoles 18-3   	
-Investigación: Funcionamiento de heap y manejo de memoria en C++.
+Investigación:      Funcionamiento de heap y manejo de memoria en C++.
 Creación de código: Se implementa la estructura básica del vHeap y vRef.
 
 Viernes 20-3	
-Investigación: Manejo de memoria en C++.
+Investigación:      Manejo de memoria en C++.
 Creación de código: Se implementa el método vMalloc y vFree. Luego de ciertos inconvenientes se logra.
 
 Miércoles 25-3	
 Creación de código: Se implementa la clase vString y método vPlacement.
 
 Sábado 28-3	
-Creación de código: Se implementa el metodo para extraer un dato de una referencia y se sobrecargan los operadores de vRef.
+Creación de código: Se implementa el metodo para extraer un dato de una referencia.
+                    Se sobrecargan los operadores de vRef.
                     Se crea una interfaz funcional para acceder al vHeap sin llamarlo directamente.
 
 Domingo 29-3	
@@ -64,7 +65,7 @@ Creación de código: Se implementa parte de las clases vLong y vFloat.
                     Se detecta error extraño en vPlacement que indica la no existencia de vRef.
 
 Martes 31-3	
-Creación de código: Se finalizan los vTypes implementando operadores. Luego de ciertos inconvenientes extrayendo contenido de referencias se implementan con éxito.
+Creación de código: Se finalizan los vTypes implementando operadores.
 
 Miércoles 1-3	
 Creación de código: Se mejora la implementación de clases vSimpleNode y vSimpleList para que esté alojada en vHeap.
@@ -74,16 +75,17 @@ Jueves 2-3
 Documentación externa
 
 Viernes 3-3
-Investigación: Swap entre punteros.
+Investigación:      Swap entre punteros.
 Creación de código: Se mejora la implementación de vRef con el uso de templates para dar una mayor transparencia en codigo y facilitar la dereferencia.
                     Se crea el desfragmentador y se deja listo para coordinar con vHeap.
                     Se crea un control de IDs borrados en Metadata para no requerir reacomodo en los mismos.
 
 Sábado 4-3
-Investigación: escritura y lectura de archivos binarios en c++.
-               función to_string() de c++11 y requerimientos para su uso.
+Investigación:      Escritura y lectura de archivos binarios en c++.
+                    Función to_string() de c++11 y requerimientos para su uso.
 Creación de código: Se activa la bandera para que g++ siga el protocolo de c++11 y asi poder utilizar to_string().
                     Se implementa el paginador con exito.
                     Se cambia el valor de retorno de derefereciación de T a T* y se arregla el problema de operadores con vTypes.
-                    Se convierte a vMetaData en singleton ya que no se podia incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo. Con esto se crea un puente de comunicación entre ambas clases sin necesidad de incluirlas.
-                    Se implemente el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un free.
+                    Se convierte a vMetaData en singleton, ya que no es posible incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo.
+                    Se crea un puente de comunicación entre ambas vHeap y vRef utilizando el singleton de vMetaData.
+                    Se implemente el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un vFree.
