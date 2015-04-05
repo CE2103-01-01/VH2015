@@ -22,7 +22,7 @@ vRef<char> vChar::operator &(){
 
 int vChar::operator +=(char pls){
     try{
-        *data + pls;
+        (**data) += pls;
         return 0;
     }catch(int e){
         return -1;
@@ -31,7 +31,7 @@ int vChar::operator +=(char pls){
 
 int vChar::operator --(){
     try{
-        (*data)--;
+        ((**data))--;
         return 0;
     }catch(int e){
         return -1;
@@ -40,7 +40,7 @@ int vChar::operator --(){
 
 int vChar::operator ++(){
     try{
-        (*data)++;
+        ((**data))++;
         return 0;
     }catch(int e){
         return -1;
@@ -49,7 +49,7 @@ int vChar::operator ++(){
 
 char vChar::operator !(){
     try{
-        return *data;
+        return (**data);
     }catch(int e){
         return -1;
     };
@@ -57,7 +57,7 @@ char vChar::operator !(){
 
 int vChar::operator =(char var){
     try{
-        *data = var;
+        (**data) = var;
         return 0;
     }catch(int e){
         return -1;
@@ -66,7 +66,7 @@ int vChar::operator =(char var){
 
 int vChar::operator =(vChar var){
     try{
-        *data = !var;
+        (**data) = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -74,49 +74,49 @@ int vChar::operator =(vChar var){
 };
 
 bool vChar::operator <(vChar other){
-    return *data < !other;
+    return (**data) < (!other);
 };
 
 bool vChar::operator <=(vChar other){
-    return *data <= !other;
+    return (**data) <= (!other);
 };
 
 bool vChar::operator >(vChar other){
-    return *data > !other;
+    return (**data) > (!other);
 };
 
 bool vChar::operator >=(vChar other){
-    return *data >= !other;
+    return (**data) >= (!other);
 };
 
 bool vChar::operator ==(vChar other){
-    return *data == !other;
+    return (**data) == (!other);
 };
 
 bool vChar::operator !=(vChar other){
-    return *data != !other;
+    return (**data) != (!other);
 };
 
 bool vChar::operator <(char other){
-    return *data < other;
+    return (**data) < other;
 };
 
 bool vChar::operator <=(char other){
-    return *data <= other;
+    return (**data) <= other;
 };
 
 bool vChar::operator >(char other){
-    return *data > other;
+    return (**data) > other;
 };
 
 bool vChar::operator >=(char other){
-    return *data >= other;
+    return (**data) >= other;
 };
 
 bool vChar::operator ==(char other){
-    return *data == other;
+    return (**data) == other;
 };
 
 bool vChar::operator !=(char other){
-    return *data != other;
+    return (**data) != other;
 };

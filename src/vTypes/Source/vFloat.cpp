@@ -23,7 +23,7 @@ vRef<float> vFloat::operator &(){
 
 int vFloat::operator +=(float pls){
     try{
-        *data + pls;
+        (**data) += pls;
         return 0;
     }catch(int e){
         return -1;
@@ -32,7 +32,7 @@ int vFloat::operator +=(float pls){
 
 int vFloat::operator --(){
     try{
-        (*data)--;
+        ((**data))--;
         return 0;
     }catch(int e){
         return -1;
@@ -41,7 +41,7 @@ int vFloat::operator --(){
 
 int vFloat::operator ++(){
     try{
-        (*data)++;
+        ((**data))++;
         return 0;
     }catch(int e){
         return -1;
@@ -50,7 +50,7 @@ int vFloat::operator ++(){
 
 float vFloat::operator !(){
     try{
-        return *data;
+        return (**data);
     }catch(int e){
         return -1;
     };
@@ -58,7 +58,7 @@ float vFloat::operator !(){
 
 int vFloat::operator =(float var){
     try{
-        *data = var;
+        (**data) = var;
         return 0;
     }catch(int e){
         return -1;
@@ -67,7 +67,7 @@ int vFloat::operator =(float var){
 
 int vFloat::operator =(vFloat var){
     try{
-        *data = !var;
+        (**data) = (!var);
         return 0;
     }catch(int e){
         return -1;
@@ -75,49 +75,49 @@ int vFloat::operator =(vFloat var){
 };
 
 bool vFloat::operator <(vFloat other){
-    return *data < !other;
+    return (**data) < (!other);
 };
 
 bool vFloat::operator <=(vFloat other){
-    return *data <= !other;
+    return (**data) <= (!other);
 };
 
 bool vFloat::operator >(vFloat other){
-    return *data > !other;
+    return (**data) > (!other);
 };
 
 bool vFloat::operator >=(vFloat other){
-    return *data >= !other;
+    return (**data) >= (!other);
 };
 
 bool vFloat::operator ==(vFloat other){
-    return *data == !other;
+    return (**data) == (!other);
 };
 
 bool vFloat::operator !=(vFloat other){
-    return *data != !other;
+    return (**data) != (!other);
 };
 
 bool vFloat::operator <(float other){
-    return *data < other;
+    return (**data) < other;
 };
 
 bool vFloat::operator <=(float other){
-    return *data <= other;
+    return (**data) <= other;
 };
 
 bool vFloat::operator >(float other){
-    return *data > other;
+    return (**data) > other;
 };
 
 bool vFloat::operator >=(float other){
-    return *data >= other;
+    return (**data) >= other;
 };
 
 bool vFloat::operator ==(float other){
-    return *data == other;
+    return (**data) == other;
 };
 
 bool vFloat::operator !=(float other){
-    return *data != other;
+    return (**data) != other;
 };

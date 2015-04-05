@@ -17,13 +17,13 @@ vLong::~vLong(){
     vFree(!data);
 };
 
-vRef vLong::operator &(){
-    return *data;
+vRef<long> vLong::operator &(){
+    return (data);
 };
 
 int vLong::operator +=(long pls){
     try{
-        *data+pls;
+        (**data)+pls;
         return 0;
     }catch(int e){
         return -1;
@@ -32,7 +32,7 @@ int vLong::operator +=(long pls){
 
 int vLong::operator --(){
     try{
-        (*data)--;
+        ((**data))--;
         return 0;
     }catch(int e){
         return -1;
@@ -41,7 +41,7 @@ int vLong::operator --(){
 
 int vLong::operator ++(){
     try{
-        (*data)++;
+        ((**data))++;
         return 0;
     }catch(int e){
         return -1;
@@ -50,7 +50,7 @@ int vLong::operator ++(){
 
 long vLong::operator !(){
     try{
-        return *data;
+        return (**data);
     }catch(int e){
         return -1;
     };
@@ -58,7 +58,7 @@ long vLong::operator !(){
 
 int vLong::operator =(long var){
     try{
-        *data = var;
+        (**data) = var;
         return 0;
     }catch(int e){
         return -1;
@@ -67,7 +67,7 @@ int vLong::operator =(long var){
 
 int vLong::operator =(vLong var){
     try{
-        *data = !var;
+        (**data) = !var;
         return 0;
     }catch(int e){
         return -1;
@@ -75,49 +75,49 @@ int vLong::operator =(vLong var){
 };
 
 bool vLong::operator <(vLong other){
-    return *data < !other;
+    return (**data) < (!other);
 };
 
 bool vLong::operator <=(vLong other){
-    return *data <= !other;
+    return (**data) <= (!other);
 };
 
 bool vLong::operator >(vLong other){
-    return *data > !other;
+    return (**data) > (!other);
 };
 
 bool vLong::operator >=(vLong other){
-    return *data >= !other;
+    return (**data) >= (!other);
 };
 
 bool vLong::operator ==(vLong other){
-    return *data == !other;
+    return (**data) == (!other);
 };
 
 bool vLong::operator !=(vLong other){
-    return *data != !other;
+    return (**data) != (!other);
 };
 
 bool vLong::operator <(long other){
-    return *data < other;
+    return (**data) < other;
 };
 
 bool vLong::operator <=(long other){
-    return *data <= other;
+    return (**data) <= other;
 };
 
 bool vLong::operator >(long other){
-    return *data > other;
+    return (**data) > other;
 };
 
 bool vLong::operator >=(long other){
-    return *data >= other;
+    return (**data) >= other;
 };
 
 bool vLong::operator ==(long other){
-    return *data == other;
+    return (**data) == other;
 };
 
 bool vLong::operator !=(long other){
-    return *data != other;
+    return (**data) != other;
 };
