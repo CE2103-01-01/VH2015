@@ -14,16 +14,17 @@ vHeap::vHeap(int s, float o){
     initPos = mainChunk;
     finalPos = initPos+s*1024;
 
-    metaData = vMetaData::getInstance();
-    memoryMutex = metaData->getMutex();
-
     pager = static_cast<vPager*>(malloc(sizeof(vPager)));
     new(pager) vPager();
+
+    metaData = vMetaData::getInstance();
+    metaData->setPager(pager);
+    memoryMutex = metaData->getMutex();
 
     dfrag = static_cast<vDefragmenter*>(malloc(sizeof(vDefragmenter)));
     new(dfrag) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
 
-    pthread_create(dfragThread,NULL,dfrag->vDefragmentThread,0);
+    pthread_create(dfragThread,NULL,vDefragmentThread,0);
     pthread_join(*dfragThread,NULL);
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));

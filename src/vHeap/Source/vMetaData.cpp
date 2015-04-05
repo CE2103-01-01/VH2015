@@ -150,7 +150,7 @@ vMetaData* vMetaData::getInstance() {
     return single;
 }
 
-void* vMetaData::de_vReference(int id, vPager* pager) {
+void* vMetaData::de_vReference(int id) {
     pthread_mutex_lock(memoryMutex);
 
     vListIterator<vEntry> *iter = memoryTable->getIterator();
@@ -176,11 +176,11 @@ void* vMetaData::de_vReference(int id, vPager* pager) {
     return 0;
 };
 
-static pthread_mutex_t* vMetaData::getMutex(){
+pthread_mutex_t* vMetaData::getMutex(){
     return memoryMutex;
 };
 
-static pthread_cond_t* vMetaData::getDefragmenterCond(){
+pthread_cond_t* vMetaData::getDefragmenterCond(){
     return dfragCond;
 };
 
@@ -202,4 +202,8 @@ vEntry* vMetaData::searchToPage(int s){
 
 int vMetaData::getHeapUse(){
     return vSize;
+};
+
+void vMetaData::setPager(vPager* p){
+    pager=p;
 };

@@ -23,6 +23,7 @@ class vMetaData {
     static vMetaData* single;
     static pthread_mutex_t* memoryMutex;
     static pthread_cond_t* dfragCond;
+    vPager* pager;
 public:
     vMetaData();
     ~vMetaData();
@@ -35,11 +36,12 @@ public:
     void printMetaData();
     vList<vEntry>* operator!();
     static vMetaData* getInstance();
-    static pthread_mutex_t* getMutex();
-    static pthread_cond_t* getDefragmenterCond();
-    void* de_vReference(int, vPager*);
+    pthread_mutex_t* getMutex();
+    pthread_cond_t* getDefragmenterCond();
+    void* de_vReference(int);
     vEntry* searchToPage(int);
     int getHeapUse();
+    void setPager(vPager*);
 };
 
 

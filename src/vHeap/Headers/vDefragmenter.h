@@ -21,12 +21,15 @@ class vDefragmenter {
     void* actualPos;
     vList<vEntry>* memoryT;
     void finishDefragment(vListIterator<vEntry>*, int);
-    void vDefragment();
     public:
         vDefragmenter(void*, void*, vList<vEntry>*, pthread_cond_t*, pthread_mutex_t*);
         ~vDefragmenter();
-        void* vDefragmentThread(void*);
+        void vDefragment();
+        pthread_mutex_t* getMutex();
+        pthread_cond_t* getCond();
 };
 
+
+void* vDefragmentThread(void*);
 
 #endif //VH2015_VDEFRAGMENTER_H
