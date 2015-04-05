@@ -8,7 +8,29 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
     idRef = pIdRef;
     dataSize = pDataSize;
     offset = pOffset;
+    onHeap = true;
+    path = "";
 }
+
+vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool oH, std::string p) {
+    idRef = pIdRef;
+    dataSize = pDataSize;
+    offset = pOffset;
+    onHeap = oH;
+    path = p;
+}
+
+void vEntry::fileDown(std::string p){
+    onHeap = false;
+    path = p;
+    offset = 0;
+};
+
+void vEntry::fileUp(void* content){
+    onHeap = true;
+    path = "";
+    offset = content;
+};
 
 void *vEntry::getOffSet() {
     return offset;
@@ -42,12 +64,7 @@ int vEntry::operator!() {
 };
 
 void vEntry::changeFlag() {
-    if (useFlag) {
-        useFlag = false;
-    }
-    else {
-        useFlag = true;
-    }
+    useFlag = !useFlag;
 }
 
 unsigned int vEntry::getNumReferences() {
@@ -83,4 +100,12 @@ int vEntry::operator[](void* var){
     var=memcpy(var,offset,dataSize);
     offset=var;
     return 0;
+};
+
+bool vEntry::isOnHeap(){
+    return onHeap;
+};
+
+std::string vEntry::getPath(){
+    return path;
 };

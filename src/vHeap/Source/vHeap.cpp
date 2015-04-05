@@ -42,10 +42,22 @@ vHeap::~vHeap(){
 unsigned int vHeap::vMalloc(int sz) {
 
     pthread_mutex_lock(memoryMutex);
-
-    unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
-    actualPos += sz;
-    metaData->printMetaData();
+    unsigned int id;
+    if(*vSize * *overweight > metaData->getHeapUse()){
+        if(actualPos + sz < finalPos){
+            unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
+            actualPos += sz;
+        }else{
+            vEntry* toPage = metaData->searchToPage(sz);
+            std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());
+            void* pos = &*toPage;
+            toPage->fileDown(downPath);
+            id = metaData->addEntry(sz, pos);
+        };
+    }else{
+        id=0;
+        std::cout << "Error, vHeap lleno" << std::endl;
+    };
 
     pthread_mutex_unlock(memoryMutex);
 

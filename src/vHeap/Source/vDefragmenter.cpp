@@ -19,28 +19,18 @@ vDefragmenter::~vDefragmenter(){};
 
 void vDefragmenter::vDefragment(){
     vListIterator<vEntry>* iter = memoryT->getIterator();
-    int counter = 1;
     while (iter->exists()) {
         vEntry* tmp = iter->next();
-        if(tmp->getDataSize() + actualPos < finalPos){
+        if(tmp->isOnHeap()){
+            tmp->changeFlag();
             if(&*tmp != actualPos){
                 (*tmp)[actualPos];
             }
             actualPos+=tmp->getDataSize();
-            (*tmp)[counter];
-        }else{
-            finishDefragment(iter,counter);
-            break;
-        };
-        counter++;
+            tmp->changeFlag();
+        }
     };
     actualPos=initPos;
-};
-
-void vDefragmenter::finishDefragment(vListIterator<vEntry>* iter, int counter){
-    while (iter->exists()) {
-        (*(iter->next()))[counter++];
-    };
 };
 
 void* vDefragmenter::vDefragmentThread(void*){

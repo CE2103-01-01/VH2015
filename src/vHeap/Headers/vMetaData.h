@@ -9,10 +9,14 @@ static const unsigned int initialId = 1;
 #include <iostream>
 #include <vTypes/Headers/vList.h>
 #include "vEntry.h"
+#include "vPager.h"
 #include <pthread.h>
 #include <cstdlib>
+#include <stdlib.h>
+#include <stdio.h>
 
 class vMetaData {
+    int vSize;
     unsigned int actualID = initialId;
     vList<vEntry>* memoryTable;
     vList<unsigned int>* deletedIDS;
@@ -33,7 +37,9 @@ public:
     static vMetaData* getInstance();
     static pthread_mutex_t* getMutex();
     static pthread_cond_t* getDefragmenterCond();
-    void* de_vReference(int);
+    void* de_vReference(int, vPager*);
+    vEntry* searchToPage(int);
+    int getHeapUse();
 };
 
 

@@ -22,6 +22,8 @@ vMetaData::vMetaData() {
 
     deletedIDS = static_cast<vList<unsigned int> *>(malloc(sizeof(vList<unsigned int>)));
     new(deletedIDS) vList<int>();
+
+    vSize = 0;
 }
 
 vMetaData::~vMetaData() {
@@ -98,6 +100,22 @@ void vMetaData::removeEntry(int idRef) {
     while (i->exists()) {
         vEntry *next = i->next();
         if (next->getIdRef() == idRef) {
+            vSize -= next->getDataSize();
+
+            if(next->isOnHeap()==false){
+                std::string p = next->getPath();
+                int l = p.length();
+
+                char* arr = static_cast<char*>(malloc(sizeof(char) * l));
+
+                for(int i=0; i<l; i++){
+                    *( arr+i ) = static_cast<char>(p[i]);
+                };
+
+                const char* cArr = arr;
+                remove(cArr);
+            };
+
             memoryTable->deleteNode(i->getPosition() - 1);
             deletedIDS->append(idRef);
             break;
@@ -110,6 +128,7 @@ void vMetaData::removeEntry(int idRef) {
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
 unsigned int vMetaData::addEntry(int size, void *actualPos) {
+    vSize+=size;
     if (deletedIDS->len() == 0) {
         vEntry e = vEntry(actualID, size, actualPos);
         memoryTable->append(e);
@@ -131,7 +150,7 @@ vMetaData* vMetaData::getInstance() {
     return single;
 }
 
-void* vMetaData::de_vReference(int id) {
+void* vMetaData::de_vReference(int id, vPager* pager) {
     pthread_mutex_lock(memoryMutex);
 
     vListIterator<vEntry> *iter = memoryTable->getIterator();
@@ -139,6 +158,16 @@ void* vMetaData::de_vReference(int id) {
     while(iter->exists()){
         vEntry* entry = iter->next();
         if(!*entry==id){
+            entry->changeFlag();
+            if(entry->isOnHeap() == false){
+                vEntry* toPage = searchToPage(entry->getDataSize());
+                std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());
+                void* content = &*toPage;
+                toPage->fileDown(downPath);
+                pager->pageUp(entry->getPath(),entry->getDataSize(),content);
+                entry->fileUp(content);
+            };
+            entry->changeFlag();
             pthread_mutex_unlock(memoryMutex);
             return &*entry;
         };
@@ -153,4 +182,24 @@ static pthread_mutex_t* vMetaData::getMutex(){
 
 static pthread_cond_t* vMetaData::getDefragmenterCond(){
     return dfragCond;
+};
+
+vEntry* vMetaData::searchToPage(int s){
+    pthread_mutex_lock(memoryMutex);
+
+    vListIterator<vEntry> *iter = memoryTable->getIterator();
+
+    while(iter->exists()){
+        vEntry* entry = iter->next();
+        if(entry->getUseFlag()==false & entry->getDataSize()>s){
+            pthread_mutex_unlock(memoryMutex);
+            return entry;
+        };
+    };
+    pthread_mutex_unlock(memoryMutex);
+    return 0;
+};
+
+int vMetaData::getHeapUse(){
+    return vSize;
 };
