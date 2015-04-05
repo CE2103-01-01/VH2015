@@ -7,20 +7,32 @@
 using namespace pugi;
 
 vHeap::vHeap(int s, float o){
-    overweight=static_cast<float*>(malloc(sizeof(float)));
-    *overweight=o;
+    overweight = static_cast<float*>(malloc(sizeof(float)));
+    *overweight = o;
     mainChunk = malloc(s * 1024);
-    actualPos=mainChunk;
-    initPos=mainChunk;
+    actualPos = mainChunk;
+    initPos = mainChunk;
     finalPos = initPos+s*1024;
+
     metaData = vMetaData::getInstance();
     memoryMutex = metaData->getMutex();
+
+    pager = static_cast<vPager*>(malloc(sizeof(vPager)));
+    new(pager) vPager();
+
+    dfrag = static_cast<vDefragmenter*>(malloc(sizeof(vDefragmenter)));
+    new(dfrag) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
+
+    pthread_create(dfragThread,NULL,dfrag->vDefragmentThread,0);
+    pthread_join(*dfragThread,NULL);
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
     //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
 };
 
 vHeap::~vHeap(){
+    pthread_detach(*dfragThread);
+    free(dfrag);
     free(overweight);
     free(vDebug);
     free(mainChunk);

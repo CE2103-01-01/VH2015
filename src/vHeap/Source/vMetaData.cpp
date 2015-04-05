@@ -9,10 +9,17 @@
 * inicializa valores y crea la lista
 */
 vMetaData::vMetaData() {
-    pthread_mutex_init(memoryMutex,0);
+    memoryMutex = static_cast<pthread_mutex_t*>(malloc(sizeof(pthread_mutex_t)));
+    pthread_mutex_init(memoryMutex, 0);
+
+    dfragCond = static_cast<pthread_cond_t*>(malloc(sizeof(pthread_cond_t)));
+    pthread_cond_init(dfragCond, 0);
+
     actualID = initialId;
+
     memoryTable = static_cast<vList<vEntry>*>(malloc(sizeof(vList<vEntry>)));
     new(memoryTable) vList<vEntry>();
+
     deletedIDS = static_cast<vList<unsigned int> *>(malloc(sizeof(vList<unsigned int>)));
     new(deletedIDS) vList<int>();
 }
@@ -96,6 +103,7 @@ void vMetaData::removeEntry(int idRef) {
             break;
         }
     }
+    pthread_cond_signal(dfragCond);
 }
 
 /**
@@ -139,6 +147,10 @@ void* vMetaData::de_vReference(int id) {
     return 0;
 };
 
-pthread_mutex_t* vMetaData::getMutex(){
+static pthread_mutex_t* vMetaData::getMutex(){
     return memoryMutex;
+};
+
+static pthread_cond_t* vMetaData::getDefragmenterCond(){
+    return dfragCond;
 };

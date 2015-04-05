@@ -13,6 +13,9 @@
 #include <fstream>
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
+#include "vDefragmenter.h"
+#include "vPager.h"
+#include <cstdlib>
 
 template<class T>
 class vRef;
@@ -29,8 +32,11 @@ class vHeap{
     void* initPos;
     void* finalPos;
     void* actualPos;
-    pthread_mutex_t* memoryMutex;
     vMetaData* metaData;
+    vPager* pager;
+    vDefragmenter* dfrag;
+    pthread_mutex_t* memoryMutex;
+    pthread_t* dfragThread;
 public:
     vHeap(int,float);
     ~vHeap();
