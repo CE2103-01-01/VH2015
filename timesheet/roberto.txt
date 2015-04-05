@@ -2,7 +2,7 @@ Timesheet
 
 Miércoles 18-3  	
 1h Investigación
-2h Creación de código: vHeap
+2h Creación de código
 
 Viernes 20-3	
 1h Investigación
@@ -30,51 +30,60 @@ Jueves 2-4
 13h Documentación
 
 Viernes 3-4
+1h Investigación
 6h Creación de código
 
 Sábado 4-4
 2h Investigación
-5h Creación de código
-TODO: actualizar, ultima vez: 19:35
+6h Creación de código
+
 
 
 Bitácora
 
 Miércoles 18-3   	
-Investigación: funcionamiento de heap y manejo de memoria en C++.
-Creación de código: estructura básica del vHeap y vRef.
+Investigación: Funcionamiento de heap y manejo de memoria en C++.
+Creación de código: Se implementa la estructura básica del vHeap y vRef.
 
 Viernes 20-3	
-Investigación: manejo de memoria en C++.
-Creación de código: implementación del método vMalloc y vFree. Luego de ciertos inconvenientes se logra.
+Investigación: Manejo de memoria en C++.
+Creación de código: Se implementa el método vMalloc y vFree. Luego de ciertos inconvenientes se logra.
 
 Miércoles 25-3	
-Creación de la clase vString y método vPlacement.
+Creación de código: Se implementa la clase vString y método vPlacement.
 
 Sábado 28-3	
-Creación de código: se implementa el metodo para extraer un dato de una referencia y se sobrecargan los operadores de vRef. Se crea una interfaz funcional para acceder al vHeap sin llamarlo directamente.
+Creación de código: Se implementa el metodo para extraer un dato de una referencia y se sobrecargan los operadores de vRef.
+                    Se crea una interfaz funcional para acceder al vHeap sin llamarlo directamente.
 
 Domingo 29-3	
-Creación de código: implementación de parte de las clases vInt y vChar.
+Creación de código: Se implementa parte de las clases vInt y vChar.
 
 Lunes 30-3	
-Creación de código: implementación de parte de las clases vLong y vFloat. Se detecta error extraño en vPlacement que indica la no existencia de vRef.
+Creación de código: Se implementa parte de las clases vLong y vFloat.
+                    Se detecta error extraño en vPlacement que indica la no existencia de vRef.
 
 Martes 31-3	
-Creación de código: se finalizan los vTypes implementando operadores. Luego de ciertos inconvenientes extrayendo contenido de referencias se realiza con éxito.
+Creación de código: Se finalizan los vTypes implementando operadores. Luego de ciertos inconvenientes extrayendo contenido de referencias se implementan con éxito.
 
 Miércoles 1-3	
-Creación de código: se mejora la implementación de clases vSimpleNode y vSimpleList para que esté alojada en vHeap.  Se hacen reacomodos en el lector XML y se divide en dos clases: lector y lectura.
+Creación de código: Se mejora la implementación de clases vSimpleNode y vSimpleList para que esté alojada en vHeap.
+                    Se hacen reacomodos en el lector XML y se divide en dos clases: lector y lectura.
 
 Jueves 2-3	
 Documentación externa
 
 Viernes 3-3
-Creación de código: se mejora la implementación de vRef con el uso de templates para dar una mayor transparencia en codigo y facilitar la dereferencia. Se crea el desfragmentador y se deja listo para coordinar con vHeap. Se crea un control de IDs borrados en Metadata para no requerir reacomodo en los mismos.
+Investigación: Swap entre punteros.
+Creación de código: Se mejora la implementación de vRef con el uso de templates para dar una mayor transparencia en codigo y facilitar la dereferencia.
+                    Se crea el desfragmentador y se deja listo para coordinar con vHeap.
+                    Se crea un control de IDs borrados en Metadata para no requerir reacomodo en los mismos.
 
 Sábado 4-3
 Investigación: escritura y lectura de archivos binarios en c++.
                función to_string() de c++11 y requerimientos para su uso.
-Creación de código: luego de ciertos problemas con el uso de to_string(), se activa la bandera para que g++ siga el protocolo de c++11 y se implementa el paginador con exito.
+Creación de código: Se activa la bandera para que g++ siga el protocolo de c++11 y asi poder utilizar to_string().
+                    Se implementa el paginador con exito.
                     Se cambia el valor de retorno de derefereciación de T a T* y se arregla el problema de operadores con vTypes.
                     Se convierte a vMetaData en singleton ya que no se podia incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo. Con esto se crea un puente de comunicación entre ambas clases sin necesidad de incluirlas.
+                    Se implemente el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un free.
