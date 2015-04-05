@@ -43,14 +43,21 @@ void vDefragmenter::finishDefragment(vListIterator<vEntry>* iter, int counter){
     };
 };
 
-void* vDefragmenter::vDefragmentThread(void*){
+pthread_cond_t* vDefragmenter::getCond(){
+    return cond;
+};
+pthread_mutex_t* vDefragmenter::getMutex(){
+    return mutex;
+};
+
+void* vDefragmentThread(void* p){
+    vDefragmenter* vD = static_cast<vDefragmenter*>(p);
     while(true){
-        pthread_cond_wait(cond, mutex);
-        pthread_mutex_lock(mutex);
+        pthread_cond_wait(vD->getCond(), vD->getMutex());
+        pthread_mutex_lock(vD->getMutex());
 
-        vDefragment();
+        vD->vDefragment();
 
-        pthread_mutex_unlock(mutex);
+        pthread_mutex_unlock(vD->getMutex());
     };
-    return 0;
 };

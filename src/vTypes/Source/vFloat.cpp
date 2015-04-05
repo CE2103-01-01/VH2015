@@ -5,119 +5,110 @@
 #include "vTypes/Headers/vFloat.h"
 
 vFloat::vFloat(){
-    data = vRef<float>(vMalloc(sizeof(float)));
-};
-
-vFloat::vFloat(float d){
-    data = vRef<float>(vMalloc(sizeof(float)));
-    vPlacement<float>(data, d);
+    data = 0;
+    ref = static_cast<vRef*>(malloc(sizeof(vRef)));
+    new(ref) vRef(vMalloc(sizeof(vFloat)));
+    vFloat* ret = this;
+    vPlacement(*ref,*ret);
 };
 
 vFloat::~vFloat(){
-    vFree(!data);
+    vFree(!ref);
 };
 
-vRef<float> vFloat::operator &(){
-    return data;
-};
-
-int vFloat::operator +=(float pls){
-    try{
-        (**data) += pls;
-        return 0;
-    }catch(int e){
-        return -1;
+vFloat vFloat::operator = (float var){
+    if(!ref){
+        data = var;
+        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
+        new(ref) vRef(vMalloc(sizeof(vFloat)));
+        vFloat* ret = this;
+        vPlacement(*ref,*ret);
+        return *ret;
+    }else{
+        data = var;
+        vFloat* ret = this;
+        return *ret;
     };
 };
 
-int vFloat::operator --(){
-    try{
-        ((**data))--;
-        return 0;
-    }catch(int e){
-        return -1;
+vFloat vFloat::operator =(vFloat var){
+    if(!ref){
+        data = !var;
+        ref = static_cast<vRef*>(malloc(sizeof(vRef)));
+        new(ref) vRef(vMalloc(sizeof(vFloat)));
+        vFloat* ret = this;
+        vPlacement(*ref,*ret);
+        return *ret;
+    }else{
+        data = !var;
+        vFloat* ret = this;
+        return *ret;
     };
 };
 
-int vFloat::operator ++(){
-    try{
-        ((**data))++;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
+vRef vFloat::operator &() {
+    return vRef(!*ref);
+};
+void vFloat::operator +=(float pls){
+    data += pls;
+};
+
+void vFloat::operator --(){
+    (data)--;
+};
+
+void vFloat::operator ++(){
+    (data)++;
 };
 
 float vFloat::operator !(){
-    try{
-        return (**data);
-    }catch(int e){
-        return -1;
-    };
-};
-
-int vFloat::operator =(float var){
-    try{
-        (**data) = var;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
-};
-
-int vFloat::operator =(vFloat var){
-    try{
-        (**data) = (!var);
-        return 0;
-    }catch(int e){
-        return -1;
-    };
+    return data;
 };
 
 bool vFloat::operator <(vFloat other){
-    return (**data) < (!other);
+    return data < (!other);
 };
 
 bool vFloat::operator <=(vFloat other){
-    return (**data) <= (!other);
+    return data <= (!other);
 };
 
 bool vFloat::operator >(vFloat other){
-    return (**data) > (!other);
+    return data > (!other);
 };
 
 bool vFloat::operator >=(vFloat other){
-    return (**data) >= (!other);
+    return data >= (!other);
 };
 
 bool vFloat::operator ==(vFloat other){
-    return (**data) == (!other);
+    return data == (!other);
 };
 
 bool vFloat::operator !=(vFloat other){
-    return (**data) != (!other);
+    return data != (!other);
 };
 
 bool vFloat::operator <(float other){
-    return (**data) < other;
+    return data < other;
 };
 
 bool vFloat::operator <=(float other){
-    return (**data) <= other;
+    return data <= other;
 };
 
 bool vFloat::operator >(float other){
-    return (**data) > other;
+    return data > other;
 };
 
 bool vFloat::operator >=(float other){
-    return (**data) >= other;
+    return data >= other;
 };
 
 bool vFloat::operator ==(float other){
-    return (**data) == other;
+    return data == other;
 };
 
 bool vFloat::operator !=(float other){
-    return (**data) != other;
+    return data != other;
 };

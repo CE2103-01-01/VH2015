@@ -10,32 +10,31 @@
 #include "../libs/vheaplib.h"
 
 
-class vLong : public vObject{
-        vRef<long> data;
-    public:
-        vLong();
-        vLong(long);
-        ~vLong();
-        long operator !();
-        int operator +=(long);
-        vRef<long> operator &();
-        int operator --();
-        int operator ++();
-        int operator =(long);
-        int operator =(vLong);
-        bool operator <(vLong);
-        bool operator <=(vLong);
-        bool operator >(vLong);
-        bool operator >=(vLong);
-        bool operator ==(vLong);
-        bool operator !=(vLong);
-        bool operator <(long);
-        bool operator <=(long);
-        bool operator >(long);
-        bool operator >=(long);
-        bool operator ==(long);
-        bool operator !=(long);
+class vLong: public vObject{
+    long data;
+    vRef* ref;
+public:
+    vLong();
+    ~vLong();
+    vLong operator =(long);
+    vLong operator =(vLong);
+    vRef operator &();
+    long operator !();
+    void operator +=(long);
+    void operator --();
+    void operator ++();
+    bool operator <(vLong);
+    bool operator <=(vLong);
+    bool operator >(vLong);
+    bool operator >=(vLong);
+    bool operator ==(vLong);
+    bool operator !=(vLong);
+    bool operator <(long);
+    bool operator <=(long);
+    bool operator >(long);
+    bool operator >=(long);
+    bool operator ==(long);
+    bool operator !=(long);
 };
-
 
 #endif //_VH2015_VLONG_H_

@@ -2,14 +2,13 @@
 #include <Test/Headers/TestApplication.h>
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
-#include "src/vTypes/Headers/vSimpleList.h"
 #include "src/vHeap/Headers/vPager.h"
 #include "../libs/vheaplibpp.h"
 
 using namespace std;
 
 void pruebaVHeap() {
-    vRef<int> r1 = vRef<int>(vMalloc(sizeof(int)));
+    vRef r1 = vRef(vMalloc(sizeof(int)));
 }
 
 void pruebaVString() {
@@ -45,7 +44,8 @@ void pruebaLista() {
 }
 
 void pruebaChar(){
-    vChar chr = vChar(63);
+    vChar chr;
+    chr = (char)63;
     std::cout<<"Valor del vChar chr: "<< !chr <<std::endl;
 };
 void pruebaDumpTxt(){
@@ -53,13 +53,6 @@ void pruebaDumpTxt(){
     dump.saveDumpFile();
 
 }
-
-void pruebaListaSimple(){
-    vRef<vSimpleList<vChar>> lista = vRef<vSimpleList<vChar>>(vMalloc(sizeof(vSimpleList<vChar>)));
-    vSimpleList<vChar> l = vSimpleList<vChar>();
-    vPlacement<vSimpleList<vChar>>(lista, l);
-
-};
 
 void pruebaPager(){
     vPager* vP = static_cast<vPager*>(malloc(sizeof(vPager)));

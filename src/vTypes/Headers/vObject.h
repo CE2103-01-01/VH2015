@@ -12,6 +12,13 @@ class vObject {
     public:
         vObject();
         ~vObject();
+        vObject operator =(vObject);
+        bool operator <(vObject);
+        bool operator <=(vObject);
+        bool operator >(vObject);
+        bool operator >=(vObject);
+        bool operator ==(vObject);
+        bool operator !=(vObject);
 };
 
 

@@ -10,7 +10,7 @@
 #include <iostream>
 #include "../libs/vheaplib.h"
 #include "vInt.h"
-
+/**
 template <class T>
 class vSimpleNode{
     vRef<vSimpleNode> next;
