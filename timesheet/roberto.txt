@@ -77,3 +77,4 @@ Investigación: escritura y lectura de archivos binarios en c++.
                función to_string() de c++11 y requerimientos para su uso.
 Creación de código: luego de ciertos problemas con el uso de to_string(), se activa la bandera para que g++ siga el protocolo de c++11 y se implementa el paginador con exito.
                     Se cambia el valor de retorno de derefereciación de T a T* y se arregla el problema de operadores con vTypes.
+                    Se convierte a vMetaData en singleton ya que no se podia incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo. Con esto se crea un puente de comunicación entre ambas clases sin necesidad de incluirlas.
