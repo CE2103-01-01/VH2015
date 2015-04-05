@@ -29,8 +29,8 @@ class vHeap{
     void* initPos;
     void* finalPos;
     void* actualPos;
-    pthread_mutex_t memoryMutex;
-    vMetaData *metaData;
+    pthread_mutex_t* memoryMutex;
+    vMetaData* metaData;
 public:
     vHeap(int,float);
     ~vHeap();

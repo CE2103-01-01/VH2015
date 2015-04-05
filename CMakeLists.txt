@@ -7,7 +7,6 @@ set(SOURCE_FILES    main.cpp
                     src/vHeap/Source/vHeap.cpp
                     src/vHeap/Source/vGarbageCollector.cpp
                     src/vHeap/Source/vMetaData.cpp
-                    src/vHeap/Source/vRef.cpp
                     src/vHeap/Source/vEntry.cpp
                     src/vHeap/Source/vDefragmenter.cpp
                     src/vHeap/Source/vPager.cpp

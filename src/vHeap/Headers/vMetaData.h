@@ -6,18 +6,17 @@
 
 static const unsigned int initialId = 1;
 
-
-#include "vEntry.h"
-
-
 #include <iostream>
 #include <vTypes/Headers/vList.h>
-
+#include "vEntry.h"
+#include <pthread.h>
 
 class vMetaData {
     unsigned int actualID = initialId;
-    vList<vEntry> *memoryTable;
-    vList<unsigned int> *deletedIDS;
+    vList<vEntry>* memoryTable;
+    vList<unsigned int>* deletedIDS;
+    static vMetaData* single;
+    static pthread_mutex_t* memoryMutex;
 public:
     vMetaData();
     ~vMetaData();
@@ -25,11 +24,13 @@ public:
     int len();
     void increaseReference(unsigned int idRef);
     void decreaseReference(unsigned int idRef);
-
     unsigned int addEntry(int, void *);
     void removeEntry(int idRef);
     void printMetaData();
     vList<vEntry> *operator!();
+    static vMetaData* getInstance();
+    static pthread_mutex_t* getMutex();
+    void* de_vReference(int);
 };
 
 

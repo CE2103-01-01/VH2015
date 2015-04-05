@@ -9,6 +9,7 @@
 * inicializa valores y crea la lista
 */
 vMetaData::vMetaData() {
+    pthread_mutex_init(memoryMutex,0);
     actualID = initialId;
     memoryTable = static_cast<vList<vEntry>*>(malloc(sizeof(vList<vEntry>)));
     new(memoryTable) vList<vEntry>();
@@ -113,3 +114,31 @@ unsigned int vMetaData::addEntry(int size, void *actualPos) {
         return id;
     };
 }
+
+vMetaData* vMetaData::getInstance() {
+    if(!single) {
+        single = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
+        new(single) vMetaData();
+    }
+    return single;
+}
+
+void* vMetaData::de_vReference(int id) {
+    pthread_mutex_lock(memoryMutex);
+
+    vListIterator<vEntry> *iter = memoryTable->getIterator();
+
+    while(iter->exists()){
+        vEntry* entry = iter->next();
+        if(!*entry==id){
+            pthread_mutex_unlock(memoryMutex);
+            return &*entry;
+        };
+    };
+    pthread_mutex_unlock(memoryMutex);
+    return 0;
+};
+
+pthread_mutex_t* vMetaData::getMutex(){
+    return memoryMutex;
+};

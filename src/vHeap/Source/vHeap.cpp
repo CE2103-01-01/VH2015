@@ -13,9 +13,8 @@ vHeap::vHeap(int s, float o){
     actualPos=mainChunk;
     initPos=mainChunk;
     finalPos = initPos+s*1024;
-    pthread_mutex_init(&memoryMutex,0);
-    metaData = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
-    new(metaData) vMetaData();
+    metaData = vMetaData::getInstance();
+    memoryMutex = metaData->getMutex();
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
     //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
@@ -30,13 +29,13 @@ vHeap::~vHeap(){
 
 unsigned int vHeap::vMalloc(int sz) {
 
-    pthread_mutex_lock(&memoryMutex);
+    pthread_mutex_lock(memoryMutex);
 
     unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
     actualPos += sz;
     metaData->printMetaData();
 
-    pthread_mutex_unlock(&memoryMutex);
+    pthread_mutex_unlock(memoryMutex);
 
     return id;
 };
@@ -44,20 +43,20 @@ unsigned int vHeap::vMalloc(int sz) {
 
 template<class T>
 void vHeap::vFree(vRef<T> r) {
-    pthread_mutex_lock(&memoryMutex);
+    pthread_mutex_lock(memoryMutex);
     metaData->removeEntry(!r);
-    pthread_mutex_unlock(&memoryMutex);;
+    pthread_mutex_unlock(memoryMutex);;
 }
 
 template<class T>
 int vHeap::vPlacement(vRef<T> memory, T object) {
-    pthread_mutex_lock(&memoryMutex);
+    pthread_mutex_lock(memoryMutex);
     try {
         *static_cast<T *>(de_vReference(!memory)) = object;
-        pthread_mutex_unlock(&memoryMutex);
+        pthread_mutex_unlock(memoryMutex);
         return 0;
     } catch (int error) {
-        pthread_mutex_unlock(&memoryMutex);
+        pthread_mutex_unlock(memoryMutex);
         return -1;
     };
 };
@@ -65,9 +64,9 @@ int vHeap::vPlacement(vRef<T> memory, T object) {
 vHeap* vHeap::vHeapSingleton = 0;
 
 void vHeap::vFree(unsigned int idRef) {
-    pthread_mutex_lock(&memoryMutex);
+    pthread_mutex_lock(memoryMutex);
     metaData->removeEntry(idRef);
-    pthread_mutex_unlock(&memoryMutex);;
+    pthread_mutex_unlock(memoryMutex);;
 }
 
 vMetaData *vHeap::getMetaData() {
@@ -87,18 +86,18 @@ vHeap *vHeap::getInstance() {
  }
 
 void *vHeap::de_vReference(int id) {
-   pthread_mutex_lock(&memoryMutex);
+   pthread_mutex_lock(memoryMutex);
 
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
         vEntry* entry = iter->next();
     if(!*entry==id){
-            pthread_mutex_unlock(&memoryMutex);
+            pthread_mutex_unlock(memoryMutex);
             return &*entry;
         };
     };
-    pthread_mutex_unlock(&memoryMutex);
+    pthread_mutex_unlock(memoryMutex);
     return 0;
 };
 

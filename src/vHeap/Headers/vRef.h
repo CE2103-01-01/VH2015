@@ -6,7 +6,7 @@
 #define _VH2015_VREF_H_
 
 
-#include "vHeap.h"
+#include "vMetaData.h"
 
 template <class T> class vRef {
         int referenceID;
@@ -22,6 +22,62 @@ template <class T> class vRef {
         int operator --();
 };
 
+template<class T>
+vRef<T>::vRef(int id) {
+    referenceID = id;
+    vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
+};
 
+template<class T>
+vRef<T>::vRef() {
+    referenceID = 0;
+};
+
+template<class T>
+vRef<T>::~vRef() {
+    vMetaData::getInstance()->decreaseReference(referenceID); // disminuye contador de referencias
+};
+
+template<class T>
+int vRef<T>::operator!() {
+    return referenceID;
+};
+
+template<class T>
+T* vRef<T>::operator*() {
+    return static_cast<T *>(vMetaData::getInstance()->de_vReference(referenceID));
+};
+
+template<class T>
+int vRef<T>::operator=(int id) {
+    if (referenceID)vMetaData::getInstance()->decreaseReference(referenceID);
+    referenceID = id;
+    vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
+    return 0;
+};
+
+template<class T>
+int vRef<T>::operator=(vRef other) {
+    if (referenceID)vMetaData::getInstance()->decreaseReference(referenceID);
+    referenceID = !other;
+    vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
+    return 0;
+};
+
+template<class T>
+int vRef<T>::operator++() {
+    if (referenceID)vMetaData::getInstance()->decreaseReference(referenceID);
+    referenceID++;
+    vMetaData::getInstance()->increaseReference(referenceID);
+    return 0;
+};
+
+template<class T>
+int vRef<T>::operator--() {
+    if (referenceID) vMetaData::getInstance()->decreaseReference(referenceID);
+    referenceID--;
+    if (referenceID) vMetaData::getInstance()->increaseReference(referenceID);
+    return 0;
+};
 
 #endif //_VH2015_VREF_H_
