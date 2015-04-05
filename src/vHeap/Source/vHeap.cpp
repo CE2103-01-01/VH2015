@@ -23,7 +23,7 @@ vHeap::vHeap(int s, float o){
     dfrag = static_cast<vDefragmenter*>(malloc(sizeof(vDefragmenter)));
     new(dfrag) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
 
-    pthread_create(dfragThread,NULL,vDefragmentThread,static_cast<void*>(dfrag));
+    pthread_create(dfragThread,NULL,dfrag->vDefragmentThread,0);
     pthread_join(*dfragThread,NULL);
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
@@ -53,28 +53,18 @@ unsigned int vHeap::vMalloc(int sz) {
 };
 
 
-void vHeap::vFree(vRef r) {
+template<class T>
+void vHeap::vFree(vRef<T> r) {
     pthread_mutex_lock(memoryMutex);
     metaData->removeEntry(!r);
     pthread_mutex_unlock(memoryMutex);;
 }
 
-int vHeap::vPlacement(vRef memory, vObject object) {
+template<class T>
+int vHeap::vPlacement(vRef<T> memory, T object) {
     pthread_mutex_lock(memoryMutex);
     try {
-        *static_cast<vObject *>(de_vReference(!memory)) = object;
-        pthread_mutex_unlock(memoryMutex);
-        return 0;
-    } catch (int error) {
-        pthread_mutex_unlock(memoryMutex);
-        return -1;
-    };
-};
-
-int vHeap::vPlacement(int mem, vObject object) {
-    pthread_mutex_lock(memoryMutex);
-    try {
-        *static_cast<vObject*>(de_vReference(mem)) = object;
+        *static_cast<T *>(de_vReference(!memory)) = object;
         pthread_mutex_unlock(memoryMutex);
         return 0;
     } catch (int error) {

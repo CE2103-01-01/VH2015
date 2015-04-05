@@ -147,10 +147,10 @@ void* vMetaData::de_vReference(int id) {
     return 0;
 };
 
-pthread_mutex_t* vMetaData::getMutex(){
+static pthread_mutex_t* vMetaData::getMutex(){
     return memoryMutex;
 };
 
-pthread_cond_t* vMetaData::getDefragmenterCond(){
+static pthread_cond_t* vMetaData::getDefragmenterCond(){
     return dfragCond;
 };

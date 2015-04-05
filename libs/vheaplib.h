@@ -7,21 +7,17 @@
 
 #include "../src/vHeap/Headers/vHeap.h"
 #include "../src/vHeap/Headers/vRef.h"
-#include "vTypes/Headers/vObject.h"
-
-class vRef;
-class vObject;
 
 
-void vFree(int);
-
-void vFree(vRef);
+void vFree(int toFree);
 
 unsigned int vMalloc(unsigned int);
 
-int vPlacement(vRef, vObject);
+template<class T>
+void vFree(vRef<T> toFree);
 
-int vPlacement(int, vObject);
+template<class T>
+int vPlacement(vRef<T> vR, T toPlace);
 
 
 #endif //_VH2015_HEAP_H_

@@ -31,8 +31,8 @@ public:
     void printMetaData();
     vList<vEntry>* operator!();
     static vMetaData* getInstance();
-    pthread_mutex_t* getMutex();
-    pthread_cond_t* getDefragmenterCond();
+    static pthread_mutex_t* getMutex();
+    static pthread_cond_t* getDefragmenterCond();
     void* de_vReference(int);
 };
 

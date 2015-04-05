@@ -5,108 +5,118 @@
 #include "vTypes/Headers/vChar.h"
 
 vChar::vChar(){
-    data = 0;
-    ref = vMalloc(sizeof(vChar));
-    vChar* ret = this;
-    vPlacement(ref,*ret);
+    data = vRef<char>(vMalloc(sizeof(char)));
+};
+
+vChar::vChar(char d){
+    data = vRef<char>(vMalloc(sizeof(char)));
+    vPlacement<char>(data, d);
 };
 
 vChar::~vChar(){
-    vFree(!ref);
+    vFree(!data);
 };
-
-vChar vChar::operator = (char var){
-    if(ref==0){
-        data = var;
-        ref = vMalloc(sizeof(vChar));
-        vChar* ret = this;
-        vPlacement(ref,*ret);
-        return *ret;
-    }else{
-        data = var;
-        vChar* ret = this;
-        return *ret;
-    };
-};
-
-vChar vChar::operator =(vChar var){
-    if(!ref){
-        data = !var;
-        ref = vMalloc(sizeof(vChar));
-        vChar* ret = this;
-        vPlacement(ref,*ret);
-        return *ret;
-    }else{
-        data = !var;
-        vChar* ret = this;
-        return *ret;
-    };
-};
-
-vRef vChar::operator &() {
-    return vRef(ref);
-
-};
-void vChar::operator +=(char pls){
-    data += pls;
-};
-
-void vChar::operator --(){
-    (data)--;
-};
-
-void vChar::operator ++(){
-    (data)++;
-};
-
-char vChar::operator !(){
+vRef<char> vChar::operator &(){
     return data;
 };
 
+int vChar::operator +=(char pls){
+    try{
+        (**data) += pls;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vChar::operator --(){
+    try{
+        ((**data))--;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vChar::operator ++(){
+    try{
+        ((**data))++;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+char vChar::operator !(){
+    try{
+        return (**data);
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vChar::operator =(char var){
+    try{
+        (**data) = var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
+int vChar::operator =(vChar var){
+    try{
+        (**data) = !var;
+        return 0;
+    }catch(int e){
+        return -1;
+    };
+};
+
 bool vChar::operator <(vChar other){
-    return data < (!other);
+    return (**data) < (!other);
 };
 
 bool vChar::operator <=(vChar other){
-    return data <= (!other);
+    return (**data) <= (!other);
 };
 
 bool vChar::operator >(vChar other){
-    return data > (!other);
+    return (**data) > (!other);
 };
 
 bool vChar::operator >=(vChar other){
-    return data >= (!other);
+    return (**data) >= (!other);
 };
 
 bool vChar::operator ==(vChar other){
-    return data == (!other);
+    return (**data) == (!other);
 };
 
 bool vChar::operator !=(vChar other){
-    return data != (!other);
+    return (**data) != (!other);
 };
 
 bool vChar::operator <(char other){
-    return data < other;
+    return (**data) < other;
 };
 
 bool vChar::operator <=(char other){
-    return data <= other;
+    return (**data) <= other;
 };
 
 bool vChar::operator >(char other){
-    return data > other;
+    return (**data) > other;
 };
 
 bool vChar::operator >=(char other){
-    return data >= other;
+    return (**data) >= other;
 };
 
 bool vChar::operator ==(char other){
-    return data == other;
+    return (**data) == other;
 };
 
 bool vChar::operator !=(char other){
-    return data != other;
+    return (**data) != other;
 };

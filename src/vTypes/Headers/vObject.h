@@ -9,17 +9,9 @@
 #include "../libs/vheaplib.h"
 
 class vObject {
-    int idRef=0;
     public:
         vObject();
         ~vObject();
-        vObject operator =(vObject);
-        bool operator <(vObject);
-        bool operator <=(vObject);
-        bool operator >(vObject);
-        bool operator >=(vObject);
-        bool operator ==(vObject);
-        bool operator !=(vObject);
 };
 
 

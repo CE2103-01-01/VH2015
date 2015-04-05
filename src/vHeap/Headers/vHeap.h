@@ -16,10 +16,9 @@
 #include "vDefragmenter.h"
 #include "vPager.h"
 #include <cstdlib>
-#include "vTypes/Headers/vObject.h"
 
+template<class T>
 class vRef;
-class vObject;
 class vMetaData;
 class Dump;
 class vHeap{
@@ -42,7 +41,7 @@ public:
     vHeap(int,float);
     ~vHeap();
     unsigned int vMalloc(int);
-    void vFree(vRef);
+    template <class T> void vFree(vRef<T>);
     void vFree(unsigned int);
     static vHeap* getInstance();
     bool makeDump();
@@ -50,8 +49,7 @@ public:
     vMetaData* getMetaData();
     int removeVRef(int);
     int addVRef(int);
-    int vPlacement(vRef, vObject);
-    int vPlacement(int, vObject);
+    template <class T> int vPlacement(vRef<T>, T);
     void* de_vReference(int);
 };
 

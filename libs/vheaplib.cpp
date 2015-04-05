@@ -12,14 +12,12 @@ unsigned int vMalloc(unsigned int vSize) {
     return vHeap::getInstance()->vMalloc(vSize);
 };
 
-void vFree(vRef toFree) {
+template<class T>
+void vFree(vRef<T> toFree) {
     vHeap::getInstance()->vFree(toFree);
 };
 
-int vPlacement(vRef vR, vObject toPlace) {
-    return vHeap::getInstance()->vPlacement(vR, toPlace);
-};
-
-int vPlacement(int vR, vObject toPlace) {
-    return vHeap::getInstance()->vPlacement(vR, toPlace);
+template<class T>
+int vPlacement(vRef<T> vR, T toPlace) {
+    return vHeap::getInstance()->vPlacement<T>(vR, toPlace);
 };

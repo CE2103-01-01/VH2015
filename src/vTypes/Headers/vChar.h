@@ -11,18 +11,18 @@
 #include <iostream>
 
 class vChar: public vObject{
-        char data;
-        int ref=0;
+        vRef<char> data;
     public:
         vChar();
+        vChar(char);
         ~vChar();
-        vChar operator =(char);
-        vChar operator =(vChar);
-        vRef operator &();
+        int operator =(char);
+        int operator =(vChar);
         char operator !();
-        void operator +=(char);
-        void operator --();
-        void operator ++();
+        int operator +=(char);
+        vRef<char> operator &();
+        int operator --();
+        int operator ++();
         bool operator <(vChar);
         bool operator <=(vChar);
         bool operator >(vChar);
