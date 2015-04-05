@@ -89,3 +89,21 @@ Creación de código: Se activa la bandera para que g++ siga el protocolo de c++
                     Se convierte a vMetaData en singleton, ya que no es posible incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo.
                     Se crea un puente de comunicación entre ambas vHeap y vRef utilizando el singleton de vMetaData.
                     Se implemente el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un vFree.
+
+Sábado 4-3
+Creación de código: Se coordina vHeap, vMetaData y vPager, dejando la paginación y la subida y bajada de objetos lista.
+                    TODO: corregir error con cMake
+                    TODO: coordinar vGarbageCollector con vDefragmenter.
+                    TODO: terminar vDump
+                    TODO: implementar vDebuger
+                    TODO: implementar vArray
+                    TODO: cambiar vBinaryTree de heap a vHeap
+                    TODO: cambiar vString de heap a vHeap
+                    TODO: implementar vDoubleList
+                    TODO: aplicación de prueba
+                    TODO: vHeap como servidor
+                    TODO: visores de uso y dump de memoria
+                    TODO: análisis de algoritmos
+                    TODO: paper y documentación
+                    TODO: malloc -> calloc
+                    TODO: mejorar vTypes
