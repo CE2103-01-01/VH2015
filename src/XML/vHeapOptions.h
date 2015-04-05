@@ -15,7 +15,6 @@ class vHeapOptions {
     float* overweight;
 
     public:
-        static char const *const xmlPath = "vHeap.xml";
         vHeapOptions();
         ~vHeapOptions();
         int operator[](std::string);

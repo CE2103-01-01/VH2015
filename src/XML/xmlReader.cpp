@@ -6,7 +6,7 @@ xmlReader::~xmlReader() {};
 
 void xmlReader::read(vHeapOptions* ret) {
     xml_document doc;
-    doc.load_file(ret->xmlPath);
+    doc.load_file(vHeapXMLPath);
     xml_node raiz = doc.child("VH2015");
     *ret+raiz.child("vdebug").attribute("activo").as_bool();
     *ret+raiz.child("vdebug").attribute("vdebug-file-path").value();
