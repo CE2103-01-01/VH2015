@@ -10,7 +10,7 @@ vInt::vInt(){
 
 vInt::vInt(int d){
     data = vRef<int>(vMalloc(sizeof(int)));
-    vPlacement<int>(data, d);
+    vPlacement(data, d);
 };
 
 vInt::~vInt(){

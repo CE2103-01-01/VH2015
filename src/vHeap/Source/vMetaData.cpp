@@ -35,7 +35,7 @@ vList<vEntry> *vMetaData::getMemoryTable() {
 
 int vMetaData::len() {
     return actualID - deletedIDS->len();
-}
+};
 
 /**
 *Busca un id y aumenta num de Referencias
@@ -49,7 +49,7 @@ void vMetaData::increaseReference(unsigned int idRef) {
             break;
         }
     }
-}
+};
 
 /**
 * Busca un id y disminuye num de referencias
@@ -63,7 +63,7 @@ void vMetaData::decreaseReference(unsigned int idRef) {
             break;
         }
     }
-}
+};
 
 /**
 * Imprime la metadata
@@ -82,7 +82,7 @@ void vMetaData::printMetaData() {
 
     }
     std::cout << "---End MetaData info---" << std::endl;
-}
+};
 
 /**
 * Devuelve la lista de la tabla de memoria
@@ -121,7 +121,7 @@ void vMetaData::removeEntry(int idRef) {
         }
     }
     pthread_cond_signal(dfragCond);
-}
+};
 
 /**
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
@@ -139,15 +139,15 @@ unsigned int vMetaData::addEntry(int size, void *actualPos) {
         memoryTable->append(e);
         return id;
     };
-}
+};
 
 vMetaData* vMetaData::getInstance() {
-    if(!single) {
-        single = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
-        new(single) vMetaData();
+    if(!vSingleton) {
+        vSingleton = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
+        new(vSingleton) vMetaData();
     }
-    return single;
-}
+    return vSingleton;
+};
 
 void* vMetaData::de_vReference(int id) {
     pthread_mutex_lock(memoryMutex);

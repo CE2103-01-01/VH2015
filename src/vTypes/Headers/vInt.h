@@ -7,10 +7,9 @@
 
 
 #include "vHeap/Headers/vRef.h"
-#include "vObject.h"
 #include "../libs/vheaplib.h"
 
-class vInt : public vObject{
+class vInt{
         vRef<int> data;
     public:
         vInt();

@@ -6,7 +6,9 @@
 #define _VH2015_VGARBAGECOLLECTOR_H_
 
 
-#include "vMetaData.h"
+#include "vHeap/Headers/vMetaData.h"
+
+class vMetaData;
 
 class vGarbageCollector {
     public:

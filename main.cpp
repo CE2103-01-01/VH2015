@@ -4,9 +4,11 @@
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vSimpleList.h"
 #include "src/vHeap/Headers/vPager.h"
-#include "../libs/vheaplibpp.h"
+#include "../libs/vheaplib.h"
 
 using namespace std;
+
+template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 void pruebaVHeap() {
     vRef<int> r1 = vRef<int>(vMalloc(sizeof(int)));
@@ -53,14 +55,14 @@ void pruebaDumpTxt(){
     dump.saveDumpFile();
 
 }
-
+/**
 void pruebaListaSimple(){
     vRef<vSimpleList<vChar>> lista = vRef<vSimpleList<vChar>>(vMalloc(sizeof(vSimpleList<vChar>)));
     vSimpleList<vChar> l = vSimpleList<vChar>();
     vPlacement<vSimpleList<vChar>>(lista, l);
 
 };
-
+*/
 void pruebaPager(){
     vPager* vP = static_cast<vPager*>(malloc(sizeof(vPager)));
     new(vP) vPager();
