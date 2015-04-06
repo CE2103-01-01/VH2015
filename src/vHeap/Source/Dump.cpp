@@ -56,7 +56,7 @@ void Dump::saveDumpFile() {
     myfile.close();
 };
 
-int Dump::getFrecuency(){
+int                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Dump::getFrecuency(){
     return *frecuency;
 };
 
