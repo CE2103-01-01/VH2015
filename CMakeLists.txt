@@ -10,6 +10,7 @@ set(SOURCE_FILES    main.cpp
                     src/vHeap/Source/vEntry.cpp
                     src/vHeap/Source/vDefragmenter.cpp
                     src/vHeap/Source/vPager.cpp
+                    src/vHeap/Source/Dump.cpp
                     libs/pugixml.cpp
                     libs/vheaplib.cpp
                     libs/vheaplibpp.cpp
@@ -28,6 +29,7 @@ set(HEADERS_FILES
                     src/vHeap/Headers/vEntry.h
                     src/vHeap/Headers/vDefragmenter.h
                     src/vHeap/Headers/vPager.h
+                    src/vHeap/Headers/Dump.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
                     libs/vheaplib.h
@@ -48,8 +50,11 @@ file(GLOB RES_FILES res/book.txt
 
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}src/vHeap/Source/Dump.cpp
-                                                                   src/vHeap/Headers/Dump.h src/vHeap/Source/vHeap.cpp
+find_package (Threads)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}
+                                                                   src/vHeap/Source/Dump.cpp
+                                                                   src/vHeap/Headers/Dump.h
+                                                                   src/vHeap/Source/vHeap.cpp
                                                                    src/vHeap/Source/vGarbageCollector.cpp
                                                                    src/vHeap/Source/vMetaData.cpp
                                                                    src/vHeap/Source/vEntry.cpp
@@ -85,4 +90,6 @@ add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}src/vHeap/Sou
                                                                    src/vTypes/Headers/vSimpleList.h
                                                                    src/Test/Headers/TestApplication.h
                                                                    src/vTypes/Headers/vArray.h)
+
+target_link_libraries (VH2015 ${CMAKE_THREAD_LIBS_INIT})
 include_directories(res)
