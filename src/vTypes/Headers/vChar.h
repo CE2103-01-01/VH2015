@@ -7,7 +7,6 @@
 
 #include "vHeap/Headers/vRef.h"
 #include "../libs/vheaplib.h"
-#include "vObject.h"
 #include <iostream>
 
 void vFree(int toFree);
@@ -15,7 +14,7 @@ unsigned int vMalloc(unsigned int);
 template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
-class vChar: public vObject{
+class vChar{
         vRef<char> data;
     public:
         vChar();

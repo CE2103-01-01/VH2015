@@ -6,7 +6,6 @@
 #define _VH2015_VLONG_H_
 
 #include "vHeap/Headers/vRef.h"
-#include "vObject.h"
 #include "../libs/vheaplib.h"
 
 void vFree(int toFree);
@@ -14,7 +13,7 @@ unsigned int vMalloc(unsigned int);
 template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
-class vLong : public vObject{
+class vLong{
         vRef<long> data;
     public:
         vLong();

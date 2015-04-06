@@ -18,6 +18,7 @@ template <class T> class vRef {
         int operator !();
         int operator =(int);
         int operator =(vRef<T>);
+        bool operator ==(vRef<T>);
         int operator ++();
         int operator --();
 };
@@ -62,6 +63,11 @@ int vRef<T>::operator=(vRef other) {
     referenceID = !other;
     vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
     return 0;
+};
+
+template<class T>
+bool vRef<T>::operator==(vRef other) {
+    return referenceID == !other;
 };
 
 template<class T>
