@@ -6,17 +6,11 @@
 #define _VH2015_VGARBAGECOLLECTOR_H_
 
 
-#include "vHeap.h"
+#include "vMetaData.h"
 
 class vGarbageCollector {
-private:
-
-
-public:
-    static void deallocate(int idRef);
-
-    static void startDump();
+    public:
+        static void deallocate(int idRef);
 };
-
 
 #endif //_VH2015_VGARBAGECOLLECTOR_H_

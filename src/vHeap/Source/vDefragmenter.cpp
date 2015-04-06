@@ -44,11 +44,9 @@ pthread_cond_t* vDefragmenter::getCond(){
 void* vDefragmentThread(void* param){
     vDefragmenter* vD = (static_cast<vDefragmenter*>(param));
     while(true){
-        pthread_cond_wait(vD->getCond(), vD->getMutex());
         pthread_mutex_lock(vD->getMutex());
-
+        pthread_cond_wait(vD->getCond(), vD->getMutex());
         vD->vDefragment();
-
         pthread_mutex_unlock(vD->getMutex());
     };
     return 0;

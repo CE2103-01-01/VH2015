@@ -49,5 +49,5 @@ file(GLOB RES_FILES res/book.txt
 
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
-add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES}  libs/vheaplib.h libs/vheaplib.cpp src/vHeap/Source/vPager.cpp src/vHeap/Headers/vPager.h)
+add_executable(VH2015 ${SOURCE_FILES} ${HEADERS_FILES} ${RES_FILES} src/vHeap/Source/Dump.cpp src/vHeap/Headers/Dump.h src/vHeap/Headers/pthreadHandler.cpp src/vHeap/Headers/pthreadHandler.h)
 include_directories(res)

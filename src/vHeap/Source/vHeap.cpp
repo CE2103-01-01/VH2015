@@ -21,10 +21,16 @@ vHeap::vHeap(int s, float o){
     metaData->setPager(pager);
     memoryMutex = metaData->getMutex();
 
+    dmp = static_cast<Dump*>(malloc(sizeof(Dump)));
+    new(dmp) Dump();
+
     dfrag = static_cast<vDefragmenter*>(malloc(sizeof(vDefragmenter)));
     new(dfrag) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
 
-    pthread_create(dfragThread,NULL,vDefragmentThread,0);
+    pthread_create(dumpThread,NULL,dump,static_cast<void*>(dmp));
+    pthread_join(*dumpThread,NULL);
+
+    pthread_create(dfragThread,NULL,vDefragmentThread,static_cast<void*>(dfrag));
     pthread_join(*dfragThread,NULL);
 
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
@@ -33,6 +39,7 @@ vHeap::vHeap(int s, float o){
 
 vHeap::~vHeap(){
     pthread_detach(*dfragThread);
+    pthread_detach(*dumpThread);
     free(dfrag);
     free(overweight);
     free(vDebug);
@@ -70,7 +77,7 @@ template<class T>
 void vHeap::vFree(vRef<T> r) {
     pthread_mutex_lock(memoryMutex);
     metaData->removeEntry(!r);
-    pthread_mutex_unlock(memoryMutex);;
+    pthread_mutex_unlock(memoryMutex);
 }
 
 template<class T>
@@ -134,58 +141,3 @@ int vHeap::removeVRef(int idRef) {
 int vHeap::addVRef(int idRef) {
     metaData->increaseReference(idRef);
 }
-
-
-//DUMP
-
-
-Dump::Dump() {
-    *dumpping = true;
-    *frecuency = 2;
-    *counter = 0;
-};
-
-Dump::~Dump() {
-    free(dumpping);
-    free(frecuency);
-    free(counter);
-};
-
-bool Dump::getDumppingState(){
-    return *dumpping;
-};
-
-std::string Dump::IntToStr(int n) {
-    std::stringstream result;
-        result << n;
-        return result.str();
-  
-};
-
-void Dump::saveDumpFile() {
-        //startDump();
-        std::string path(getenv("HOME"));
-        std::stringstream ss;
-        ss<<counter;
-        std::string s1 = ss.str();
-        path += "/Desktop/DumpFile"+s1+".txt";
-        std::ofstream myfile(path);
-    vListIterator<vEntry> *iter = vHeap::getInstance()->getMetaData()->getMemoryTable()->getIterator();
-        xml_document doc;
-        doc.load_file("vHeap.xml");
-    std::cout<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
-        myfile<< "Total size of Memory: "<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
-        while(iter->exists()){
-
-            vEntry *m = iter->next();
-            if(m->getUseFlag()==0) {
-
-                myfile << "Memory direction: " << m->getOffSet() << "\n";
-                myfile << "Size of data containing: " << m->getDataSize() << "\n";
-                myfile << "falg in use: " << true << "\n";
-            }
-        }
-
-        Dump::counter++;
-        myfile.close();
- };

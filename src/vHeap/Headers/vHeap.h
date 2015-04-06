@@ -15,14 +15,13 @@
 #include "../libs/pugixml.hpp"
 #include "vDefragmenter.h"
 #include "vPager.h"
+#include "Dump.h"
 #include <cstdlib>
 
 template<class T>
 class vRef;
 class vMetaData;
-class Dump;
 class vHeap{
-    friend class Dump;
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
@@ -34,9 +33,11 @@ class vHeap{
     void* actualPos;
     vMetaData* metaData;
     vPager* pager;
+    Dump* dmp;
     vDefragmenter* dfrag;
     pthread_mutex_t* memoryMutex;
     pthread_t* dfragThread;
+    pthread_t* dumpThread;
 public:
     vHeap(int,float);
     ~vHeap();
@@ -51,29 +52,6 @@ public:
     int addVRef(int);
     template <class T> int vPlacement(vRef<T>, T);
     void* de_vReference(int);
-};
-
-
-
-
-
-/***********************************************************************************************************/
-//DUMP
-
-class Dump {
-    friend class vHeap;
-    int* frecuency;
-    int* counter;
-    std::string directory;
-    bool* dumpping;
-    
-    public:
-        Dump();
-        ~Dump();
-        std::string IntToStr(int);
-        void saveDumpFile();
-
-    bool getDumppingState();
 };
 
 #endif //_VH2015_VHEAP_H_

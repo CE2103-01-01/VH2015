@@ -2,7 +2,6 @@
 // Created by pablo on 28/03/15.
 //
 
-
 #include "vHeap/Headers/vMetaData.h"
 
 /**

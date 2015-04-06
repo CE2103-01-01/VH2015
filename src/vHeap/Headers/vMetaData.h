@@ -21,8 +21,8 @@ class vMetaData {
     vList<vEntry>* memoryTable;
     vList<unsigned int>* deletedIDS;
     static vMetaData* single;
-    static pthread_mutex_t* memoryMutex;
-    static pthread_cond_t* dfragCond;
+    pthread_mutex_t* memoryMutex;
+    pthread_cond_t* dfragCond;
     vPager* pager;
 public:
     vMetaData();
