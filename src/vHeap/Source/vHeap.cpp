@@ -51,7 +51,7 @@ unsigned int vHeap::vMalloc(int sz) {
 
     pthread_mutex_lock(memoryMutex);
     unsigned int id;
-    if(*vSize * *overweight > metaData->getHeapUse()){
+    if((*vSize)*(*overweight) > metaData->getHeapUse()){
         if(actualPos + sz < finalPos){
             unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
             actualPos += sz;

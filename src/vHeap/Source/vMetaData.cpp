@@ -97,24 +97,21 @@ vList<vEntry> *vMetaData::operator!() {
 void vMetaData::removeEntry(int idRef) {
     vListIterator<vEntry> *i = memoryTable->getIterator();
     while (i->exists()) {
-        vEntry *next = i->next();
-        if (next->getIdRef() == idRef) {
-            vSize -= next->getDataSize();
-
-            if(next->isOnHeap()==false){
-                std::string p = next->getPath();
-                int l = p.length();
-
+        vEntry *actual = i->next();
+        if (actual->getIdRef() == idRef) {
+            vSize -= actual->getDataSize();
+            if(actual->isOnHeap()==false){  //Dato paginado
+                std::string path = actual->getPath();
+                int l = path.length();
                 char* arr = static_cast<char*>(malloc(sizeof(char) * l));
-
                 for(int i=0; i<l; i++){
-                    *( arr+i ) = static_cast<char>(p[i]);
+                    *(arr+i) = static_cast<char>(path[i]);
                 };
-
                 const char* cArr = arr;
                 remove(cArr);
+            }else{
+                cleanChunk(actual->getDataSize(),&*actual);
             };
-
             memoryTable->deleteNode(i->getPosition() - 1);
             deletedIDS->append(idRef);
             break;
@@ -126,19 +123,30 @@ void vMetaData::removeEntry(int idRef) {
 /**
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
-unsigned int vMetaData::addEntry(int size, void *actualPos) {
-    vSize+=size;
+unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
+    if(actualPos!=0){
+        cleanChunk(dataSize,actualPos);
+    };
+    vSize+=dataSize;
     if (deletedIDS->len() == 0) {
-        vEntry e = vEntry(actualID, size, actualPos);
+        vEntry e = vEntry(actualID, dataSize, actualPos);
         memoryTable->append(e);
         return actualID++;
     } else {
         int id = *(deletedIDS->get(0));
         deletedIDS->deleteNode(0);
-        vEntry e = vEntry(id, size, actualPos);
+        vEntry e = vEntry(id, dataSize, actualPos);
         memoryTable->append(e);
         return id;
     };
+};
+
+void vMetaData::cleanChunk(int chunkSize, void* chunk){
+    int counter = 0;
+    do{
+        *static_cast<char*>(chunk + counter) = 0;
+        counter++;
+    }while(counter < chunkSize);
 };
 
 vMetaData* vMetaData::getInstance() {

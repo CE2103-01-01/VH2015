@@ -6,6 +6,16 @@
 #include "src/vHeap/Headers/vPager.h"
 #include "../libs/vheaplib.h"
 
+//TODO: implementar vArray
+//TODO: cambiar vBinaryTree de heap a vHeap
+//TODO: cambiar vString de heap a vHeap
+//TODO: cambiar vSimpleList de heap a vHeap
+//TODO: implementar vDoubleList
+//TODO: implementar vDebuger
+//TODO: aplicación de prueba
+//TODO: vHeap como servidor
+//TODO: visores de uso y dump de memoria
+
 using namespace std;
 
 template<class T> int vPlacement(vRef<T> vR, T toPlace);

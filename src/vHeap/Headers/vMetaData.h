@@ -15,6 +15,8 @@ static const unsigned int initialId = 1;
 #include <stdlib.h>
 #include <stdio.h>
 
+class vEntry;
+
 class vMetaData {
     static vMetaData* vSingleton;
     int vSize;
@@ -42,6 +44,7 @@ public:
     vEntry* searchToPage(int);
     int getHeapUse();
     void setPager(vPager*);
+    void cleanChunk(int, void*);
 };
 
 #endif //_VH2015_VMETADATA_H_

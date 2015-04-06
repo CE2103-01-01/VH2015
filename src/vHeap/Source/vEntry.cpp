@@ -78,8 +78,7 @@ unsigned int vEntry::getNumReferences() {
 void vEntry::decreaseNumReferences() {
     numReferences--;
     if (numReferences == 0) {
-        //vGarbageCollector::deallocate(idRef);
-        //vGarbageCollector::startDump();
+        vGarbageCollector::deallocate(idRef);
     }
 }
 
@@ -96,8 +95,12 @@ int vEntry::operator[](int var){
 };
 
 int vEntry::operator[](void* var){
-    var=realloc(var,dataSize);
-    var=memcpy(var,offset,dataSize);
+    int counter = 0;
+    do{
+        *static_cast<char*>(var+counter) = *static_cast<char*>(offset+counter);
+        *static_cast<char*>(offset+counter)=0;
+        counter++;
+    }while(counter < dataSize);
     offset=var;
     return 0;
 };
