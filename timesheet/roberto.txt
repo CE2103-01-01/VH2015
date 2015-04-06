@@ -40,6 +40,9 @@ Sábado 4-4
 Domingo 5-4
 3h Creación de código
 
+Lunes 6-4
+1h Creación de código   TODO: actualizar, ultima 12:00
+
 
 Bitácora
 
@@ -102,7 +105,8 @@ Creación de código: Se arregla error con cMake.
                     Se terminar vDump.
 
 Lunes 6-3
-Creación de código: TODO: implementar vArray
+Creación de código: Se implementa el llenado de 0s para entregar y liberar memoria
+                    TODO: implementar vArray
                     TODO: cambiar vBinaryTree de heap a vHeap
                     TODO: cambiar vString de heap a vHeap
                     TODO: cambiar vSimpleList de heap a vHeap
@@ -111,4 +115,3 @@ Creación de código: TODO: implementar vArray
                     TODO: aplicación de prueba
                     TODO: vHeap como servidor
                     TODO: visores de uso y dump de memoria
-                    TODO: malloc -> calloc
