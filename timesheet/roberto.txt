@@ -106,7 +106,6 @@ Creación de código: Se arregla error con cMake.
 
 Lunes 6-3
 Creación de código: Se implementa el llenado de 0s para entregar y liberar memoria
-                    TODO: cambiar vSimpleList de heap a vHeap
                     TODO: implementar vDoubleList
                     TODO: cambiar vString de heap a vHeap
                     TODO: cambiar vBinaryTree de heap a vHeap
