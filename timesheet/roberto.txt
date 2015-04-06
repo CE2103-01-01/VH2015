@@ -94,18 +94,21 @@ Creación de código: Se activa la bandera para que g++ siga el protocolo de c++
 
 Sábado 4-3
 Creación de código: Se coordina vHeap, vMetaData y vPager, dejando la paginación y la subida y bajada de objetos lista.
-                    TODO: corregir error con cMake
-                    TODO: coordinar vGarbageCollector con vDefragmenter.
-                    TODO: terminar vDump
-                    TODO: implementar vDebuger
-                    TODO: implementar vArray
+                    Se soluciona indefinición de vPlacement.
+
+Domingo 5-3
+Creación de código: Se arregla error con cMake.
+                    Se coordinar vGarbageCollector con vDefragmenter.
+                    Se terminar vDump.
+
+Lunes 6-3
+Creación de código: TODO: implementar vArray
                     TODO: cambiar vBinaryTree de heap a vHeap
                     TODO: cambiar vString de heap a vHeap
+                    TODO: cambiar vSimpleList de heap a vHeap
                     TODO: implementar vDoubleList
+                    TODO: implementar vDebuger
                     TODO: aplicación de prueba
                     TODO: vHeap como servidor
                     TODO: visores de uso y dump de memoria
-                    TODO: análisis de algoritmos
-                    TODO: paper y documentación
                     TODO: malloc -> calloc
-                    TODO: mejorar vTypes
