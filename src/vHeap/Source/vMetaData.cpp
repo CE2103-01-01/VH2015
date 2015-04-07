@@ -148,7 +148,7 @@ void vMetaData::cleanChunk(int chunkSize, void* chunk){
         counter++;
     }while(counter < chunkSize);
 };
-
+vMetaData *vMetaData::vMDSingleton = 0;
 vMetaData* vMetaData::getInstance() {
     if (vMDSingleton == nullptr) {
         vMDSingleton = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));

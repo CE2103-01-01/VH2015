@@ -19,15 +19,17 @@ class vEntry;
 
 class vMetaData {
 private:
+    static vMetaData *vMDSingleton;
     int vSize;
-    unsigned int actualID = initialId;
+    unsigned int actualID;
     vList<vEntry>* memoryTable;
     vList<unsigned int>* deletedIDS;
     pthread_mutex_t* memoryMutex;
     pthread_cond_t* dfragCond;
     vPager* pager;
-    static vMetaData* vMDSingleton;
+
 public:
+    static vMetaData *getInstance();
     vMetaData();
     ~vMetaData();
     vList<vEntry>* getMemoryTable();
@@ -38,7 +40,6 @@ public:
     void removeEntry(int idRef);
     void printMetaData();
     vList<vEntry>* operator!();
-    static vMetaData* getInstance();
     pthread_mutex_t* getMutex();
     pthread_cond_t* getDefragmenterCond();
     void* de_vReference(int);
