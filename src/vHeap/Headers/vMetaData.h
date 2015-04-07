@@ -4,8 +4,6 @@
 #ifndef _VH2015_VMETADATA_H_
 #define _VH2015_VMETADATA_H_
 
-static const unsigned int initialId = 1;
-
 #include <iostream>
 #include <vTypes/Headers/vList.h>
 #include "vEntry.h"
@@ -15,10 +13,11 @@ static const unsigned int initialId = 1;
 #include <stdlib.h>
 #include <stdio.h>
 
+static const unsigned int initialId = 1;
+
 class vEntry;
 
 class vMetaData {
-    static vMetaData* vSingleton;
     int vSize;
     unsigned int actualID = initialId;
     vList<vEntry>* memoryTable;
@@ -26,6 +25,7 @@ class vMetaData {
     pthread_mutex_t* memoryMutex;
     pthread_cond_t* dfragCond;
     vPager* pager;
+    static vMetaData* vMDSingleton;
 public:
     vMetaData();
     ~vMetaData();

@@ -1,26 +1,25 @@
 #ifndef _VH2015_VHEAP_H_
 #define _VH2015_VHEAP_H_
 
-
-#include "vMetaData.h"
-#include "vTypes/Headers/vList.h"
 #include <iostream>
 #include <stdlib.h>
 #include <pthread.h>
 #include <stdio.h>
-#include "vRef.h"
 #include <sstream>
 #include <fstream>
+#include <cstdlib>
 #include <unistd.h>
 #include "../libs/pugixml.hpp"
+#include "vTypes/Headers/vList.h"
+#include "vRef.h"
 #include "vDefragmenter.h"
 #include "vPager.h"
 #include "Dump.h"
-#include <cstdlib>
+#include "vMetaData.h"
 
-template<class T>
-class vRef;
+template<class T> class vRef;
 class vMetaData;
+
 class vHeap{
     bool* vDebug;
     int* dumpFrecuency;

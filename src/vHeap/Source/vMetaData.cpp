@@ -150,11 +150,11 @@ void vMetaData::cleanChunk(int chunkSize, void* chunk){
 };
 
 vMetaData* vMetaData::getInstance() {
-    if(!vSingleton) {
-        vSingleton = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
-        new(vSingleton) vMetaData();
+    if(vMDSingleton == 0) {
+        vMDSingleton = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
+        new(vMDSingleton) vMetaData();
     }
-    return vSingleton;
+    return vMDSingleton;
 };
 
 void* vMetaData::de_vReference(int id) {
