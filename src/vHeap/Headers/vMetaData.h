@@ -18,6 +18,7 @@ static const unsigned int initialId = 1;
 class vEntry;
 
 class vMetaData {
+private:
     int vSize;
     unsigned int actualID = initialId;
     vList<vEntry>* memoryTable;
