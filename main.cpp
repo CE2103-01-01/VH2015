@@ -3,8 +3,6 @@
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vSimpleList.h"
-#include "src/vHeap/Headers/vPager.h"
-#include "../libs/vheaplib.h"
 
 //TODO: implementar vArray
 //TODO: cambiar vBinaryTree de heap a vHeap
@@ -65,14 +63,14 @@ void pruebaDumpTxt(){
     dump.saveDumpFile();
 
 }
-/**
+
 void pruebaListaSimple(){
     vRef<vSimpleList<vChar>> lista = vRef<vSimpleList<vChar>>(vMalloc(sizeof(vSimpleList<vChar>)));
     vSimpleList<vChar> l = vSimpleList<vChar>();
     vPlacement<vSimpleList<vChar>>(lista, l);
 
 };
-*/
+
 void pruebaPager(){
     vPager* vP = static_cast<vPager*>(malloc(sizeof(vPager)));
     new(vP) vPager();

@@ -5,11 +5,16 @@
 #ifndef VH2015_VPAGER_H
 #define VH2015_VPAGER_H
 
+static char const *const PATH = "../res/vPages/";
+
+static char const *const extension = ".celdmm";
+
 #include <string>
 #include <fstream>
 
 class vPager {
-    public:
+
+public:
         vPager();
         ~vPager();
         std::string pageDown(void*, int, int);

@@ -2,6 +2,8 @@
 // Created by roberto on 04/04/15.
 //
 
+
+#include <sys/stat.h>
 #include "vHeap/Headers/vPager.h"
 
 
@@ -10,9 +12,11 @@ vPager::vPager(){};
 vPager::~vPager(){};
 
 std::string vPager::pageDown(void* data, int id, int dSize){
-    std::string path = "../res/vPages/";
+    std::string path = getenv("HOME");
+    path.append("/.vh2015/");
+    int result = mkdir(path.c_str(), 0777);
     path.append(std::to_string(id));
-    path.append(".celdmm");
+    path.append(extension);
 
     std::ofstream outFile(path, std::ios::binary);
 
