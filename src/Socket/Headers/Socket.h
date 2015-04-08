@@ -13,8 +13,12 @@
 #include<arpa/inet.h> //inet_addr
 #include<unistd.h>    //write
 #include<pthread.h> //for threading , link with lpthread
+//#include "../libs/JSON/include/json/json.h"
+#include "json.h"
+#include "vHeap/Headers/vHeap.h"
 class Socket{
 public:
+    Json::Value root;
     Socket();
     ~Socket();
     int initSocket();
@@ -55,9 +59,7 @@ int Socket::initSocket() {
     c = sizeof(struct sockaddr_in);
 
 
-    //Accept and incoming connection
-    puts("Waiting for incoming connections...");
-    c = sizeof(struct sockaddr_in);
+
     pthread_t thread_id;
 
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
@@ -105,7 +107,15 @@ void* Socket::connection_handler(void *socket_desc) {
         }
 
         //Send the message back to client
-        write(sock , client_message , strlen(client_message));
+        xml_document doc;
+        doc.load_file("vHeap.xml");
+        int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
+        float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
+        int totalSize = size*1024*1024+size*over*1024*1024;
+        root["TotalSize"]=Json::Value(totalSize);
+        root["usingSize"]=Json::Value(*(vHeap::getInstance()->vSize));
+        std::string data =root.toStyledString();
+        write(sock , data);
 
         //clear the message buffer
         memset(client_message, 0, 2000);
