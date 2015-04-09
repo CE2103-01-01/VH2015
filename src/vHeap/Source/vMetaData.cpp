@@ -165,8 +165,6 @@ void* vMetaData::de_vReference(int id) {
 
     while(iter->exists()){
         vEntry* entry = iter->next();
-        std::cout<<"!*entry "<<!*entry<<std::endl;
-        std::cout<<"id "<<id<<std::endl;
         if(!*entry==id){
             entry->changeFlag();
             if(entry->isOnHeap() == false){

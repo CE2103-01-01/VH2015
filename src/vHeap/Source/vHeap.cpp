@@ -109,8 +109,8 @@ void *vHeap::de_vReference(int id) {
 
 int vHeap::removeVRef(int idRef) {
     metaData->decreaseReference(idRef);
-}
+};
 
 int vHeap::addVRef(int idRef) {
     metaData->increaseReference(idRef);
-}
+};

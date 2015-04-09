@@ -10,10 +10,10 @@ vInt::vInt(){
 
 vInt::vInt(int d){
     int id = vMalloc(sizeof(int));
-    std::cout<<"id: "<<id<<std::endl;
     data = vRef<int>(id);
     vPlacement(data, d);
-    std::cout<<"vInt"<<std::endl;
+
+    std::cout<<"d"<<d<<std::endl;
 };
 
 vInt::~vInt(){
