@@ -69,9 +69,8 @@ void pruebaListaSimple(){
     vRef<vSimpleList<vChar>> lista;
     lista =  vRef<vSimpleList<vChar>>(id);
     vSimpleList<vChar> l = vSimpleList<vChar>();
-    std::cout<<"vPlacement(lista, l);"<<std::endl;
-    vPlacement(lista, l);
-    std::cout<<"FINISH"<<std::endl;
+    vChar bs = vChar(61);
+    std::cout<<"aaa"<<std::endl;
 };
 
 void pruebaPager(){
@@ -92,8 +91,21 @@ void pruebaPager(){
 };
 
 int main() {
+    std::cout<<"Creadcion de a: "<<std::endl;
+    vChar a = vChar(80);
+    std::cout<<std::endl;
+    std::cout<<"Impresion de a: "<<std::endl;
+    std::cout<<!a<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"Creacion de b: "<<std::endl;
+    vChar b = vChar(81);
+    std::cout<<std::endl;
+    std::cout<<"Impresion de b: "<<std::endl;
+    std::cout<<!b<<std::endl;
+    std::cout<<std::endl;
+
     //pruebaPager();
-    pruebaListaSimple();
+    //pruebaListaSimple();
     //pruebaLista();
     //pruebaVHeap();
     //start(vString("vList"));

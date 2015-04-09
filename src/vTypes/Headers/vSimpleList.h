@@ -128,8 +128,9 @@ template <class T> vSimpleList<T>::~vSimpleList(){
 };
 
 template <class T> int vSimpleList<T>::operator +(T data){
-    vRef<T> r = vRef<T>(vMalloc(sizeof(T)));
-    vPlacement<T>(r,data);
+    vRef<vSimpleNode<T>> r = vRef<vSimpleNode<T>>(vMalloc(sizeof(vSimpleNode<T>)));
+    vSimpleNode<T> n = vSimpleNode<T>(data);
+    vPlacement<vSimpleNode<T>>(r,n);
     if(0 != !m_tail){
         (**m_tail) + r;
         m_tail = r;

@@ -176,7 +176,8 @@ void vNode<T>::freeNext() {
 */
 template<class T>
 vList<T>::vList() {
-    _head=_tail=0;
+    _head=0;
+    _tail=0;
 };
 /** @brief Destruye la lista
 *

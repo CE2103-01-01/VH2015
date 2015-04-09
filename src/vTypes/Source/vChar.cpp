@@ -9,7 +9,8 @@ vChar::vChar(){
 };
 
 vChar::vChar(char d){
-    data = vRef<char>(vMalloc(sizeof(char)));
+    int id = vMalloc(sizeof(char));
+    data = vRef<char>(id);
     vPlacement<char>(data, d);
 };
 

@@ -10,11 +10,11 @@ vHeap::vHeap(int s, float o){
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = o;
     vSize = static_cast<int*>(malloc(sizeof(int)));
-    *vSize = s;
-    mainChunk = malloc(s * 1024);
+    *vSize = s*1024*1024;
+    mainChunk = malloc(s*1024*1024);
     actualPos = mainChunk;
     initPos = mainChunk;
-    finalPos = initPos+s*1024;
+    finalPos = initPos+s*1024*1024;
 
     pager = static_cast<vPager*>(malloc(sizeof(vPager)));
     new(pager) vPager();
