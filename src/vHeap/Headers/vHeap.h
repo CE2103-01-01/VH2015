@@ -62,7 +62,9 @@ template<class T> void vHeap::vFree(vRef<T> r) {
 
 template<class T> int vHeap::vPlacement(vRef<T> memory, T object) {
     T* ptr = *memory;
+    std::cout<<"*ptr = object;"<<std::endl;
     *ptr = object;
+    std::cout<<"return 0;"<<std::endl;
     return 0;
 };
 

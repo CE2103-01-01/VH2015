@@ -68,12 +68,10 @@ void pruebaListaSimple(){
     unsigned int id = vMalloc(sizeof(vSimpleList<vChar>));
     vRef<vSimpleList<vChar>> lista;
     lista =  vRef<vSimpleList<vChar>>(id);
-
     vSimpleList<vChar> l = vSimpleList<vChar>();
-    std::cout<<"MAIN1"<<std::endl;
-
-    vPlacement<vSimpleList<vChar>>(lista, l);
-    std::cout<<"MAIN2"<<std::endl;
+    std::cout<<"vPlacement(lista, l);"<<std::endl;
+    vPlacement(lista, l);
+    std::cout<<"FINISH"<<std::endl;
 };
 
 void pruebaPager(){
