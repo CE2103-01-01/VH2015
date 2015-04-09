@@ -79,9 +79,7 @@ public:
 */
 template<class T>
 vNode<T>::vNode(T* v) {
-    data = static_cast<T*>(malloc(sizeof(T)));
-    T dt = *v;
-    (data) = static_cast<T*>(&dt);
+    data = v;
     next = 0;
 };
 /** @brief Constructor
