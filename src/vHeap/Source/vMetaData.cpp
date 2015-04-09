@@ -129,8 +129,11 @@ unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
     };
     vSize+=dataSize;
     if (deletedIDS->len() == 0) {
-        vEntry e = vEntry(actualID, dataSize, actualPos);
+        vEntry* e = static_cast<vEntry*>(malloc(sizeof(vEntry)));
+        new (e) vEntry(actualID, dataSize, actualPos);
+        std::cout<<"ADD1"<<std::endl;
         memoryTable->append(e);
+        std::cout<<"ADD2"<<std::endl;
         return actualID++;
     } else {
         int id = *(deletedIDS->get(0));

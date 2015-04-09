@@ -30,13 +30,13 @@ class vHeap{
     void* initPos;
     void* finalPos;
     void* actualPos;
+    void* dmp;
+    void* dfrag;
     vMetaData* metaData;
     vPager* pager;
-    Dump* dmp;
-    vDefragmenter* dfrag;
     pthread_mutex_t* memoryMutex;
-    pthread_t* dfragThread;
-    pthread_t* dumpThread;
+    pthread_t dfragThread;
+    pthread_t dumpThread;
 public:
     int* vSize;
     vHeap(int,float);

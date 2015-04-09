@@ -9,6 +9,8 @@ using namespace pugi;
 vHeap::vHeap(int s, float o){
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = o;
+    vSize = static_cast<int*>(malloc(sizeof(int)));
+    *vSize = s;
     mainChunk = malloc(s * 1024);
     actualPos = mainChunk;
     initPos = mainChunk;
@@ -21,25 +23,20 @@ vHeap::vHeap(int s, float o){
     metaData->setPager(pager);
     memoryMutex = metaData->getMutex();
 
-    dmp = static_cast<Dump*>(malloc(sizeof(Dump)));
-    new(dmp) Dump();
+    dmp = malloc(sizeof(Dump));
+    new(static_cast<Dump*>(dmp)) Dump();
 
-    dfrag = static_cast<vDefragmenter*>(malloc(sizeof(vDefragmenter)));
-    new(dfrag) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
+    dfrag = malloc(sizeof(vDefragmenter));
+    new(static_cast<vDefragmenter*>(dfrag)) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
 
-    pthread_create(dumpThread,NULL,dump,static_cast<void*>(dmp));
-    pthread_join(*dumpThread,NULL);
+    pthread_create(&dumpThread,NULL,dump,dmp);
 
-    pthread_create(dfragThread,NULL,vDefragmentThread,static_cast<void*>(dfrag));
-    pthread_join(*dfragThread,NULL);
-
+    pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
     //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
     //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
 };
 
 vHeap::~vHeap(){
-    pthread_detach(*dfragThread);
-    pthread_detach(*dumpThread);
     free(dfrag);
     free(overweight);
     free(vDebug);
@@ -48,13 +45,14 @@ vHeap::~vHeap(){
 };
 
 unsigned int vHeap::vMalloc(int sz) {
-
     pthread_mutex_lock(memoryMutex);
     unsigned int id;
     if((*vSize)*(*overweight) > metaData->getHeapUse()){
         if(actualPos + sz < finalPos){
-            unsigned int id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
+            id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
+            std::cout<<"MALLOC4"<<std::endl;
             actualPos += sz;
+            std::cout<<"MALLOC5"<<std::endl;
         }else{
             vEntry* toPage = metaData->searchToPage(sz);
             std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());

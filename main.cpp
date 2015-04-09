@@ -65,10 +65,22 @@ void pruebaDumpTxt(){
 }
 
 void pruebaListaSimple(){
-    vRef<vSimpleList<vChar>> lista = vRef<vSimpleList<vChar>>(vMalloc(sizeof(vSimpleList<vChar>)));
-    vSimpleList<vChar> l = vSimpleList<vChar>();
-    vPlacement<vSimpleList<vChar>>(lista, l);
+    std::cout<<"MAIN-2"<<std::endl;
 
+    unsigned int id = vMalloc(sizeof(vSimpleList<vChar>));
+    std::cout<<"MAIN-1"<<std::endl;
+
+    vRef<vSimpleList<vChar>> lista;
+    std::cout<<"MAIN0"<<std::endl;
+
+    lista =  vRef<vSimpleList<vChar>>(id);
+    std::cout<<"MAIN1"<<std::endl;
+
+    vSimpleList<vChar> l = vSimpleList<vChar>();
+    std::cout<<"MAIN2"<<std::endl;
+
+    vPlacement<vSimpleList<vChar>>(lista, l);
+    std::cout<<"MAIN3"<<std::endl;
 };
 
 void pruebaPager(){
@@ -89,8 +101,8 @@ void pruebaPager(){
 };
 
 int main() {
-    pruebaPager();
-    //pruebaListaSimple();
+    //pruebaPager();
+    pruebaListaSimple();
     //pruebaLista();
     //pruebaVHeap();
     //start(vString("vList"));

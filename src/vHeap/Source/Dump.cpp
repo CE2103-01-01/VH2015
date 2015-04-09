@@ -6,6 +6,9 @@
 using namespace pugi;
 
 Dump::Dump() {
+    dumpping = static_cast<bool*>(malloc(sizeof(bool)));
+    counter = static_cast<int*>(malloc(sizeof(int)));
+    frecuency = static_cast<int*>(malloc(sizeof(int)));
     *dumpping = true;
     *frecuency = 2;
     *counter = 0;
@@ -59,7 +62,7 @@ void Dump::saveDumpFile() {
 int                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Dump::getFrecuency(){
     return *frecuency;
 };
-/*
+
 void* dump(void* d){
     struct timespec o;
     o.tv_nsec = 0;
@@ -70,4 +73,4 @@ void* dump(void* d){
         static_cast<Dump*>(d)->saveDumpFile();
         pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
     };
-};*/
+};

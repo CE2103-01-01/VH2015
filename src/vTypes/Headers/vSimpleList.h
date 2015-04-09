@@ -113,9 +113,13 @@ public:
 };
 
 template <class T> vSimpleList<T>::vSimpleList(){
+    std::cout<<"1"<<std::endl;
     m_len = vInt(0);
-    m_head = vRef<vSimpleNode<T>>();
-    m_tail = vRef<vSimpleNode<T>>();
+    std::cout<<"2"<<std::endl;
+    m_head = vRef<vSimpleNode<T>>(0);
+    std::cout<<"3"<<std::endl;
+    m_tail = vRef<vSimpleNode<T>>(0);
+    std::cout<<"4"<<std::endl;
 };
 
 template <class T> vSimpleList<T>::~vSimpleList(){

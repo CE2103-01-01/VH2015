@@ -58,6 +58,7 @@ public:
     ~vList(); //Destructor
     void add(T); //Inserta nodo al inicio
     void append(T); //Inserta nodo al final
+    void append(T*); //Inserta nodo al final
     bool deleteNodeByData(T); //Busca nodo y lo borra
     bool deleteNode(unsigned int); //Busca nodo y lo borra
     void deleteAll(); //Borra all
@@ -77,9 +78,13 @@ public:
 *
 */
 template<class T>
-vNode<T>::vNode(T *v) {
-    data = static_cast<T *>(malloc(sizeof(T)));
+vNode<T>::vNode(T* v) {
+    std::cout<<"1"<<std::endl;
+    data = static_cast<T*>(malloc(sizeof(T)));
+    std::cout<<"1"<<std::endl;
     *data = *v;
+    std::cout<<"1"<<std::endl;
+
     next = 0;
 };
 /** @brief Constructor
@@ -202,14 +207,38 @@ void vList<T>::add(T d) {
     };
     l++;
 };
+
+/** @brief Inserta un nodo al final
+*
+* @param vNode<T>*
+*/
+template<class T>
+void vList<T>::append(T* d) {
+    std::cout<<"APPEND1"<<std::endl;
+    vNode<T>* n = static_cast<vNode<T>*>(malloc(sizeof(vNode<T>)));
+    std::cout<<"APPEND2"<<std::endl;
+    new(n) vNode<T>(d);
+    std::cout<<"APPEND3"<<std::endl;
+    if(_tail!=0){
+        std::cout<<"APPEND4"<<std::endl;
+        _tail->insertAfter(n);
+        std::cout<<"APPEND5"<<std::endl;
+        _tail=n;
+    }else{
+        _head=n;
+        _tail=n;
+    };
+    l++;
+};
+
 /** @brief Inserta un nodo al final
 *
 * @param vNode<T>*
 */
 template<class T>
 void vList<T>::append(T d) {
-    vNode<T> *n = new vNode<T>(d);
-    std::cout<<"node direction: "<<n<<std::endl;
+    vNode<T>* n = static_cast<vNode<T>*>(malloc(sizeof(vNode<T>)));
+    new(n) vNode<T>(d);
     if(_tail!=0){
         _tail->insertAfter(n);
         _tail=n;
