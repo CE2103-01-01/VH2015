@@ -61,15 +61,10 @@ template<class T> void vHeap::vFree(vRef<T> r) {
 };
 
 template<class T> int vHeap::vPlacement(vRef<T> memory, T object) {
-    pthread_mutex_lock(memoryMutex);
-    try {
-        *static_cast<T *>(de_vReference(!memory)) = object;
-        pthread_mutex_unlock(memoryMutex);
-        return 0;
-    } catch (int error) {
-        pthread_mutex_unlock(memoryMutex);
-        return -1;
-    };
+    T* ptr = *memory;
+    std::cout<<"ptr= "<<ptr<<std::endl;
+    *ptr = object;
+    return 0;
 };
 
 #endif //_VH2015_VHEAP_H_

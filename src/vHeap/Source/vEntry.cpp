@@ -60,6 +60,7 @@ void *vEntry::operator&() {
 };
 
 int vEntry::operator!() {
+    std::cout<<"ID "<<idRef<<std::endl;
     return idRef;
 };
 

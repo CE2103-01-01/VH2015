@@ -79,12 +79,9 @@ public:
 */
 template<class T>
 vNode<T>::vNode(T* v) {
-    std::cout<<"1"<<std::endl;
     data = static_cast<T*>(malloc(sizeof(T)));
-    std::cout<<"1"<<std::endl;
-    *data = *v;
-    std::cout<<"1"<<std::endl;
-
+    T dt = *v;
+    (data) = static_cast<T*>(&dt);
     next = 0;
 };
 /** @brief Constructor
@@ -214,15 +211,10 @@ void vList<T>::add(T d) {
 */
 template<class T>
 void vList<T>::append(T* d) {
-    std::cout<<"APPEND1"<<std::endl;
     vNode<T>* n = static_cast<vNode<T>*>(malloc(sizeof(vNode<T>)));
-    std::cout<<"APPEND2"<<std::endl;
     new(n) vNode<T>(d);
-    std::cout<<"APPEND3"<<std::endl;
     if(_tail!=0){
-        std::cout<<"APPEND4"<<std::endl;
         _tail->insertAfter(n);
-        std::cout<<"APPEND5"<<std::endl;
         _tail=n;
     }else{
         _head=n;

@@ -46,28 +46,24 @@ vHeap::~vHeap(){
 
 unsigned int vHeap::vMalloc(int sz) {
     pthread_mutex_lock(memoryMutex);
-    unsigned int id;
     if((*vSize)*(*overweight) > metaData->getHeapUse()){
+        void* pos;
         if(actualPos + sz < finalPos){
-            id = metaData->addEntry(sz, actualPos);// add Entry devuelve una referencia
-            std::cout<<"MALLOC4"<<std::endl;
             actualPos += sz;
-            std::cout<<"MALLOC5"<<std::endl;
+            pos = actualPos;// add Entry devuelve una referencia
         }else{
             vEntry* toPage = metaData->searchToPage(sz);
             std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());
-            void* pos = &*toPage;
+            pos = &*toPage;
             toPage->fileDown(downPath);
-            id = metaData->addEntry(sz, pos);
         };
+        pthread_mutex_unlock(memoryMutex);
+        return metaData->addEntry(sz, pos);
     }else{
-        id=0;
         std::cout << "Error, vHeap lleno" << std::endl;
+        pthread_mutex_unlock(memoryMutex);
+        return 0;
     };
-
-    pthread_mutex_unlock(memoryMutex);
-
-    return id;
 };
 
 vHeap* vHeap::vHeapSingleton = 0;

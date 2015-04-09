@@ -131,9 +131,7 @@ unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
     if (deletedIDS->len() == 0) {
         vEntry* e = static_cast<vEntry*>(malloc(sizeof(vEntry)));
         new (e) vEntry(actualID, dataSize, actualPos);
-        std::cout<<"ADD1"<<std::endl;
         memoryTable->append(e);
-        std::cout<<"ADD2"<<std::endl;
         return actualID++;
     } else {
         int id = *(deletedIDS->get(0));
@@ -167,6 +165,8 @@ void* vMetaData::de_vReference(int id) {
 
     while(iter->exists()){
         vEntry* entry = iter->next();
+        std::cout<<"!*entry "<<!*entry<<std::endl;
+        std::cout<<"id "<<id<<std::endl;
         if(!*entry==id){
             entry->changeFlag();
             if(entry->isOnHeap() == false){

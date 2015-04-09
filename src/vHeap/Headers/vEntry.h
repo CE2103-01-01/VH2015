@@ -13,11 +13,11 @@
 
 class vEntry {
 private:
-    unsigned int idRef = 0;
-    void *offset = 0;
-    unsigned int dataSize = 0;
+    unsigned int idRef;
+    void *offset;
+    unsigned int dataSize;
     bool useFlag;   //TODO: usar
-    unsigned int numReferences = 0;
+    unsigned int numReferences;
     bool onHeap;
     std::string path;
 public:

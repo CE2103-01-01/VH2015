@@ -119,7 +119,6 @@ template <class T> vSimpleList<T>::vSimpleList(){
     m_head = vRef<vSimpleNode<T>>(0);
     std::cout<<"3"<<std::endl;
     m_tail = vRef<vSimpleNode<T>>(0);
-    std::cout<<"4"<<std::endl;
 };
 
 template <class T> vSimpleList<T>::~vSimpleList(){
