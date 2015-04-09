@@ -12,8 +12,6 @@ vInt::vInt(int d){
     int id = vMalloc(sizeof(int));
     data = vRef<int>(id);
     vPlacement(data, d);
-
-    std::cout<<"d"<<d<<std::endl;
 };
 
 vInt::~vInt(){
