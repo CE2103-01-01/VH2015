@@ -12,8 +12,12 @@
 #include<arpa/inet.h> //inet_addr
 #include<unistd.h>    //write
 #include<pthread.h> //for threading , link with lpthread
-#include "jsoncpp-master/include/json/json.h"
-
+#include "../libs/rapidjson/rapidjson.h"
+#include "../libs/rapidjson/document.h"
+#include "../libs/rapidjson/stringbuffer.h"
+#include "../libs/rapidjson/writer.h"
+#include "vHeap/Headers/vHeap.h"
+#include "../libs/pugixml.hpp"
 //the thread function
 /*
 void *connection_handler(void *);
@@ -87,16 +91,29 @@ int main(int argc , char *argv[])
  * This will handle connection for each client
  * */
 
-/* void *connection_handler(void *socket_desc)
+int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
+float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
+ void *connection_handler(void *socket_desc)
 {
     //Get the socket descriptor
     int sock = *(int*)socket_desc;
     int read_size;
     char *message , client_message[2000];
-    Json::Value root;
-    root["TotalSize"]= Json::Value(100);
-    root["UseSize"]= Json::Value(50);
+    rapidjson::Document document;
+    document.SetObject();
+    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
+    xml_document doc;
+    doc.load_file("vHeap.xml");
+    int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
+    float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
 
+
+    document.AddMember("TotalSize",(int)(size+size*over)*1024*1024,allocator);
+    document.AddMember("UseSize",*vHeap::getInstance()->vSize,allocator);
+    rapidjson::StringBuffer buffer;
+
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    document.Accept(writer);
     //Send some messages to the client
     // message = "Greetings! I am your connection handler\n";
     //write(sock , message , strlen(message));
@@ -112,8 +129,8 @@ int main(int argc , char *argv[])
         printf("Got %d bytes: %s\n", read_size, client_message);
 
         //Send the message back to client
-        char json[1024];
-        strcpy(json, root.asCString());
+
+        strcpy(json, buffer.GetString());
         write(sock , json , strlen(json));
 
         //clear the message buffer
@@ -133,4 +150,3 @@ int main(int argc , char *argv[])
 
     return 0;
 }
-*/
