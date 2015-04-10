@@ -1,11 +1,10 @@
-//
-// Created by alex on 28/03/15.
-//
 
-#ifndef _VH2015_SOCKET_H_
-#define _VH2015_SOCKET_H_
+/*
+    C socket server example, handles multiple clients using threads
+    Compile
+    gcc server.c -lpthread -o server
+*/
 
-#endif //_VH2015_SOCKET_H_
 #include<stdio.h>
 #include<string.h>    //strlen
 #include<stdlib.h>    //strlen
@@ -13,19 +12,15 @@
 #include<arpa/inet.h> //inet_addr
 #include<unistd.h>    //write
 #include<pthread.h> //for threading , link with lpthread
-//#include "../libs/JSON/include/json/json.h"
-#include "json.h"
-#include "vHeap/Headers/vHeap.h"
-class Socket{
-public:
-    Json::Value root;
-    Socket();
-    ~Socket();
-    int initSocket();
-    void *connection_handler(void *socket_desc);
+#include "jsoncpp-master/include/json/json.h"
 
-};
-int Socket::initSocket() {
+//the thread function
+/*
+void *connection_handler(void *);
+
+int main(int argc , char *argv[])
+{
+
     int socket_desc , client_sock , c;
     struct sockaddr_in server , client;
 
@@ -40,7 +35,7 @@ int Socket::initSocket() {
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons( 9500 ); //port 9500 for socket comunication
+    server.sin_port = htons( 9500 );
 
     //Bind
     if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
@@ -59,7 +54,9 @@ int Socket::initSocket() {
     c = sizeof(struct sockaddr_in);
 
 
-
+    //Accept and incoming connection
+    puts("Waiting for incoming connections...");
+    c = sizeof(struct sockaddr_in);
     pthread_t thread_id;
 
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
@@ -86,41 +83,42 @@ int Socket::initSocket() {
     return 0;
 }
 
-void* Socket::connection_handler(void *socket_desc) {
+/*
+ * This will handle connection for each client
+ * */
+
+/* void *connection_handler(void *socket_desc)
+{
     //Get the socket descriptor
     int sock = *(int*)socket_desc;
     int read_size;
     char *message , client_message[2000];
+    Json::Value root;
+    root["TotalSize"]= Json::Value(100);
+    root["UseSize"]= Json::Value(50);
 
     //Send some messages to the client
+    // message = "Greetings! I am your connection handler\n";
+    //write(sock , message , strlen(message));
 
-
+    //message = "Now type something and i shall repeat what you type \n";
+    //write(sock , message , strlen(message));
 
     //Receive a message from client
     while( (read_size = recv(sock , client_message , 2000 , 0)) > 0 )
     {
         //end of string marker
         client_message[read_size] = '\0';
-        if(read_size==1){
-
-            printf("Got %d bytes: %s\n", read_size, client_message);
-        }
+        printf("Got %d bytes: %s\n", read_size, client_message);
 
         //Send the message back to client
-        xml_document doc;
-        doc.load_file("vHeap.xml");
-        int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
-        float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
-        int totalSize = size*1024*1024+size*over*1024*1024;
-        root["TotalSize"]=Json::Value(totalSize);
-        root["usingSize"]=Json::Value(*(vHeap::getInstance()->vSize));
-        std::string data =root.toStyledString();
-        write(sock , data);
+        char json[1024];
+        strcpy(json, root.asCString());
+        write(sock , json , strlen(json));
 
         //clear the message buffer
         memset(client_message, 0, 2000);
         usleep(5000);
-
     }
 
     if(read_size == 0)
@@ -135,3 +133,4 @@ void* Socket::connection_handler(void *socket_desc) {
 
     return 0;
 }
+*/
