@@ -18,7 +18,7 @@ Domingo 29-3
 1h Creación de código
 
 Lunes 30-3	
-1h Creación de código
+1h Creación y análisis de código
 
 Martes 31-3	
 2h Creación de código
@@ -35,13 +35,19 @@ Viernes 3-4
 
 Sábado 4-4
 2h Investigación
-6h Creación de código
+6h Creación y corrección de código
 
 Domingo 5-4
 3h Creación de código
 
 Lunes 6-4
-2h Creación de código   TODO: actualizar, ultima 13:30
+2h Creación y análisis de código
+
+Lunes 6-4
+2h Creación y análisis de código
+
+Lunes 13-4
+2h Documentación
 
 
 Bitácora
@@ -67,25 +73,25 @@ Creación de código: Se implementa parte de las clases vInt y vChar.
 
 Lunes 30-3	
 Creación de código: Se implementa parte de las clases vLong y vFloat.
-                    Se detecta error extraño en vPlacement que indica la no existencia de vRef.
+Análisis de código: Se detecta error extraño en vPlacement que indica la no existencia de vRef.
 
 Martes 31-3	
 Creación de código: Se finalizan los vTypes implementando operadores.
 
-Miércoles 1-3	
+Miércoles 1-4	
 Creación de código: Se mejora la implementación de clases vSimpleNode y vSimpleList para que esté alojada en vHeap.
                     Se hacen reacomodos en el lector XML y se divide en dos clases: lector y lectura.
 
-Jueves 2-3	
+Jueves 2-4	
 Documentación externa
 
-Viernes 3-3
+Viernes 3-4
 Investigación:      Swap entre punteros.
 Creación de código: Se mejora la implementación de vRef con el uso de templates para dar una mayor transparencia en codigo y facilitar la dereferencia.
                     Se crea el desfragmentador y se deja listo para coordinar con vHeap.
                     Se crea un control de IDs borrados en Metadata para no requerir reacomodo en los mismos.
 
-Sábado 4-3
+Sábado 4-4
 Investigación:      Escritura y lectura de archivos binarios en c++.
                     Función to_string() de c++11 y requerimientos para su uso.
 Creación de código: Se activa la bandera para que g++ siga el protocolo de c++11 y asi poder utilizar to_string().
@@ -93,23 +99,23 @@ Creación de código: Se activa la bandera para que g++ siga el protocolo de c++
                     Se cambia el valor de retorno de derefereciación de T a T* y se arregla el problema de operadores con vTypes.
                     Se convierte a vMetaData en singleton, ya que no es posible incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo.
                     Se crea un puente de comunicación entre ambas vHeap y vRef utilizando el singleton de vMetaData.
-                    Se implemente el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un vFree.
+                    Se implementa el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un vFree.
 
-Sábado 4-3
+Sábado 4-4
 Creación de código: Se coordina vHeap, vMetaData y vPager, dejando la paginación y la subida y bajada de objetos lista.
-                    Se soluciona indefinición de vPlacement.
+Corrección de código: Se soluciona indefinición de vPlacement.
 
-Domingo 5-3
+Domingo 5-4
 Creación de código: Se arregla error con cMake.
                     Se coordinar vGarbageCollector con vDefragmenter.
                     Se terminar vDump.
 
-Lunes 6-3
-Creación de código: Se implementa el llenado de 0s para entregar y liberar memoria
-                    TODO: implementar vDoubleList
-                    TODO: cambiar vString de heap a vHeap
-                    TODO: cambiar vBinaryTree de heap a vHeap
-                    TODO: implementar vDebuger
-                    TODO: aplicación de prueba
-                    TODO: vHeap como servidor
-                    TODO: visores de uso y dump de memoria
+Lunes 6-4
+Creación de código: Se implementa el llenado de 0s para entregar y liberar memoria.
+Análisis de código: Se detecta error en Metadata: se están perdiendo las entradas del segundo dato en adelante, provocando segmentation fault al desreferenciar porque no se encuentra. Se busca solución.
+
+Miércoles 8-4
+Análisis de código:  Se continúa con la busqueda de error en Metadato, se concluye que se puede estar generando por la manera en la cual se pasan los parámetros, por lo que se inicia el análisis de dicho aspecto.
+
+Lunes 13-4
+Documentación externa
