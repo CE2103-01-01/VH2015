@@ -44,7 +44,5 @@ void vPager::pageUp(std::string path, int s, void* ret){
             counter++;
         }while(counter < s);
         inFile.close();
-    }catch(int e){
-        //TODO: implementar excepcion de ruta no existente
-    };
+    }catch(int e){};
 };

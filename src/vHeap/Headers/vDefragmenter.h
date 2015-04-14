@@ -20,7 +20,6 @@ class vDefragmenter {
     void* finalPos;
     void* actualPos;
     vList<vEntry>* memoryT;
-    void finishDefragment(vListIterator<vEntry>*, int);
     public:
         vDefragmenter(void*, void*, vList<vEntry>*, pthread_cond_t*, pthread_mutex_t*);
         ~vDefragmenter();
