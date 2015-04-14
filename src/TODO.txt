@@ -1,0 +1,10 @@
+vPager:
+1. Implementar excepcion de ruta no existente
+vTypes:
+1. Implementar vDoubleList
+2. Cambiar vString de heap a vHeap
+3. Cambiar vBinaryTree de heap a vHeap
+vHeap y relacionados:
+1. Implementar vDebuger
+Externo a vHeap:
+1. Terminar aplicación de prueba con el uso de todos los vTypes
