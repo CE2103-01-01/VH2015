@@ -176,7 +176,6 @@ void* vMetaData::de_vReference(int id) {
                 pager->pageUp(entry->getPath(),entry->getDataSize(),content);
                 entry->fileUp(content);
             };
-            entry->changeFlag();
             pthread_mutex_unlock(memoryMutex);
             return entry->getOffSet();
         };

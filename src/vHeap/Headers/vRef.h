@@ -12,6 +12,8 @@ template <class T> class vRef {
         int referenceID;
     public:
         vRef();
+
+    vRef(const vRef<T> &obj);
         vRef(int);
         ~vRef();
         T* operator *();
@@ -24,6 +26,12 @@ template <class T> class vRef {
 };
 
 template<class T>
+vRef<T>::vRef(const vRef<T> &obj) {
+    referenceID = obj.referenceID;
+    vMetaData::getInstance()->increaseReference(obj.referenceID);
+}
+
+template<class T>
 vRef<T>::vRef(int id) {
     referenceID = id;
     vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
@@ -32,6 +40,7 @@ vRef<T>::vRef(int id) {
 template<class T>
 vRef<T>::vRef() {
     referenceID = 0;
+
 };
 
 template<class T>
@@ -86,4 +95,8 @@ int vRef<T>::operator--() {
     return 0;
 };
 
-#endif //_VH2015_VREF_H_
+#endif //_VH2015_VREF_H_vRef::vRef(const vRef& obj){
+
+
+
+

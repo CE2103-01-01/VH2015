@@ -266,6 +266,12 @@ bool vList<T>::deleteNodeByData(T d) {
 template<class T>
 bool vList<T>::deleteNode(unsigned int d) {
     if(d==0){
+        if (l == 1) {
+            free(_head);
+            _head = _tail = 0;
+            l--;
+            return true;
+        }
         _head=_head->getNextNode();
         (_head->getPrevNode())->~vNode();
         free(_head->getPrevNode());
