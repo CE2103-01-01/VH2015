@@ -8,3 +8,7 @@ vHeap y relacionados:
 1. Implementar vDebuger
 Externo a vHeap:
 1. Terminar aplicación de prueba con el uso de todos los vTypes
+Dump
+1 Arreglar manejo de strings
+vDefag
+1 BAndera while true

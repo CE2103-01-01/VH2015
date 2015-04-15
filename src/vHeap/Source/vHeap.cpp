@@ -44,7 +44,7 @@ vHeap::~vHeap(){
     free(dumpFrecuency);
 };
 
-unsigned int vHeap::vMalloc(int sz) {
+unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
     pthread_mutex_lock(memoryMutex);
     if((*vSize)*(*overweight) > metaData->getHeapUse()){
         void* pos;
@@ -68,7 +68,7 @@ unsigned int vHeap::vMalloc(int sz) {
 
 vHeap* vHeap::vHeapSingleton = 0;
 
-void vHeap::vFree(unsigned int idRef) {
+void vHeap::vFree(unsigned int idRef) {//4T
     pthread_mutex_lock(memoryMutex);
     metaData->removeEntry(idRef);
     pthread_mutex_unlock(memoryMutex);;
@@ -90,7 +90,7 @@ vHeap *vHeap::getInstance() {
     return vHeapSingleton;
  }
 
-void *vHeap::de_vReference(int id) {
+void *vHeap::de_vReference(int id) {//T(7+6i)
    pthread_mutex_lock(memoryMutex);
 
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();

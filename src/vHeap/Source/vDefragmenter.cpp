@@ -17,7 +17,7 @@ vDefragmenter::vDefragmenter(void* iPos, void* fPos, vList<vEntry>* mem, pthread
 
 vDefragmenter::~vDefragmenter(){};
 
-void vDefragmenter::vDefragment(){
+void vDefragmenter::vDefragment() {//T(3+11i)
     vListIterator<vEntry>* iter = memoryT->getIterator();
     while (iter->exists()) {
         vEntry* tmp = iter->next();
@@ -43,7 +43,7 @@ pthread_cond_t* vDefragmenter::getCond(){
 
 void* vDefragmentThread(void* param){
     vDefragmenter* vD = (static_cast<vDefragmenter*>(param));
-    while(true){
+    while (true) {//TODO-roberto flag
         pthread_mutex_lock(vD->getMutex());
         pthread_cond_wait(vD->getCond(), vD->getMutex());
         vD->vDefragment();

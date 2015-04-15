@@ -11,7 +11,7 @@ vPager::vPager(){};
 
 vPager::~vPager(){};
 
-std::string vPager::pageDown(void* data, int id, int dSize){
+std::string vPager::pageDown(void *data, int id, int dSize) {//T(13+7i)
     std::string path = getenv("HOME");
     path.append("/.vh2015/");
     int result = mkdir(path.c_str(), 0777);
@@ -31,7 +31,7 @@ std::string vPager::pageDown(void* data, int id, int dSize){
 };
 
 
-void vPager::pageUp(std::string path, int s, void* ret){
+void vPager::pageUp(std::string path, int s, void *ret) {//T(11+6i)
     try{
         std::ifstream inFile(path, std::ios::binary);
         char* buf = static_cast<char*>(malloc(s * sizeof(char)));
