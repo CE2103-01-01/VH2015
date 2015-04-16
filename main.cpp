@@ -2,6 +2,7 @@
 #include <Test/Headers/TestApplication.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <sys/stat.h>
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vInt.h"
@@ -269,19 +270,28 @@ void startSocket(){
 
     }
 };
+int createDirectory(string path)
+{
 
+    return mkdir(path.c_str(), 0777);
+}
 int main() {
+    string path = getenv("HOME");
+    path.append("/.vh2015/");
+    createDirectory(path);
+    /*
+    ///Redirects cout to output.txt
+    ofstream out(path + "output.txt");
+    streambuf *coutbuf = cout.rdbuf(); //save old buf
+    cout.rdbuf(out.rdbuf());
+    */
+
     pruebaChar();
     pruebaInt();
     pruebaFloat();
     pruebaLong();
 
-    //pruebaPager();
-    //pruebaListaSimple();
-    //pruebaLista();
-    //pruebaVHeap();
-    //start(vString("vList"));
-    Dump dump;
-    dump.saveDumpFile();
+
+    //std::cout.rdbuf(coutbuf); //restore old buffer
     return 0;
 };

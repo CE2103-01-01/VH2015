@@ -13,8 +13,8 @@ vPager::~vPager(){};
 
 std::string vPager::pageDown(void *data, int id, int dSize) {//T(13+7i)
     std::string path = getenv("HOME");
-    path.append("/.vh2015/");
-    int result = mkdir(path.c_str(), 0777);
+    path.append("/.vh2015/pages/");
+    mkdir(path.c_str(), 0777);
     path.append(std::to_string(id));
     path.append(extension);
 
