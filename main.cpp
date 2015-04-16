@@ -17,7 +17,6 @@
 #include "../libs/pugixml.hpp"
 
 //TODO: implementar vArray
-//TODO: cambiar vBinaryTree de heap a vHeap
 //TODO: cambiar vString de heap a vHeap
 //TODO: cambiar vSimpleList de heap a vHeap
 //TODO: implementar vDoubleList
