@@ -5,19 +5,21 @@
 #include "vHeap/Headers/Dump.h"
 using namespace pugi;
 
-Dump::Dump() {
-    dumpping = static_cast<bool*>(malloc(sizeof(bool)));
-    counter = static_cast<int*>(malloc(sizeof(int)));
-    frecuency = static_cast<int*>(malloc(sizeof(int)));
-    *dumpping = true;
-    *frecuency = 2;
-    *counter = 0;
+Dump::Dump() {//TODO-roberto revise los que estan en comentario,seg fault
+    //dumpping = static_cast<bool*>(malloc(sizeof(bool)));
+   // counter = static_cast<int*>(malloc(sizeof(int)));
+    //frecuency = static_cast<int*>(malloc(sizeof(int)));
+    bool dumpping = true;
+    int frecuency = 2;
+    int counter = 0;
 };
 
 Dump::~Dump() {
+    /*
     free(dumpping);
     free(frecuency);
     free(counter);
+     */
 };
 
 bool Dump::getDumppingState(){
@@ -32,11 +34,11 @@ std::string Dump::IntToStr(int n) {
 };
 
 void Dump::saveDumpFile() {//T(25+17i)
-    std::string path(getenv("HOME"));
+    //std::string path(getenv("HOME"));
     std::stringstream ss;
     ss<<counter;
     std::string s1 = ss.str();
-    path += "/Desktop/DumpFile" + s1 + ".txt";//TODO-alex revisar
+    std::string path = "/home/alex/Documents/Clion Project/VH2015/DumpFile/DumpFile" + s1 + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
     vListIterator<vEntry> *iter = vMetaData::getInstance()->getMemoryTable()->getIterator();
     xml_document doc;
@@ -46,6 +48,7 @@ void Dump::saveDumpFile() {//T(25+17i)
     while(iter->exists()){
 
         vEntry *m = iter->next();
+        myfile << "Memory direction: " << "Hola" << "\n";
         if(m->getUseFlag()==0) {
 
             myfile << "Memory direction: " << m->getOffSet() << "\n";

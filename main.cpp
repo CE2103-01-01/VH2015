@@ -156,6 +156,7 @@ int main() {
     //pruebaLista();
     //pruebaVHeap();
     //start(vString("vList"));
-
+    Dump dump;
+    dump.saveDumpFile();
     return 0;
 };
