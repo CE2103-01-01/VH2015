@@ -2,7 +2,6 @@
 // Created by Pablo Rodriguez Quesada on 3/30/15.
 //
 
-#include <AppKit/AppKit.h>
 #include <vHeap/Headers/vRef.h>
 #include <vheaplib.h>
 
@@ -53,14 +52,14 @@ public:
 * Le asigna el padre a un nodo y l dato
 */
 template<class T>
-vNodeTree::vNodeTree(vNodeTree *parent, T pData) {
+vNodeTree<T>::vNodeTree(vNodeTree *parent, T pData) {
     _parent = parent;
     data = vMalloc(sizeof(pData));
     vPlacement(data, pData);
 }
 
 template<class T>
-vRef<T> vNodeTree::getData() {
+vRef<T> vNodeTree<T>::getData() {
     return data;
 }
 
@@ -69,8 +68,8 @@ vRef<T> vNodeTree::getData() {
 * inferiores
 */
 template<class T>
-void vNodeTree::insert(T pData) {
-    if (pData >= data) {
+void vNodeTree<T>::insert(T pData) {
+    if (pData >= **data) {
         if (!_right) _right = new vNodeTree(this, pData);
         else _right->insert(pData);
     }
@@ -79,16 +78,16 @@ void vNodeTree::insert(T pData) {
         else _left->insert(pData);
     }
 }
-
-vNodeTree *vNodeTree::getRight() {
+template<class T>
+vNodeTree<T> *vNodeTree<T>::getRight() {
     return _right;
 }
-
-vNodeTree *vNodeTree::getLeft() {
+template<class T>
+vNodeTree<T> *vNodeTree<T>::getLeft() {
     return _left;
 }
-
-vNodeTree *vNodeTree::getParent() {
+template<class T>
+vNodeTree<T> *vNodeTree<T>::getParent() {
     return _parent;
 }
 
@@ -96,7 +95,7 @@ vNodeTree *vNodeTree::getParent() {
 * Inserta un dato en un arbol binario
 */
 template<class T>
-void vBinaryTree::insert(T pDato) {
+void vBinaryTree<T>::insert(T pDato) {
     if (!_root) {
         _root = new vNodeTree<T>(nullptr, pDato);
     }
@@ -107,7 +106,7 @@ void vBinaryTree::insert(T pDato) {
 * Busca un dato en un arbol binario y si existe lo devuelve o si no retorna nullptr
 */
 template<class T>
-vRef<T> vBinaryTree::find(T compare) {
+vRef<T> vBinaryTree<T>::find(T compare) {
     vRef<T> dato = nullptr;
     vNodeTree<T> *actualNode = _root;
     while (true) {

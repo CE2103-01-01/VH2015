@@ -14,6 +14,7 @@ class vString{
     public:
         vString(std::string);
         ~vString();
+        unsigned int len();
         int operator +=(std::string);
         int operator +=(vString);
 	    int operator =(vString);
@@ -23,6 +24,7 @@ class vString{
         vList<char>* operator !();
 	    bool operator==(std::string);
 	    bool operator==(vString);
+        bool operator>=(vString);
 };
 
 

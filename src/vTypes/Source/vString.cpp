@@ -107,3 +107,20 @@ int vString::operator =(std::string str){
         return 0;
 	};
 };
+
+bool vString::operator>=(vString str) {
+        vListIterator<char>* iter1 = word->getIterator();
+        vListIterator<char>* iter2 = (!str)->getIterator();
+        while(iter1->exists() && iter2->exists()){
+            if(iter1->next() >=  iter2->next()){
+                return true;
+            };
+        };
+    if (iter1->exists()) return true;
+    return false;
+
+}
+
+unsigned int vString::len() {
+    return word->len();
+}

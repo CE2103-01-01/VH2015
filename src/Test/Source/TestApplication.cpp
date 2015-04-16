@@ -3,14 +3,19 @@
 //
 
 
+#include <vTypes/Headers/vString.h>
+#include <fstream>
+#include <sstream>
+#include "Test/Headers/TestApplication.h"
+
 using namespace std;
 int start(vString type) {
-    if (type == "vBinaryTree") createVList();
+    if (type == "vList") createVList();
     return 0;
 }
 
-void createVBinaryTree() {
-    vBinaryTree <string> palabras = vBinaryTree<string>();
+void createVList() {
+    vList<string> palabras = vList<string>();
     fstream myFile;
     myFile.open(txtPath);
     string line;
