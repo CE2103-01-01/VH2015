@@ -24,7 +24,6 @@ class vHeap{
     bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
-
     float* overweight;
     void* mainChunk;
     void* initPos;
@@ -38,8 +37,9 @@ class vHeap{
     pthread_t dfragThread;
     pthread_t dumpThread;
 public:
+    bool getVDebug();
     int* vSize;
-    vHeap(int,float);
+    vHeap(int,float, bool);
     ~vHeap();
     unsigned int vMalloc(int);
     template <class T> void vFree(vRef<T>);

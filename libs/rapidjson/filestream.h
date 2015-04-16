@@ -2,6 +2,7 @@
 #define RAPIDJSON_FILESTREAM_H_
 
 #include <cstdio>
+#include "rapidjson.h"
 
 namespace rapidjson {
 

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <VH2015>
-    <vdebug activo="true" vdebug-file-path="/home/ernesto/" />
+    <vDebug activo="true" />
     <vHeap size="100" overweight="1" />
 </VH2015>

@@ -2,15 +2,18 @@
 // Created by alex on 20/03/15.
 //
 
+#include <vheaplibpp.h>
 #include "vHeap/Headers/vHeap.h"
 
 using namespace pugi;
 
-vHeap::vHeap(int s, float o){
+vHeap::vHeap(int s, float o, bool pDebug){
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = o;
     vSize = static_cast<int*>(malloc(sizeof(int)));
     *vSize = s*1024*1024;
+    vDebug = static_cast<bool*>(malloc(sizeof(bool)));
+    *vDebug = pDebug;
     mainChunk = malloc(s*1024*1024);
     actualPos = mainChunk;
     initPos = mainChunk;
@@ -46,6 +49,8 @@ vHeap::~vHeap(){
 
 unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
     pthread_mutex_lock(memoryMutex);
+    std::chrono::high_resolution_clock::time_point debug;
+    if (vDebug) debug = startTime();
     if((*vSize)*(*overweight) > metaData->getHeapUse()){
         void* pos;
         if(actualPos + sz < finalPos){
@@ -57,10 +62,12 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
             pos = &*toPage;
             toPage->fileDown(downPath);
         };
+        if (vDebug) printTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
         return metaData->addEntry(sz, pos);
     }else{
         std::cout << "Error, vHeap lleno" << std::endl;
+        if (vDebug) printTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
         return 0;
     };
@@ -85,14 +92,16 @@ vHeap *vHeap::getInstance() {
         doc.load_file("vHeap.xml");
         int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
         float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
-        new(vHeapSingleton) vHeap(size, over);
+        bool debug = doc.child("VH2015").child("vDebug").attribute("activo").as_bool();
+        new(vHeapSingleton) vHeap(size, over, debug);
     }
     return vHeapSingleton;
  }
 
 void *vHeap::de_vReference(int id) {//T(7+6i)
    pthread_mutex_lock(memoryMutex);
-
+    std::chrono::high_resolution_clock::time_point debug;
+    if (vDebug) debug = startTime();
     vListIterator<vEntry> *iter = (!*metaData)->getIterator();
 
     while(iter->exists()){
@@ -103,6 +112,7 @@ void *vHeap::de_vReference(int id) {//T(7+6i)
         };
     };
     pthread_mutex_unlock(memoryMutex);
+    if (vDebug) printTime(debug, "vdeReference");
     return 0;
 };
 
@@ -114,3 +124,7 @@ int vHeap::removeVRef(int idRef) {
 int vHeap::addVRef(int idRef) {
     metaData->increaseReference(idRef);
 };
+
+bool vHeap::getVDebug() {
+    return vDebug;
+}
