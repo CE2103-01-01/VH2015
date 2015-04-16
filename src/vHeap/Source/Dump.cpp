@@ -2,6 +2,7 @@
 // Created by roberto on 05/04/15.
 //
 
+#include <sys/stat.h>
 #include "vHeap/Headers/Dump.h"
 using namespace pugi;
 
@@ -34,11 +35,11 @@ std::string Dump::IntToStr(int n) {
 };
 
 void Dump::saveDumpFile() {//T(25+17i)
-    //std::string path(getenv("HOME"));
+    std::string path(getenv("HOME"));
     std::stringstream ss;
     ss<<counter;
     std::string s1 = ss.str();
-    std::string path = "/home/alex/Documents/Clion Project/VH2015/DumpFile/DumpFile" + s1 + ".txt";//TODO-alex revisar
+    path += "/Desktop/DumpFile" + s1 + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
     vListIterator<vEntry> *iter = vMetaData::getInstance()->getMemoryTable()->getIterator();
     xml_document doc;
@@ -53,7 +54,7 @@ void Dump::saveDumpFile() {//T(25+17i)
 
             myfile << "Memory direction: " << m->getOffSet() << "\n";
             myfile << "Size of data containing: " << m->getDataSize() << "\n";
-            myfile << "falg in use: " << true << "\n";
+            myfile << "flag in use: " << true << "\n";
         }
     }
 
