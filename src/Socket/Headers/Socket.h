@@ -19,7 +19,7 @@
 #include "vHeap/Headers/vHeap.h"
 #include "../libs/pugixml.hpp"
 //the thread function
-/*
+
 void *connection_handler(void *);
 
 int main(int argc , char *argv[])
@@ -91,8 +91,6 @@ int main(int argc , char *argv[])
  * This will handle connection for each client
  * */
 
-int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
-float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
  void *connection_handler(void *socket_desc)
 {
     //Get the socket descriptor
@@ -129,7 +127,7 @@ float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float
         printf("Got %d bytes: %s\n", read_size, client_message);
 
         //Send the message back to client
-
+        char json[1024];
         strcpy(json, buffer.GetString());
         write(sock , json , strlen(json));
 
