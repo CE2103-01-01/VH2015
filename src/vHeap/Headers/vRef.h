@@ -55,6 +55,7 @@ int vRef<T>::operator!() {
 
 template<class T>
 T* vRef<T>::operator*() {
+
     return static_cast<T *>(vMetaData::getInstance()->de_vReference(referenceID));
 };
 

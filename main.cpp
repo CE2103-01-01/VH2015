@@ -3,6 +3,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/stat.h>
+#include <vTypes/Headers/vArray.h>
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
 #include "src/vTypes/Headers/vInt.h"
@@ -290,6 +291,17 @@ int main() {
     pruebaInt();
     pruebaFloat();
     pruebaLong();
+
+    vRef<vArray<int>> a = vMalloc(sizeof(vArray<int>));
+    vPlacement(a,vArray<int>(5));
+    std::cout<<"cae"<<std::endl;
+    for(int i = 0; i<5; i++){
+        *static_cast<int*>((**a)[i]) = i;
+    };
+    std::cout<<"cae"<<std::endl;
+    for(int i = 0; i<5; i++){
+        std::cout<< "imprime: "<< *static_cast<int*>((**a)[i]) <<std::endl;
+    };
 
 
     //std::cout.rdbuf(coutbuf); //restore old buffer

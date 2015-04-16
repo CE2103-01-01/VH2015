@@ -6,13 +6,13 @@
 
 vChar::vChar(){
     data = 0;
-    vThis = vRef<vChar>(vMalloc(sizeof(vChar)));
+    vThis = vMalloc(sizeof(vChar));
     vPlacement(vThis, *this);
 };
 
 vChar::vChar(char dataParam){
     data = dataParam;
-    vThis = vRef<vChar>(vMalloc(sizeof(vChar)));
+    vThis = vMalloc(sizeof(vChar));
     vPlacement(vThis, *this);
 };
 

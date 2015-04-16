@@ -40,6 +40,7 @@ class vChar{
         bool operator >=(char);
         bool operator ==(char);
         bool operator !=(char);
+
 };
 
 

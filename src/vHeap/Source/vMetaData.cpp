@@ -179,7 +179,7 @@ void* vMetaData::de_vReference(int id) {
         };
     };
     pthread_mutex_unlock(memoryMutex);
-    return 0;
+    return nullptr;
 };
 
 pthread_mutex_t* vMetaData::getMutex(){

@@ -10,81 +10,54 @@
 
 template <class T> class vArray {
     vInt vSize;
-    vRef<T> first;
-    vRef<T> last;
-    vRef<vArray<T>> ths;
+    vRef<void> chunk;
     public:
-        vArray(vInt);
-        ~vArray();
+        vArray<T>(vInt);
+        ~vArray<T>();
         int operator =(vArray);
-        vRef<vArray<T>> operator &();
         bool operator ==(vArray);
-        vRef<T> operator [](vInt);
+        T* operator [](vInt);
         vInt len();
 };
 
-template <class T> vArray::vArray(vInt len){
+template <class T> vArray<T>::vArray(vInt len){
     vSize=len;
-    first = vRef<T>(vMalloc(sizeof(T)));
-    vRef<T> tmp = first;
-    for(vInt i = 0; i<vSize; i++){
-        tmp = vRef<T>(vMalloc(sizeof(T)));
-    }
-    last = tmp;
-    ths = vRef<vArray<T>>(vMalloc(sizeof(vArray)));
-    vArray* toPlace = this;
-    vPlacement<vArray<T>>(ths, *toPlace);
+    chunk = vRef<void>(vMalloc(sizeof(T) * !len));
 };
 
-template <class T> vArray::~vArray(){
-    vRef<T> tmp1 = first;
-    vRef<T> tmp2 = first;
-    for(vInt i = 0; i<vSize; i++){
-        ++tmp2;
-        vFree(tmp1);
-        ++tmp1;
-    }
+template <class T> vArray<T>::~vArray(){
+    vFree(chunk);
 };
 
-template <class T> int vArray::operator =(vArray<T> other){
+template <class T> int vArray<T>::operator =(vArray<T> other){
     if(vSize == other.len()){
-        vRef<T> tmp = first;
-        for(vInt i = 0; i<vSize; i++){
-            tmp = other[i];
-            ++tmp;
+        for(int i = 0; i<!vSize; i++){
+            *static_cast<T*>(*chunk + i*sizeof(T)) = *other[i];
         }
     };
 };
 
-template <class T> vRef<vArray<T>> vArray::operator &(){
-    return ths;
-};
-
-template <class T> bool vArray::operator ==(vArray<T> other){
+template <class T> bool vArray<T>::operator ==(vArray<T> other){
     if(vSize == other.len()){
-        vRef<T> tmp = first;
-        for(vInt i = 0; i<vSize; i++){
-            if(!(tmp==other[i])){
+        for(int i = 0; i<!vSize; i++){
+            if(!(*static_cast<T*>(*chunk + i*sizeof(T))==*other[i])){
                 return false;
             }
-            ++tmp;
         }
         return true;
     };
     return false;
 };
 
-template <class T> vRef<T> vArray::operator [](vInt pos){
+template <class T> T* vArray<T>::operator [](vInt pos){
     if(vSize > pos){
-        vRef<T> tmp = first;
-        for(vInt i = 0; i<pos; i++){
-            ++tmp;
+        for(int i = 0; i<!pos; i++){
+            return static_cast<T*>(*chunk + i*sizeof(T));
         }
-        return tmp;
     };
 };
 
-template <class T> vInt vArray::len(){
+template <class T> vInt vArray<T>::len(){
     return vSize;
 };
 
