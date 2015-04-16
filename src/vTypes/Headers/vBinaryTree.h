@@ -3,6 +3,8 @@
 //
 
 #include <AppKit/AppKit.h>
+#include <vHeap/Headers/vRef.h>
+#include <vheaplib.h>
 
 #ifndef _VH2015_VBINARYTREE_H
 #define _VH2015_VBINARYTREE_H
@@ -17,14 +19,14 @@ class vBinaryTree;
 template<class T>
 class vNodeTree {
 private:
-    T data;
+    vRef<T> data;
     vNodeTree *_left = 0;
     vNodeTree *_right = 0;
     vNodeTree *_parent = 0;
 public:
     vNodeTree(vNodeTree *, T data);
 
-    T *getData();
+    vRef<T> getData();
 
     void insert(T);
 
@@ -42,7 +44,7 @@ private:
 public:
     void insert(T pDato);
 
-    T find(T compare);
+    vRef<T> find(T compare);
 };
 
 #endif //_VH2015_VBINARYTREE_H
@@ -51,13 +53,15 @@ public:
 * Le asigna el padre a un nodo y l dato
 */
 template<class T>
-vNodeTree::vNodeTree(vNodeTree *parent, T data) {
+vNodeTree::vNodeTree(vNodeTree *parent, T pData) {
     _parent = parent;
+    data = vMalloc(sizeof(pData));
+    vPlacement(data, pData);
 }
 
 template<class T>
-T *vNodeTree::getData() {
-    return &data;
+vRef<T> vNodeTree::getData() {
+    return data;
 }
 
 /**
@@ -103,12 +107,12 @@ void vBinaryTree::insert(T pDato) {
 * Busca un dato en un arbol binario y si existe lo devuelve o si no retorna nullptr
 */
 template<class T>
-T vBinaryTree::find(T compare) {
-    T *dato = nullptr;
+vRef<T> vBinaryTree::find(T compare) {
+    vRef<T> dato = nullptr;
     vNodeTree<T> *actualNode = _root;
     while (true) {
         if (!actualNode) break;
-        else if (*compare == *actualNode->getData()) {
+        else if (compare == *actualNode->getData()) {
             dato = actualNode->getData();
             break;
         }
@@ -120,5 +124,5 @@ T vBinaryTree::find(T compare) {
         }
 
     }
-    return *dato;
+    return dato;
 }

@@ -16,7 +16,8 @@ static char const *const readError = "Unable to open file";
 
 
 int start(vString type);
-    void createVList();
+
+void createVBinaryTree();
 
 
 #endif //_VH2015_TESTAPPLICATION_H_
