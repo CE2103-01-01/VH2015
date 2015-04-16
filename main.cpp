@@ -2,6 +2,9 @@
 #include <Test/Headers/TestApplication.h>
 #include "vHeap/Headers/vRef.h"
 #include "src/vTypes/Headers/vChar.h"
+#include "src/vTypes/Headers/vInt.h"
+#include "src/vTypes/Headers/vLong.h"
+#include "src/vTypes/Headers/vFloat.h"
 #include "src/vTypes/Headers/vSimpleList.h"
 
 //TODO: implementar vArray
@@ -55,9 +58,61 @@ void pruebaLista() {
 }
 
 void pruebaChar(){
-    vChar chr = vChar(63);
-    std::cout<<"Valor del vChar chr: "<< !chr <<std::endl;
+    vChar a = vChar(65);
+    vRef<vChar> b = &a;
+    std::cout<<"A(65): "<<!**b<<std::endl;
+
+    vChar c = vChar(67);
+    vRef<vChar> d = &c;
+    std::cout<<"C(67): "<<!**d<<std::endl;
+
+    vChar e = vChar(70);
+    vRef<vChar> f = &e;
+    std::cout<<"F(70): "<<!**f<<std::endl;
 };
+
+void pruebaFloat(){
+    vFloat a = vFloat(3.5);
+    vRef<vFloat> b = &a;
+    std::cout<<"vFloat 3.5: "<<!**b<<std::endl;
+
+    vFloat c = vFloat(5.66);
+    vRef<vFloat> d = &c;
+    std::cout<<"vFloat 5.66: "<<!**d<<std::endl;
+
+    vFloat e = vFloat(0.2111);
+    vRef<vFloat> f = &e;
+    std::cout<<"vFloat 0.2111: "<<!**f<<std::endl;
+};
+
+void pruebaInt(){
+    vInt a = vInt(10);
+    vRef<vInt> b = &a;
+    std::cout<<"vInt 10: "<<!**b<<std::endl;
+
+    vInt c = vInt(1);
+    vRef<vInt> d = &c;
+    std::cout<<"vInt 1: "<<!**d<<std::endl;
+
+    vInt e = vInt(500);
+    vRef<vInt> f = &e;
+    std::cout<<"vInt 500: "<<!**f<<std::endl;
+};
+
+void pruebaLong(){
+    vLong a = vLong(1000000);
+    vRef<vLong> b = &a;
+    std::cout<<"vLong 1000000: "<<!**b<<std::endl;
+
+    vLong c = vLong(100000000000);
+    vRef<vLong> d = &c;
+    std::cout<<"vLong 100000000000: "<<!**d<<std::endl;
+
+    vLong e = vLong(1000000000);
+    vRef<vLong> f = &e;
+    std::cout<<"vLong 1000000000: "<<!**f<<std::endl;
+};
+
 void pruebaDumpTxt(){
     Dump dump;
     dump.saveDumpFile();
@@ -91,18 +146,10 @@ void pruebaPager(){
 };
 
 int main() {
-    std::cout<<"Creadcion de a: "<<std::endl;
-    vChar a = vChar(80);
-    std::cout<<std::endl;
-    std::cout<<"Impresion de a: "<<std::endl;
-    std::cout<<!a<<std::endl;
-    std::cout<<std::endl;
-    std::cout<<"Creacion de b: "<<std::endl;
-    vChar b = vChar(81);
-    std::cout<<std::endl;
-    std::cout<<"Impresion de b: "<<std::endl;
-    std::cout<<!b<<std::endl;
-    std::cout<<std::endl;
+    pruebaChar();
+    pruebaInt();
+    pruebaFloat();
+    pruebaLong();
 
     //pruebaPager();
     //pruebaListaSimple();

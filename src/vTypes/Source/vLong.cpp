@@ -3,27 +3,27 @@
 //
 
 #include "vTypes/Headers/vLong.h"
-
 vLong::vLong(){
-    data = vRef<long>(vMalloc(sizeof(long)));
+    data = 0;
+    vThis = vRef<vLong>(vMalloc(sizeof(vLong)));
+    vPlacement(vThis, *this);
 };
 
-vLong::vLong(long d){
-    data = vRef<long>(vMalloc(sizeof(long)));
-    vPlacement<long>(data, d);
+vLong::vLong(long dataParam){
+    data = dataParam;
+    vThis = vRef<vLong>(vMalloc(sizeof(vLong)));
+    vPlacement(vThis, *this);
 };
 
-vLong::~vLong(){
-    vFree(!data);
-};
+vLong::~vLong(){};
 
-vRef<long> vLong::operator &(){
-    return (data);
+vRef<vLong> vLong::operator &(){
+    return vThis;
 };
 
 int vLong::operator +=(long pls){
     try{
-        (**data)+pls;
+        data += pls;
         return 0;
     }catch(int e){
         return -1;
@@ -32,7 +32,7 @@ int vLong::operator +=(long pls){
 
 int vLong::operator --(){
     try{
-        ((**data))--;
+        data -= 1;
         return 0;
     }catch(int e){
         return -1;
@@ -41,7 +41,7 @@ int vLong::operator --(){
 
 int vLong::operator ++(){
     try{
-        ((**data))++;
+        data += 1;
         return 0;
     }catch(int e){
         return -1;
@@ -50,15 +50,15 @@ int vLong::operator ++(){
 
 long vLong::operator !(){
     try{
-        return (**data);
+        return data;
     }catch(int e){
-        return -1;
+        return 0;
     };
 };
 
 int vLong::operator =(long var){
     try{
-        (**data) = var;
+        data = var;
         return 0;
     }catch(int e){
         return -1;
@@ -67,7 +67,8 @@ int vLong::operator =(long var){
 
 int vLong::operator =(vLong var){
     try{
-        (**data) = !var;
+        data = !var;
+        vThis = &var;
         return 0;
     }catch(int e){
         return -1;
@@ -75,49 +76,49 @@ int vLong::operator =(vLong var){
 };
 
 bool vLong::operator <(vLong other){
-    return (**data) < (!other);
+    return data < (!other);
 };
 
 bool vLong::operator <=(vLong other){
-    return (**data) <= (!other);
+    return data <= (!other);
 };
 
 bool vLong::operator >(vLong other){
-    return (**data) > (!other);
+    return data > (!other);
 };
 
 bool vLong::operator >=(vLong other){
-    return (**data) >= (!other);
+    return data >= (!other);
 };
 
 bool vLong::operator ==(vLong other){
-    return (**data) == (!other);
+    return data == (!other);
 };
 
 bool vLong::operator !=(vLong other){
-    return (**data) != (!other);
+    return data != (!other);
 };
 
 bool vLong::operator <(long other){
-    return (**data) < other;
+    return data < other;
 };
 
 bool vLong::operator <=(long other){
-    return (**data) <= other;
+    return data <= other;
 };
 
 bool vLong::operator >(long other){
-    return (**data) > other;
+    return data > other;
 };
 
 bool vLong::operator >=(long other){
-    return (**data) >= other;
+    return data >= other;
 };
 
 bool vLong::operator ==(long other){
-    return (**data) == other;
+    return data == other;
 };
 
 bool vLong::operator !=(long other){
-    return (**data) != other;
+    return data != other;
 };

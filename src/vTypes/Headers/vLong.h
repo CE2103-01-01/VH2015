@@ -14,14 +14,15 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vLong{
-        vRef<long> data;
+        long data;
+        vRef<vLong> vThis;
     public:
         vLong();
         vLong(long);
         ~vLong();
         long operator !();
         int operator +=(long);
-        vRef<long> operator &();
+        vRef<vLong> operator &();
         int operator --();
         int operator ++();
         int operator =(long);

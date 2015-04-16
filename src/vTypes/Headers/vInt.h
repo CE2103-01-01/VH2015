@@ -10,14 +10,15 @@
 #include "../libs/vheaplib.h"
 
 class vInt{
-        vRef<int> data;
+        int data;
+        vRef<vInt> vThis;
     public:
         vInt();
         vInt(int);
         ~vInt();
         int operator !();
         int operator +=(int);
-        vRef<int> operator &();
+        vRef<vInt> operator &();
         int operator --();
         int operator ++();
         int operator =(int);

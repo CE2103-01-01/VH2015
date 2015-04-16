@@ -16,14 +16,15 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vFloat{
-        vRef<float> data;
+        float data;
+        vRef<vFloat> vThis;
     public:
         vFloat();
         vFloat(float);
         ~vFloat();
         float operator !();
         int operator +=(float);
-        vRef<float> operator &();
+        vRef<vFloat> operator &();
         int operator --();
         int operator ++();
         int operator =(float);

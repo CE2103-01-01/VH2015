@@ -5,35 +5,35 @@
 #include "vTypes/Headers/vInt.h"
 
 vInt::vInt(){
-    data = vRef<int>(vMalloc(sizeof(int)));
+    data = 0;
+    vThis = vRef<vInt>(vMalloc(sizeof(vInt)));
+    vPlacement(vThis, *this);
 };
 
-vInt::vInt(int d){
-    int id = vMalloc(sizeof(int));
-    data = vRef<int>(id);
-    vPlacement(data, d);
+vInt::vInt(int dataParam){
+    data = dataParam;
+    vThis = vRef<vInt>(vMalloc(sizeof(vInt)));
+    vPlacement(vThis, *this);
 };
 
-vInt::~vInt(){
-    vFree(!data);
+vInt::~vInt(){};
+
+vRef<vInt> vInt::operator &(){
+    return vThis;
 };
 
 int vInt::operator +=(int pls){
     try{
-        (**data) += pls;
+        data += pls;
         return 0;
     }catch(int e){
         return -1;
     };
 };
 
-vRef<int> vInt::operator &(){
-    return data;
-};
-
 int vInt::operator --(){
     try{
-        (**data)--;
+        data -= 1;
         return 0;
     }catch(int e){
         return -1;
@@ -42,7 +42,7 @@ int vInt::operator --(){
 
 int vInt::operator ++(){
     try{
-        (**data)++;
+        data += 1;
         return 0;
     }catch(int e){
         return -1;
@@ -51,15 +51,15 @@ int vInt::operator ++(){
 
 int vInt::operator !(){
     try{
-        return (**data);
+        return data;
     }catch(int e){
-        return -1;
+        return 0;
     };
 };
 
 int vInt::operator =(int var){
     try{
-        (**data) = var;
+        data = var;
         return 0;
     }catch(int e){
         return -1;
@@ -68,7 +68,8 @@ int vInt::operator =(int var){
 
 int vInt::operator =(vInt var){
     try{
-        (**data) = (!var);
+        data = !var;
+        vThis = &var;
         return 0;
     }catch(int e){
         return -1;
@@ -76,49 +77,49 @@ int vInt::operator =(vInt var){
 };
 
 bool vInt::operator <(vInt other){
-    return (**data) < (!other);
+    return data < (!other);
 };
 
 bool vInt::operator <=(vInt other){
-    return (**data) <= (!other);
+    return data <= (!other);
 };
 
 bool vInt::operator >(vInt other){
-    return (**data) > (!other);
+    return data > (!other);
 };
 
 bool vInt::operator >=(vInt other){
-    return (**data) >= (!other);
+    return data >= (!other);
 };
 
 bool vInt::operator ==(vInt other){
-    return (**data) == (!other);
+    return data == (!other);
 };
 
 bool vInt::operator !=(vInt other){
-    return (**data) != (!other);
+    return data != (!other);
 };
 
 bool vInt::operator <(int other){
-    return (**data) < other;
+    return data < other;
 };
 
 bool vInt::operator <=(int other){
-    return (**data) <= other;
+    return data <= other;
 };
 
 bool vInt::operator >(int other){
-    return (**data) > other;
+    return data > other;
 };
 
 bool vInt::operator >=(int other){
-    return (**data) >= other;
+    return data >= other;
 };
 
 bool vInt::operator ==(int other){
-    return (**data) == other;
+    return data == other;
 };
 
 bool vInt::operator !=(int other){
-    return (**data) != other;
+    return data != other;
 };

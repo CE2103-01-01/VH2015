@@ -1,96 +1,71 @@
 Timesheet
-
 Miércoles 18-3  	
 1h Investigación
 2h Creación de código
-
 Viernes 20-3	
 1h Investigación
 3h Creación de código
-
 Miércoles 25-3	
 2h Creación de código
-
 Sábado 28-3	
 3h Creación de código
-
 Domingo 29-3	
 1h Creación de código
-
 Lunes 30-3	
 1h Creación y análisis de código
-
 Martes 31-3	
 2h Creación de código
-
 Miércoles 1-4
 5h Creación de código
-
 Jueves 2-4
 12h Documentación
-
 Viernes 3-4
 1h Investigación
 6h Creación de código
-
 Sábado 4-4
 2h Investigación
 6h Creación y corrección de código
-
 Domingo 5-4
 3h Creación de código
-
 Lunes 6-4
 2h Creación y análisis de código
-
 Lunes 6-4
 2h Creación y análisis de código
-
 Lunes 13-4
 2h Documentación
-
+Martes 14-4
+2h Documentación
 
 Bitácora
-
 Miércoles 18-3   	
 Investigación:      Funcionamiento de heap y manejo de memoria en C++.
 Creación de código: Se implementa la estructura básica del vHeap y vRef.
-
 Viernes 20-3	
 Investigación:      Manejo de memoria en C++.
 Creación de código: Se implementa el método vMalloc y vFree. Luego de ciertos inconvenientes se logra.
-
 Miércoles 25-3	
 Creación de código: Se implementa la clase vString y método vPlacement.
-
 Sábado 28-3	
 Creación de código: Se implementa el metodo para extraer un dato de una referencia.
                     Se sobrecargan los operadores de vRef.
                     Se crea una interfaz funcional para acceder al vHeap sin llamarlo directamente.
-
 Domingo 29-3	
 Creación de código: Se implementa parte de las clases vInt y vChar.
-
 Lunes 30-3	
 Creación de código: Se implementa parte de las clases vLong y vFloat.
 Análisis de código: Se detecta error extraño en vPlacement que indica la no existencia de vRef.
-
 Martes 31-3	
 Creación de código: Se finalizan los vTypes implementando operadores.
-
 Miércoles 1-4	
 Creación de código: Se mejora la implementación de clases vSimpleNode y vSimpleList para que esté alojada en vHeap.
                     Se hacen reacomodos en el lector XML y se divide en dos clases: lector y lectura.
-
 Jueves 2-4	
 Documentación externa
-
 Viernes 3-4
 Investigación:      Swap entre punteros.
 Creación de código: Se mejora la implementación de vRef con el uso de templates para dar una mayor transparencia en codigo y facilitar la dereferencia.
                     Se crea el desfragmentador y se deja listo para coordinar con vHeap.
                     Se crea un control de IDs borrados en Metadata para no requerir reacomodo en los mismos.
-
 Sábado 4-4
 Investigación:      Escritura y lectura de archivos binarios en c++.
                     Función to_string() de c++11 y requerimientos para su uso.
@@ -100,22 +75,19 @@ Creación de código: Se activa la bandera para que g++ siga el protocolo de c++
                     Se convierte a vMetaData en singleton, ya que no es posible incluir a vHeap en vRef y a vRef en vHeap al mismo tiempo.
                     Se crea un puente de comunicación entre ambas vHeap y vRef utilizando el singleton de vMetaData.
                     Se implementa el pthread para vDefragmenter con su respectiva variable de condición para que se active cada vez que se hace un vFree.
-
 Sábado 4-4
 Creación de código: Se coordina vHeap, vMetaData y vPager, dejando la paginación y la subida y bajada de objetos lista.
 Corrección de código: Se soluciona indefinición de vPlacement.
-
 Domingo 5-4
 Creación de código: Se arregla error con cMake.
                     Se coordinar vGarbageCollector con vDefragmenter.
                     Se terminar vDump.
-
 Lunes 6-4
 Creación de código: Se implementa el llenado de 0s para entregar y liberar memoria.
 Análisis de código: Se detecta error en Metadata: se están perdiendo las entradas del segundo dato en adelante, provocando segmentation fault al desreferenciar porque no se encuentra. Se busca solución.
-
 Miércoles 8-4
 Análisis de código:  Se continúa con la busqueda de error en Metadato, se concluye que se puede estar generando por la manera en la cual se pasan los parámetros, por lo que se inicia el análisis de dicho aspecto.
-
 Lunes 13-4
+Documentación externa
+Martes 14-4
 Documentación externa

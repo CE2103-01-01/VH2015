@@ -164,9 +164,7 @@ void* vMetaData::de_vReference(int id) {
 
     while(iter->exists()){
         vEntry* entry = iter->next();
-        std::cout<<"ID metadato "<<!*entry<<"  ID buscado "<<id<<std::endl;
         if(!*entry==id){
-            std::cout<<"Se encuentra"<<std::endl;
             entry->changeFlag();
             if(entry->isOnHeap() == false){
                 vEntry* toPage = searchToPage(entry->getDataSize());
@@ -180,7 +178,6 @@ void* vMetaData::de_vReference(int id) {
             return entry->getOffSet();
         };
     };
-    std::cout<<"No se encuentra"<<std::endl;
     pthread_mutex_unlock(memoryMutex);
     return 0;
 };
