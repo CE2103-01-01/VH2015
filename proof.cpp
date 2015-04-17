@@ -61,8 +61,18 @@ void pruebaArray(){
     for(vInt i = 0; i<5; i+=1){
         std::cout<<"arr["<< !i <<"]= "<< !*(arr[i]) <<std::endl;
     };
+};
 
-
+void pruebaRefArray(){
+    std::cout<< "Inicia pruebaRefArray()" <<std::endl;
+    vRef<vArray<vInt>> ref = vMalloc(sizeof(vArray<vInt>));
+    vPlacement(ref, vArray<vInt>(5));
+    for(vInt i = 0; i<5; i+=1){
+        *((**ref)[i]) = i;
+    };
+    for(vInt i = 0; i<5; i+=1){
+        std::cout<< "arr[" << !i << "]= " << !*((**ref)[i]) <<std::endl;
+    };
 };
 
 void begin(){
@@ -72,4 +82,5 @@ void begin(){
     pruebaChar();
     pruebaFloat();
     pruebaArray();
+    pruebaRefArray();
 };

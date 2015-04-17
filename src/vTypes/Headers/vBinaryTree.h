@@ -107,7 +107,7 @@ template<class T>
 void vBinaryTree<T>::insert(T pDato) {
     if (!!_root) {
         _root = vMalloc(sizeof(vNodeTree<T>));
-        vPlacement(_root, vNodeTree(vRef<vNodeTree>(0),pDato));
+        vPlacement(_root, vNodeTree<T>(vRef<vNodeTree<T>>(0),pDato));
         //_root = new vNodeTree<T>(nullptr, pDato);
     }
     else (**_root).insert(pDato,_root);

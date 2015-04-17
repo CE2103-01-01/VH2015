@@ -44,6 +44,7 @@ set(HEADERS_FILES
                     src/vTypes/Headers/vFloat.h
                     src/vTypes/Headers/vLong.h
                     src/vTypes/Headers/vArray.h
+                    src/vTypes/Headers/vBinaryTree.h
                     src/vTypes/Headers/vSimpleList.h)
 
 file(GLOB RES_FILES res/book.txt
