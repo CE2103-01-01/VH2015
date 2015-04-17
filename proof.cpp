@@ -54,17 +54,15 @@ void pruebaPager(){
 };
 
 void pruebaArray(){
-    vRef<vArray<int>> a = vMalloc(sizeof(vArray<int>));
-    vPlacement(a,vArray<int>(5));
-    for(int i = 0; i<5; i++){
-        std::cout<<"for de asignaciones, i: "<<i<<std::endl;
-        int* ptr = (**a)[i];
-        *ptr = i;
+    vArray<vInt> arr = vArray<vInt>(5);
+    for(vInt i = 0; i<5; i+=1){
+        *(arr[i]) = i;
+    };
+    for(vInt i = 0; i<5; i+=1){
+        std::cout<<"arr["<< !i <<"]= "<< !*(arr[i]) <<std::endl;
     };
 
-    for(int i = 0; i<5; i++){
-        std::cout<< "imprime: "<< *static_cast<int*>((**a)[i]) <<std::endl;
-    };
+
 };
 
 void begin(){
