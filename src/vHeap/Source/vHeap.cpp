@@ -54,8 +54,8 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
     if((*vSize)*(*overweight) > metaData->getHeapUse()){
         void* pos;
         if(actualPos + sz < finalPos){
-            actualPos += sz;
             pos = actualPos;// add Entry devuelve una referencia
+            actualPos += sz;
         }else{
             vEntry* toPage = metaData->searchToPage(sz);
             std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());

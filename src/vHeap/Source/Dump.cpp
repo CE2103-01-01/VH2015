@@ -39,11 +39,12 @@ void Dump::saveDumpFile() {//T(25+17i)
     std::stringstream ss;
     ss<<counter;
     std::string s1 = ss.str();
-    path += "/Desktop/DumpFile" + s1 + ".txt";//TODO-alex revisar
+    path += "/DumpFile" + s1 + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
     vListIterator<vEntry> *iter = vMetaData::getInstance()->getMemoryTable()->getIterator();
     xml_document doc;
     doc.load_file("vHeap.xml");
+    std::cout<<path<<std::endl;
     std::cout<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
     myfile<< "Total size of Memory: "<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
     while(iter->exists()){

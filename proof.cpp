@@ -50,9 +50,7 @@ void pruebaPager(){
 };
 
 void pruebaArray(){
-    std::cout<<"a"<<std::endl;
     vArray<int> arr = vArray<int>(5);
-    std::cout<<"a"<<std::endl;
     for(int i = 0; i<5; i++){
         std::cout<<i<<std::endl;
         *(arr[i]) = i;
