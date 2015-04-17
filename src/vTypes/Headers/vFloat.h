@@ -17,7 +17,7 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vFloat{
-    float data;
+    vRef<float> data;
 public:
     vFloat();
     vFloat(float);

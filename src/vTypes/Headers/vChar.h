@@ -14,7 +14,7 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vChar{
-    char data;
+    vRef<char> data;
 public:
     vChar();
     vChar(char);

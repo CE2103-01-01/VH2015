@@ -5,95 +5,97 @@
 #include "vTypes/Headers/vChar.h"
 
 vChar::vChar(){
-    data = 0;
+    data = vMalloc(sizeof(char));
+    vPlacement(data,(char)0);
 };
 
 vChar::vChar(char dataParam){
-    data = dataParam;
+    data = vMalloc(sizeof(char));
+    vPlacement(data,dataParam);
 };
 
 char vChar::operator !(){
-    return data;
+    return (**data);
 };
 
 vChar vChar::operator +(vChar param){
-    data += !param;
+    (**data) += !param;
     return *this;
 };
 
 void vChar::operator +=(vChar pls){
-    data += !pls;
+    (**data) += !pls;
 };
 
 void vChar::operator =(vChar var){
-    data = !var;
+    (**data) = !var;
 };
 
 bool vChar::operator <(vChar other){
-    return data < (!other);
+    return (**data) < (!other);
 };
 
 bool vChar::operator <=(vChar other){
-    return data <= (!other);
+    return (**data) <= (!other);
 };
 
 bool vChar::operator >(vChar other){
-    return data > (!other);
+    return (**data) > (!other);
 };
 
 bool vChar::operator >=(vChar other){
-    return data >= (!other);
+    return (**data) >= (!other);
 };
 
 bool vChar::operator ==(vChar other){
-    return data == (!other);
+    return (**data) == (!other);
 };
 
 bool vChar::operator !=(vChar other){
-    return data != (!other);
+    return (**data) != (!other);
 };
 
 vChar vChar::operator +(char param){
-    data += param;
+    (**data) += param;
     return *this;
 };
 
 void vChar::operator +=(char pls){
-    data += pls;
+    (**data) += pls;
 };
 
 void vChar::operator =(char var){
-    data = var;
+    (**data) = var;
 };
 
 bool vChar::operator <(char other){
-    return data < other;
+    return (**data) < other;
 };
 
 bool vChar::operator <=(char other){
-    return data <= other;
+    return (**data) <= other;
 };
 
 bool vChar::operator >(char other){
-    return data > other;
+    return (**data) > other;
 };
 
 bool vChar::operator >=(char other){
-    return data >= other;
+    return (**data) >= other;
 };
 
 bool vChar::operator ==(char other){
-    return data == other;
+    return (**data) == other;
 };
 
 bool vChar::operator !=(char other){
-    return data != other;
+    return (**data) != other;
 };
 
 void vChar::operator --(){
-    --data;
+    --(**data);
 };
 
 void vChar::operator ++(){
-    ++data;
+    ++(**data);
 };

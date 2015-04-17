@@ -5,95 +5,97 @@
 #include "vTypes/Headers/vFloat.h"
 
 vFloat::vFloat(){
-    data = 0;
+    data = vMalloc(sizeof(float));
+    vPlacement(data,(float)0);
 };
 
 vFloat::vFloat(float dataParam){
-    data = dataParam;
+    data = vMalloc(sizeof(float));
+    vPlacement(data,dataParam);
 };
 
 float vFloat::operator !(){
-    return data;
+    return (**data);
 };
 
 vFloat vFloat::operator +(vFloat param){
-    data += !param;
+    (**data) += !param;
     return *this;
 };
 
 void vFloat::operator +=(vFloat pls){
-    data += !pls;
+    (**data) += !pls;
 };
 
 void vFloat::operator =(vFloat var){
-    data = !var;
+    (**data) = !var;
 };
 
 bool vFloat::operator <(vFloat other){
-    return data < (!other);
+    return (**data) < (!other);
 };
 
 bool vFloat::operator <=(vFloat other){
-    return data <= (!other);
+    return (**data) <= (!other);
 };
 
 bool vFloat::operator >(vFloat other){
-    return data > (!other);
+    return (**data) > (!other);
 };
 
 bool vFloat::operator >=(vFloat other){
-    return data >= (!other);
+    return (**data) >= (!other);
 };
 
 bool vFloat::operator ==(vFloat other){
-    return data == (!other);
+    return (**data) == (!other);
 };
 
 bool vFloat::operator !=(vFloat other){
-    return data != (!other);
+    return (**data) != (!other);
 };
 
 vFloat vFloat::operator +(float param){
-    data += param;
+    (**data) += param;
     return *this;
 };
 
 void vFloat::operator +=(float pls){
-    data += pls;
+    (**data) += pls;
 };
 
 void vFloat::operator =(float var){
-    data = var;
+    (**data) = var;
 };
 
 bool vFloat::operator <(float other){
-    return data < other;
+    return (**data) < other;
 };
 
 bool vFloat::operator <=(float other){
-    return data <= other;
+    return (**data) <= other;
 };
 
 bool vFloat::operator >(float other){
-    return data > other;
+    return (**data) > other;
 };
 
 bool vFloat::operator >=(float other){
-    return data >= other;
+    return (**data) >= other;
 };
 
 bool vFloat::operator ==(float other){
-    return data == other;
+    return (**data) == other;
 };
 
 bool vFloat::operator !=(float other){
-    return data != other;
+    return (**data) != other;
 };
 
 void vFloat::operator --(){
-    --data;
+    --(**data);
 };
 
 void vFloat::operator ++(){
-    ++data;
+    ++(**data);
 };

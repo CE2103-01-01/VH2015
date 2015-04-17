@@ -14,7 +14,7 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vInt{
-    int data;
+    vRef<int> data;
 public:
     vInt();
     vInt(int);

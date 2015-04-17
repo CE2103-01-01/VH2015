@@ -14,7 +14,7 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vLong{
-    long data;
+    vRef<long> data;
 public:
     vLong();
     vLong(long);
