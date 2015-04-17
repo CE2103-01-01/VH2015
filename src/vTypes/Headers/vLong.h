@@ -14,32 +14,31 @@ template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vLong{
-        long data;
-        vRef<vLong> vThis;
-    public:
-        vLong();
-        vLong(long);
-        ~vLong();
-        long operator !();
-        int operator +=(long);
-        vRef<vLong> operator &();
-        int operator --();
-        int operator ++();
-        int operator =(long);
-        int operator =(vLong);
-        bool operator <(vLong);
-        bool operator <=(vLong);
-        bool operator >(vLong);
-        bool operator >=(vLong);
-        bool operator ==(vLong);
-        bool operator !=(vLong);
-        bool operator <(long);
-        bool operator <=(long);
-        bool operator >(long);
-        bool operator >=(long);
-        bool operator ==(long);
-        bool operator !=(long);
+    long data;
+public:
+    vLong();
+    vLong(long);
+    vLong operator +(vLong);
+    vLong operator +(long);
+    long operator !();
+    void operator +=(long);
+    void operator +=(vLong);
+    void operator --();
+    void operator ++();
+    void operator =(long);
+    void operator =(vLong);
+    bool operator <(vLong);
+    bool operator <=(vLong);
+    bool operator >(vLong);
+    bool operator >=(vLong);
+    bool operator ==(vLong);
+    bool operator !=(vLong);
+    bool operator <(long);
+    bool operator <=(long);
+    bool operator >(long);
+    bool operator >=(long);
+    bool operator ==(long);
+    bool operator !=(long);
 };
-
 
 #endif //_VH2015_VLONG_H_

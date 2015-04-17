@@ -3,76 +3,30 @@
 //
 
 #include "vTypes/Headers/vLong.h"
+
 vLong::vLong(){
     data = 0;
-    vThis = vRef<vLong>(vMalloc(sizeof(vLong)));
-    vPlacement(vThis, *this);
 };
 
 vLong::vLong(long dataParam){
     data = dataParam;
-    vThis = vRef<vLong>(vMalloc(sizeof(vLong)));
-    vPlacement(vThis, *this);
-};
-
-vLong::~vLong(){};
-
-vRef<vLong> vLong::operator &(){
-    return vThis;
-};
-
-int vLong::operator +=(long pls){
-    try{
-        data += pls;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
-};
-
-int vLong::operator --(){
-    try{
-        data -= 1;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
-};
-
-int vLong::operator ++(){
-    try{
-        data += 1;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
 };
 
 long vLong::operator !(){
-    try{
-        return data;
-    }catch(int e){
-        return 0;
-    };
+    return data;
 };
 
-int vLong::operator =(long var){
-    try{
-        data = var;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
+vLong vLong::operator +(vLong param){
+    data += !param;
+    return *this;
 };
 
-int vLong::operator =(vLong var){
-    try{
-        data = !var;
-        vThis = &var;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
+void vLong::operator +=(vLong pls){
+    data += !pls;
+};
+
+void vLong::operator =(vLong var){
+    data = !var;
 };
 
 bool vLong::operator <(vLong other){
@@ -99,6 +53,19 @@ bool vLong::operator !=(vLong other){
     return data != (!other);
 };
 
+vLong vLong::operator +(long param){
+    data += param;
+    return *this;
+};
+
+void vLong::operator +=(long pls){
+    data += pls;
+};
+
+void vLong::operator =(long var){
+    data = var;
+};
+
 bool vLong::operator <(long other){
     return data < other;
 };
@@ -121,4 +88,12 @@ bool vLong::operator ==(long other){
 
 bool vLong::operator !=(long other){
     return data != other;
+};
+
+void vLong::operator --(){
+    --data;
+};
+
+void vLong::operator ++(){
+    ++data;
 };

@@ -4,76 +4,30 @@
 
 #include "vTypes/Headers/vInt.h"
 
+
 vInt::vInt(){
     data = 0;
-    vThis = vRef<vInt>(vMalloc(sizeof(vInt)));
-    vPlacement(vThis, *this);
 };
 
 vInt::vInt(int dataParam){
     data = dataParam;
-    vThis = vRef<vInt>(vMalloc(sizeof(vInt)));
-    vPlacement(vThis, *this);
-};
-
-vInt::~vInt(){};
-
-vRef<vInt> vInt::operator &(){
-    return vThis;
-};
-
-int vInt::operator +=(int pls){
-    try{
-        data += pls;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
-};
-
-int vInt::operator --(){
-    try{
-        data -= 1;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
-};
-
-int vInt::operator ++(){
-    try{
-        data += 1;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
 };
 
 int vInt::operator !(){
-    try{
-        return data;
-    }catch(int e){
-        return 0;
-    };
+    return data;
 };
 
-int vInt::operator =(int var){
-    try{
-        data = var;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
+vInt vInt::operator +(vInt param){
+    data += !param;
+    return *this;
 };
 
-int vInt::operator =(vInt var){
-    try{
-        data = !var;
-        vThis = &var;
-        return 0;
-    }catch(int e){
-        return -1;
-    };
+void vInt::operator +=(vInt pls){
+    data += !pls;
+};
+
+void vInt::operator =(vInt var){
+    data = !var;
 };
 
 bool vInt::operator <(vInt other){
@@ -100,6 +54,19 @@ bool vInt::operator !=(vInt other){
     return data != (!other);
 };
 
+vInt vInt::operator +(int param){
+    data += param;
+    return *this;
+};
+
+void vInt::operator +=(int pls){
+    data += pls;
+};
+
+void vInt::operator =(int var){
+    data = var;
+};
+
 bool vInt::operator <(int other){
     return data < other;
 };
@@ -122,4 +89,12 @@ bool vInt::operator ==(int other){
 
 bool vInt::operator !=(int other){
     return data != other;
+};
+
+void vInt::operator --(){
+    --data;
+};
+
+void vInt::operator ++(){
+    ++data;
 };
