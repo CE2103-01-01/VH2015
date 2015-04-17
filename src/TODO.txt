@@ -1,14 +1,12 @@
-vPager:
-1. Implementar excepcion de ruta no existente
 vTypes:
-1. Implementar vDoubleList
-2. Cambiar vString de heap a vHeap
-3. Cambiar vBinaryTree de heap a vHeap
-vHeap y relacionados:
-1. Implementar vDebuger
+1. Terminar vSimpleList
+2. Implementar vDoubleList
+3. Cambiar vString de heap a vHeap
+4. Cambiar vBinaryTree de heap a vHeap
+5. Casos de prueba
 Externo a vHeap:
 1. Terminar aplicación de prueba con el uso de todos los vTypes
-Dump
-1 Arreglar manejo de strings
+vPager:
+1. Implementar excepcion de ruta no existente
 vDefag
-1 BAndera while true
+1. Bandera del while
