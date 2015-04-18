@@ -158,9 +158,6 @@ int main() {
     string path = getenv("HOME");
     path.append("/.vh2015/");
     createDirectory(path);
-    vDoubleList<int> hola;
-    hola.insertFront(5);
-    hola.insertFront(60);
 
     /*
     ///Redirects cout to output.txt

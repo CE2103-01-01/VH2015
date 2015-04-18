@@ -1,5 +1,4 @@
 vTypes:
-1. Terminar vSimpleList
 2. Implementar vDoubleList
 3. Cambiar vString de heap a vHeap
 4. Cambiar vBinaryTree de heap a vHeap

@@ -52,7 +52,6 @@ void pruebaPager(){
 void pruebaArray(){
     vArray<int> arr = vArray<int>(5);
     for(int i = 0; i<5; i++){
-        std::cout<<i<<std::endl;
         *(arr[i]) = i;
     };
     for(int i = 0; i<5; i++){
@@ -72,6 +71,12 @@ void pruebaSimpleList(){
     std::cout<< "vSimpleList[2] = 2 : " << (**r)[2] <<std::endl;
 };
 
+void pruebaDoubleList(){
+    vDoubleList<int> hola = vDoubleList<int>();
+    hola.insertFront(5);
+    hola.insertFront(60);
+};
+
 void begin(){
     //pruebaPager();
     pruebaLong();
@@ -80,4 +85,5 @@ void begin(){
     pruebaFloat();
     pruebaArray();
     pruebaSimpleList();
+    pruebaDoubleList();
 };

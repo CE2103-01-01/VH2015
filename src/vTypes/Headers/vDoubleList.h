@@ -257,7 +257,6 @@ vRef<vDoubleNode<T>> vDoubleNode<T>::getPrev() {
 }
 template <class T>
 vDoubleNode<T>::~vDoubleNode() {
-    vFree(data);
 }
 template <class T>
 void vDoubleNode<T>::operator*=(T d) {
