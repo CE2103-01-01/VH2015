@@ -2,13 +2,11 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <sys/stat.h>
-#include <vTypes/Headers/vBinaryTree.h>
 #include "../libs/rapidjson/rapidjson.h"
 #include "../libs/rapidjson/document.h"
 #include "../libs/rapidjson/stringbuffer.h"
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
-#include "src/vTypes/Headers/vDoubleList.h"
 #include "proof.h"
 
 //TODO: implementar vArray
@@ -161,21 +159,12 @@ int main() {
     string path = getenv("HOME");
     path.append("/.vh2015/");
     createDirectory(path);
-
     /*
     ///Redirects cout to output.txt
     ofstream out(path + "output.txt");
     streambuf *coutbuf = cout.rdbuf(); //save old buf
     cout.rdbuf(out.rdbuf());
     */
-
-    vBinaryTree<int> myBinary = vBinaryTree<int>();
-    myBinary.insert(2);
-    myBinary.insert(4);
-    myBinary.insert(1);
-    myBinary.insert(5);
-
-
 
     //std::cout.rdbuf(coutbuf); //restore old buffer
     return 0;

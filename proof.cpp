@@ -101,6 +101,19 @@ void pruebaString(){
     std::cout<<"impresion vString borrado: "<<!a<<std::endl;
 };
 
+void pruebaTree(){
+    vBinaryTree<int> myBinary = vBinaryTree<int>(1);
+    std::cout<<"vBinaryTree<int> myBinary = vBinaryTree<int>(1);"<<std::endl;
+    myBinary.insert(2);
+    std::cout<<"myBinary.insert(2);"<<std::endl;
+    myBinary.insert(4);
+    std::cout<<"myBinary.insert(4);"<<std::endl;
+    myBinary.insert(1);
+    std::cout<<"myBinary.insert(1);"<<std::endl;
+    myBinary.insert(5);
+    std::cout<<"myBinary.insert(5);"<<std::endl;
+};
+
 void begin(){
     //pruebaPager();
     pruebaLong();
@@ -111,4 +124,6 @@ void begin(){
     pruebaSimpleList();
     pruebaDoubleList();
     pruebaString();
+    pruebaTree();
+    std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };
