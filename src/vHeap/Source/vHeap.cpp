@@ -20,6 +20,8 @@ vHeap::vHeap(int s, float o, bool pDebug){
     initPos = mainChunk;
     finalPos = initPos+s*1024*1024;
 
+    void* a = mainChunk;
+
     pager = static_cast<vPager*>(malloc(sizeof(vPager)));
     new(pager) vPager();
 
@@ -36,6 +38,7 @@ vHeap::vHeap(int s, float o, bool pDebug){
     pthread_create(&dumpThread,NULL,dump,dmp);
 
     pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
+
     if (vDebug) printTime(debug, "Constructor vHeap");
 };
 

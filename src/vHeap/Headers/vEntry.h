@@ -19,7 +19,7 @@ private:
     bool useFlag;   //TODO: usar
     unsigned int numReferences;
     bool onHeap;
-    std::string path;
+    //std::string path;
 public:
     vEntry();
     vEntry(int, int, void*);

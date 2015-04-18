@@ -7,6 +7,8 @@
 #include "../libs/rapidjson/stringbuffer.h"
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
+#include "vHeap/Headers/vEntry.h"
+#include "vTypes/Headers/vList.h"
 #include "proof.h"
 //#include "Test/Headers/TestApplication.h"
 
@@ -153,13 +155,22 @@ int createDirectory(string path)
     return mkdir(path.c_str(), 0777);
 }
 int main() {
-    begin();
+
+    vList<vEntry> a = vList<vEntry>();
+    for(int i =0; i<1000; i++){
+        std::cout<< i <<std::endl;
+        vEntry tmp = vEntry(0,0,0);
+        std::cout<< "vEntry tmp = vEntry(...);" <<std::endl;
+        a.append(tmp);
+    }
+
+    //begin();
     //start("vBinaryTree");
     //pruebaDumpTxt();
 
-    string path = getenv("HOME");
-    path.append("/.vh2015/");
-    createDirectory(path);
+    //string path = getenv("HOME");
+    //path.append("/.vh2015/");
+    //createDirectory(path);
     /*
     ///Redirects cout to output.txt
     ofstream out(path + "output.txt");

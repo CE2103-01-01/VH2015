@@ -9,7 +9,7 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
     dataSize = pDataSize;
     offset = pOffset;
     onHeap = true;
-    path = "";
+    //path = "";
 }
 
 vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool oH, std::string p) {
@@ -17,18 +17,18 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool oH, std::string p)
     dataSize = pDataSize;
     offset = pOffset;
     onHeap = oH;
-    path = p;
+    //path = p;
 }
 
 void vEntry::fileDown(std::string p){
     onHeap = false;
-    path = p;
+    //path = p;
     offset = 0;
 };
 
 void vEntry::fileUp(void* content){
     onHeap = true;
-    path = "";
+    //path = "";
     offset = content;
 };
 
@@ -110,5 +110,5 @@ bool vEntry::isOnHeap(){
 };
 
 std::string vEntry::getPath(){
-    return path;
+    return "";
 };
