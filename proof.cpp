@@ -106,5 +106,5 @@ void begin(){
     pruebaArray();
     pruebaSimpleList();
     pruebaDoubleList();
-    pruebaString();
+    //pruebaString();
 };

@@ -37,7 +37,7 @@ std::string Dump::IntToStr(int n) {
 void Dump::saveDumpFile() {//T(25+17i)
     std::string path(getenv("HOME"));
     std::stringstream ss;
-    ss<<counter;
+    ss<<*counter;
     std::string s1 = ss.str();
     path += "/DumpFile" + s1 + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
