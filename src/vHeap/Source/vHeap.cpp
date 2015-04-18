@@ -8,6 +8,7 @@
 using namespace pugi;
 
 vHeap::vHeap(int s, float o, bool pDebug){
+    std::chrono::high_resolution_clock::time_point debug;
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = o;
     vSize = static_cast<int*>(malloc(sizeof(int)));
@@ -35,8 +36,7 @@ vHeap::vHeap(int s, float o, bool pDebug){
     pthread_create(&dumpThread,NULL,dump,dmp);
 
     pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
-    //vDebug=static_cast<bool*>(malloc(sizeof(bool)));
-    //dumpFrecuency=static_cast<int*>(malloc(sizeof(int)));
+    if (vDebug) printTime(debug, "Constructor vHeap");
 };
 
 vHeap::~vHeap(){

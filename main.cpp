@@ -166,6 +166,14 @@ int main() {
     cout.rdbuf(out.rdbuf());
     */
 
+    vBinaryTree<int> *myBinary = new vBinaryTree<int>();
+    myBinary->insert(2);
+    myBinary->insert(4);
+    myBinary->insert(1);
+    myBinary->insert(5);
+
+
+
     //std::cout.rdbuf(coutbuf); //restore old buffer
     return 0;
 };

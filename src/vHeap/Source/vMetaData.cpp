@@ -2,6 +2,7 @@
 // Created by pablo on 28/03/15.
 //
 
+#include <vheaplibpp.h>
 #include "vHeap/Headers/vMetaData.h"
 
 /**
@@ -159,6 +160,7 @@ vMetaData* vMetaData::getInstance() {
 };
 
 void* vMetaData::de_vReference(int id) {
+    std::chrono::high_resolution_clock::time_point debug;
     pthread_mutex_lock(memoryMutex);
     vListIterator<vEntry> *iter = memoryTable->getIterator();
 
@@ -175,10 +177,12 @@ void* vMetaData::de_vReference(int id) {
                 entry->fileUp(content);
             };
             pthread_mutex_unlock(memoryMutex);
+            if (vDebug) printTime(debug, "deReference of "+ id);
             return entry->getOffSet();
         };
     };
     pthread_mutex_unlock(memoryMutex);
+    if (vDebug) printTime(debug, "deReference");
     return nullptr;
 };
 

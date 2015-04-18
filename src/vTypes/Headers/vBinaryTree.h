@@ -19,11 +19,11 @@ template<class T>
 class vNodeTree {
 private:
     vRef<T> data;
-    vRef<vNodeTree> vThis;
     vRef<vNodeTree> _left = 0;
     vRef<vNodeTree> _right = 0;
     vRef<vNodeTree> _parent = 0;
 public:
+    vNodeTree(const vNodeTree<T> &obj);
     vNodeTree(vRef<vNodeTree> parent, T data);
 
     vRef<T> getData();
@@ -54,7 +54,6 @@ public:
 */
 template<class T>
 vNodeTree<T>::vNodeTree(vRef<vNodeTree> parent, T pData) {
-    vThis = parent;
     _parent = parent;
     data = vMalloc(sizeof(pData));
     vPlacement(data, pData);
@@ -75,7 +74,6 @@ void vNodeTree<T>::insert(T pData, vRef<vNodeTree> me) {
         if (!!_right) {
             _right = vMalloc(sizeof(vNodeTree));
             vPlacement(_right,vNodeTree(me,pData));
-            //_right = new vNodeTree(this, pData);
         }
         else (**_right).insert(pData,_right);
     }
@@ -107,7 +105,9 @@ template<class T>
 void vBinaryTree<T>::insert(T pDato) {
     if (!!_root) {
         _root = vMalloc(sizeof(vNodeTree<T>));
-        vPlacement(_root, vNodeTree<T>(vRef<vNodeTree<T>>(0),pDato));
+        vRef<vNodeTree<T>> nullPtr = vRef<vNodeTree<T>>();
+        vNodeTree<T> rootNode = vNodeTree<T>(nullPtr,pDato);
+        vPlacement(_root, rootNode);
         //_root = new vNodeTree<T>(nullptr, pDato);
     }
     else (**_root).insert(pDato,_root);
@@ -135,4 +135,11 @@ vRef<T> vBinaryTree<T>::find(T compare) {
 
     }
     return dato;
+}
+template <class T>
+vNodeTree<T>::vNodeTree(const vNodeTree<T> &obj) {
+    data = obj.data;
+    _parent = obj._parent;
+    _left = obj._left;
+    _right = obj._right;
 }
