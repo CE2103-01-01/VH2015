@@ -60,6 +60,16 @@ void pruebaArray(){
     };
 };
 
+void pruebaSimpleList(){
+    vSimpleList<int> a = vSimpleList<int>();
+    a+0;
+    std::cout<< "vSimpleList[0] = 0 : " << a[0] <<std::endl;
+    a+1;
+    std::cout<< "vSimpleList[1] = 1 : " << a[1] <<std::endl;
+    a+2;
+    std::cout<< "vSimpleList[2] = 2 : " << a[2] <<std::endl;
+};
+
 void begin(){
     //pruebaPager();
     pruebaLong();
@@ -67,4 +77,5 @@ void begin(){
     pruebaChar();
     pruebaFloat();
     pruebaArray();
+    pruebaSimpleList();
 };

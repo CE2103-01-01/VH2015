@@ -13,6 +13,7 @@ template <class T> class vArray {
     vRef<void> chunk;
     public:
         vArray<T>(int);
+
         int operator =(vArray);
         bool operator ==(vArray);
         T* operator [](int);
@@ -27,7 +28,7 @@ template <class T> vArray<T>::vArray(int len){
 template <class T> int vArray<T>::operator =(vArray<T> other){
     if(vSize == other.len()){
         for(vInt i = 0; i<vSize; i+=1){
-            *static_cast<T*>(*chunk + !i*sizeof(T)) = *(other[i]);
+            *static_cast<T*>(*chunk + !i*sizeof(T)) = *(other[!i]);
         }
     };
 };
@@ -35,7 +36,7 @@ template <class T> int vArray<T>::operator =(vArray<T> other){
 template <class T> bool vArray<T>::operator ==(vArray<T> other){
     if(vSize == other.len()){
         for(vInt i = 0; i<vSize; i+=1){
-            if(!(*static_cast<T*>(*chunk + !i*sizeof(T))==*(other[i]))){
+            if(!(*static_cast<T*>(*chunk + !i*sizeof(T))==*(other[!i]))){
                 return false;
             }
         }

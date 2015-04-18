@@ -11,6 +11,7 @@
 #include "src/vTypes/Headers/vFloat.h"
 #include "src/vTypes/Headers/vInt.h"
 #include "src/vTypes/Headers/vLong.h"
+#include "src/vTypes/Headers/vSimpleList.h"
 #include "src/vHeap/Headers/vPager.h"
 
 void pruebaArray();
@@ -19,6 +20,7 @@ void pruebaLong();
 void pruebaInt();
 void pruebaChar();
 void pruebaFloat();
+void pruebaSimpleList();
 void begin();
 
 #endif //VH2015_PROOF_H
