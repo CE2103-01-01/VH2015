@@ -13,7 +13,8 @@ vHeap::vHeap(int s, float o, bool pDebug){
     *overweight = o;
     vSize = static_cast<int*>(malloc(sizeof(int)));
     *vSize = s*1024*1024;
-    vDebug = pDebug;
+    vDebug = static_cast<bool*>(malloc(sizeof(bool)));
+    *vDebug = pDebug;
     mainChunk = malloc(s*1024*1024);
     actualPos = mainChunk;
     initPos = mainChunk;
@@ -40,6 +41,7 @@ vHeap::vHeap(int s, float o, bool pDebug){
 
 vHeap::~vHeap(){
     free(dfrag);
+    free(vDebug);
     free(overweight);
     free(mainChunk);
     free(dumpFrecuency);

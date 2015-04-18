@@ -21,7 +21,7 @@ template<class T> class vRef;
 class vMetaData;
 
 class vHeap{
-    bool vDebug;
+    bool* vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
     float* overweight;
@@ -45,8 +45,6 @@ public:
     template <class T> void vFree(vRef<T>);
     void vFree(unsigned int);
     static vHeap* getInstance();
-    bool makeDump();
-    void startDumpThread();
     vMetaData* getMetaData();
     int removeVRef(int);
     int addVRef(int);
