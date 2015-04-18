@@ -68,6 +68,10 @@ void pruebaSimpleList(){
     std::cout<< "vSimpleList[1] = 1 : " << a[1] <<std::endl;
     a+2;
     std::cout<< "vSimpleList[2] = 2 : " << a[2] <<std::endl;
+
+    vRef<vSimpleList<int>> r = vMalloc(sizeof(a));
+    vPlacement(r,a);
+    std::cout<< "(**vRef<vSimpleList<int>>)[1] = 1 : " << (**r)[1] <<std::endl;
 };
 
 void begin(){
