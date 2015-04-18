@@ -17,7 +17,7 @@ private:
     void *offset;
     unsigned int dataSize;
     bool useFlag;   //TODO: usar
-    unsigned int numReferences;
+    unsigned int numReferences = 0;
     bool onHeap;
     std::string path;
 public:
