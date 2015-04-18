@@ -78,11 +78,16 @@ void pruebaDoubleList(){
         (**r).insertFront(5);
         (**r).insertFront(10);
         (**r).insertFront(20);
-        (**r).insertBack(100);
+        (**r).insertFront(30);
+    (**r).insertPosition(1,25);
+       // (**r).insertBack(100);
+    std::cout<<(**r).getLen()<<std::endl;
+
     std::cout<< "vDoubleList[0]: "<<(**r)[0]<<std::endl;
     std::cout<< "vDoubleList[1]: "<<(**r)[1]<<std::endl;
     std::cout<< "vDoubleList[2]: "<<(**r)[2]<<std::endl;
     std::cout<< "vDoubleList[3]: "<<(**r)[3]<<std::endl;
+    std::cout<< "vDoubleList[3]: "<<(**r)[4]<<std::endl;
 
 
 };

@@ -55,13 +55,9 @@ public:
 };
 template<class T>
 T vDoubleList<T>::operator[](int pos) {
-    if(0<=pos<**len){
-        vRef<vDoubleNode<T>> temp;
-        temp = head;
-        if(pos==0){
-            return (**temp).getData();
-        }
-        for(int i=1;i<**len;i++){
+    if(pos<**len){
+        vRef<vDoubleNode<T>> temp = head;
+        for(int i=0;i<pos;i++){
             temp= (**temp).getNext();
         }
         return (**temp).getData();
@@ -75,28 +71,30 @@ vDoubleList<T>::vDoubleList() {
 }
 template<class T>
 void vDoubleList<T>::deletePosition(int pos) {
-    if(0<pos<=**len){
+    if(pos<**len){
         vRef<vDoubleNode<T>> temp;
         temp = head;
-        if(pos==1){
+        if(pos==0){
             (**temp).getNext();
             head = (**temp).getNext();
             temp.~vRef();
         }
-        else{
-            if(pos==**len){
+        else {
+            if (pos == **len - 1) {
                 vRef<vDoubleNode<T>> tempAux;
                 tempAux = tail;
-                (**(**tempAux).getPrev()).setNext(NULL);
-                tail=(**tempAux).getPrev();
+                (**(**tempAux).getPrev()).setNext(0);
+                tail = (**tempAux).getPrev();
                 tempAux.~vRef();
             }
-            for(int i =0;i<pos;i++){
-                temp=(**temp).getNext();
+            else {
+                for (int i = 0; i < pos; i++) {
+                    temp = (**temp).getNext();
+                }
+                (**(**temp).getPrev()).setNext((**temp).getNext());
+                (**(**temp).getNext()).setPrev((**temp).getPrev());
+                temp.~vRef();
             }
-            (**(**temp).getPrev()).setNext((**temp).getNext());
-            (**(**temp).getNext()).setPrev((**temp).getPrev());
-            temp.~vRef();
         }
         (**len)--;
     }
@@ -114,18 +112,20 @@ bool vDoubleList<T>::isEmpty() {
 }
 template <class T>
 void vDoubleList<T>::insertFront(T data) {
-    if (**len == 0) {
+    if (**len== 0) {
+
         head = vMalloc(sizeof(vDoubleNode<T>));
         tail = head;
-        vPlacement(head, vDoubleNode<T>(data));
-    }
-    else {
-        vRef<vDoubleNode<T>> tmp;
-        tmp = vMalloc(sizeof(vDoubleNode<T>));
-        vPlacement(tmp, vDoubleNode<T>(data));
-        (**tmp).setNext(head);
-        (**head).setPrev(tmp);
-        head = tmp;
+        vPlacement(tail, vDoubleNode<T>(data));
+    } else {
+        vRef<vDoubleNode<T>> tmp = head;
+        head = vMalloc(sizeof(vDoubleNode<T>));
+        vPlacement(head,vDoubleNode<T>(data));
+        (**tmp).setPrev(head);
+        (**head).setNext(tmp);
+
+
+
     }
     (**len)++;
 }
@@ -133,8 +133,8 @@ template <class T>
 void vDoubleList<T>::insertBack(T data) {
     vDoubleNode<T> node = vDoubleNode<T>(data);
     if(**len==0){
-        head = vMalloc(sizeof(vDoubleNode<T>));
-        tail = head;
+        tail = vMalloc(sizeof(vDoubleNode<T>));
+        head = tail;
         vPlacement(head, vDoubleNode<T>(data));
     }
     else{
@@ -142,7 +142,7 @@ void vDoubleList<T>::insertBack(T data) {
         tail = vMalloc(sizeof(vDoubleNode<T>));
         vPlacement(tail,vDoubleNode<T>(data));
         (**tmp).setNext(tail);
-        (*tail)->setPrev(tmp);
+        (**tail).setPrev(tmp);
     }
     (**len)++;
 }
@@ -167,7 +167,7 @@ void vDoubleList<T>::deleteBack() {
 template<class T>
 void vDoubleList<T>::deleteFront() {
     if (**len==1){
-        head.~vDoubleNode();
+        head.~vRef();
         head = 0;
         tail = 0;
     }
@@ -197,33 +197,37 @@ vRef<vDoubleNode<T>> vDoubleList<T>::getPosition(int pos) {
 
 template <class T>
 void vDoubleList<T>::insertPosition(int pos, T data) {
-    if(0<pos<=**len){
+    if(pos<**len){
         vRef<vDoubleNode<T>> temp;
         if(pos<**len){
             temp=head;
-            for(int i = 0; i<pos;i++){
+            for(int i =1; i<pos;i++){
                 temp=(**temp).getNext();
             }
             vRef<vDoubleNode<T>> node;
-            if(pos==1){
-                node=head;
-                vPlacement(head,data);
-                (**head).setNext(node);
+            if(pos==0){
+                node=vMalloc(sizeof(vDoubleNode<T>));
+                vPlacement(node,vDoubleNode<T>(data));
                 (**node).setNext(head);
+                (**head).setPrev(node);
+                head=node;
             }
-            vPlacement(node,data);
-            (**node).setPrev(temp);
-            (**node).setNext((**temp).getNext());
-            (**(**temp).getNext()).setPrev(node);
-            (**temp).setNext(node);
+            else {
+                node = vMalloc(sizeof(vDoubleNode<T>));
 
+                vPlacement(node, vDoubleNode<T>(data));
+                (**node).setPrev(temp);
+                (**node).setNext((**temp).getNext());
+                (**(**temp).getNext()).setPrev(node);
+                (**temp).setNext(node);
 
+            }
 
         }
         else{
             vRef<vDoubleNode<T>> node;
             node = tail;
-            vPlacement(tail,data);
+            vPlacement(tail,vDoubleNode<T>(data));
             (**tail).setPrev(node);
         }
         (**len)++;
