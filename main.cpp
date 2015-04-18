@@ -7,7 +7,7 @@
 #include "../libs/rapidjson/stringbuffer.h"
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
-
+#include "src/vTypes/Headers/vDoubleList.h"
 #include "proof.h"
 
 //TODO: implementar vArray
@@ -158,6 +158,10 @@ int main() {
     string path = getenv("HOME");
     path.append("/.vh2015/");
     createDirectory(path);
+    vDoubleList<int> hola;
+    hola.insertFront(5);
+    hola.insertFront(60);
+
     /*
     ///Redirects cout to output.txt
     ofstream out(path + "output.txt");

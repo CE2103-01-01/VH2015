@@ -37,8 +37,10 @@ set(HEADERS_FILES
                     libs/vheaplib.h
                     libs/vheaplibpp.h
                     src/vTypes/Headers/vArray.h
+                    src/vTypes/Headers/vBinaryTree.h
                     src/vTypes/Headers/vList.h
                     src/vTypes/Headers/vString.h
+                    src/vTypes/Headers/vDoubleList.h
                     src/vTypes/Headers/vInt.h
                     src/vTypes/Headers/vChar.h
                     src/vTypes/Headers/vFloat.h
@@ -53,7 +55,7 @@ file(GLOB RES_FILES res/book.txt
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
 find_package (Threads)
-add_executable(VH2015 ${HEADERS_FILES} ${SOURCE_FILES} ${RES_FILES} libs/rapidjson/internal/pow10.h libs/rapidjson/internal/stack.h libs/rapidjson/internal/strfunc.h libs/rapidjson/document.h libs/rapidjson/filestream.h libs/rapidjson/prettywriter.h libs/rapidjson/rapidjson.h libs/rapidjson/reader.h libs/rapidjson/stringbuffer.h libs/rapidjson/writer.h proof.h proof.cpp)
+add_executable(VH2015 ${HEADERS_FILES} ${SOURCE_FILES} ${RES_FILES} libs/rapidjson/internal/pow10.h libs/rapidjson/internal/stack.h libs/rapidjson/internal/strfunc.h libs/rapidjson/document.h libs/rapidjson/filestream.h libs/rapidjson/prettywriter.h libs/rapidjson/rapidjson.h libs/rapidjson/reader.h libs/rapidjson/stringbuffer.h libs/rapidjson/writer.h proof.h proof.cpp src/vTypes/Headers/vDoubleList.h)
 
 target_link_libraries (VH2015 ${CMAKE_THREAD_LIBS_INIT})
 include_directories(res)
