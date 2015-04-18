@@ -92,11 +92,6 @@ void pruebaDoubleList(){
 
 };
 
-void pruebaString(){
-    vString s = vString("hola");
-    !s;
-};
-
 void begin(){
     //pruebaPager();
     pruebaLong();
@@ -106,5 +101,4 @@ void begin(){
     pruebaArray();
     pruebaSimpleList();
     pruebaDoubleList();
-    //pruebaString();
 };

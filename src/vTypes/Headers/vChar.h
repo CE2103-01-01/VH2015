@@ -10,7 +10,7 @@
 
 void vFree(int toFree);
 unsigned int vMalloc(unsigned int);
-template<class T> void vFree(vRef<T> &toFree);
+template<class T> void vFree(vRef<T> toFree);
 template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 class vChar{
