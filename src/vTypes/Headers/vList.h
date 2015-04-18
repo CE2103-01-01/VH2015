@@ -80,6 +80,7 @@ template<class T>
 vNode<T>::vNode(T* v) {
     data = v;
     next = 0;
+    prev = 0;
 };
 /** @brief Constructor
 *
@@ -89,6 +90,7 @@ vNode<T>::vNode(T v) {
     data = static_cast<T*>(malloc(sizeof(T)));
     *data = v;
     next = 0;
+    prev = 0;
 }
 /** @brief Destructor
 *
@@ -184,7 +186,6 @@ vList<T>::vList() {
 template<class T>
 vList<T>::~vList() {
     deleteAll();
-    free(&l);
 };
 /** @brief Inserta un nodo al inicio
 *
@@ -228,7 +229,7 @@ void vList<T>::append(T* d) {
 template<class T>
 void vList<T>::append(T d) {
     vNode<T>* n = static_cast<vNode<T>*>(malloc(sizeof(vNode<T>)));
-    new(n) vNode<T>(d);
+    *n = vNode<T>(d);
     if(_tail!=0){
         _tail->insertAfter(n);
         _tail=n;

@@ -113,13 +113,3 @@ std::string vEntry::getPath(){
     return " ";    //path;
 };
 
-
-vEntry::vEntry(const vEntry &obj) {
-    idRef = obj.idRef;
-    numReferences = obj.numReferences;
-    useFlag = obj.useFlag;
-    dataSize = obj.dataSize;
-    offset = obj.offset;
-    onHeap = obj.onHeap;
-    //path = obj.//path;
-}
