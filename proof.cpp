@@ -93,14 +93,12 @@ void pruebaDoubleList(){
 };
 
 void pruebaString(){
-    vString a = vString("hola");
-    a+=" ";
-    a+="a";
-    a+=" ";
+    vString a = vString("hola ");
+    a+="a ";
     a+="todos";
     std::cout<<"impresion vString: "<<!a<<std::endl;
     --a;
-    std::cout<<"impresion vString: "<<!a<<std::endl;
+    std::cout<<"impresion vString borrado: "<<!a<<std::endl;
 };
 
 void begin(){

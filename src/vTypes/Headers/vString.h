@@ -15,7 +15,7 @@ class vString{
     public:
         vString(std::string);
         ~vString();
-        vInt len();
+        int len();
         void operator =(std::string);
         void operator =(vString);
         void operator +=(std::string);
