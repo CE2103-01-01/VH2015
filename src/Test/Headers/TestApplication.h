@@ -16,10 +16,10 @@ static char const *const readError = "Unable to open file";
 #include <fstream>
 #include <sstream>
 #include "vTypes/Headers/vBinaryTree.h"
-#
+using namespace std;
 
 
-int start(vString type);
+int start(string type);
 
 void createVBinaryTree();
 
@@ -28,7 +28,7 @@ void createVBinaryTree();
 
 
 using namespace std;
-int start(vString type) {
+int start(string type) {
     if (type == "vBinaryTree") createVBinaryTree();
     return 0;
 }
@@ -51,7 +51,7 @@ void createVBinaryTree() {
             do {
                 string sub;
                 iss >> sub;
-                palabras.insert(vString(sub));
+                palabras.insert(vString("a"));
             } while (iss);
         }
         myFile.close();

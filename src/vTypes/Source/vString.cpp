@@ -97,3 +97,17 @@ void vString::operator =(std::string str){
 int vString::len() {
     return word.len();
 };
+
+bool vString::operator>=(std::string str) {
+    for (int i = 0; i < word.len() && i < str.length(); i+=1) {
+        if (word[i]<str[i]) return false;
+    }
+    return true;
+}
+
+bool vString::operator>=(vString str) {
+    for (int i = 0; i < word.len() && i < str.len(); i+=1) {
+        if (word[i]<str[i]) return false;
+    }
+    return true;
+}
