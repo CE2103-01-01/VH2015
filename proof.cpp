@@ -64,6 +64,7 @@ void pruebaSimpleList(){
     vSimpleList<int> a = vSimpleList<int>();
     vRef<vSimpleList<int>> r = vMalloc(sizeof(a));
     vPlacement(r,a);
+    (**r)+0;
     std::cout<< "vSimpleList[0] = 0 : " << (**r)[0] <<std::endl;
     (**r)+1;
     std::cout<< "vSimpleList[1] = 1 : " << (**r)[1] <<std::endl;
