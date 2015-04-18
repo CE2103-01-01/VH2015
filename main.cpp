@@ -166,6 +166,10 @@ int main() {
     cout.rdbuf(out.rdbuf());
     */
 
+
+
+
+
     //std::cout.rdbuf(coutbuf); //restore old buffer
     return 0;
 };

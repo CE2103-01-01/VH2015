@@ -102,8 +102,12 @@ void pruebaString(){
 };
 
 void pruebaTree(){
-    vBinaryTree<int> myBinary = vBinaryTree<int>(1);
-    std::cout<<"vBinaryTree<int> myBinary = vBinaryTree<int>(1);"<<std::endl;
+    vBinaryTree<int> myBinary = vBinaryTree<int>();
+    myBinary.insert(2);
+    myBinary.insert(4);
+    myBinary.insert(1);
+    myBinary.insert(5);
+
     myBinary.insert(2);
     std::cout<<"myBinary.insert(2);"<<std::endl;
     myBinary.insert(4);
@@ -116,14 +120,14 @@ void pruebaTree(){
 
 void begin(){
     //pruebaPager();
-    pruebaLong();
-    pruebaInt();
-    pruebaChar();
-    pruebaFloat();
-    pruebaArray();
-    pruebaSimpleList();
-    pruebaDoubleList();
-    pruebaString();
+    //pruebaLong();
+    //pruebaInt();
+    //pruebaChar();
+    //pruebaFloat();
+    //pruebaArray();
+    //pruebaSimpleList();
+    //pruebaDoubleList();
+    //pruebaString();
     pruebaTree();
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };
