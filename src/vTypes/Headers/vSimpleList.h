@@ -80,7 +80,9 @@ template <class T> vSimpleList<T>::vSimpleList(){
     m_head = 0;
 };
 
-template <class T> vSimpleList<T>::~vSimpleList(){};
+template <class T> vSimpleList<T>::~vSimpleList(){
+
+};
 
 template <class T> void vSimpleList<T>::operator +(T data){
     if(!m_head != 0){
@@ -98,7 +100,31 @@ template <class T> void vSimpleList<T>::operator +(T data){
     };
 };
 
-template <class T> void vSimpleList<T>::operator -(T data){};
+template <class T> void vSimpleList<T>::operator -(T data){
+    if(!**m_head != data){
+        vRef<vSimpleNode<T>> tmp = m_head;
+        vRef<vSimpleNode<T>> toDelete = ++(**m_head);
+        for(vInt i=1; i<**m_len; i+=1){
+            if(!**toDelete == data){
+                (**tmp) + ++(**toDelete);
+                vFree(toDelete);
+                **m_len -= 1;
+                break;
+            }
+            tmp = toDelete;
+            toDelete = ++(**toDelete);
+        }
+    }else{
+        if(**m_len>1){
+            vRef<vSimpleNode<T>> tmp = ++(**m_head);
+            vFree(m_head);
+            m_head = tmp;
+        }else{
+            vFree(m_head);
+        }
+        **m_len = 0;
+    }
+};
 
 template <class T> T vSimpleList<T>::operator [](vInt pos){
     if(pos < **m_len){
@@ -120,7 +146,16 @@ template <class T> void vSimpleList<T>:: setPos(vInt pos, T data){
     };
 };
 
-template <class T> void vSimpleList<T>::operator --(){};
+template <class T> void vSimpleList<T>::operator --(){
+    vRef<vSimpleNode<T>> tmp = m_head;
+    vRef<vSimpleNode<T>> tmp2 = ++(**m_head);
+    while((**m_len) > 0)
+        std::cout<<!**m_len<<std::endl;
+        **m_len -= 1;
+        vFree(tmp);
+        tmp = tmp2;
+        tmp2 = ++(**tmp2);
+};
 
 template <class T> vInt vSimpleList<T>::len(){
     return vInt(**m_len);

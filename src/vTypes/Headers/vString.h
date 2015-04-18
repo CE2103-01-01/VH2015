@@ -11,7 +11,7 @@
 #include <iostream>
 
 class vString{
-    vSimpleList<vChar> word;
+    vSimpleList<char> word;
     public:
         vString(std::string);
         ~vString();
@@ -21,8 +21,9 @@ class vString{
         void operator +=(std::string);
         void operator +=(vString);
         void operator +=(vChar);
+        void operator +=(char);
         void operator --();
-        vChar operator [](vInt);
+        char operator [](int);
         std::string operator !();
 	    bool operator==(std::string);
 	    bool operator==(vString);

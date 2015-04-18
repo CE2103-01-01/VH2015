@@ -5,9 +5,9 @@
 #include "vTypes/Headers/vString.h"
 
 vString::vString(std::string str){
-    word = vSimpleList<vChar>();
+    word = vSimpleList<char>();
     for(int i=0; i<str.length(); i++){
-        word + static_cast<char>(str[i]);
+        (word) + static_cast<char>(str[i]);
     };
 };
 
@@ -17,36 +17,48 @@ vString::~vString() {
 
 void vString::operator +=(std::string str){
     for(int i=0; i<str.length(); i++){
-        word + static_cast<char>(str[i]);
+        (word) + static_cast<char>(str[i]);
     };
 };
 
 void vString::operator +=(vString str){
-
+    for(int i=0; i < !str.len(); i++){
+        (word) + !(str[i]);
+    };
 };
 
 void vString::operator +=(vChar chr){
-    word + chr;
+    (word) + !chr;
 };
 
-vChar vString::operator [](vInt index){
-    return word[index];
+void vString::operator +=(char chr){
+    (word) + chr;
+};
+
+char vString::operator [](int index){
+    return (word)[index];
 };
 
 void vString::operator --(){
-
+    --(word);
 };
 
 std::string vString::operator !(){
-    return "";
+    std::string ret = "";
+    for(int i=0; i < !(word).len(); i++){
+        std::stringstream tmp;
+        tmp << (word)[i];
+        ret.append(tmp.str());
+    };
+    return ret;
 };
 
 bool vString::operator==(std::string str) {
-    if (word.len() != str.length()){
+    if ((word).len() != str.length()){
         return false;
     }else{
         for (int i = 0; i < str.length(); i++) {
-            if (str[i] != !word[i]){
+            if (str[i] != !(word)[i]){
                 return false;
             }
         }
@@ -55,11 +67,11 @@ bool vString::operator==(std::string str) {
 };
 
 bool vString::operator==(vString str) {
-    if (word.len() != str.len()){
+    if ((word).len() != str.len()){
         return false;
     }else{
-        for (vInt i = 0; i < str.len(); i+=1) {
-            if (str[i] != word[i]){
+        for (int i = 0; i < !str.len(); i+=1) {
+            if (str[i] != (word)[i]){
                 return false;
             }
         }
@@ -68,17 +80,17 @@ bool vString::operator==(vString str) {
 };
 
 void vString::operator =(vString str){
-    for (vInt i = 0; i < str.len(); i+=1) {
-        word + str[i];
+    for (int i = 0; i < !str.len(); i+=1) {
+        (word) + str[i];
     }
 };
 
 void vString::operator =(std::string str){
-    for (vInt i = 0; i < str.length(); i+=1) {
-        word + static_cast<char>(str[!i]);
+    for (int i = 0; i < str.length(); i+=1) {
+        (word) + static_cast<char>(str[i]);
     }
 };
 
 vInt vString::len() {
-    return word.len();
+    return (word).len();
 };

@@ -92,6 +92,17 @@ void pruebaDoubleList(){
 
 };
 
+void pruebaString(){
+    vString a = vString("hola");
+    a+=" ";
+    a+="a";
+    a+=" ";
+    a+="todos";
+    std::cout<<"impresion vString: "<<!a<<std::endl;
+    --a;
+    std::cout<<"impresion vString: "<<!a<<std::endl;
+};
+
 void begin(){
     //pruebaPager();
     pruebaLong();
@@ -101,4 +112,5 @@ void begin(){
     pruebaArray();
     pruebaSimpleList();
     pruebaDoubleList();
+    pruebaString();
 };
