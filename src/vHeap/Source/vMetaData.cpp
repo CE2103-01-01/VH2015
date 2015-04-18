@@ -177,12 +177,12 @@ void* vMetaData::de_vReference(int id) {
                 entry->fileUp(content);
             };
             pthread_mutex_unlock(memoryMutex);
-            if (vDebug) printTime(debug, "deReference");
+            if (vDebug()) printTime(debug, "deReference");
             return entry->getOffSet();
         };
     };
     pthread_mutex_unlock(memoryMutex);
-    if (vDebug) printTime(debug, "deReference");
+    if (vDebug()) printTime(debug, "deReference");
     return nullptr;
 };
 

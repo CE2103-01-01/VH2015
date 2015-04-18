@@ -155,7 +155,9 @@ int createDirectory(string path)
 }
 int main() {
     begin();
-    pruebaDumpTxt();
+
+    //pruebaDumpTxt();
+
     string path = getenv("HOME");
     path.append("/.vh2015/");
     createDirectory(path);

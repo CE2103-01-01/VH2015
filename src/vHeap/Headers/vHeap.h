@@ -21,7 +21,7 @@ template<class T> class vRef;
 class vMetaData;
 
 class vHeap{
-    bool* vDebug;
+    bool vDebug;
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
     float* overweight;

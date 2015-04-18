@@ -7,24 +7,16 @@
 using namespace pugi;
 
 Dump::Dump() {//TODO-roberto revise los que estan en comentario,seg fault
-    //dumpping = static_cast<bool*>(malloc(sizeof(bool)));
-   // counter = static_cast<int*>(malloc(sizeof(int)));
-    //frecuency = static_cast<int*>(malloc(sizeof(int)));
-    bool dumpping = true;
-    int frecuency = 2;
-    int counter = 0;
+    counter = 0;
+    frecuency = 1;
+    dumpping = true;
 };
 
 Dump::~Dump() {
-    /*
-    free(dumpping);
-    free(frecuency);
-    free(counter);
-     */
 };
 
 bool Dump::getDumppingState(){
-    return *dumpping;
+    return dumpping;
 };
 
 std::string Dump::IntToStr(int n) {
@@ -37,7 +29,7 @@ std::string Dump::IntToStr(int n) {
 void Dump::saveDumpFile() {//T(25+17i)
     std::string path(getenv("HOME"));
     std::stringstream ss;
-    ss<<*counter;
+    ss<<(counter);
     std::string s1 = ss.str();
     path += "/DumpFile" + s1 + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
@@ -63,18 +55,20 @@ void Dump::saveDumpFile() {//T(25+17i)
     myfile.close();
 };
 
-int                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Dump::getFrecuency(){
-    return *frecuency;
-};
 
 void* dump(void* d){
     struct timespec o;
-    o.tv_nsec = 0;
+    o.tv_nsec = 500;
     o.tv_sec = static_cast<Dump*>(d)->getFrecuency();
-    while(true){
-        nanosleep(&o, NULL);
+    while(false){
+
         pthread_mutex_lock(vMetaData::getInstance()->getMutex());
         static_cast<Dump*>(d)->saveDumpFile();
         pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
+        nanosleep(&o, NULL);
     };
 };
+
+int Dump::getFrecuency() {
+    return frecuency;
+}
