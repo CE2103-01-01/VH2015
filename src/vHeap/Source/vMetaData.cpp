@@ -125,7 +125,6 @@ void vMetaData::removeEntry(int idRef) {
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
 unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
-    std::cout<< actualPos <<std::endl;
     if(actualPos!=0){
         cleanChunk(dataSize,actualPos);
     };
