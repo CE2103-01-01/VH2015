@@ -35,7 +35,7 @@ vList<vEntry> *vMetaData::getMemoryTable() {
 }
 
 int vMetaData::len() {
-    return actualID - deletedIDS->len();
+    return (int) (actualID - deletedIDS->len());
 };
 
 /**
@@ -101,9 +101,9 @@ void vMetaData::removeEntry(int idRef) {
         vEntry *actual = i->next();
         if (actual->getIdRef() == idRef) {
             vSize -= actual->getDataSize();
-            if(actual->isOnHeap()==false){  //Dato paginado
+            if(!actual->isOnHeap()){  //Dato paginado
                 std::string path = actual->getPath();
-                int l = path.length();
+                int l = (int) path.length();
                 char* arr = static_cast<char*>(malloc(sizeof(char) * l));
                 for(int i=0; i<l; i++){
                     *(arr+i) = static_cast<char>(path[i]);
@@ -113,8 +113,8 @@ void vMetaData::removeEntry(int idRef) {
             }else{
                 cleanChunk(actual->getDataSize(),&*actual);
             };
-            memoryTable->deleteNode(i->getPosition() - 1);
-            deletedIDS->append(idRef);
+            memoryTable->deleteNode((unsigned int) (i->getPosition() - 1));
+            deletedIDS->append((unsigned int) idRef);
             break;
         }
     }
@@ -139,7 +139,7 @@ unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
         deletedIDS->deleteNode(0);
         vEntry e = vEntry(id, dataSize, actualPos);
         memoryTable->append(e);
-        return id;
+        return (unsigned int) id;
     };
 };
 
@@ -168,7 +168,7 @@ void* vMetaData::de_vReference(int id) {
         vEntry* entry = iter->next();
         if(!*entry==id){
             entry->changeFlag();
-            if(entry->isOnHeap() == false){
+            if(!entry->isOnHeap()){
                 vEntry* toPage = searchToPage(entry->getDataSize());
                 std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());
                 void* content = &*toPage;
@@ -201,7 +201,7 @@ vEntry* vMetaData::searchToPage(int s){
 
     while(iter->exists()){
         vEntry* entry = iter->next();
-        if(entry->getUseFlag()==false & entry->getDataSize()>s){
+        if(!entry->getUseFlag() & entry->getDataSize()>s){
             pthread_mutex_unlock(memoryMutex);
             return entry;
         };

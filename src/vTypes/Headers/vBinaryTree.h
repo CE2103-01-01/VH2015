@@ -55,7 +55,7 @@ public:
 */
 template<class T>
 vNodeTree<T>::vNodeTree( T pData) {
-    data = vMalloc(sizeof(pData));
+    data = vMalloc((unsigned int) sizeof(pData));
     vPlacement(data, pData);
 }
 

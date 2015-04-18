@@ -17,11 +17,12 @@ private:
     void *offset;
     unsigned int dataSize;
     bool useFlag;   //TODO: usar
-    unsigned int numReferences;
+    unsigned int numReferences = 0;
     bool onHeap;
     std::string path;
 public:
     vEntry();
+    vEntry(const vEntry &obj);
     vEntry(int, int, void*);
     vEntry(int, int, void*, bool, std::string);
     void changeFlag();

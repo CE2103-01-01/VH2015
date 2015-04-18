@@ -69,7 +69,6 @@ public:
     vNode<T> *getNode(int); //Busca getNode
     T* get(int); //Busca getNode
     unsigned long len(); //Devuelve longtiud
-    vList<T>operator=(vList<T>); //Operador de asignacion
     void print(); //Imprime en consola
 };
 
@@ -388,6 +387,7 @@ T *vList<T>::get(int n) {
         };
     }else{
     };
+    return nullptr;
 };
 /** Devuelve la longitud
 *

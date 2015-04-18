@@ -59,14 +59,8 @@ void Dump::saveDumpFile() {//T(25+17i)
 void* dump(void* d){
     struct timespec o;
     o.tv_nsec = 500;
-    o.tv_sec = static_cast<Dump*>(d)->getFrecuency();
-    while(false){
-
-        pthread_mutex_lock(vMetaData::getInstance()->getMutex());
-        static_cast<Dump*>(d)->saveDumpFile();
-        pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
-        nanosleep(&o, NULL);
-    };
+    o.tv_sec = static_cast<Dump*>(d)->getFrecuency();;
+    return nullptr;
 };
 
 int Dump::getFrecuency() {

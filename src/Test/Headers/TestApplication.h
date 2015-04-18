@@ -51,7 +51,7 @@ void createVBinaryTree() {
             do {
                 string sub;
                 iss >> sub;
-                palabras.insert(vString("a"));
+                if (sub!="")palabras.insert(sub);
             } while (iss);
         }
         myFile.close();

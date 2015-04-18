@@ -5,16 +5,16 @@
 #include "vHeap/Headers/vEntry.h"
 
 vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
-    idRef = pIdRef;
-    dataSize = pDataSize;
+    idRef = (unsigned int) pIdRef;
+    dataSize = (unsigned int) pDataSize;
     offset = pOffset;
     onHeap = true;
     path = "";
 }
 
 vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool oH, std::string p) {
-    idRef = pIdRef;
-    dataSize = pDataSize;
+    idRef = (unsigned int) pIdRef;
+    dataSize = (unsigned int) pDataSize;
     offset = pOffset;
     onHeap = oH;
     path = p;
@@ -90,7 +90,7 @@ void vEntry::increaseNumReferences() {
 }
 
 int vEntry::operator[](int var){
-    idRef = var;
+    idRef = (unsigned int) var;
     return 0;
 };
 
@@ -112,3 +112,13 @@ bool vEntry::isOnHeap(){
 std::string vEntry::getPath(){
     return path;
 };
+
+vEntry::vEntry(const vEntry &obj) {
+    idRef = obj.idRef;
+    numReferences = obj.numReferences;
+    useFlag = obj.useFlag;
+    dataSize = obj.dataSize;
+    offset = obj.offset;
+    onHeap = obj.onHeap;
+    path = obj.path;
+}

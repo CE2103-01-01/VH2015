@@ -7,8 +7,8 @@
 #include "../libs/rapidjson/stringbuffer.h"
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
-#include "proof.h"
-//#include "Test/Headers/TestApplication.h"
+//#include "proof.h"
+#include "Test/Headers/TestApplication.h"
 
 //TODO: implementar vArray
 //TODO: cambiar vString de heap a vHeap
@@ -153,8 +153,8 @@ int createDirectory(string path)
     return mkdir(path.c_str(), 0777);
 }
 int main() {
-    begin();
-    //start("vBinaryTree");
+    //begin();
+    start("vBinaryTree");
     //pruebaDumpTxt();
 
     string path = getenv("HOME");
