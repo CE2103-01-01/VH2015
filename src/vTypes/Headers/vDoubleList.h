@@ -36,12 +36,12 @@ public:
 template <class T>
 class vDoubleList{
 private:
-    vRef<vDoubleNode<T>> head=0;
-    vRef<vDoubleNode<T>> tail=0;
+    vRef<vDoubleNode<T>> head;
+    vRef<vDoubleNode<T>> tail;
     vRef<int> len;
 public:
     vDoubleList();
-    vDoubleNode<T> operator [] (int);
+    T operator [] (int);
     void insertFront(T);
     void insertBack(T);
     vRef<vDoubleNode<T>> getPosition(int);
@@ -54,18 +54,23 @@ public:
 
 };
 template<class T>
-vDoubleNode<T> vDoubleList<T>::operator[](int pos) {
+T vDoubleList<T>::operator[](int pos) {
     if(0<=pos<**len){
         vRef<vDoubleNode<T>> temp;
         temp = head;
-        for(int i=0;i<**len;i++){
+        if(pos==0){
+            return (**temp).getData();
+        }
+        for(int i=1;i<**len;i++){
             temp= (**temp).getNext();
         }
-        return temp;
+        return (**temp).getData();
     }
 }
 template<class T>
 vDoubleList<T>::vDoubleList() {
+    head=0;
+    tail=0;
     len = vMalloc(sizeof(int));
 }
 template<class T>
@@ -109,23 +114,25 @@ bool vDoubleList<T>::isEmpty() {
 }
 template <class T>
 void vDoubleList<T>::insertFront(T data) {
-    if (len == 0) {
+    if (**len == 0) {
         head = vMalloc(sizeof(vDoubleNode<T>));
         tail = head;
         vPlacement(head, vDoubleNode<T>(data));
     }
     else {
-        vRef<vDoubleNode<T>> tmp = head;
-        head = vMalloc(sizeof(vDoubleNode<T>));
-        vPlacement(head, vDoubleNode<T>(data));
-        (*head)->setNext(tmp);
+        vRef<vDoubleNode<T>> tmp;
+        tmp = vMalloc(sizeof(vDoubleNode<T>));
+        vPlacement(tmp, vDoubleNode<T>(data));
+        (**tmp).setNext(head);
+        (**head).setPrev(tmp);
+        head = tmp;
     }
     (**len)++;
 }
 template <class T>
 void vDoubleList<T>::insertBack(T data) {
     vDoubleNode<T> node = vDoubleNode<T>(data);
-    if(len==0){
+    if(**len==0){
         head = vMalloc(sizeof(vDoubleNode<T>));
         tail = head;
         vPlacement(head, vDoubleNode<T>(data));
@@ -134,6 +141,7 @@ void vDoubleList<T>::insertBack(T data) {
        vRef<vDoubleNode<T>> tmp = tail;
         tail = vMalloc(sizeof(vDoubleNode<T>));
         vPlacement(tail,vDoubleNode<T>(data));
+        (**tmp).setNext(tail);
         (*tail)->setPrev(tmp);
     }
     (**len)++;
