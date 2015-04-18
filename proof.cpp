@@ -62,16 +62,13 @@ void pruebaArray(){
 
 void pruebaSimpleList(){
     vSimpleList<int> a = vSimpleList<int>();
-    a+0;
-    std::cout<< "vSimpleList[0] = 0 : " << a[0] <<std::endl;
-    a+1;
-    std::cout<< "vSimpleList[1] = 1 : " << a[1] <<std::endl;
-    a+2;
-    std::cout<< "vSimpleList[2] = 2 : " << a[2] <<std::endl;
-
     vRef<vSimpleList<int>> r = vMalloc(sizeof(a));
     vPlacement(r,a);
-    std::cout<< "(**vRef<vSimpleList<int>>)[1] = 1 : " << (**r)[1] <<std::endl;
+    std::cout<< "vSimpleList[0] = 0 : " << (**r)[0] <<std::endl;
+    (**r)+1;
+    std::cout<< "vSimpleList[1] = 1 : " << (**r)[1] <<std::endl;
+    (**r)+2;
+    std::cout<< "vSimpleList[2] = 2 : " << (**r)[2] <<std::endl;
 };
 
 void begin(){
