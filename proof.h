@@ -13,6 +13,7 @@
 #include "src/vTypes/Headers/vLong.h"
 #include "src/vTypes/Headers/vSimpleList.h"
 #include "src/vTypes/Headers/vDoubleList.h"
+#include "src/vTypes/Headers/vString.h"
 #include "src/vHeap/Headers/vPager.h"
 
 void pruebaArray();
@@ -23,6 +24,7 @@ void pruebaChar();
 void pruebaFloat();
 void pruebaSimpleList();
 void pruebaDoubleList();
+void pruebaString();
 void begin();
 
 #endif //VH2015_PROOF_H
