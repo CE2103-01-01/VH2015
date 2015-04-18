@@ -93,6 +93,7 @@ void vString::operator =(std::string str){
     }
 };
 
+//longitud
 int vString::len() {
     return word.len();
 };
