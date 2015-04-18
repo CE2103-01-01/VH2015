@@ -13,15 +13,16 @@
 
 class vEntry {
 private:
-    unsigned int idRef;
     void *offset;
     unsigned int dataSize;
     bool useFlag;   //TODO: usar
-    unsigned int numReferences;
+    unsigned int numReferences = 0;
     bool onHeap;
     //std::string path;
+    unsigned int idRef;
 public:
     vEntry();
+
     vEntry(int, int, void*);
     vEntry(int, int, void*, bool, std::string);
     void changeFlag();

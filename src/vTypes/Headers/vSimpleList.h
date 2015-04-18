@@ -29,7 +29,7 @@ template <class T> vSimpleNode<T>::vSimpleNode(){
 };
 
 template <class T> vSimpleNode<T>::vSimpleNode(T param){
-    data = vMalloc(sizeof(T));
+    data = vMalloc((unsigned int) sizeof(T));
     vPlacement(data,param);
     next = 0;
 };
@@ -46,7 +46,7 @@ template <class T> void vSimpleNode<T>::operator *=(T d){
     if(!data != 0){
         vPlacement(data,d);
     }else{
-        data = vMalloc(sizeof(T));
+        data = vMalloc((unsigned int) sizeof(T));
         vPlacement(data,d);
     }
 };

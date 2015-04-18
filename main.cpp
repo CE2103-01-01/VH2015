@@ -7,10 +7,8 @@
 #include "../libs/rapidjson/stringbuffer.h"
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
-#include "vHeap/Headers/vEntry.h"
-#include "vTypes/Headers/vList.h"
-#include "proof.h"
-//#include "Test/Headers/TestApplication.h"
+//#include "proof.h"
+#include "Test/Headers/TestApplication.h"
 
 //TODO: implementar vArray
 //TODO: cambiar vString de heap a vHeap
@@ -155,28 +153,24 @@ int createDirectory(string path)
     return mkdir(path.c_str(), 0777);
 }
 int main() {
-
-    vList<vEntry> a = vList<vEntry>();
-    for(int i =0; i<1000; i++){
-        std::cout<< i <<std::endl;
-        vEntry tmp = vEntry(0,0,0);
-        std::cout<< "vEntry tmp = vEntry(...);" <<std::endl;
-        a.append(tmp);
-    }
-
-    //begin();
-    //start("vBinaryTree");
-    //pruebaDumpTxt();
-
-    //string path = getenv("HOME");
-    //path.append("/.vh2015/");
-    //createDirectory(path);
-    /*
+    string path = getenv("HOME");
+    path.append("/.vh2015/");
+    createDirectory(path);
+/*
     ///Redirects cout to output.txt
     ofstream out(path + "output.txt");
     streambuf *coutbuf = cout.rdbuf(); //save old buf
-    cout.rdbuf(out.rdbuf());
-    */
+    cout.rdbuf(out.rdbuf());*/
+
+    //startSocket();
+
+    //begin();
+    start("vSimpleList");
+    //start("vDoubleList");
+    //start("vBinaryTree");
+    pruebaDumpTxt();
+
+
 
 
 

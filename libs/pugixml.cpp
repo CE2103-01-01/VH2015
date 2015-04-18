@@ -1275,12 +1275,9 @@ PUGI__NS_BEGIN
 
 	PUGI__FN xml_encoding get_wchar_encoding()
 	{
-		PUGI__STATIC_ASSERT(sizeof(wchar_t) == 2 || sizeof(wchar_t) == 4);
+		PUGI__STATIC_ASSERT(sizeof(wchar_t) == 4);
 
-		if (sizeof(wchar_t) == 2)
-			return is_little_endian() ? encoding_utf16_le : encoding_utf16_be;
-		else 
-			return is_little_endian() ? encoding_utf32_le : encoding_utf32_be;
+		return is_little_endian() ? encoding_utf32_le : encoding_utf32_be;
 	}
 
 	PUGI__FN xml_encoding guess_buffer_encoding(uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
@@ -2096,7 +2093,7 @@ PUGI__NS_BEGIN
 	
 	PUGI__FN strconv_pcdata_t get_strconv_pcdata(unsigned int optmask)
 	{
-		PUGI__STATIC_ASSERT(parse_escapes == 0x10 && parse_eol == 0x20 && parse_trim_pcdata == 0x0800);
+		PUGI__STATIC_ASSERT(parse_trim_pcdata == 0x0800);
 
 		switch (((optmask >> 4) & 3) | ((optmask >> 9) & 4)) // get bitmask for flags (eol escapes trim)
 		{
@@ -2265,7 +2262,7 @@ PUGI__NS_BEGIN
 
 	PUGI__FN strconv_attribute_t get_strconv_attribute(unsigned int optmask)
 	{
-		PUGI__STATIC_ASSERT(parse_escapes == 0x10 && parse_eol == 0x20 && parse_wconv_attribute == 0x40 && parse_wnorm_attribute == 0x80);
+		PUGI__STATIC_ASSERT(parse_wnorm_attribute == 0x80);
 		
 		switch ((optmask >> 4) & 15) // get bitmask for flags (wconv wnorm eol escapes)
 		{
@@ -3684,9 +3681,8 @@ PUGI__NS_BEGIN
 	{
 		if (parent != node_document && parent != node_element) return false;
 		if (child == node_document || child == node_null) return false;
-		if (parent != node_document && (child == node_declaration || child == node_doctype)) return false;
+		return !(parent != node_document && (child == node_declaration || child == node_doctype));
 
-		return true;
 	}
 
 	PUGI__FN bool allow_move(xml_node parent, xml_node child)
@@ -6087,7 +6083,7 @@ namespace pugi
 			unsigned int bom = 0xfeff;
 			buffered_writer.write(static_cast<wchar_t>(bom));
 		#else
-			buffered_writer.write('\xef', '\xbb', '\xbf');
+			buffered_writer.write((char_t) '\xef', (char_t) '\xbb', (char_t) '\xbf');
 		#endif
 		}
 

@@ -22,7 +22,7 @@ template <class T> class vArray {
 
 template <class T> vArray<T>::vArray(int len){
     vSize = len;
-    chunk = vMalloc(sizeof(T) * len);
+    chunk = vMalloc((unsigned int) (sizeof(T) * len));
 };
 
 template <class T> int vArray<T>::operator =(vArray<T> other){
@@ -31,6 +31,8 @@ template <class T> int vArray<T>::operator =(vArray<T> other){
             *static_cast<T*>(*chunk + !i*sizeof(T)) = *(other[!i]);
         }
     };
+
+    return 0;
 };
 
 template <class T> bool vArray<T>::operator ==(vArray<T> other){

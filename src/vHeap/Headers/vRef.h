@@ -29,13 +29,13 @@ template <class T> class vRef {
 template<class T>
 vRef<T>::vRef(const vRef<T> &obj) {
     referenceID = obj.referenceID;
-    vMetaData::getInstance()->increaseReference(obj.referenceID);
+    vMetaData::getInstance()->increaseReference((unsigned int) obj.referenceID);
 }
 
 template<class T>
 vRef<T>::vRef(int id) {
     referenceID = id;
-    vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
+    vMetaData::getInstance()->increaseReference((unsigned int) referenceID); // aumenta contador de referencias
 };
 
 template<class T>
@@ -46,7 +46,7 @@ vRef<T>::vRef() {
 
 template<class T>
 vRef<T>::~vRef() {
-    vMetaData::getInstance()->decreaseReference(referenceID); // disminuye contador de referencias
+    vMetaData::getInstance()->decreaseReference((unsigned int) referenceID); // disminuye contador de referencias
 };
 
 template<class T>
@@ -62,17 +62,17 @@ T* vRef<T>::operator*() {
 
 template<class T>
 int vRef<T>::operator=(int id) {
-    if (referenceID)vMetaData::getInstance()->decreaseReference(referenceID);
+    if (referenceID)vMetaData::getInstance()->decreaseReference((unsigned int) referenceID);
     referenceID = id;
-    vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
+    vMetaData::getInstance()->increaseReference((unsigned int) referenceID); // aumenta contador de referencias
     return 0;
 };
 
 template<class T>
 int vRef<T>::operator=(vRef other) {
-    if (referenceID)vMetaData::getInstance()->decreaseReference(referenceID);
+    if (referenceID)vMetaData::getInstance()->decreaseReference((unsigned int) referenceID);
     referenceID = !other;
-    vMetaData::getInstance()->increaseReference(referenceID); // aumenta contador de referencias
+    vMetaData::getInstance()->increaseReference((unsigned int) referenceID); // aumenta contador de referencias
     return 0;
 };
 
@@ -83,17 +83,17 @@ bool vRef<T>::operator==(vRef other) {
 
 template<class T>
 int vRef<T>::operator++() {
-    if (referenceID)vMetaData::getInstance()->decreaseReference(referenceID);
+    if (referenceID)vMetaData::getInstance()->decreaseReference((unsigned int) referenceID);
     referenceID++;
-    vMetaData::getInstance()->increaseReference(referenceID);
+    vMetaData::getInstance()->increaseReference((unsigned int) referenceID);
     return 0;
 };
 
 template<class T>
 int vRef<T>::operator--() {
-    if (referenceID) vMetaData::getInstance()->decreaseReference(referenceID);
+    if (referenceID) vMetaData::getInstance()->decreaseReference((unsigned int) referenceID);
     referenceID--;
-    if (referenceID) vMetaData::getInstance()->increaseReference(referenceID);
+    if (referenceID) vMetaData::getInstance()->increaseReference((unsigned int) referenceID);
     return 0;
 };
 

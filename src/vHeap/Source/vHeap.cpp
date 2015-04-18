@@ -15,7 +15,7 @@ vHeap::vHeap(int s, float o, bool pDebug){
     *vSize = s*1024*1024;
     vDebug = static_cast<bool*>(malloc(sizeof(bool)));
     *vDebug = pDebug;
-    mainChunk = malloc(s*1024*1024);
+    mainChunk = malloc((size_t) (s*1024*1024));
     actualPos = mainChunk;
     initPos = mainChunk;
     finalPos = initPos+s*1024*1024;
@@ -121,13 +121,15 @@ void *vHeap::de_vReference(int id) {//T(7+6i)
 
 
 int vHeap::removeVRef(int idRef) {
-    metaData->decreaseReference(idRef);
+    metaData->decreaseReference((unsigned int) idRef);
+    return 0;
 };
 
 int vHeap::addVRef(int idRef) {
-    metaData->increaseReference(idRef);
+    metaData->increaseReference((unsigned int) idRef);
+    return 0;
 };
 
 bool vHeap::getVDebug() {
-    return vDebug;
+    return (bool) vDebug;
 }

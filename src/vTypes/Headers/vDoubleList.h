@@ -62,6 +62,7 @@ T vDoubleList<T>::operator[](int pos) {
         }
         return (**temp).getData();
     }
+    return NULL;
 }
 template<class T>
 vDoubleList<T>::vDoubleList() {
@@ -105,10 +106,7 @@ int vDoubleList<T>::getLen() {
 }
 template<class T>
 bool vDoubleList<T>::isEmpty() {
-    if(**len!=0){
-        return false;
-    }
-    return true;
+    return **len==0;
 }
 template <class T>
 void vDoubleList<T>::insertFront(T data) {
@@ -192,6 +190,7 @@ vRef<vDoubleNode<T>> vDoubleList<T>::getPosition(int pos) {
         }
         return temp;
     }
+    return vRef<vDoubleNode<T>>();
 }
 
 
