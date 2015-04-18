@@ -16,6 +16,8 @@ class vString{
         vString(std::string);
         ~vString();
         int len();
+        bool operator >=(std::string);
+        bool operator >=(vString);
         void operator =(std::string);
         void operator =(vString);
         void operator +=(std::string);

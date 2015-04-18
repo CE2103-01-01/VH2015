@@ -8,6 +8,7 @@
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
 #include "proof.h"
+//#include "Test/Headers/TestApplication.h"
 
 //TODO: implementar vArray
 //TODO: cambiar vString de heap a vHeap
@@ -153,7 +154,7 @@ int createDirectory(string path)
 }
 int main() {
     begin();
-
+    //start("vBinaryTree");
     //pruebaDumpTxt();
 
     string path = getenv("HOME");

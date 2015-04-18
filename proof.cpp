@@ -102,20 +102,10 @@ void pruebaString(){
 };
 
 void pruebaTree(){
-    vBinaryTree<int> myBinary = vBinaryTree<int>();
-    myBinary.insert(2);
-    myBinary.insert(4);
-    myBinary.insert(1);
-    myBinary.insert(5);
+    vBinaryTree<vString> myBinary = vBinaryTree<vString>();
+    myBinary.insert(vString("a"));
+    myBinary.insert(vString(""));
 
-    myBinary.insert(2);
-    std::cout<<"myBinary.insert(2);"<<std::endl;
-    myBinary.insert(4);
-    std::cout<<"myBinary.insert(4);"<<std::endl;
-    myBinary.insert(1);
-    std::cout<<"myBinary.insert(1);"<<std::endl;
-    myBinary.insert(5);
-    std::cout<<"myBinary.insert(5);"<<std::endl;
 };
 
 void begin(){
