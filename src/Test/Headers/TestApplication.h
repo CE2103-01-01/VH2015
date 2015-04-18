@@ -51,7 +51,6 @@ void createVBinaryTree() {
     time (&start);
     if (myFile.is_open()) {
         while (getline(myFile, line)) {
-
             istringstream iss(line);
             do {
                 string sub;

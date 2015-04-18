@@ -94,15 +94,15 @@ void pruebaTree(){
 };
 
 void begin(){
-    //pruebaPager();
-    //pruebaLong();
-    //pruebaInt();
-    //pruebaChar();
-    //pruebaFloat();
-    //pruebaArray();
-    //pruebaSimpleList();
+    pruebaPager();
+    pruebaLong();
+    pruebaInt();
+    pruebaChar();
+    pruebaFloat();
+    pruebaArray();
+    pruebaSimpleList();
     pruebaDoubleList();
-    //pruebaString();
+    pruebaString();
     //pruebaTree();
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };
