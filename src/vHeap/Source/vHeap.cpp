@@ -56,7 +56,7 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
     if((*vSize)*(*overweight) > metaData->getHeapUse()){
         void* pos;
         if(actualPos + sz < finalPos){
-            pos = actualPos;// add Entry devuelve una referencia
+            pos = actualPos;
             actualPos += sz;
         }else{
             vEntry* toPage = metaData->searchToPage(sz);
@@ -66,7 +66,7 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
         };
         if (vDebug) printTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
-        return metaData->addEntry(sz, pos);
+        return metaData->addEntry(sz, pos); //addEntry devuelve un numero de referencia
     }else{
         std::cout << "Error, vHeap lleno" << std::endl;
         if (vDebug) printTime(debug, "vMalloc");
