@@ -171,8 +171,8 @@ int main() {
     //start("vBinaryTree");
     pruebaDumpTxt();
 
-*/
-
     std::cout.rdbuf(coutbuf); //restore old buffer
+*/
+    //begin();
     return 0;
 };

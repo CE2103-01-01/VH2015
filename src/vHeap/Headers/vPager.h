@@ -11,6 +11,7 @@ static char const *const extension = ".celdmm";
 
 #include <string>
 #include <fstream>
+#include <iostream>
 
 class vPager {
 
