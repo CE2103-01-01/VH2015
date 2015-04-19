@@ -173,6 +173,6 @@ int main() {
 
 */
 
-    //std::cout.rdbuf(coutbuf); //restore old buffer
+    std::cout.rdbuf(coutbuf); //restore old buffer
     return 0;
 };
