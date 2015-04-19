@@ -5,33 +5,34 @@
 #ifndef VH2015_BTREE_H
 #define VH2015_BTREE_H
 
+#include <cstdlib>
 
 /*************************************************************************************************
-*****************************************CLASE DataContainer******************************************
+*****************************************CLASE Container******************************************
 *************************************************************************************************/
 
 
 /** @brief esta clase contendra un dato tipo T y estara contenida en una hoja
  */
-template <class T> class DataContainer{
+template <class T> class Container{
     T* data;
-    DataContainer<T>* next;
-    DataContainer<T>* prev;
+    Container<T>* next;
+    Container<T>* prev;
     public:
-        DataContainer();
-        ~DataContainer();
+        Container();
+        ~Container();
         void setData(T*);
-        void swap(DataContainer<T>*);
-        void setNext(DataContainer<T>*);
-        void setPrev(DataContainer<T>*);
+        void swap(Container<T>*);
+        void setNext(Container<T>*);
+        void setPrev(Container<T>*);
         T* getData();
-        DataContainer<T>* getNext();
-        DataContainer<T>* getPrev();
+        Container<T>* getNext();
+        Container<T>* getPrev();
 };
 
 /** @brief inicializa los datos con valor nulo
  */
-template <class T> DataContainer<T>::DataContainer(){
+template <class T> Container<T>::Container(){
     data=0;
     next=0;
     prev=0;
@@ -39,14 +40,14 @@ template <class T> DataContainer<T>::DataContainer(){
 
 /** @brief hace un free sobre el dato
  */
-template <class T> DataContainer<T>::~DataContainer(){
+template <class T> Container<T>::~Container(){
     free(data);
 };
 
 /** @brief asigna al dato el puntero de parametro
  * @param T* dataParam: nuevo dato
  */
-void template <class T> DataContainer<T>::setData(T* dataParam){
+template <class T> void Container<T>::setData(T* dataParam){
     if(!data){
         data = dataParam;
     }else{
@@ -55,47 +56,47 @@ void template <class T> DataContainer<T>::setData(T* dataParam){
     }
 };
 
-/** @brief intercambia el dato con el del parametro
- * @param DataContainer<T>* toSwap: DataContainer a intercambiar
+/** @brief intercambia el dato con el del parametro.
+ * @param Container<T>* toSwap: Container a intercambiar
  */
-void template <class T> DataContainer<T>::swap(DataContainer<T>* toSwap){
+template <class T> void Container<T>::swap(Container<T>* toSwap){
     T* tmp = data;
     data = toSwap->getData();
     toSwap->setData(tmp);
 };
 
-/** @brief asigna un DataContainer a la derecha
- * @param DataContainer<T>* nextParam: DataContainer a asignar
+/** @brief asigna un Container a la derecha
+ * @param Container<T>* nextParam: Container a asignar
  */
-void template <class T> DataContainer<T>::setNext(DataContainer<T>* nextParam){
+template <class T> void Container<T>::setNext(Container<T>* nextParam){
     next = nextParam;
 };
 
-/** @brief asigna un DataContainer a la izquierda
- * @param DataContainer<T>* prevParam: DataContainer a asignar
+/** @brief asigna un Container a la izquierda
+ * @param Container<T>* prevParam: Container a asignar
  */
-void template <class T> DataContainer<T>::::setPrev(DataContainer<T>* prevParam){
+template <class T> void Container<T>::setPrev(Container<T>* prevParam){
     prev = prevParam;
 };
 
 /** @brief devuelve un puntero al dato guardado
  * @return T*: dato guardado
  */
-T* template <class T> DataContainer<T>::getData(){
+template <class T> T* Container<T>::getData(){
     return data;
 };
 
-/** @brief devuelve un puntero al DataContainer siguiente
- * @return DataContainer<T>*: contenedor siguiente
+/** @brief devuelve un puntero al Container siguiente
+ * @return Container<T>*: contenedor siguiente
  */
-DataContainer<T>* template <class T> DataContainer<T>::getNext(){
+template <class T> Container<T>* Container<T>::getNext(){
     return next;
 };
 
-/** @brief devuelve un puntero al DataContainer anterior
- * @return DataContainer<T>*: contenedor anterior
+/** @brief devuelve un puntero al Container anterior
+ * @return Container<T>*: contenedor anterior
  */
-DataContainer<T>* template <class T> DataContainer<T>::getPrev(){
+template <class T> Container<T>* Container<T>::getPrev(){
     return prev;
 };
 
