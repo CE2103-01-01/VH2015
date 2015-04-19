@@ -153,14 +153,15 @@ int createDirectory(string path)
     return mkdir(path.c_str(), 0777);
 }
 int main() {
-    string path = getenv("HOME");
+    /**
+     string path = getenv("HOME");
     path.append("/.vh2015/");
     createDirectory(path);
-/*
+
     ///Redirects cout to output.txt
     ofstream out(path + "output.txt");
     streambuf *coutbuf = cout.rdbuf(); //save old buf
-    cout.rdbuf(out.rdbuf());*/
+    cout.rdbuf(out.rdbuf());
 
     //startSocket();
 
@@ -170,11 +171,7 @@ int main() {
     //start("vBinaryTree");
     pruebaDumpTxt();
 
-
-
-
-
-
+*/
 
     //std::cout.rdbuf(coutbuf); //restore old buffer
     return 0;
