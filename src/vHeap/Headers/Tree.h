@@ -2,8 +2,8 @@
 // Created by roberto on 19/04/15.
 //
 
-#ifndef VH2015_BTREE_H
-#define VH2015_BTREE_H
+#ifndef VH2015_TREE_H
+#define VH2015_TREE_H
 
 #include <cstdlib>
 
@@ -50,12 +50,7 @@ template <class T> Container<T>::~Container(){
  * @param T* dataParam: nuevo dato
  */
 template <class T> void Container<T>::setData(T* dataParam){
-    if(!data){
-        data = dataParam;
-    }else{
-        free(data);
-        data = dataParam;
-    }
+    data = dataParam;
 };
 
 /** @brief intercambia el dato con el del parametro.
@@ -115,22 +110,30 @@ template <class T> Container<T>* Container<T>::getPrev(){
  */
 template <class T> class Leaf{
     int* filledContainers;          //Numero de contenedores llenos
+    int* filledSons;                //Numero de contenedores llenos
     Container<T>* firstContainer;   //Primer contenedor
     Container<T>* lastContainer;    //Ultimo contenedor
     Leaf<T>* nextLeaf;              //Hoja hermana siguiente
     Leaf<T>* prevLeaf;              //Hoja hermana anterior
     Leaf<T>* firstSon;              //Primera hoja hija
     Leaf<T>* lastSon;               //Ultima hoja hija
+    Leaf<T>* father;                //Hoja padre
     bool* terminal;                 //Bandera que indica si es terminal: true=sin hijos
     void createContainers();
     void createSons();
-    void adjustContainers();
+    void shortInsertion(T*);
+    void longInsertion(T*);
+    void continueInsertion(T*);
+    void slowlyOpenSpace(T*);
+    void quicklyOpenSpace(T*);
     public:
-        Leaf();
+        Leaf(Leaf<T>*);
         ~Leaf();
         bool isTerminal();
+        bool isFull();
         void split();
         void insert(T*);
+        void openSpace(T*);
         void setNext(Leaf<T>*);
         void setPrev(Leaf<T>*);
         void setNextLeaf(Leaf<T>*);
@@ -141,16 +144,21 @@ template <class T> class Leaf{
         Leaf<T>* getLastSon();
         Container<T>* getFirstContainer();
         Container<T>* getLastContainer();
+        void imFull();
+        void imNotFull();
 };
 
 /** @brief crea una hoja con n-1 containers, tal que n=treeSize
  */
-template <class T> Leaf<T>::Leaf(){
+template <class T> Leaf<T>::Leaf(Leaf<T>* fatherParam){
+    father = fatherParam;
     createContainers();
     firstSon = 0;
     lastSon = 0;
     filledContainers = static_cast<int*>(malloc(sizeof(int)));
     *filledContainers = 0;
+    filledSons = static_cast<int*>(malloc(sizeof(int)));
+    *filledSons = 0;
     terminal = static_cast<bool*>(malloc(sizeof(bool)));
     *terminal = true;
 };
@@ -169,48 +177,38 @@ template <class T> Leaf<T>::~Leaf(){
  */
 template <class T> void Leaf<T>::createContainers(){
     firstContainer = static_cast<Container<T>*>(malloc(sizeof(Container<T>)));
-    lastContainer = static_cast<Container<T>*>(malloc(sizeof(Container<T>)));
     new(firstContainer) Container<T>();
-    new(lastContainer) Container<T>();
-    
-    Container<T>* tmp=firstContainer;
-    for(int i=3; i < treeSize; i++){
+    lastContainer=firstContainer;
+    for(int i=2; i < treeSize; i++){
         Container<T>* newContainer = static_cast<Container<T>*>(malloc(sizeof(Container<T>)));
         new(newContainer) Container<T>();
-        newContainer->setPrev(tmp);
-        tmp->setNext(newContainer);
-        tmp = tmp->getNext();
+        newContainer->setPrev(lastContainer);
+        lastContainer->setNext(newContainer);
+        lastContainer = lastContainer->getNext();
     };
-    
-    lastContainer->setPrev(tmp);
-    tmp->setNext(lastContainer);
 };
 
 
 /** @brief crea n hojas hijas, tal que n=treeSize
  */
-template <class T> void Leaf<T>::createSons(){    
-    firstSon = static_cast<Leaf<T>*>(malloc(sizeof(Leaf<T>)));
-    lastSon = static_cast<Leaf<T>*>(malloc(sizeof(Leaf<T>)));
-    new(firstSon) Leaf<T>();
-    new(lastSon) Leaf<T>();
-
-    Leaf<T>* tmp=firstSon;
-    for(int i=0; i < treeSize; i++){
-        Leaf<T>* newLeaf = static_cast<Leaf<T>*>(malloc(sizeof(Leaf<T>)));
-        new(newLeaf) Leaf<T>();
-        newLeaf->setPrevLeaf(tmp);
-        tmp->setNextLeaf(newLeaf);
-        tmp = tmp->getNextLeaf();
+template <class T> void Leaf<T>::createSons(){
+    *terminal = false;                                          //Coloca en false la bandera
+    firstSon = (Leaf<T>*)(malloc(sizeof(Leaf<T>)));             //Reserva el primer hijo
+    new(firstSon) Leaf(this);                                   //Toma el primer hijo
+    lastSon=firstSon;
+    for(int index=1; index<treeSize; index++){
+        Leaf<T>* newLeaf = (Leaf<T>*)(malloc(sizeof(Leaf<T>))); //Reserva espacio para la nueva hoja
+        new(newLeaf) Leaf(this);                                //Crea la nueva hoja
+        newLeaf->setPrevLeaf(lastSon);                          //Introduce el ultimo antes del nuevo
+        lastSon->setNextLeaf(newLeaf);                          //Introduce al nuevo antes del ultimo
+        lastSon = lastSon->getNextLeaf();                       //Convierte al ultimo en el nuevo
     };
-
-    lastSon->setPrevLeaf(tmp);
-    tmp->setNextLeaf(lastSon);
+    for(Container<T>* tmp = firstContainer; tmp!=lastContainer ; tmp = tmp->getNext()){
+        firstSon->insert(tmp->getData());                       //Inserta el contenedor en la primer hoja
+        tmp->setData(0);                                        //Borra el contenido del contenedor
+    };
+    firstContainer->swap(lastContainer);                        //Cambia el primer contenedor con el ultimo
 };
-
-/** @brief reparte los contenedores entre los hijos
- */
-template <class T> void Leaf<T>::adjustContainers(){};          //TODO: implementar
 
 /** @brief crea n hojas hijas, tal que n=treeSize
  */
@@ -222,7 +220,7 @@ template <class T> bool Leaf<T>::isTerminal(){
  */
 template <class T> void Leaf<T>::split(){
     createSons();
-    adjustContainers();
+    father->imNotFull();
 };
 
 /** @brief inserta una hoja como siguiente
@@ -281,21 +279,153 @@ template <class T> Leaf<T>* Leaf<T>::getLastSon(){
     return lastSon;
 };
 
-/** @brief inserta un dato en el container indicado
+/** @brief abre un espacio en el padre e inserta el dato
  * @param T* newData: dato a insertar
  */
-template <class T> void Leaf<T>::insert(T* newData){};          //TODO: implementar
+template <class T> void Leaf<T>::openSpace(T* newData){
+    if(!isFull()){
+        quicklyOpenSpace(newData);
+    }else{
+        slowlyOpenSpace(newData);
+    }
+};
+
+/** @brief abre un espacio e inserta el dato sabiendo que no hay campo
+ * @param T* newData: dato a insertar
+ */
+template <class T> void Leaf<T>::slowlyOpenSpace(T* newData){
+    Container<T>* tmpContainer = firstContainer;
+    for(Leaf<T>* tmpSon = firstSon->getNextLeaf(); tmpContainer!=0; tmpSon=tmpSon->getNextLeaf()){
+        if(*(tmpContainer->getData()) > *newData){
+            T* tmpData = tmpContainer->getData();
+            tmpContainer->setData(newData);
+            newData = tmpData;
+            if(!(tmpSon->isFull())){
+                tmpSon->insert(newData);
+                newData=0;
+                break;
+            }
+        tmpContainer=tmpContainer->getNext();
+        }
+    }
+    if(newData!=0 && father!=0){
+        father->openSpace(newData);
+    }
+};
+
+/** @brief abre un espacio e inserta el dato sabiendo que hay campo
+ * @param T* newData: dato a insertar
+ */
+template <class T> void Leaf<T>::quicklyOpenSpace(T* newData){
+    for(Container<T>* tmp = firstContainer; tmp!=0; tmp=tmp->getNext()){
+        if(tmp->getData() == 0){
+            tmp->setData(newData);
+        }else if(*(tmp->getData()) > *newData){
+            T* out=tmp->getData();
+            tmp->setData(newData);
+            newData=out;
+        }
+    }
+};
+
+/** @brief busca la hoja correcta para insertar
+ * @param T* newData: dato a insertar
+ */
+template <class T> void Leaf<T>::insert(T* newData){
+    if(!isTerminal()){
+        continueInsertion(newData);
+    }else{
+        if(!(isFull())){
+            shortInsertion(newData);
+            (*filledContainers)++;
+            if(isFull()){
+                father->imFull();
+            }
+        }else{
+            longInsertion(newData);
+        }
+    }
+};
+
+
+/** @brief continua localizando la hoja correcta
+ * @param T* newData: dato a insertar
+ */
+template <class T> void Leaf<T>::continueInsertion(T* newData){
+    Container<T>* tmpContainer = firstContainer;
+    for(Leaf<T>* tmpSon = firstSon; tmpContainer!=0; tmpSon=tmpSon->getNextLeaf()){
+        if(tmpContainer->getData() == 0){
+            tmpContainer->setData(newData);
+        }else if(*(tmpContainer->getData()) > *newData){
+            tmpSon->insert(newData);
+            break;
+        }else{
+            tmpContainer=tmpContainer->getNext();
+        }
+    }
+    if(tmpContainer==0){
+        lastSon->insert(newData);
+    }
+}
+
+/** @brief cuando se ha localizado la hoja correcta, se introduce el dato
+ * @param T* newData: dato a insertar
+ */
+template <class T> void Leaf<T>::shortInsertion(T* newData){
+    for(Container<T>* tmp = firstContainer; tmp!=0; tmp=tmp->getNext()){
+        if(tmp->getData() == 0){
+            tmp->setData(newData);
+        }else if(*(tmp->getData()) > *newData){
+            Container<T>* out = tmp->getData();
+            tmp->setData(newData);
+            newData=out;
+        }
+    } 
+};
+
+/** @brief hace el reacomodo necesario e introduce el dato
+ * @param T* newData: dato a insertar
+ */
+template <class T> void Leaf<T>::longInsertion(T* newData){
+    if(*newData < *(lastContainer->getData())){
+        father->openSpace(lastContainer->getData());
+        lastContainer->setData(0);
+        shortInsertion(newData);
+    }else{
+        father->openSpace(lastContainer->getData());
+    }
+}
+
+/** @brief inserta un dato en el container indicado
+ * @param bool: true si esta lleno
+ */
+template <class T> bool Leaf<T>::isFull(){
+    return (*filledContainers == treeSize-1) && (*filledSons == treeSize);
+};
+
+/** @brief notificacion del hijo para indicar que no posee espacio
+*/
+template <class T> void Leaf<T>::imFull(){
+    (*filledSons)++;
+};
+
+/** @brief notificacion del hijo para indicar que posee espacio
+*/
+template <class T> void Leaf<T>::imNotFull(){
+    (*filledSons)--;
+};
+
 
 /*************************************************************************************************
 ********************************************CLASE TREE********************************************
 *************************************************************************************************/
 
-template <class T> class bTree{
+template <class T> class Tree{
     Leaf<T>* root;
 public:
-    bTree();
-    ~bTree();
+    Tree();
+    ~Tree();
 };
 
 
-#endif //VH2015_BTREE_H
+#endif //VH2015_TREE_H
