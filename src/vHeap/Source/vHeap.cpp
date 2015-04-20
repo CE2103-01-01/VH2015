@@ -44,7 +44,7 @@ vHeap::vHeap(){
 
     pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
 
-    if(getVDebug()) printTime(debug, "Constructor vHeap");
+    if(getVDebug()) logTime(debug, "Constructor vHeap");
 };
 
 vHeap::~vHeap(){
@@ -72,12 +72,12 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
             pos = &*toPage;
             toPage->fileDown(downPath);
         };
-        if(getVDebug()) printTime(debug, "vMalloc");
+        if(getVDebug()) logTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
         return metaData->addEntry(sz, pos); //addEntry devuelve un numero de referencia
     }else{
         std::cout << "Error, vHeap lleno" << std::endl;
-        if(getVDebug()) printTime(debug, "vMalloc");
+        if(getVDebug()) logTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
         return 0;
     };
@@ -123,7 +123,7 @@ void *vHeap::de_vReference(int id) {//T(7+6i)
         };
     };
     pthread_mutex_unlock(memoryMutex);
-    if(getVDebug()) printTime(debug, "vdeReference");
+    if(getVDebug()) logTime(debug, "vdeReference");
     return 0;
 };
 

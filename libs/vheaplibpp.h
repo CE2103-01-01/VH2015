@@ -18,6 +18,8 @@ int removeVRef(int);
 int addVRef(int);
 void* de_vReference(int);
 high_resolution_clock::time_point startTime();
-void printTime(high_resolution_clock::time_point sTime,std::string proceso);
+void logTime(high_resolution_clock::time_point sTime, std::string proceso);
+void log(string str);
+void printTime(high_resolution_clock::time_point sTime);
 
 #endif //VH2015_VHEAPLIBPP_H

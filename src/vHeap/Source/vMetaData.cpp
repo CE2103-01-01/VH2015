@@ -161,11 +161,17 @@ vMetaData* vMetaData::getInstance() {
 
 void* vMetaData::de_vReference(int id) {
     std::chrono::high_resolution_clock::time_point debug;
+    cout<<"------------------"<<endl;
+    if(getVDebug()) debug = startTime();
+    //test = startTime();
+    //printTime(test);
+    std::chrono::high_resolution_clock::time_point test;
     pthread_mutex_lock(memoryMutex);
     vListIterator<vEntry> *iter = memoryTable->getIterator();
-
     while(iter->exists()){
         vEntry* entry = iter->next();
+        printTime(test);
+        test = startTime();
         if(!*entry==id){
             entry->changeFlag();
             if(!entry->isOnHeap()){
@@ -177,12 +183,12 @@ void* vMetaData::de_vReference(int id) {
                 entry->fileUp(content);
             };
             pthread_mutex_unlock(memoryMutex);
-            if(getVDebug()) printTime(debug, "deReference");
+            if(getVDebug()) logTime(debug, "deReference");
             return entry->getOffSet();
         };
     };
     pthread_mutex_unlock(memoryMutex);
-    if(getVDebug()) printTime(debug, "deReference");
+    if(getVDebug()) logTime(debug, "deReference");
     return nullptr;
 };
 
