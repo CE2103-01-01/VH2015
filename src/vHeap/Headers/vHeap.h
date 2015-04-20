@@ -9,9 +9,10 @@
 #include <fstream>
 #include <cstdlib>
 #include <unistd.h>
-#include "../libs/pugixml.hpp"
+
 #include "vTypes/Headers/vList.h"
 #include "vRef.h"
+#include <vheaplibpp.h>
 #include "vDefragmenter.h"
 #include "vPager.h"
 #include "Dump.h"
@@ -39,7 +40,7 @@ class vHeap{
 public:
     bool getVDebug();
     int* vSize;
-    vHeap(int,float, bool);
+    vHeap();
     ~vHeap();
     unsigned int vMalloc(int);
     template <class T> void vFree(vRef<T>);
@@ -51,13 +52,17 @@ public:
     template <class T> int vPlacement(vRef<T>, T);
     void* de_vReference(int);
 };
-
+/**
+ * Metodo para liberar memoria
+ */
 template<class T> void vHeap::vFree(vRef<T> r) {
     pthread_mutex_lock(memoryMutex);
     metaData->removeEntry(!r);
     pthread_mutex_unlock(memoryMutex);
 };
-
+/**
+ * Se usa para poner un objeto en una vRef en memoria
+ */
 template<class T> int vHeap::vPlacement(vRef<T> memory, T object) {
     **memory = object;
     return 0;

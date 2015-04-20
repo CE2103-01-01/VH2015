@@ -3,6 +3,7 @@
 //
 
 #include <sys/stat.h>
+#include <Constants.h>
 #include "vHeap/Headers/Dump.h"
 using namespace pugi;
 
@@ -27,12 +28,10 @@ std::string Dump::IntToStr(int n) {
 };
 
 void Dump::saveDumpFile() {//T(25+17i)
-    std::string path(getenv("HOME"));
-    std::stringstream ss;
-    ss<<(counter);
-    std::string s1 = ss.str();
-    path += "/DumpFile" + s1 + ".txt";//TODO-alex revisar
+    std::string path = Constants::dumpsPath;
+    path += "/DumpFile" + std::to_string(counter) + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
+
     vListIterator<vEntry> *iter = vMetaData::getInstance()->getMemoryTable()->getIterator();
     xml_document doc;
     doc.load_file("vHeap.xml");

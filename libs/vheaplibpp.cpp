@@ -22,12 +22,24 @@ high_resolution_clock::time_point startTime() {
 
 }
 
-void printTime(high_resolution_clock::time_point sTime,std::string proceso) {
+void logTime(high_resolution_clock::time_point sTime, std::string proceso) {
     high_resolution_clock::time_point finish = high_resolution_clock::now();
-    std::cout << "Time elapsed for "<<proceso +" : "<< std::chrono::duration_cast<std::chrono::nanoseconds>(finish-sTime).count()
-    << "ns"<<std::endl;
+    ofstream log(Constants::logFilePath, ios_base::out | ios_base::app );
+    log << "Time elapsed for "<<proceso +" : "<< duration_cast<nanoseconds>(finish-sTime).count()
+    << "ns"<<endl;
 }
 
-bool vDebug() {
+void log(string str)
+{
+    ofstream log(Constants::logFilePath, ios_base::out | ios_base::app );
+    log<<str<<endl;
+}
+
+void printTime(high_resolution_clock::time_point sTime){
+cout<<"Time elapsed: "<< duration_cast<nanoseconds>(high_resolution_clock::now()-sTime).count()
+<< "ns"<<endl;
+};
+
+bool getVDebug() {
     return vHeap::getInstance()->getVDebug();
 }
