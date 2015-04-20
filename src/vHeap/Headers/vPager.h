@@ -14,12 +14,9 @@ static char const *const extension = ".celdmm";
 #include <iostream>
 
 class vPager {
-
-public:
-        vPager();
-        ~vPager();
-        std::string pageDown(void*, int, int);
-        void pageUp(std::string, int, void*);
+        public:
+                std::string pageDown(void*, int, int);
+                void pageUp(std::string, int, void*);
 };
 
 #endif //VH2015_VPAGER_H
