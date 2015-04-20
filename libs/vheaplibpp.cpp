@@ -24,8 +24,8 @@ high_resolution_clock::time_point startTime() {
 
 void printTime(high_resolution_clock::time_point sTime,std::string proceso) {
     high_resolution_clock::time_point finish = high_resolution_clock::now();
-    Constants::log<<"hi";
-    Constants::log << "Time elapsed for "<<proceso +" : "<< std::chrono::duration_cast<std::chrono::nanoseconds>(finish-sTime).count()
+    std::ofstream log(Constants::logFilePath, std::ios_base::out | std::ios_base::app );
+    log << "Time elapsed for "<<proceso +" : "<< std::chrono::duration_cast<std::chrono::nanoseconds>(finish-sTime).count()
     << "ns"<<endl;
 }
 

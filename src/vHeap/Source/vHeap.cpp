@@ -13,7 +13,7 @@ vHeap::vHeap(){
     std::chrono::high_resolution_clock::time_point debug;
 
     xml_document doc;
-    doc.load_file("vHeap.xml");
+    doc.load_file(Constants::xmlPath);
 
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();

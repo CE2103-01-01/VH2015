@@ -14,8 +14,21 @@ namespace Constants
     int b = mkdir(Constants::pagesPath.c_str(), 0777);
     extern const std::string dumpsPath = projectPath +"/dumps";
     int c = mkdir(Constants::dumpsPath.c_str(), 0777);
-    extern const std::string logFilePath = projectPath +"/log.txt";
-    extern std::ofstream log(logFilePath, std::ios_base::app | std::ios_base::out);
+    extern const std::string logsPath = projectPath +"/logs";
+    int d = mkdir(Constants::logsPath.c_str(), 0777);
+    extern const std::string logFilePath = logsPath +"/log"+currentDateTime()+".txt";
 
+    extern char const *xmlPath ="vHeap.xml";
+
+    extern const std::string currentDateTime() {
+        time_t     now = time(0);
+        struct tm  tstruct;
+        char       buf[80];
+        tstruct = *localtime(&now);
+
+        strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+
+        return buf;
+    }
 
 }
