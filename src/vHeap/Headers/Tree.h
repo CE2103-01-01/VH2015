@@ -134,8 +134,6 @@ template <class T> class Leaf{
         void split();
         void insert(T*);
         void openSpace(T*);
-        void setNext(Leaf<T>*);
-        void setPrev(Leaf<T>*);
         void setNextLeaf(Leaf<T>*);
         void setPrevLeaf(Leaf<T>*);
         Leaf<T>* getNextLeaf();
