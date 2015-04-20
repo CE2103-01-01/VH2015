@@ -12,12 +12,14 @@ template <class T> class vArray {
     vInt vSize;
     vRef<void> chunk;
     public:
-        vArray<T>(int);
+        vArray(int,int);
+        vArray(int);
 
         int operator =(vArray);
         bool operator ==(vArray);
         T* operator [](int);
         vInt len();
+
 };
 
 template <class T> vArray<T>::vArray(int len){
@@ -58,4 +60,15 @@ template <class T> vInt vArray<T>::len(){
     return vSize;
 };
 
-#endif //VH2015_VARRAY_H
+#endif //VH2015_VARRAY_HvArray::vArray(){
+
+
+template <class T>
+vArray<T>::vArray(int i, int j) {
+    vSize = i;
+    chunk = vMalloc((unsigned int) (sizeof(vArray<T>) * i));
+    for (int k = 0; k < i; ++k) {
+        vArray<T>* ptr = static_cast<vArray<T>*>(*chunk + k*sizeof(T));
+        new(ptr) vArray<T>(j);
+    }
+}

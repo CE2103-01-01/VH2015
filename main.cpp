@@ -7,8 +7,9 @@
 #include "../libs/rapidjson/stringbuffer.h"
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
-//#include "proof.h"
-#include "Test/Headers/TestApplication.h"
+#include "proof.h"
+#include "Test/Headers/Ship.h"
+#include "Constants.h"
 
 //TODO: implementar vArray
 //TODO: cambiar vString de heap a vHeap
@@ -21,8 +22,6 @@
 
 using namespace std;
 using namespace pugi;
-
-template<class T> int vPlacement(vRef<T> vR, T toPlace);
 
 void pruebaDumpTxt(){
     Dump dump;
@@ -147,32 +146,12 @@ void startSocket(){
 
     }
 };
-int createDirectory(string path)
-{
 
-    return mkdir(path.c_str(), 0777);
-}
 int main() {
-    /**
-     string path = getenv("HOME");
-    path.append("/.vh2015/");
-    createDirectory(path);
+    play();
 
-    ///Redirects cout to output.txt
-    ofstream out(path + "output.txt");
-    streambuf *coutbuf = cout.rdbuf(); //save old buf
-    cout.rdbuf(out.rdbuf());
-
-    //startSocket();
-
-    //begin();
-    start("vSimpleList");
-    //start("vDoubleList");
-    //start("vBinaryTree");
     pruebaDumpTxt();
 
-    std::cout.rdbuf(coutbuf); //restore old buffer
-*/
-    //begin();
+
     return 0;
 };

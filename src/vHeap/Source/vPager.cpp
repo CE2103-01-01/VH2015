@@ -4,6 +4,7 @@
 
 
 #include <sys/stat.h>
+#include <Constants.h>
 #include "vHeap/Headers/vPager.h"
 
 
@@ -12,9 +13,7 @@ vPager::vPager(){};
 vPager::~vPager(){};
 
 std::string vPager::pageDown(void *data, int id, int dSize) {//T(13+7i)
-    std::string path = getenv("HOME");
-    path.append("/.vh2015/pages/");
-    mkdir(path.c_str(), 0777);
+    std::string path = Constants::pagesPath;
     path.append(std::to_string(id));
     path.append(extension);
 

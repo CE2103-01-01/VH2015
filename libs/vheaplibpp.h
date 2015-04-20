@@ -5,11 +5,15 @@
 #ifndef VH2015_VHEAPLIBPP_H
 #define VH2015_VHEAPLIBPP_H
 
+#include <Constants.h>
 #include "../src/vHeap/Headers/vHeap.h"
 #include <chrono>
-using namespace std::chrono;
+#include <fstream>
+
+using namespace std;
+using namespace chrono;
 class vHeap;
-bool vDebug();
+bool getVDebug();
 int removeVRef(int);
 int addVRef(int);
 void* de_vReference(int);
