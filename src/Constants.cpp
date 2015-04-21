@@ -2,7 +2,7 @@
 // Created by pablo on 19/04/15.
 //
 
-#include <sys/stat.h>
+
 #include "Constants.h"
 namespace Constants
 {

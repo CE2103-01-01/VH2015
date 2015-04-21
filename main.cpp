@@ -149,6 +149,7 @@ void startSocket(){
 };
 
 int main() {
+    play();
     Tree<long> tr = Tree<long>();
     for(long i = 1; i<=15000; i++){
         std::cout<<"inserta: "<<i<<std::endl;
