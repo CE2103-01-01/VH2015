@@ -33,20 +33,18 @@ void pruebaLong(){
 };
 
 void pruebaPager(){
-    vPager* vP = static_cast<vPager*>(malloc(sizeof(vPager)));
-    new(vP) vPager();
+    vPager pager;
 
-    void* d = malloc(sizeof(long));
-    *static_cast<long*>(d) = 80000000000000;
+    void* dataHeap = malloc(sizeof(long));
+    *static_cast<long*>(dataHeap) = 80000000000000;
 
-    std::string path = vP->pageDown(d,1,sizeof(d));
+    pager.pageDown(dataHeap,1,sizeof(long));
 
-    void* dPaged = malloc(sizeof(long));
-    vP->pageUp(path, sizeof(long), dPaged);
+    void* dataPaged = malloc(sizeof(long));
+    pager.pageUp(dataPaged,1,sizeof(long));
 
-    std::cout<<"Ruta: "<<path<<std::endl;
-    std::cout<<"Dato en RAM: "<<*static_cast<long*>(d)<<std::endl;
-    std::cout<<"Dato leido del HD: "<<*static_cast<long*>(dPaged)<<std::endl;
+    std::cout<<"Dato en RAM: "<<*static_cast<long*>(dataHeap)<<std::endl;
+    std::cout<<"Dato leido del HD: "<<*static_cast<long*>(dataPaged)<<std::endl;
 };
 
 void pruebaArray(){
@@ -95,14 +93,15 @@ void pruebaTree(){
 
 void begin(){
     pruebaPager();
-    //pruebaLong();
-    //pruebaInt();
-    //pruebaChar();
-    //pruebaFloat();
-    //pruebaArray();
-    //pruebaSimpleList();
-    //pruebaDoubleList();
-    //pruebaString();
+    pruebaLong();
+    pruebaInt();
+    pruebaChar();
+    pruebaFloat();
+    pruebaArray();
+    pruebaSimpleList();
+    pruebaDoubleList();
+    pruebaString();
     //pruebaTree();
+
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };

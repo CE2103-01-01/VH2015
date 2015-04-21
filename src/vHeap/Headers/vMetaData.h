@@ -5,7 +5,8 @@
 #define _VH2015_VMETADATA_H_
 
 #include <iostream>
-#include <vTypes/Headers/vList.h>
+#include "Tree/Tree.h"
+#include "vTypes/Headers/vList.h"
 #include "vEntry.h"
 #include "vPager.h"
 #include <pthread.h>
@@ -22,24 +23,21 @@ private:
     static vMetaData *vMDSingleton;
     int vSize;
     unsigned int actualID;
-    vList<vEntry>* memoryTable;
+    Tree<vEntry>* memoryTree;
     vList<unsigned int>* deletedIDS;
     pthread_mutex_t* memoryMutex;
     pthread_cond_t* dfragCond;
-    vPager* pager;
 
 public:
     static vMetaData *getInstance();
     vMetaData();
     ~vMetaData();
-    vList<vEntry>* getMemoryTable();
-    int len();
+    Tree<vEntry>* getMemoryTree();
     void increaseReference(unsigned int idRef);
     void decreaseReference(unsigned int idRef);
-    unsigned int addEntry(int, void *);
+    unsigned int addEntry(int, void*);
     void removeEntry(int idRef);
     void printMetaData();
-    vList<vEntry>* operator!();
     pthread_mutex_t* getMutex();
     pthread_cond_t* getDefragmenterCond();
     void* de_vReference(int);
@@ -47,6 +45,7 @@ public:
     int getHeapUse();
     void setPager(vPager*);
     void cleanChunk(int, void*);
+    int len();
 };
 
 #endif //_VH2015_VMETADATA_H_

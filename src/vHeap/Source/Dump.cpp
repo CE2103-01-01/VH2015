@@ -32,21 +32,23 @@ void Dump::saveDumpFile() {//T(25+17i)
     path += "/DumpFile" + std::to_string(counter) + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
 
-    vListIterator<vEntry> *iter = vMetaData::getInstance()->getMemoryTable()->getIterator();
+    Tree<vEntry> *tree = vMetaData::getInstance()->getMemoryTree();
     xml_document doc;
     doc.load_file("vHeap.xml");
     std::cout<<path<<std::endl;
     std::cout<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
     myfile<< "Total size of Memory: "<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
-    while(iter->exists()){
-
-        vEntry *m = iter->next();
-        myfile << "Memory direction: " << "Hola" << "\n";
-        if(m->getUseFlag()==0) {
-
-            myfile << "Memory direction: " << m->getOffSet() << "\n";
-            myfile << "Size of data containing: " << m->getDataSize() << "\n";
-            myfile << "flag in use: " << true << "\n";
+    for(int i=1; i<tree->max(); i++){
+        try{
+            vEntry *m = (static_cast<vEntry*>(tree->searchElement(i)));
+            myfile << "Memory direction: " << "Hola" << "\n";
+            if(m->getUseFlag()==0) {
+                myfile << "Memory direction: " << m->getOffSet() << "\n";
+                myfile << "Size of data containing: " << m->getDataSize() << "\n";
+                myfile << "flag in use: " << true << "\n";
+            }
+        }catch(int e){
+            continue;
         }
     }
 
@@ -58,8 +60,12 @@ void Dump::saveDumpFile() {//T(25+17i)
 void* dump(void* d){
     struct timespec o;
     o.tv_nsec = 500;
-    o.tv_sec = static_cast<Dump*>(d)->getFrecuency();;
-    return nullptr;
+    o.tv_sec = static_cast<Dump*>(d)->getFrecuency();
+    while(true){
+        nanosleep(&o,0);
+        static_cast<Dump*>(d)->saveDumpFile();
+    }
+    return 0;
 };
 
 int Dump::getFrecuency() {

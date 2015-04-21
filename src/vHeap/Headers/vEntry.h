@@ -18,13 +18,11 @@ private:
     bool useFlag;   //TODO: usar
     unsigned int numReferences = 0;
     bool onHeap;
-    //std::string path;
     unsigned int idRef;
 public:
     vEntry();
-
     vEntry(int, int, void*);
-    vEntry(int, int, void*, bool, std::string);
+    vEntry(int, int, void*, bool);
     void changeFlag();
     int getIdRef();
     void* getOffSet();
@@ -33,15 +31,15 @@ public:
     unsigned int getNumReferences();
     void decreaseNumReferences();
     void increaseNumReferences();
-    int operator!();                //idRef
-    void* operator&();              //Offset
-    int operator[](int);            //setID
-    int operator[](void*);          //setOffset
-    void fileDown(std::string);
+    void fileDown();
     void fileUp(void*);
     bool isOnHeap();
-    std::string getPath();
+    void setOffset(void*);
+    void setNumRef(int);
+    void setID(int);
+    void setDefault();
 };
 
+void setDefault(vEntry* entry);
 
 #endif //VH2015_VENTRY_H

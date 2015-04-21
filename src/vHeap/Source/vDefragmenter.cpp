@@ -24,7 +24,7 @@ void vDefragmenter::vDefragment() {//T(3+11i)
         if(tmp->isOnHeap()){
             tmp->changeFlag();
             if(&*tmp != actualPos){
-                (*tmp)[actualPos];
+                tmp->setOffset(actualPos);
             }
             actualPos+=tmp->getDataSize();
             tmp->changeFlag();

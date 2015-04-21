@@ -2,31 +2,45 @@
 // Created by roberto on 04/04/15.
 //
 
-
-#include <sys/stat.h>
-#include <Constants.h>
 #include "vHeap/Headers/vPager.h"
 
-std::string vPager::pageDown(void *data, int id, int dSize) {//T(13+7i)
+/** Pagina abajo
+ * @param: void* data: dato a guardar
+ * @param: int id: numero de pagina
+ * @param: int dSize: tamaño del dato
+ * @brief guarda una pagina formato ".celdmm"
+ */
+void vPager::pageDown(void *data, int id, int dSize) {//T(13+7i)
     std::string path = Constants::pagesPath;
     path.append(std::to_string(id));
     path.append(extension);
-
     std::ofstream outFile(path, std::ios::binary);
-
     for(int counter = 0; counter < dSize; counter++) {
         outFile.write(static_cast<const char *>(data + counter), 1);
     }
-    return path;
 };
 
+/** Pagina arriba
+ * @param: void* ret: dato a cargar
+ * @param: int id: numero de pagina
+ * @param: int retSize: tamaño del dato
+ * @brief carga una pagina formato ".celdmm"
+ */
+void vPager::pageUp(void *ret, int id, int retSize) {//T(11+6i)
+    std::string path = Constants::pagesPath;
+    path.append(std::to_string(id));
+    path.append(extension);
+    std::ifstream inFile(path, std::ios::binary);
+    inFile.read(static_cast<char*>(ret),inFile.precision());
+    inFile.close();
+};
 
-void vPager::pageUp(std::string path, int retSize, void *ret) {//T(11+6i)
-    try{
-        std::ifstream inFile(path, std::ios::binary);
-        inFile.read(static_cast<char*>(ret),inFile.precision());
-        inFile.close();
-    }catch(int e){
-        std::cout<<"Error " << e <<" en vPager al abrir archivo con ruta "<<path<<std::endl;
-    };
+/** Borra pagina
+ * @param: int id: numero de pagina
+ * @brief borra una pagina formato ".celdmm"
+ */
+void vPager::deletePage(int id){
+    std::string path = Constants::pagesPath;
+    path.append(std::to_string(id));
+    path.append(extension);
 };

@@ -149,14 +149,7 @@ void startSocket(){
 };
 
 int main() {
-    Tree<long> tr = Tree<long>();
-    for(long i = 1; i<=15000; i++){
-        std::cout<<"inserta: "<<i<<std::endl;
-        tr.insertElement(i, i);
-    }
-    for(long i = 1; i<=15000; i++){
-        std::cout<<*(long*)(tr.searchElement(i))<<std::endl;
-    }
+    begin();
 
     return 0;
 };

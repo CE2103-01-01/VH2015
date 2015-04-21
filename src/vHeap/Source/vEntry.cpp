@@ -4,31 +4,35 @@
 
 #include "vHeap/Headers/vEntry.h"
 
+
+/**
+* Constructor pone en 1 el numero de referencias
+*/
+vEntry::vEntry() {
+    numReferences = 1;
+}
+
 vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
     idRef = (unsigned int) pIdRef;
     dataSize = (unsigned int) pDataSize;
     offset = pOffset;
     onHeap = true;
-    //path = "";
 }
 
-vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool oH, std::string p) {
+vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool oH) {
     idRef = (unsigned int) pIdRef;
     dataSize = (unsigned int) pDataSize;
     offset = pOffset;
     onHeap = oH;
-    //path = p;
 }
 
-void vEntry::fileDown(std::string p){
+void vEntry::fileDown(){
     onHeap = false;
-    //path = p;
     offset = 0;
 };
 
 void vEntry::fileUp(void* content){
     onHeap = true;
-    //path = "";
     offset = content;
 };
 
@@ -47,21 +51,6 @@ bool vEntry::getUseFlag() {
 int vEntry::getIdRef() {
     return idRef;
 }
-
-/**
-* Constructor pone en 1 el numero de referencias
-*/
-vEntry::vEntry() {
-    numReferences = 1;
-}
-
-void *vEntry::operator&() {
-    return offset;
-};
-
-int vEntry::operator!() {
-    return idRef;
-};
 
 void vEntry::changeFlag() {
     useFlag = !useFlag;
@@ -89,27 +78,33 @@ void vEntry::increaseNumReferences() {
     numReferences++;
 }
 
-int vEntry::operator[](int var){
-    idRef = (unsigned int) var;
-    return 0;
-};
-
-int vEntry::operator[](void* var){
-    int counter = 0;
-    do{
-        *static_cast<char*>(var+counter) = *static_cast<char*>(offset+counter);
-        *static_cast<char*>(offset+counter)=0;
-        counter++;
-    }while(counter < dataSize);
-    offset=var;
-    return 0;
-};
-
 bool vEntry::isOnHeap(){
     return onHeap;
 };
 
-std::string vEntry::getPath(){
-    return " ";    //path;
+void vEntry::setOffset(void* p){
+    offset = p;
 };
 
+void vEntry::setNumRef(int p){
+    numReferences=0;
+};
+
+void vEntry::setID(int p){
+    idRef=p;
+};
+
+void vEntry::setDefault(){
+    if(!(onHeap)){
+        vPager a;
+        a.deletePage(idRef);
+    };
+    idRef=0;
+    numReferences=0;
+    offset=0;
+    onHeap=false;
+};
+
+void setDefault(vEntry* entry){
+    entry->setDefault();
+};

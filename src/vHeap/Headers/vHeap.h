@@ -17,6 +17,7 @@
 #include "vPager.h"
 #include "Dump.h"
 #include "vMetaData.h"
+#include "Tree/Tree.h"
 
 template<class T> class vRef;
 class vMetaData;
@@ -33,7 +34,6 @@ class vHeap{
     void* dmp;
     void* dfrag;
     vMetaData* metaData;
-    vPager* pager;
     pthread_mutex_t* memoryMutex;
     pthread_t dfragThread;
     pthread_t dumpThread;

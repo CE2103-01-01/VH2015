@@ -6,7 +6,7 @@
 #include "vHeap/Headers/vMetaData.h"
 
 /**
-* inicializa valores y crea la lista
+* inicializa valores y crea el arbol
 */
 vMetaData::vMetaData() {
     memoryMutex = static_cast<pthread_mutex_t*>(malloc(sizeof(pthread_mutex_t)));
@@ -17,8 +17,8 @@ vMetaData::vMetaData() {
 
     actualID = initialId;
 
-    memoryTable = static_cast<vList<vEntry>*>(malloc(sizeof(vList<vEntry>)));
-    new(memoryTable) vList<vEntry>();
+    memoryTree = static_cast<Tree<vEntry>*>(malloc(sizeof(Tree<vEntry>)));
+    new(memoryTree) Tree<vEntry>();
 
     deletedIDS = static_cast<vList<unsigned int> *>(malloc(sizeof(vList<unsigned int>)));
     new(deletedIDS) vList<int>();
@@ -26,54 +26,49 @@ vMetaData::vMetaData() {
     vSize = 0;
 }
 
+/**
+ * Desocupa el espacio
+ */
 vMetaData::~vMetaData() {
-
+    free(memoryTree);
+    free(deletedIDS);
 }
 
-vList<vEntry> *vMetaData::getMemoryTable() {
-    return memoryTable;
+/**
+ * Devuelve el arbol de memoria
+ */
+Tree<vEntry>* vMetaData::getMemoryTree() {
+    return memoryTree;
 }
 
+/**
+ * Devuelve la cantidad de datos en heap
+ */
 int vMetaData::len() {
     return (int) (actualID - deletedIDS->len());
-};
+}
 
 /**
 *Busca un id y aumenta num de Referencias
 */
 void vMetaData::increaseReference(unsigned int idRef) {
-    vListIterator<vEntry> *i = memoryTable->getIterator();
-    while (i->exists()) {
-        vEntry *next = i->next();
-        if (next->getIdRef() == idRef) {
-            next->increaseNumReferences();
-            break;
-        }
-    }
-};
+    (static_cast<vEntry*>(memoryTree->searchElement(idRef)))->increaseNumReferences();
+}
 
 /**
 * Busca un id y disminuye num de referencias
 */
 void vMetaData::decreaseReference(unsigned int idRef) {
-    vListIterator<vEntry> *i = memoryTable->getIterator();
-    while (i->exists()) {
-        vEntry *next = i->next();
-        if (next->getIdRef() == idRef) {
-            next->decreaseNumReferences();
-            break;
-        }
-    }
-};
+    (static_cast<vEntry*>(memoryTree->searchElement(idRef)))->decreaseNumReferences();
+}
 
 /**
 * Imprime la metadata
 */
 void vMetaData::printMetaData() {
-    vListIterator<vEntry> *iter = memoryTable->getIterator();
     std::cout << "--Begin MetaData info--" << std::endl;
-    while (iter->exists()) {
-        vEntry *m = iter->next();
+    for(int i=0;i<actualID;i++){
+        vEntry *m = static_cast<vEntry*>(memoryTree->searchElement(i));
         std::cout <<
         "ID: " << m->getIdRef() <<
         " Size: " << m->getDataSize() <<
@@ -83,82 +78,63 @@ void vMetaData::printMetaData() {
 
     }
     std::cout << "---End MetaData info---" << std::endl;
-};
-
-/**
-* Devuelve la lista de la tabla de memoria
-*/
-vList<vEntry> *vMetaData::operator!() {
-    return memoryTable;
-};
+}
 
 /**
 * Elimina una entrada de la tabla de momoria
 */
 void vMetaData::removeEntry(int idRef) {
-    vListIterator<vEntry> *i = memoryTable->getIterator();
-    while (i->exists()) {
-        vEntry *actual = i->next();
-        if (actual->getIdRef() == idRef) {
-            vSize -= actual->getDataSize();
-            if(!actual->isOnHeap()){  //Dato paginado
-                std::string path = actual->getPath();
-                int l = (int) path.length();
-                char* arr = static_cast<char*>(malloc(sizeof(char) * l));
-                for(int i=0; i<l; i++){
-                    *(arr+i) = static_cast<char>(path[i]);
-                };
-                const char* cArr = arr;
-                remove(cArr);
-            }else{
-                cleanChunk(actual->getDataSize(),&*actual);
-            };
-            memoryTable->deleteNode((unsigned int) (i->getPosition() - 1));
-            deletedIDS->append((unsigned int) idRef);
-            break;
-        }
-    }
-    pthread_cond_signal(dfragCond);
-};
+    vEntry *entry = static_cast<vEntry*>(memoryTree->searchElement(idRef));
+    vSize -= entry->getDataSize();
+    memoryTree->deleteElement(idRef,setDefault);
+    deletedIDS->append((unsigned int) idRef);
+}
 
 /**
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
 unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
-    if(actualPos!=0){
-        cleanChunk(dataSize,actualPos);
-    };
     vSize+=dataSize;
     if (deletedIDS->len() == 0) {
-        vEntry* e = static_cast<vEntry*>(malloc(sizeof(vEntry)));
-        new (e) vEntry(actualID, dataSize, actualPos);
-        memoryTable->append(e);
+        memoryTree->insertElement(vEntry(actualID, dataSize, actualPos),actualID);
         return actualID++;
     } else {
         int id = *(deletedIDS->get(0));
         deletedIDS->deleteNode(0);
-        vEntry e = vEntry(id, dataSize, actualPos);
-        memoryTable->append(e);
+        memoryTree->insertElement(vEntry(id, dataSize, actualPos),id);
         return (unsigned int) id;
     };
-};
+}
 
+/**
+ * Llena un chunk de memoria con ceros
+ */
 void vMetaData::cleanChunk(int chunkSize, void* chunk){
     int counter = 0;
     do{
         *static_cast<char*>(chunk + counter) = 0;
         counter++;
     }while(counter < chunkSize);
-};
+}
+
+/** Singleton
+ */
 vMetaData *vMetaData::vMDSingleton = 0;
+
+/**
+ * Metodo singleton
+ */
 vMetaData* vMetaData::getInstance() {
     if (vMDSingleton == nullptr) {
         vMDSingleton = static_cast<vMetaData*>(malloc(sizeof(vMetaData)));
         new(vMDSingleton) vMetaData();
     }
     return vMDSingleton;
-};
+}
 
+/**
+ * Busca la entrada con el id indicado y extrae el dato, si esta paginada la sube
+ */
 void* vMetaData::de_vReference(int id) {
     std::chrono::high_resolution_clock::time_point debug;
     cout<<"------------------"<<endl;
@@ -166,60 +142,60 @@ void* vMetaData::de_vReference(int id) {
     //test = startTime();
     //printTime(test);
     std::chrono::high_resolution_clock::time_point test;
+
     pthread_mutex_lock(memoryMutex);
-    vListIterator<vEntry> *iter = memoryTable->getIterator();
-    while(iter->exists()){
-        vEntry* entry = iter->next();
-        printTime(test);
-        test = startTime();
-        if(!*entry==id){
-            entry->changeFlag();
-            if(!entry->isOnHeap()){
-                vEntry* toPage = searchToPage(entry->getDataSize());
-                std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());
-                void* content = &*toPage;
-                toPage->fileDown(downPath);
-                pager->pageUp(entry->getPath(),entry->getDataSize(),content);
-                entry->fileUp(content);
-            };
-            pthread_mutex_unlock(memoryMutex);
-            if(getVDebug()) logTime(debug, "deReference");
-            return entry->getOffSet();
-        };
+    printTime(test);
+    test = startTime();
+    vEntry* entry = (static_cast<vEntry*>(memoryTree->searchElement(id)));
+    entry->changeFlag();
+    if(!entry->isOnHeap()){
+        vEntry* toPage = searchToPage(entry->getDataSize());
+        vPager a;
+        a.pageUp(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
+        void* content = toPage->getOffSet();
+        toPage->fileDown();
+        a.pageUp(content,toPage->getIdRef(),toPage->getDataSize());
+        entry->fileUp(content);
     };
     pthread_mutex_unlock(memoryMutex);
-    if(getVDebug()) logTime(debug, "deReference");
-    return nullptr;
-};
 
+    if(getVDebug()) logTime(debug, "deReference");
+    return entry->getOffSet();
+}
+
+/** @return pthread_mutex_t*: variable mutex de memoria
+ */
 pthread_mutex_t* vMetaData::getMutex(){
     return memoryMutex;
-};
+}
 
+/** @return pthread_cond_t*: variable de condicion de desfragmentador
+ */
 pthread_cond_t* vMetaData::getDefragmenterCond(){
     return dfragCond;
-};
+}
 
+/* @brief busca una elemento para paginar
+ * return vEntry*: el elemento
+ */
 vEntry* vMetaData::searchToPage(int s){
     pthread_mutex_lock(memoryMutex);
-
-    vListIterator<vEntry> *iter = memoryTable->getIterator();
-
-    while(iter->exists()){
-        vEntry* entry = iter->next();
-        if(!entry->getUseFlag() & entry->getDataSize()>s){
-            pthread_mutex_unlock(memoryMutex);
-            return entry;
-        };
-    };
+    for(int i=1; i<memoryTree->max(); i++){
+        try{
+            vEntry* entry = (static_cast<vEntry*>(memoryTree->searchElement(i)));
+            if(!entry->getUseFlag() & entry->getDataSize()>s){
+                pthread_mutex_unlock(memoryMutex);
+                return entry;
+            };
+        }catch(int e){}
+    }
     pthread_mutex_unlock(memoryMutex);
     return 0;
-};
+}
 
+/** Uso de heap
+ * return int: bytes en uso
+ */
 int vMetaData::getHeapUse(){
     return vSize;
-};
-
-void vMetaData::setPager(vPager* p){
-    pager=p;
-};
+}

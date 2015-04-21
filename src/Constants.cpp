@@ -6,7 +6,7 @@
 #include "Constants.h"
 namespace Constants
 {
-
+    extern const int treeSize = 50;
     extern const std::string homePath = getenv("HOME");
     extern const std::string projectPath = homePath + "/vh2015";
     int a = mkdir(Constants::projectPath.c_str(), 0777);
@@ -17,9 +17,7 @@ namespace Constants
     extern const std::string logsPath = projectPath +"/logs";
     int d = mkdir(Constants::logsPath.c_str(), 0777);
     extern const std::string logFilePath = logsPath +"/log"+currentDateTime()+".txt";
-
     extern char const *xmlPath ="vHeap.xml";
-
     extern const std::string currentDateTime() {
         time_t     now = time(0);
         struct tm  tstruct;

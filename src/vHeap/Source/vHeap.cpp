@@ -26,27 +26,20 @@ vHeap::vHeap(){
     initPos = mainChunk;
     finalPos = initPos+*vSize;
 
-
-    pager = static_cast<vPager*>(malloc(sizeof(vPager)));
-    new(pager) vPager();
-
     metaData = vMetaData::getInstance();
-    metaData->setPager(pager);
     memoryMutex = metaData->getMutex();
 
     dmp = malloc(sizeof(Dump));
     new(static_cast<Dump*>(dmp)) Dump();
 
-    dfrag = malloc(sizeof(vDefragmenter));
-    new(static_cast<vDefragmenter*>(dfrag)) vDefragmenter(initPos, finalPos, !(*metaData), metaData->getDefragmenterCond(), memoryMutex);
-
     pthread_create(&dumpThread,NULL,dump,dmp);
-
-    pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
 
     if(getVDebug()) logTime(debug, "Constructor vHeap");
 };
 
+/**
+ * Libera el espacio ocupado
+ */
 vHeap::~vHeap(){
     free(dfrag);
     free(vDebug);
@@ -54,6 +47,7 @@ vHeap::~vHeap(){
     free(mainChunk);
     free(dumpFrecuency);
 };
+
 /**
  * Reservar un espacio en memoria, devuelve el int de referencia
  */
@@ -68,9 +62,10 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
             actualPos += sz;
         }else{
             vEntry* toPage = metaData->searchToPage(sz);
-            std::string downPath = pager->pageDown(&*toPage,!*toPage,toPage->getDataSize());
-            pos = &*toPage;
-            toPage->fileDown(downPath);
+            vPager a;
+            a.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
+            pos = toPage->getOffSet();
+            toPage->fileDown();
         };
         if(getVDebug()) logTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
@@ -84,6 +79,7 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
 };
 
 vHeap* vHeap::vHeapSingleton = 0;
+
 /**
  * Se libera la memoria
  */
@@ -93,6 +89,9 @@ void vHeap::vFree(unsigned int idRef) {//4T
     pthread_mutex_unlock(memoryMutex);;
 }
 
+/**
+ * Accede a la metadada
+ */
 vMetaData *vHeap::getMetaData() {
     return metaData;
 }
@@ -113,15 +112,7 @@ void *vHeap::de_vReference(int id) {//T(7+6i)
    pthread_mutex_lock(memoryMutex);
     std::chrono::high_resolution_clock::time_point debug;
     if(getVDebug()) debug = startTime();
-    vListIterator<vEntry> *iter = (!*metaData)->getIterator();
-
-    while(iter->exists()){
-        vEntry* entry = iter->next();
-    if(!*entry==id){
-            pthread_mutex_unlock(memoryMutex);
-            return &*entry;
-        };
-    };
+    metaData->de_vReference(id);
     pthread_mutex_unlock(memoryMutex);
     if(getVDebug()) logTime(debug, "vdeReference");
     return 0;
@@ -135,11 +126,17 @@ int vHeap::removeVRef(int idRef) {
     return 0;
 };
 
+/**
+ * Aumenta el numero de referencias de un vRef
+ */
 int vHeap::addVRef(int idRef) {
     metaData->increaseReference((unsigned int) idRef);
     return 0;
 };
 
+/**
+ * Devuelve bandera de debugger
+ */
 bool vHeap::getVDebug() {
     return *vDebug;
 }
