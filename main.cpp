@@ -150,6 +150,7 @@ void startSocket(){
 
 int main() {
     begin();
-
+    play();
+    
     return 0;
 };

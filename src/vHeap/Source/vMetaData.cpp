@@ -137,7 +137,7 @@ vMetaData* vMetaData::getInstance() {
  */
 void* vMetaData::de_vReference(int id) {
     std::chrono::high_resolution_clock::time_point debug;
-    cout<<"------------------"<<endl;
+    //cout<<"------------------"<<endl;
     if(getVDebug()) debug = startTime();
     //test = startTime();
     //printTime(test);

@@ -116,7 +116,6 @@ int play() {
     }
     cout << "Game over!" << endl;
     Show(true);
-    system("pause");
     return 0;
 }
 
