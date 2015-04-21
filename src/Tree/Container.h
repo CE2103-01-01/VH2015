@@ -14,7 +14,6 @@ public:
     ~Container();
     void* getData();
     void setData(void*);
-    void swap(Container*);
 };
 
 #endif //VH2015_CONTAINER_H

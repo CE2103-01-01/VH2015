@@ -6,22 +6,17 @@
 
 /** @brief crea una hoja con n-1 containers, tal que n=treeSize
  */
-Leaf::Leaf(Leaf* fatherParam, int treeSizeParam){
-    father = fatherParam;
-    filledContainers = (int*)(malloc(sizeof(int)));
-    *filledContainers = 0;
-    filledSons = (int*)(malloc(sizeof(int)));
-    *filledSons = 0;
+Leaf::Leaf(int treeSizeParam,int sizeofTypeParam){
+    sizeofType = (int*)(malloc(sizeof(int)));
+    *sizeofType = sizeofTypeParam;
     terminal = (bool*)(malloc(sizeof(bool)));
     *terminal = true;
-    containers = malloc((treeSizeParam-1)*sizeof(Container));
+    containers = malloc((treeSizeParam)*sizeof(sizeofType));
 };
 
 /** @brief recorre los containers eliminando cada uno
  */
 Leaf::~Leaf(){
-    free(filledContainers);
-    free(filledSons);
     free(terminal);
     free(sons);
     free(containers);
@@ -36,18 +31,11 @@ bool Leaf::isTerminal(){
 /** @brief divide la hoja creando hijos
  */
 void Leaf::split(int number){
-    sons = malloc((number-1)*sizeof(Leaf));
+    sons = malloc((number)*sizeof(Leaf));
     for(int i=0; i<number; i++){
-        new((Leaf*)(sons+i*sizeof(Leaf))) Leaf(this,number);
+        new(static_cast<Leaf*>(sons+i*sizeof(Leaf))) Leaf(number, *sizeofType);
     }
     *terminal = false;
-};
-
-/** @brief inserta un dato en el container indicado
- * @param bool: true si esta lleno
- */
-bool Leaf::isFull(int treeSize){
-    return (*filledContainers == treeSize-1) && (*filledSons == treeSize);
 };
 
 void* Leaf::getSons(){

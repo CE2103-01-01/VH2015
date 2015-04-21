@@ -7,20 +7,19 @@
 
 #include "Container.h"
 #include <cstdlib>
+#include <iostream>
 
 /** @brief miembro del arbol
  * Numero de hijos: n, tal que n=treeSize 
  * Numero de containers: n-1
  */
 class Leaf{
-    int* filledContainers;          //Numero de contenedores llenos
-    int* filledSons;                //Numero de contenedores llenos
+    int* sizeofType;
     void* containers;
     void* sons;
-    Leaf* father;                   //Hoja padre
     bool* terminal;                 //Bandera que indica si es terminal: true=sin hijos
 public:
-    Leaf(Leaf*, int);
+    Leaf(int, int);
     ~Leaf();
     void* getSons();
     void* getContainers();

@@ -8,6 +8,7 @@
 #include "../libs/rapidjson/writer.h"
 #include "../libs/pugixml.hpp"
 #include "proof.h"
+#include "Tree/Tree.h"
 #include "Test/Headers/Ship.h"
 #include "Constants.h"
 
@@ -148,10 +149,14 @@ void startSocket(){
 };
 
 int main() {
-    play();
-
-    pruebaDumpTxt();
-
+    Tree<long> tr = Tree<long>();
+    for(long i = 1; i<=15000; i++){
+        std::cout<<"inserta: "<<i<<std::endl;
+        tr.insertElement(i, i);
+    }
+    for(long i = 1; i<=15000; i++){
+        std::cout<<*(long*)(tr.searchElement(i))<<std::endl;
+    }
 
     return 0;
 };

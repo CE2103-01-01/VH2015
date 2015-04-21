@@ -29,12 +29,3 @@ void* Container::getData(){
 void Container::setData(void* dataParam){
     data = dataParam;
 };
-
-/** Inserta el dato del parametro
- * @param void*
- */
-void Container::swap(Container* param){
-    void* tmp = data;
-    data = param->getData();
-    param->setData(tmp);
-};
