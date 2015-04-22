@@ -18,13 +18,12 @@
 #include "../libs/pugixml.hpp"
 
 class Dump {
-    int* frecuency;
-    int* counter;
-    bool* dumpping;
+    int frecuency;
+    int counter;
+    bool dumpping;
 
     public:
         Dump();
-        ~Dump();
         std::string IntToStr(int);
         void saveDumpFile();
         bool getDumppingState();

@@ -8,22 +8,13 @@
 using namespace pugi;
 
 Dump::Dump() {
-    counter = static_cast<int*>(malloc(sizeof(int)));
-    (*counter) = 0;
-    frecuency = static_cast<int*>(malloc(sizeof(int)));
-    (*frecuency) = 1;
-    dumpping = static_cast<bool*>(malloc(sizeof(bool)));
-    (*dumpping) = true;
-}
-
-Dump::~Dump() {
-    free(counter);
-    free(frecuency);
-    free(dumpping);
+    counter = 0;
+    frecuency = 1;
+    dumpping = true;
 }
 
 bool Dump::getDumppingState(){
-    return (*dumpping);
+    return dumpping;
 }
 
 std::string Dump::IntToStr(int n) {
@@ -35,7 +26,9 @@ std::string Dump::IntToStr(int n) {
 
 void Dump::saveDumpFile() {//T(25+17i)
     std::string path = Constants::dumpsPath;
-    path += "/DumpFile" + std::to_string((*counter)) + ".txt";//TODO-alex revisar
+    std::cout<<"HHHH"<<std::endl;
+    path += "/DumpFile" + IntToStr(counter) + ".txt";
+    std::cout<<"HHHH"<<std::endl;
     std::ofstream myfile(path);
 
     Tree<vEntry> *tree = vMetaData::getInstance()->getMemoryTree();
@@ -58,7 +51,7 @@ void Dump::saveDumpFile() {//T(25+17i)
         }
     }
 
-    (*counter)++;
+    (Dump::counter)++;
     myfile.close();
 }
 
@@ -69,11 +62,11 @@ void* dump(void* d){
     o.tv_sec = static_cast<Dump*>(d)->getFrecuency();
     while(true){
         nanosleep(&o,0);
-        //static_cast<Dump*>(d)->saveDumpFile();
+        static_cast<Dump*>(d)->saveDumpFile();
     }
     return 0;
 }
 
 int Dump::getFrecuency() {
-    return (*frecuency);
+    return frecuency;
 }

@@ -31,7 +31,6 @@ vHeap::vHeap(){
 
     dmp = malloc(sizeof(Dump));
     new(static_cast<Dump*>(dmp)) Dump();
-
     pthread_create(&dumpThread,NULL,dump,dmp);
 
     if(getVDebug()) logTime(debug, "Constructor vHeap");
