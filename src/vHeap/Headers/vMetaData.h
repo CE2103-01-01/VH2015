@@ -21,7 +21,7 @@ class vEntry;
 class vMetaData {
 private:
     static vMetaData *vMDSingleton;
-    int vSize;
+    long* vSize;
     unsigned int actualID;
     Tree<vEntry>* memoryTree;
     vList<unsigned int>* deletedIDS;
@@ -42,7 +42,7 @@ public:
     pthread_cond_t* getDefragmenterCond();
     void* de_vReference(int);
     vEntry* searchToPage(int);
-    int getHeapUse();
+    long getHeapUse();
     void setPager(vPager*);
     void cleanChunk(int, void*);
     int len();

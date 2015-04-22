@@ -14,6 +14,7 @@
 namespace Constants
 {
     // forward declarations only
+    extern const int treeSize;
     extern const std::string homePath;
     extern const std::string projectPath;
     extern const std::string pagesPath;
@@ -22,7 +23,6 @@ namespace Constants
     extern const std::string logFilePath;
     extern char const *xmlPath;
     extern const std::string currentDateTime();
-    extern const int treeSize;
 }
 
 

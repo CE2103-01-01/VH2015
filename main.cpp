@@ -12,15 +12,6 @@
 #include "Test/Headers/Ship.h"
 #include "Constants.h"
 
-//TODO: implementar vArray
-//TODO: cambiar vString de heap a vHeap
-//TODO: cambiar vSimpleList de heap a vHeap
-//TODO: implementar vDoubleList
-//TODO: implementar vDebuger
-//TODO: aplicación de prueba
-//TODO: vHeap como servidor
-//TODO: visores de uso y dump de memoria
-
 using namespace std;
 using namespace pugi;
 
@@ -149,8 +140,9 @@ void startSocket(){
 };
 
 int main() {
-    begin();
+
     play();
+    //begin();
     
     return 0;
 };

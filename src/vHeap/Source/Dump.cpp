@@ -7,29 +7,35 @@
 #include "vHeap/Headers/Dump.h"
 using namespace pugi;
 
-Dump::Dump() {//TODO-roberto revise los que estan en comentario,seg fault
-    counter = 0;
-    frecuency = 1;
-    dumpping = true;
-};
+Dump::Dump() {
+    counter = static_cast<int*>(malloc(sizeof(int)));
+    (*counter) = 0;
+    frecuency = static_cast<int*>(malloc(sizeof(int)));
+    (*frecuency) = 1;
+    dumpping = static_cast<bool*>(malloc(sizeof(bool)));
+    (*dumpping) = true;
+}
 
 Dump::~Dump() {
-};
+    free(counter);
+    free(frecuency);
+    free(dumpping);
+}
 
 bool Dump::getDumppingState(){
-    return dumpping;
-};
+    return (*dumpping);
+}
 
 std::string Dump::IntToStr(int n) {
     std::stringstream result;
     result << n;
     return result.str();
 
-};
+}
 
 void Dump::saveDumpFile() {//T(25+17i)
     std::string path = Constants::dumpsPath;
-    path += "/DumpFile" + std::to_string(counter) + ".txt";//TODO-alex revisar
+    path += "/DumpFile" + std::to_string((*counter)) + ".txt";//TODO-alex revisar
     std::ofstream myfile(path);
 
     Tree<vEntry> *tree = vMetaData::getInstance()->getMemoryTree();
@@ -52,9 +58,9 @@ void Dump::saveDumpFile() {//T(25+17i)
         }
     }
 
-    Dump::counter++;
+    (*counter)++;
     myfile.close();
-};
+}
 
 
 void* dump(void* d){
@@ -63,11 +69,11 @@ void* dump(void* d){
     o.tv_sec = static_cast<Dump*>(d)->getFrecuency();
     while(true){
         nanosleep(&o,0);
-        static_cast<Dump*>(d)->saveDumpFile();
+        //static_cast<Dump*>(d)->saveDumpFile();
     }
     return 0;
-};
+}
 
 int Dump::getFrecuency() {
-    return frecuency;
+    return (*frecuency);
 }

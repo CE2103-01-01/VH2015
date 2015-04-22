@@ -22,8 +22,8 @@ vMetaData::vMetaData() {
 
     deletedIDS = static_cast<vList<unsigned int> *>(malloc(sizeof(vList<unsigned int>)));
     new(deletedIDS) vList<int>();
-
-    vSize = 0;
+    vSize = static_cast<long*>(malloc(sizeof(long)));
+    (*vSize) = 0;
 }
 
 /**
@@ -85,7 +85,7 @@ void vMetaData::printMetaData() {
 */
 void vMetaData::removeEntry(int idRef) {
     vEntry *entry = static_cast<vEntry*>(memoryTree->searchElement(idRef));
-    vSize -= entry->getDataSize();
+    (*vSize) -= entry->getDataSize();
     memoryTree->deleteElement(idRef,setDefault);
     deletedIDS->append((unsigned int) idRef);
 }
@@ -94,7 +94,7 @@ void vMetaData::removeEntry(int idRef) {
 * en la tabla de memoria agrega una entrada y devuelve un int de la posicion
 */
 unsigned int vMetaData::addEntry(int dataSize, void *actualPos) {
-    vSize+=dataSize;
+    (*vSize)+=dataSize;
     if (deletedIDS->len() == 0) {
         memoryTree->insertElement(vEntry(actualID, dataSize, actualPos),actualID);
         return actualID++;
@@ -137,15 +137,10 @@ vMetaData* vMetaData::getInstance() {
  */
 void* vMetaData::de_vReference(int id) {
     std::chrono::high_resolution_clock::time_point debug;
-    //cout<<"------------------"<<endl;
     if(getVDebug()) debug = startTime();
-    //test = startTime();
-    //printTime(test);
     std::chrono::high_resolution_clock::time_point test;
 
     pthread_mutex_lock(memoryMutex);
-    printTime(test);
-    test = startTime();
     vEntry* entry = (static_cast<vEntry*>(memoryTree->searchElement(id)));
     entry->changeFlag();
     if(!entry->isOnHeap()){
@@ -196,6 +191,6 @@ vEntry* vMetaData::searchToPage(int s){
 /** Uso de heap
  * return int: bytes en uso
  */
-int vMetaData::getHeapUse(){
-    return vSize;
+long vMetaData::getHeapUse(){
+    return (*vSize);
 }

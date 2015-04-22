@@ -100,19 +100,24 @@ int play() {
     SetShips();
     int pos1, pos2;
     char prompt;
-    while (1) {
-        Show(false);
-        cout << "Please input location: (x y)";
-        cin >> pos1 >> pos2;
-        if (Attack(pos1, pos2))
-            cout << "You got me! :)" << endl;
-        else
-            cout << "Sorry no ship at that position!" << endl;
-        cout << "Number of ships left: " << NumberOfShips() << endl;
-        cout << "Do you want to surrender (y/n)? ";
-        cin >> prompt;
-        if (prompt == 'y')
-            break;
+    while (prompt!='y') {
+        try{
+            Show(false);
+            cout << "Please input X location";
+            cin >> pos1;
+            cout << "Please input Y location";
+            cin >> pos2;
+            if (Attack(pos1, pos2))
+                cout << "You got me! :)" << endl;
+            else
+                cout << "Sorry no ship at that position!" << endl;
+            cout << "Number of ships left: " << NumberOfShips() << endl;
+            cout << "Do you want to surrender (y/n)? ";
+            cin >> prompt;
+        }catch(int e){
+            cout << "Error " << e << endl;
+            continue;
+        }
     }
     cout << "Game over!" << endl;
     Show(true);

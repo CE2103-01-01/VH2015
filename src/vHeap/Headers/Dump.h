@@ -18,10 +18,9 @@
 #include "../libs/pugixml.hpp"
 
 class Dump {
-    int frecuency;
-    int counter;
-    std::string directory;
-    bool dumpping;
+    int* frecuency;
+    int* counter;
+    bool* dumpping;
 
     public:
         Dump();
