@@ -27,6 +27,7 @@ class vHeap{
     int* dumpFrecuency;
     static vHeap* vHeapSingleton;
     float* overweight;
+    int* vSize;
     void* mainChunk;
     void* initPos;
     void* finalPos;
@@ -39,7 +40,6 @@ class vHeap{
     pthread_t dumpThread;
 public:
     bool getVDebug();
-    int* vSize;
     vHeap();
     ~vHeap();
     unsigned int vMalloc(int);
@@ -51,6 +51,7 @@ public:
     int addVRef(int);
     template <class T> int vPlacement(vRef<T>, T);
     void* de_vReference(int);
+    long getUse();
 };
 /**
  * Metodo para liberar memoria

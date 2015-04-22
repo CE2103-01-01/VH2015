@@ -37,7 +37,7 @@ void *connection_handler(void *socket_desc)
 
 
     document.AddMember("TotalSize",(int)(size+size*over)*1024*1024,allocator);
-    document.AddMember("UseSize",*vHeap::getInstance()->vSize,allocator);
+    document.AddMember("UseSize",vHeap::getInstance()->getUse(),allocator);
     rapidjson::StringBuffer buffer;
 
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);

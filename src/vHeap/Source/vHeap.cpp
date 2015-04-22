@@ -139,3 +139,10 @@ int vHeap::addVRef(int idRef) {
 bool vHeap::getVDebug() {
     return *vDebug;
 }
+
+/** Devuelve los bytes utilizados
+ * return long
+ */
+long vHeap::getUse(){
+    return metaData->getHeapUse();
+};
