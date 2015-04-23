@@ -48,14 +48,19 @@ void pruebaPager(){
 };
 
 void pruebaArray(){
-    vArray<int> arr1 = vArray<int>(1500);
-    for(int i = 0; i<1500; i+=1) *(arr1[i]) = i;
-    vArray<int> arr2 = vArray<int>(1500);
-    for(int i = 0; i<1500; i+=1) *(arr2[i]) = i;
-    vArray<int> arr3 = vArray<int>(1500);
-    for(int i = 0; i<1500; i+=1) *(arr3[i]) = i;
+    std::cin.get();
+    vArray<int> arr1 = vArray<int>(10000000);
+    for(int i = 0; i<10000000; i+=1) *(arr1[i]) = i;
+    std::cin.get();
+    vArray<int> arr2 = vArray<int>(5000);
+    for(int i = 0; i<5000; i+=1) *(arr2[i]) = i;
+    std::cin.get();
+    vArray<int> arr3 = vArray<int>(5000);
+    for(int i = 0; i<5000; i+=1) *(arr3[i]) = i;
+    std::cin.get();
 
-    for(int i = 0; i<1500; i+=1){
+
+    for(int i = 0; i<5000; i+=1){
         std::cout<<"arr1["<< i <<"]= "<< *(arr1[i]) <<std::endl;
         std::cout<<"arr2["<< i <<"]= "<< *(arr2[i]) <<std::endl;
         std::cout<<"arr3["<< i <<"]= "<< *(arr3[i]) <<std::endl;
@@ -98,12 +103,19 @@ void pruebaTree(){
 
 void begin(){
     pruebaTree();
+    std::cin.get();
     pruebaSimpleList();
+    std::cin.get();
     pruebaDoubleList();
+    std::cin.get();
     pruebaString();
+    std::cin.get();
     pruebaLong();
+    std::cin.get();
     pruebaInt();
+    std::cin.get();
     pruebaChar();
+    std::cin.get();
     pruebaFloat();
     pruebaArray();
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;

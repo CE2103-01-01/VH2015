@@ -146,7 +146,7 @@ int main() {
     pthread_t thread;
     pthread_create(&thread,NULL,&startSocket,NULL);
 
-    begin();
-    //play();
+   // begin();
+    play();
     return 0;
 };
