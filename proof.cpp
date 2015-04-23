@@ -85,13 +85,17 @@ void pruebaString(){
 };
 
 void pruebaTree(){
-    vBinaryTree<vString> myBinary = vBinaryTree<vString>();
-    myBinary.insert(vString("a"));
-    myBinary.insert(vString(""));
-
+    Tree<int>* tr = static_cast<Tree<int>*>(malloc(sizeof(Tree<int>)));
+    new(tr) Tree<int>();
+    for(int i=0; i<10000; i++){
+        tr->insertElement(i,i);
+    }
+    std::cout<< "longitud del arbol: "<< tr->lenght() <<std::endl;
+    free(tr);
 };
 
 void begin(){
+    pruebaTree();
     pruebaPager();
     pruebaLong();
     pruebaInt();
@@ -101,7 +105,6 @@ void begin(){
     pruebaSimpleList();
     pruebaDoubleList();
     pruebaString();
-    //pruebaTree();
 
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };

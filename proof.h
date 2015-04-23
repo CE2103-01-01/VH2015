@@ -16,7 +16,9 @@
 #include <vTypes/Headers/vDoubleList.h>
 #include <vTypes/Headers/vBinaryTree.h>
 #include <vHeap/Headers/vPager.h>
+#include <Tree/Tree.h>
 
+void pruebaTree();
 void pruebaArray();
 void pruebaPager();
 void pruebaLong();
