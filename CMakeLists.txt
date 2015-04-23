@@ -18,8 +18,8 @@ set(SOURCE_FILES    src/vHeap/Source/vHeap.cpp
                     src/vTypes/Source/vString.cpp
                     src/vTypes/Source/vChar.cpp
                     src/vTypes/Source/vFloat.cpp
-                    src/vTypes/Source/vLong.cpp
                     src/vHeap/Source/Dump.cpp
+                    src/vTypes/Source/vLong.cpp
                     main.cpp
                                                                    )
 

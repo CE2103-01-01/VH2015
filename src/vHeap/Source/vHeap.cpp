@@ -14,7 +14,6 @@ vHeap::vHeap(){
 
     xml_document doc;
     doc.load_file(Constants::xmlPath);
-
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
     vSize = static_cast<int*>(malloc(sizeof(int)));
@@ -74,7 +73,8 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
         pthread_mutex_unlock(memoryMutex);
         return metaData->addEntry(sz, pos); //addEntry devuelve un numero de referencia
     }else{
-        std::cout << "Error, vHeap lleno" << std::endl;
+        std::cout << "Exit code 1: vHeap is full" << std::endl;
+        abort();
         if(getVDebug()) logTime(debug, "vMalloc");
         pthread_mutex_unlock(memoryMutex);
         return 0;
@@ -153,6 +153,7 @@ long vHeap::getUse(){
 void vHeap::setActualPos(void* pos){
     actualPos = pos;
 }
+
 int vHeap::getSize() {
     return *vSize;
 }
