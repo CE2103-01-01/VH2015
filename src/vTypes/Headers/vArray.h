@@ -14,10 +14,10 @@ template <class T> class vArray {
     public:
         vArray(int,int);
         vArray(int);
-
         int operator =(vArray);
         bool operator ==(vArray);
         T* operator [](int);
+        T* operator [](vInt);
         vInt len();
 
 };
@@ -52,6 +52,13 @@ template <class T> bool vArray<T>::operator ==(vArray<T> other){
 template <class T> T* vArray<T>::operator [](int pos){
     if(vSize > pos){
        return static_cast<T*>(*chunk + pos*sizeof(T));
+    }
+    return 0;
+};
+
+template <class T> T* vArray<T>::operator [](vInt pos){
+    if(vSize > pos){
+        return static_cast<T*>(*chunk + !pos*sizeof(T));
     }
     return 0;
 };
