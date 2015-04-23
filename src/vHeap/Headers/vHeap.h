@@ -39,6 +39,7 @@ class vHeap{
     pthread_t dfragThread;
     pthread_t dumpThread;
 public:
+    int getSize();
     bool getVDebug();
     vHeap();
     ~vHeap();

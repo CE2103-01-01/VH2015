@@ -14,6 +14,7 @@
 
 using namespace std;
 using namespace pugi;
+using namespace rapidjson;
 
 void pruebaDumpTxt(){
     Dump dump;
@@ -27,21 +28,14 @@ void *connection_handler(void *socket_desc)
     int sock = *(int*)socket_desc;
     int read_size;
     char *message , client_message[2000];
-    rapidjson::Document document;
-    document.SetObject();
-    rapidjson::Document::AllocatorType& allocator = document.GetAllocator();
-    xml_document doc;
-    doc.load_file("vHeap.xml");
-    int size = doc.child("VH2015").child("vHeap").attribute("size").as_int();
-    float over = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
+    Document document;
+    const char* json = "{\"TotalSize\":\"0\",\"UseSize\":0}";
+    document.Parse<0>(json);
+    rapidjson::Value& s = document["TotalSize"];
+    s.SetInt(vHeap::getInstance()->getSize());
 
 
-    document.AddMember("TotalSize",(int)(size+size*over)*1024*1024,allocator);
-    document.AddMember("UseSize",vHeap::getInstance()->getUse(),allocator);
-    rapidjson::StringBuffer buffer;
 
-    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
-    document.Accept(writer);
     //Send some messages to the client
     // message = "Greetings! I am your connection handler\n";
     //write(sock , message , strlen(message));
@@ -54,13 +48,27 @@ void *connection_handler(void *socket_desc)
     {
         //end of string marker
         client_message[read_size] = '\0';
-        printf("Got %d bytes: %s\n", read_size, client_message);
+      //  printf("Got %d bytes: %s\n", read_size, client_message);
 
         //Send the message back to client
-        char json[1024];
-        strcpy(json, buffer.GetString());
-        write(sock , json , strlen(json));
 
+        /*
+        document.AddMember("TotalSize",(int)(size+size*over)*1024*1024,allocator);
+        document.AddMember("UseSize",vHeap::getInstance()->getUse(),allocator);
+        rapidjson::StringBuffer buffer;
+
+        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        document.Accept(writer);
+
+         */
+        rapidjson::Value& j = document["UseSize"];
+        j.SetInt(vHeap::getInstance()->getUse());
+        rapidjson::StringBuffer buffer;
+        Writer<StringBuffer> writer(buffer);
+        document.Accept(writer);
+        char json2[1024];
+        strcpy(json2, buffer.GetString());
+        write(sock , json2 , strlen(json2));
         //clear the message buffer
         memset(client_message, 0, 2000);
         usleep(5000);
@@ -78,7 +86,7 @@ void *connection_handler(void *socket_desc)
 
     return 0;
 };
-void startSocket(){
+void* startSocket(void*){
     int socket_desc , client_sock , c;
     struct sockaddr_in server , client;
 
@@ -102,34 +110,29 @@ void startSocket(){
         perror("bind failed. Error");
 
     }
-    puts("bind done");
+    //puts("bind done");
 
     //Listen
     listen(socket_desc , 3);
 
     //Accept and incoming connection
-    puts("Waiting for incoming connections...");
-    c = sizeof(struct sockaddr_in);
 
-
-    //Accept and incoming connection
-    puts("Waiting for incoming connections...");
     c = sizeof(struct sockaddr_in);
     pthread_t thread_id;
 
     while( (client_sock = accept(socket_desc, (struct sockaddr *)&client, (socklen_t*)&c)) )
     {
-        puts("Connection accepted");
+        //puts("Connection accepted");
 
         if( pthread_create( &thread_id , NULL ,  connection_handler , (void*) &client_sock) < 0)
         {
-            perror("could not create thread");
+          //  perror("could not create thread");
 
         }
 
         //Now join the thread , so that we dont terminate before the thread
         //pthread_join( thread_id , NULL);
-        puts("Handler assigned");
+       // puts("Handler assigned");
     }
 
     if (client_sock < 0)
@@ -140,7 +143,10 @@ void startSocket(){
 };
 
 int main() {
-    begin();
-    //play();
+    pthread_t thread;
+    pthread_create(&thread,NULL,&startSocket,NULL);
+
+    //begin();
+    play();
     return 0;
 };

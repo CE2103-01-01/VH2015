@@ -153,3 +153,6 @@ long vHeap::getUse(){
 void vHeap::setActualPos(void* pos){
     actualPos = pos;
 }
+int vHeap::getSize() {
+    return *vSize;
+}
