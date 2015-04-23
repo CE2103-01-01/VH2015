@@ -140,9 +140,7 @@ void startSocket(){
 };
 
 int main() {
-
-    //play();
     begin();
-    
+    //play();
     return 0;
 };

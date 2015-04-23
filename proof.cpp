@@ -106,6 +106,5 @@ void begin(){
     pruebaChar();
     pruebaFloat();
     pruebaArray();
-
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };
