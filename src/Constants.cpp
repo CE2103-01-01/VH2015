@@ -28,5 +28,5 @@ namespace Constants
 
         return buf;
     }
-
+    extern const int defragmenterFrecuency = 30;
 }

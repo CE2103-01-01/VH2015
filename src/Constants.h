@@ -23,6 +23,7 @@ namespace Constants
     extern const std::string logFilePath;
     extern char const *xmlPath;
     extern const std::string currentDateTime();
+    extern const int defragmenterFrecuency;
 }
 
 

@@ -83,6 +83,9 @@ bool vEntry::isOnHeap(){
 };
 
 void vEntry::setOffset(void* p){
+    for(int i = 0; i<dataSize; i++){
+        *static_cast<char*>(p+i) = *static_cast<char*>(offset+i);
+    }
     offset = p;
 };
 

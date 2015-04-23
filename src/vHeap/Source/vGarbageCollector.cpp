@@ -12,8 +12,6 @@ void vGarbageCollector::deallocate(int idRef) {
     pthread_mutex_lock(vMetaData::getInstance()->getMutex());
     vMetaData::getInstance()->removeEntry(idRef);
     pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
-    pthread_cond_signal(vMetaData::getInstance()->getDefragmenterCond());
     if(getVDebug()) logTime(debug, "GC deallocate");
-
 }
 

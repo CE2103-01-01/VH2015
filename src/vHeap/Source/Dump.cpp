@@ -9,7 +9,7 @@ using namespace pugi;
 
 Dump::Dump() {
     counter = 0;
-    frecuency = 1;
+    frecuency = 5;
     dumpping = true;
 }
 
@@ -26,21 +26,14 @@ std::string Dump::IntToStr(int n) {
 
 void Dump::saveDumpFile() {//T(25+17i)
     std::string path = Constants::dumpsPath;
-    std::cout<<"HHHH"<<std::endl;
-    path += "/DumpFile" + IntToStr(counter) + ".txt";
-    std::cout<<"HHHH"<<std::endl;
     std::ofstream myfile(path);
-
     Tree<vEntry> *tree = vMetaData::getInstance()->getMemoryTree();
     xml_document doc;
     doc.load_file("vHeap.xml");
-    std::cout<<path<<std::endl;
-    std::cout<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
     myfile<< "Total size of Memory: "<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
     for(int i=1; i<tree->max(); i++){
         try{
             vEntry *m = (static_cast<vEntry*>(tree->searchElement(i)));
-            myfile << "Memory direction: " << "Hola" << "\n";
             if(m->getUseFlag()==0) {
                 myfile << "Memory direction: " << m->getOffSet() << "\n";
                 myfile << "Size of data containing: " << m->getDataSize() << "\n";
@@ -50,23 +43,24 @@ void Dump::saveDumpFile() {//T(25+17i)
             continue;
         }
     }
-
     (Dump::counter)++;
     myfile.close();
 }
 
-
-void* dump(void* d){
-    struct timespec o;
-    o.tv_nsec = 500;
-    o.tv_sec = static_cast<Dump*>(d)->getFrecuency();
-    while(true){
-        nanosleep(&o,0);
-        static_cast<Dump*>(d)->saveDumpFile();
-    }
-    return 0;
-}
-
 int Dump::getFrecuency() {
     return frecuency;
+}
+
+void* dump(void* d){
+    Dump* dmp = static_cast<Dump*>(d);
+    struct timespec o;
+    o.tv_nsec = 0;
+    o.tv_sec = dmp->getFrecuency();
+    while(true){
+        nanosleep(&o,0);
+        pthread_mutex_lock(vMetaData::getInstance()->getMutex());
+        dmp->saveDumpFile();
+        pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
+    }
+    return 0;
 }

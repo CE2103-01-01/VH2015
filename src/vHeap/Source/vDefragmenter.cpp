@@ -4,50 +4,49 @@
 
 #include "vHeap/Headers/vDefragmenter.h"
 
-vDefragmenter::vDefragmenter(void* iPos, void* fPos, vList<vEntry>* mem, pthread_cond_t* c, pthread_mutex_t* m){
+vDefragmenter::vDefragmenter(void* iPos, void* fPos){
     initPos = iPos;
     finalPos = fPos;
     actualPos = iPos;
-    memoryT = mem;
-    cond=c;
-    mutex=m;
-    active = static_cast<bool*>(malloc(sizeof(bool)));
-    *active = true;
-};
+}
 
-vDefragmenter::~vDefragmenter(){};
+vDefragmenter::~vDefragmenter(){
+    initPos = 0;
+    finalPos = 0;
+    actualPos = 0;
+}
 
 void vDefragmenter::vDefragment() {//T(3+11i)
-    vListIterator<vEntry>* iter = memoryT->getIterator();
-    while (iter->exists()) {
-        vEntry* tmp = iter->next();
-        if(tmp->isOnHeap()){
-            tmp->changeFlag();
-            if(&*tmp != actualPos){
-                tmp->setOffset(actualPos);
+    Tree<vEntry>* tree = vMetaData::getInstance()->getMemoryTree();
+    for(int i=1; i<= tree->lenght(); i++){
+        try{
+            vEntry* tmp = static_cast<vEntry*>(tree->searchElement(i));
+            if(tmp->getIdRef()!=0 && tmp->isOnHeap()){
+                tmp->changeFlag();
+                if(tmp->getOffSet() != actualPos){
+                    tmp->setOffset(actualPos);
+                }
+                actualPos += tmp->getDataSize();
+                tmp->changeFlag();
             }
-            actualPos+=tmp->getDataSize();
-            tmp->changeFlag();
+        }catch(int e){
+            std::cout << "Error " << e << std::endl;
+            continue;
         }
     };
     actualPos=initPos;
-};
-
-pthread_mutex_t* vDefragmenter::getMutex(){
-    return mutex;
-};
-
-pthread_cond_t* vDefragmenter::getCond(){
-    return cond;
-};
+}
 
 void* vDefragmentThread(void* param){
-    vDefragmenter* vD = (static_cast<vDefragmenter*>(param));
-    while (true) {//TODO-roberto flag
-        pthread_mutex_lock(vD->getMutex());
-        pthread_cond_wait(vD->getCond(), vD->getMutex());
-        vD->vDefragment();
-        pthread_mutex_unlock(vD->getMutex());
+    vDefragmenter* vDefrag = (static_cast<vDefragmenter*>(param));
+    struct timespec o;
+    o.tv_nsec = 0;
+    o.tv_sec = Constants::defragmenterFrecuency;
+    while (true) {
+        nanosleep(&o,0);
+        pthread_mutex_lock(vMetaData::getInstance()->getMutex());
+        vDefrag->vDefragment();
+        pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
     };
     return 0;
-};
+}

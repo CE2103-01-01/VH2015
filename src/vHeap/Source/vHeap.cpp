@@ -29,6 +29,10 @@ vHeap::vHeap(){
     metaData = vMetaData::getInstance();
     memoryMutex = metaData->getMutex();
 
+    dfrag = malloc(sizeof(vDefragmenter));
+    new(static_cast<vDefragmenter*>(dfrag)) vDefragmenter(initPos,finalPos);
+    pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
+
     dmp = malloc(sizeof(Dump));
     new(static_cast<Dump*>(dmp)) Dump();
     pthread_create(&dumpThread,NULL,dump,dmp);

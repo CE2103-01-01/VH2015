@@ -12,9 +12,6 @@ vMetaData::vMetaData() {
     memoryMutex = static_cast<pthread_mutex_t*>(malloc(sizeof(pthread_mutex_t)));
     pthread_mutex_init(memoryMutex, 0);
 
-    dfragCond = static_cast<pthread_cond_t*>(malloc(sizeof(pthread_cond_t)));
-    pthread_cond_init(dfragCond, 0);
-
     actualID = initialId;
 
     memoryTree = static_cast<Tree<vEntry>*>(malloc(sizeof(Tree<vEntry>)));
@@ -162,12 +159,6 @@ void* vMetaData::de_vReference(int id) {
  */
 pthread_mutex_t* vMetaData::getMutex(){
     return memoryMutex;
-}
-
-/** @return pthread_cond_t*: variable de condicion de desfragmentador
- */
-pthread_cond_t* vMetaData::getDefragmenterCond(){
-    return dfragCond;
 }
 
 /* @brief busca una elemento para paginar

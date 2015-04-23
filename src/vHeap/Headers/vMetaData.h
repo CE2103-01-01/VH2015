@@ -26,7 +26,6 @@ private:
     Tree<vEntry>* memoryTree;
     vList<unsigned int>* deletedIDS;
     pthread_mutex_t* memoryMutex;
-    pthread_cond_t* dfragCond;
 
 public:
     static vMetaData *getInstance();
@@ -39,7 +38,6 @@ public:
     void removeEntry(int idRef);
     void printMetaData();
     pthread_mutex_t* getMutex();
-    pthread_cond_t* getDefragmenterCond();
     void* de_vReference(int);
     vEntry* searchToPage(int);
     long getHeapUse();
