@@ -10,7 +10,7 @@ namespace Constants
     extern const std::string homePath = getenv("HOME");
     extern const std::string projectPath = homePath + "/vh2015";
     int a = mkdir(Constants::projectPath.c_str(), 0777);
-    extern const std::string pagesPath = projectPath +"/pages";
+    extern const std::string pagesPath = projectPath +"/pages/";
     int b = mkdir(Constants::pagesPath.c_str(), 0777);
     extern const std::string dumpsPath = projectPath +"/dumps";
     int c = mkdir(Constants::dumpsPath.c_str(), 0777);

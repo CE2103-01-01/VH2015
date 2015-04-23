@@ -52,6 +52,7 @@ public:
     template <class T> int vPlacement(vRef<T>, T);
     void* de_vReference(int);
     long getUse();
+    void setActualPos(void*);
 };
 /**
  * Metodo para liberar memoria

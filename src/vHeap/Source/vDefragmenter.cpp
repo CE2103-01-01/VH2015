@@ -34,6 +34,7 @@ void vDefragmenter::vDefragment() {//T(3+11i)
             continue;
         }
     };
+    vHeap::getInstance()->setActualPos(actualPos);
     actualPos=initPos;
 }
 

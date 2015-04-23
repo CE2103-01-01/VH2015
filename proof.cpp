@@ -48,25 +48,25 @@ void pruebaPager(){
 };
 
 void pruebaArray(){
-    vArray<int> arr = vArray<int>(5);
-    for(int i = 0; i<5; i++){
-        *(arr[i]) = i;
-    };
-    for(int i = 0; i<5; i++){
-        std::cout<<"arr["<< i <<"]= "<< *(arr[i]) <<std::endl;
-    };
+    vArray<int> arr1 = vArray<int>(1500);
+    for(int i = 0; i<1500; i++) *(arr1[i]) = i;
+    vArray<int> arr2 = vArray<int>(1500);
+    for(int i = 0; i<1500; i++) *(arr2[i]) = i;
+    vArray<int> arr3 = vArray<int>(1500);
+    for(int i = 0; i<1500; i++) *(arr3[i]) = i;
+
+    for(int i = 0; i<1500; i++) std::cout<<"arr1["<< i <<"]= "<< *(arr1[i]) <<std::endl;
+    for(int i = 0; i<1500; i++) std::cout<<"arr2["<< i <<"]= "<< *(arr2[i]) <<std::endl;
+    for(int i = 0; i<1500; i++) std::cout<<"arr3["<< i <<"]= "<< *(arr3[i]) <<std::endl;
 };
 
 void pruebaSimpleList(){
     vSimpleList<int> a = vSimpleList<int>();
     vRef<vSimpleList<int>> r = vMalloc(sizeof(a));
     vPlacement(r,a);
-    (**r)+0;
-    std::cout<< "vSimpleList[0] = 0 : " << (**r)[0] <<std::endl;
-    (**r)+1;
-    std::cout<< "vSimpleList[1] = 1 : " << (**r)[1] <<std::endl;
-    (**r)+2;
-    std::cout<< "vSimpleList[2] = 2 : " << (**r)[2] <<std::endl;
+    for(int i=0; i<10; i++){
+        (**r)+i;
+    }
 };
 
 void pruebaDoubleList(){
@@ -95,16 +95,16 @@ void pruebaTree(){
 };
 
 void begin(){
-    pruebaTree();
-    pruebaPager();
-    pruebaLong();
-    pruebaInt();
-    pruebaChar();
-    pruebaFloat();
+    //pruebaTree();
+    //pruebaPager();
+    //pruebaLong();
+    //pruebaInt();
+    //pruebaChar();
+    //pruebaFloat();
     pruebaArray();
-    pruebaSimpleList();
-    pruebaDoubleList();
-    pruebaString();
+    //pruebaSimpleList();
+    //pruebaDoubleList();
+    //pruebaString();
 
     std::cout<<"FIN DE LAS PRUEBAS"<<std::endl;
 };

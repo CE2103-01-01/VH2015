@@ -8,7 +8,8 @@
 #include "vEntry.h"
 #include "Constants.h"
 #include "Tree/Tree.h"
-#include "vHeap/Headers/vMetaData.h"
+#include "vMetaData.h"
+#include "vHeap.h"
 #include <pthread.h>
 #include <cstdlib>
 

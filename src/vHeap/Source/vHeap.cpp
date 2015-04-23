@@ -18,10 +18,10 @@ vHeap::vHeap(){
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
     vSize = static_cast<int*>(malloc(sizeof(int)));
-    *vSize = doc.child("VH2015").child("vHeap").attribute("size").as_int() *1024*1024;
+    *vSize = doc.child("VH2015").child("vHeap").attribute("size").as_int() *1024;
     vDebug = static_cast<bool*>(malloc(sizeof(bool)));
     *vDebug = doc.child("VH2015").child("vDebug").attribute("activo").as_bool();
-    mainChunk = malloc((size_t) (*vSize));
+    mainChunk = malloc(*vSize);
     actualPos = mainChunk;
     initPos = mainChunk;
     finalPos = initPos+*vSize;
@@ -58,7 +58,7 @@ unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
     pthread_mutex_lock(memoryMutex);
     std::chrono::high_resolution_clock::time_point debug;
     if(getVDebug()) debug = startTime();
-    if((*vSize)*(*overweight) > metaData->getHeapUse()){
+    if((*vSize)+(*vSize)*(*overweight) > (sz + metaData->getHeapUse())){
         void* pos;
         if(actualPos + sz < finalPos){
             pos = actualPos;
@@ -112,13 +112,12 @@ vHeap *vHeap::getInstance() {
  * Se desreferencia un valor y se devuelve el dato
  */
 void *vHeap::de_vReference(int id) {//T(7+6i)
-   pthread_mutex_lock(memoryMutex);
+    pthread_mutex_lock(memoryMutex);
     std::chrono::high_resolution_clock::time_point debug;
     if(getVDebug()) debug = startTime();
-    metaData->de_vReference(id);
     pthread_mutex_unlock(memoryMutex);
     if(getVDebug()) logTime(debug, "vdeReference");
-    return 0;
+    return metaData->de_vReference(id);
 };
 
 /**
@@ -149,4 +148,8 @@ bool vHeap::getVDebug() {
  */
 long vHeap::getUse(){
     return metaData->getHeapUse();
-};
+}
+
+void vHeap::setActualPos(void* pos){
+    actualPos = pos;
+}

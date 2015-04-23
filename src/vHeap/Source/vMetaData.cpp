@@ -140,10 +140,11 @@ void* vMetaData::de_vReference(int id) {
     pthread_mutex_lock(memoryMutex);
     vEntry* entry = (static_cast<vEntry*>(memoryTree->searchElement(id)));
     entry->changeFlag();
-    if(!entry->isOnHeap()){
-        vEntry* toPage = searchToPage(entry->getDataSize());
+    if(!(entry->isOnHeap())){
+        int s = entry->getDataSize();
+        vEntry* toPage = searchToPage(s);
         vPager a;
-        a.pageUp(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
+        a.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
         void* content = toPage->getOffSet();
         toPage->fileDown();
         a.pageUp(content,toPage->getIdRef(),toPage->getDataSize());
@@ -165,17 +166,16 @@ pthread_mutex_t* vMetaData::getMutex(){
  * return vEntry*: el elemento
  */
 vEntry* vMetaData::searchToPage(int s){
-    pthread_mutex_lock(memoryMutex);
     for(int i=1; i<memoryTree->max(); i++){
         try{
             vEntry* entry = (static_cast<vEntry*>(memoryTree->searchElement(i)));
-            if(!entry->getUseFlag() & entry->getDataSize()>s){
-                pthread_mutex_unlock(memoryMutex);
+            if(entry->getOffSet()!=0 && entry->getDataSize()>=s){
                 return entry;
-            };
-        }catch(int e){}
+            }
+        }catch(int e){
+            std::cout << "Error " << e << std::endl;
+        }
     }
-    pthread_mutex_unlock(memoryMutex);
     return 0;
 }
 
