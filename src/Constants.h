@@ -5,6 +5,7 @@
 #ifndef VH2015_CONSTANTS_H
 #define VH2015_CONSTANTS_H
 
+#define TREE_SIZE 50
 
 #include <iosfwd>
 #include <fstream>

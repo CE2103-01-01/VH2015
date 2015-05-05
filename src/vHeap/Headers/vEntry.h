@@ -40,6 +40,6 @@ public:
     void setDefault();
 };
 
-void setDefault(vEntry* entry);
+void setDefault(vEntry* entry, void*);
 
 #endif //VH2015_VENTRY_H

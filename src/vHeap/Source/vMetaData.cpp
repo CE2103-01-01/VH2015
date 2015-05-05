@@ -83,7 +83,7 @@ void vMetaData::printMetaData() {
 void vMetaData::removeEntry(int idRef) {
     vEntry *entry = static_cast<vEntry*>(memoryTree->searchElement(idRef));
     (*vSize) -= entry->getDataSize();
-    memoryTree->deleteElement(idRef,setDefault);
+    memoryTree->deleteElement(idRef,setDefault,0);
     deletedIDS->append((unsigned int) idRef);
 }
 
