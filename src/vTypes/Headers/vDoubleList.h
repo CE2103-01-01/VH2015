@@ -23,7 +23,6 @@ class vDoubleNode{
 public:
     vDoubleNode();
     vDoubleNode(T);
-    ~vDoubleNode();
     T getData();
     void setNext(vRef<vDoubleNode<T>>);
     void setPrev(vRef<vDoubleNode<T>>);
@@ -265,9 +264,6 @@ vRef<vDoubleNode<T>> vDoubleNode<T>::getNext() {
 template <class T>
 vRef<vDoubleNode<T>> vDoubleNode<T>::getPrev() {
     return prev;
-}
-template <class T>
-vDoubleNode<T>::~vDoubleNode() {
 }
 template <class T>
 void vDoubleNode<T>::operator*=(T d) {

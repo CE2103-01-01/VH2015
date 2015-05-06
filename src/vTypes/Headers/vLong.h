@@ -18,6 +18,7 @@ class vLong{
 public:
     vLong();
     vLong(long);
+    ~vLong();
     vLong operator +(vLong);
     vLong operator +(long);
     long operator !();

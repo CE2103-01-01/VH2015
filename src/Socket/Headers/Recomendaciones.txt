@@ -1,5 +1,0 @@
-Recomendaciones
-1. Documentar el codigo inmediatamente
-2. Hacer mensajes de commit adecuadamente para en el futuro saber adonde se quedo al igual que actualizar la bitacora.
-3. Usar el debugger para resolver SegFault
-4. Analizar el codigo manualmente ante algun error

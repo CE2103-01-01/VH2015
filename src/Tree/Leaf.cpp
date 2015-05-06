@@ -4,7 +4,7 @@
 
 #include "Leaf.h"
 
-/** @brief crea una hoja con n-1 containers, tal que n=treeSize
+/** @brief crea una hoja con n containers, tal que n=treeSize
  */
 Leaf::Leaf(int treeSizeParam,int sizeofTypeParam){
     sizeofType = static_cast<int*>(malloc(sizeof(int)));

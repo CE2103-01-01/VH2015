@@ -26,21 +26,21 @@ public:
 
 template <class T> vSimpleNode<T>::vSimpleNode(){
     next = 0;
-};
+}
 
 template <class T> vSimpleNode<T>::vSimpleNode(T param){
     data = vMalloc((unsigned int) sizeof(T));
     vPlacement(data,param);
     next = 0;
-};
+}
 
 template <class T> T vSimpleNode<T>::operator !(){
     return **data;
-};
+}
 
 template <class T> vRef<vSimpleNode<T>> vSimpleNode<T>::operator ++(){
     return next;
-};
+}
 
 template <class T> void vSimpleNode<T>::operator *=(T d){
     if(!data != 0){
@@ -49,11 +49,11 @@ template <class T> void vSimpleNode<T>::operator *=(T d){
         data = vMalloc((unsigned int) sizeof(T));
         vPlacement(data,d);
     }
-};
+}
 
 template <class T> void vSimpleNode<T>::operator +(vRef<vSimpleNode> vR){
     next=vR;
-};
+}
 
 
 //SIMPLE LIST
@@ -65,7 +65,6 @@ private:
     vRef<vSimpleNode<T>> m_head;
 public:
     vSimpleList();
-    ~vSimpleList();
     void operator +(T);                          //add
     void operator -(T);                          //delete
     void operator --();                          //delete all
@@ -77,11 +76,7 @@ public:
 template <class T> vSimpleList<T>::vSimpleList(){
     m_len = 0;
     m_head = 0;
-};
-
-template <class T> vSimpleList<T>::~vSimpleList(){
-
-};
+}
 
 template <class T> void vSimpleList<T>::operator +(T data){
     if(!m_head != 0){
@@ -96,8 +91,8 @@ template <class T> void vSimpleList<T>::operator +(T data){
         m_head = vMalloc(sizeof(vSimpleNode<T>));
         vPlacement(m_head,vSimpleNode<T>(data));
         (m_len)++;
-    };
-};
+    }
+}
 
 template <class T> void vSimpleList<T>::operator -(T data){
     if(!**m_head != data){
@@ -123,7 +118,7 @@ template <class T> void vSimpleList<T>::operator -(T data){
         }
         m_len = 0;
     }
-};
+}
 
 template <class T> T vSimpleList<T>::operator [](int pos){
     vRef<vSimpleNode<T>> tmp = m_head;
@@ -131,9 +126,9 @@ template <class T> T vSimpleList<T>::operator [](int pos){
         for(int i=0; i<pos; i+=1){
             tmp = ++(**tmp);
         }
-    };
+    }
     return !**tmp;
-};
+}
 
 template <class T> void vSimpleList<T>:: setPos(int pos, T data){
     if(pos < m_len){
@@ -142,8 +137,8 @@ template <class T> void vSimpleList<T>:: setPos(int pos, T data){
             tmp = ++(**tmp);
         }
         (**tmp) *= data;
-    };
-};
+    }
+}
 
 template <class T> void vSimpleList<T>::operator --(){
     while(!m_head != 0) {
@@ -152,10 +147,10 @@ template <class T> void vSimpleList<T>::operator --(){
         vFree(tmp);
     }
     m_len = 0;
-};
+}
 
 template <class T> int vSimpleList<T>::len(){
     return m_len;
-};
+}
 
 #endif //_VH2015_VSIMPLELIST_H_

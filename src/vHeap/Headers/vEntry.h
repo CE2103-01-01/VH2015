@@ -5,20 +5,16 @@
 #ifndef VH2015_VENTRY_H
 #define VH2015_VENTRY_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <iostream>
 #include "vGarbageCollector.h"
 
 class vEntry {
 private:
-    void *offset;
-    unsigned int dataSize;
-    bool useFlag;   //TODO: usar
+    void* offset = 0;
+    unsigned int dataSize = 0;
+    bool useFlag = false;
     unsigned int numReferences = 0;
-    bool onHeap;
-    unsigned int idRef;
+    bool onHeap = false;
+    unsigned int idRef = 0;
 public:
     vEntry();
     vEntry(int, int, void*);

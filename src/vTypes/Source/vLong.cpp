@@ -17,6 +17,11 @@ vLong::vLong(long dataParam){
     vPlacement(data,dataParam);
 };
 
+//borra el dato
+vLong::~vLong(){
+    //vFree(data);
+}
+
 //brief Devuelve el dato envuelto por la clase
 //return long
 long vLong::operator !(){
@@ -40,7 +45,12 @@ void vLong::operator +=(vLong pls){
 //brief Asigna un nuevo valor al contenido de la clase
 //param vLong var: variable a sumar
 void vLong::operator =(vLong var){
-    (**data) = !var;
+    if((!data) != 0){
+        vPlacement(data, !var);
+    }else{
+        data = vMalloc(sizeof(long));
+        vPlacement(data, !var);
+    }
 };
 
 //brief Compara dos vLong

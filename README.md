@@ -1,1 +1,1 @@
-# VH2015
+Dynamic Lightweigh Memory Manager es un proyecto realizado por: Roberto Bonilla, Jiamming Feng y Pablo Rodriguez, estudiantes de la carrera Ingenieria en Computadores del Instituto Tecnologico de Costa Rica, como proyecto del curso Algoritmos y Estructuras de Datos II impartido por el profesor Gerardo Nereo.

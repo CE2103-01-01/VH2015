@@ -7,7 +7,6 @@
 
 #include <malloc.h>
 #include "Constants.h"
-#include <iostream>
 
 /** @brief miembro del arbol
  * Numero de hijos: n, tal que n=treeSize 

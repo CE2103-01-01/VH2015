@@ -11,6 +11,7 @@
 
 void vFree(int);
 unsigned int vMalloc(unsigned int);
+unsigned int vCalloc(unsigned int);
 template<class T> void vFree(vRef<T> toFree) {
     vHeap::getInstance()->vFree(toFree);
 };

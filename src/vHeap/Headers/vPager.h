@@ -5,14 +5,6 @@
 #ifndef VH2015_VPAGER_H
 #define VH2015_VPAGER_H
 
-static char const *const PATH = "../res/vPages/";
-
-static char const *const extension = ".celdmm";
-
-#include <string>
-#include <fstream>
-#include <iostream>
-#include <sys/stat.h>
 #include <Constants.h>
 
 class vPager {

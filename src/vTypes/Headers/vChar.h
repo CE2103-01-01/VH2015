@@ -18,6 +18,7 @@ class vChar{
 public:
     vChar();
     vChar(char);
+    ~vChar();
     vChar operator +(vChar);
     vChar operator +(char);
     char operator !();

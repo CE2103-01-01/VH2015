@@ -6,14 +6,18 @@
 #include "Constants.h"
 namespace Constants
 {
-    extern const int treeSize = 50;
+    extern char const *const PROJECT_NAME = "VH2015";
+    extern char const *const V_HEAP = "vHeap";
+    extern char const *const SIZE_STR = "size";
+    extern char const *const PAGER_EXTENSION = ".celdmm";
     extern const std::string homePath = getenv("HOME");
     extern const std::string projectPath = homePath + "/vh2015";
     int a = mkdir(Constants::projectPath.c_str(), 0777);
-    extern const std::string pagesPath = projectPath +"/pages/";
-    int b = mkdir(Constants::pagesPath.c_str(), 0777);
-    extern const std::string dumpsPath = projectPath +"/dumps";
-    int c = mkdir(Constants::dumpsPath.c_str(), 0777);
+    extern const std::string PAGES_PATH = projectPath +"/pages/";
+    int b = mkdir(Constants::PAGES_PATH.c_str(), 0777);
+    extern const std::string DUMPS_PATH = projectPath +"/dumps";
+    int c = mkdir(Constants::DUMPS_PATH.c_str(), 0777);
+    extern const int DEFRAGMENTER_FRECUENCY = 30;
     extern const std::string logsPath = projectPath +"/logs";
     int d = mkdir(Constants::logsPath.c_str(), 0777);
     extern const std::string logFilePath = logsPath +"/log"+currentDateTime()+".txt";
@@ -28,5 +32,4 @@ namespace Constants
 
         return buf;
     }
-    extern const int defragmenterFrecuency = 30;
 }

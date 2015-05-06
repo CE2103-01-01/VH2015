@@ -4,15 +4,12 @@
 #ifndef _VH2015_VMETADATA_H_
 #define _VH2015_VMETADATA_H_
 
-#include <iostream>
 #include "Tree/Tree.h"
 #include "vTypes/Headers/vList.h"
 #include "vEntry.h"
 #include "vPager.h"
 #include <pthread.h>
-#include <cstdlib>
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
 
 static const unsigned int initialId = 1;
 
@@ -22,7 +19,7 @@ class vMetaData {
 private:
     static vMetaData *vMDSingleton;
     long* vSize;
-    unsigned int actualID;
+    unsigned int* actualID;
     Tree<vEntry>* memoryTree;
     vList<unsigned int>* deletedIDS;
     pthread_mutex_t* memoryMutex;

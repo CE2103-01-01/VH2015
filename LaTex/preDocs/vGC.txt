@@ -1,7 +1,0 @@
-Clase vGarbageCollector
-
-void deallocate(int idRef)
-Ejecuta vFree de un vRef sin uso
-
-void startDump()
-Inicia el dump cuando se ejecuta el deallocate

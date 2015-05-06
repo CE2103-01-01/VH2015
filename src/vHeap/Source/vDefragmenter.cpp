@@ -4,28 +4,47 @@
 
 #include "vHeap/Headers/vDefragmenter.h"
 
-vDefragmenter::vDefragmenter(void* iPos, void* fPos){
-    initPos = iPos;
-    finalPos = fPos;
-    actualPos = iPos;
+/** Construye un defragmentador
+ * @param void* initPosParam: posicion inicial del heap
+ * @param void* finalPosParam: posicion final del heap
+ */
+vDefragmenter::vDefragmenter(void* initPosParam, void* finalPosParam){
+    initPos = initPosParam;
+    finalPos = finalPosParam;
+    actualPos = initPos;
+    defragmenting = static_cast<bool*>(malloc(sizeof(bool)));
+    (*defragmenting) = true;
 }
 
+/** Libera la memoria utilizada y coloca punteros en 0
+ */
 vDefragmenter::~vDefragmenter(){
     initPos = 0;
     finalPos = 0;
     actualPos = 0;
+    free(defragmenting);
 }
 
-void vDefragmenter::vDefragment() {//T(3+11i)
+/** Metodo que defragmeta el vHeap
+ */
+void vDefragmenter::vDefragment() {
+    //Toma la memoria
     Tree<vEntry>* tree = vMetaData::getInstance()->getMemoryTree();
+    //Recorre el arbol
     for(int i=1; i<= tree->lenght(); i++){
         try{
-            vEntry* tmp = static_cast<vEntry*>(tree->searchElement(i));
-            if(tmp->getIdRef()!=0 && tmp->isOnHeap()){
+            //Toma un elemento
+            vEntry* tmp = tree->searchElement(i);
+            //Comprueba si existe y si esta en heap
+            if(tmp!=0 && tmp->getIdRef()!=0 && tmp->isOnHeap()){
+                //Si esta cambia la bandera de uso
                 tmp->changeFlag();
+                //Revisa si esta continuo o tiene espacio en medio
                 if(tmp->getOffSet() != actualPos){
+                    //Acomoda la memoria
                     tmp->setOffset(actualPos);
                 }
+                //Cambia la bandera y la posicion actual
                 actualPos += tmp->getDataSize();
                 tmp->changeFlag();
             }
@@ -34,20 +53,37 @@ void vDefragmenter::vDefragment() {//T(3+11i)
             continue;
         }
     };
+    //Cambia la posicion actual
     vHeap::getInstance()->setActualPos(actualPos);
     actualPos=initPos;
 }
 
-void* vDefragmentThread(void* param){
-    vDefragmenter* vDefrag = (static_cast<vDefragmenter*>(param));
-    struct timespec o;
-    o.tv_nsec = 0;
-    o.tv_sec = Constants::defragmenterFrecuency;
-    while (true) {
-        nanosleep(&o,0);
+/** Devuelve una bandera que indica si el defragmentador esta activo
+ * @return bool
+ */
+bool vDefragmenter::getDefragmenterFlag() {
+    return defragmenting;
+}
+
+/**@brief metodo ejecutado por el pthread
+ * @param void* defragmenterObjParam: defragmentador
+ * @return void* 0
+ */
+void* vDefragmentThread(void* defragmenterObjParam){
+    //Crea estructura de tiempo
+    struct timespec timeController;
+    timeController.tv_nsec = 0;
+    timeController.tv_sec = Constants::DEFRAGMENTER_FRECUENCY;
+    //Siempre que la bandera de defragmetar sea verdader
+    while(static_cast<vDefragmenter*>(defragmenterObjParam)->getDefragmenterFlag()){
+        //Espera
+        nanosleep(&timeController,0);
+        //Bloquea mutex
         pthread_mutex_lock(vMetaData::getInstance()->getMutex());
-        vDefrag->vDefragment();
+        //Llama al metodo que defragmenta
+        static_cast<vDefragmenter*>(defragmenterObjParam)->vDefragment();
+        //Desbloquea mutex
         pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
     };
-    return 0;
+    return defragmenterObjParam;
 }

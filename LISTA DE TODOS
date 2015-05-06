@@ -1,0 +1,19 @@
+LISTA DE "TODO"
+
++PABLO: 
+1. Cambiar aplicacion de prueba para que reciba tamano de matriz y numero de elementos a buscar
+2. Utilizar vArray<vArray<Tipo>> en aplicacion de prueba
+3. Comentar aplicacion de prueba
+4. Comentar Iterator al final de vList
+5. Comentar vBinaryTree
+6. Revisar archivo de constantes, todavia hay minusculas
+7. Revisar vFree y destructores
++ALEX
+1. Revisar dump y socket, hay dos Socket.h
+2. Comentar socket
+3. Revisar archivo de constantes, todavia hay minusculas
+4. Revisar vFree y destructores
++ROBERTO
+1. Comentar vSimpleList
+2. Comentar vArray
+3. Revisar vFree y destructores

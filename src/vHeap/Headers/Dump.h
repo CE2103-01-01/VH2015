@@ -5,26 +5,18 @@
 #ifndef VH2015_DUMP_H
 #define VH2015_DUMP_H
 
-
-#include "vMetaData.h"
-#include "vTypes/Headers/vList.h"
-#include <iostream>
-#include <cstdlib>
-#include <stdlib.h>
-#include <stdio.h>
-#include <sstream>
-#include <fstream>
-#include <unistd.h>
 #include "../libs/pugixml.hpp"
+#include "vMetaData.h"
+#include <sstream>
 
 class Dump {
-    int frecuency;
-    int counter;
-    bool dumpping;
-
+    int* frecuency;
+    int* counter;
+    bool* dumpping;
     public:
         Dump();
-        std::string IntToStr(int);
+        ~Dump();
+        void changeDumppingState();
         void saveDumpFile();
         bool getDumppingState();
         int getFrecuency();

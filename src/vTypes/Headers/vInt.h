@@ -18,6 +18,7 @@ class vInt{
 public:
     vInt();
     vInt(int);
+    ~vInt();
     vInt operator +(vInt);
     vInt operator +(int);
     int operator !();

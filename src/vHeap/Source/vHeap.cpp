@@ -15,11 +15,11 @@ vHeap::vHeap(){
     xml_document doc;
     doc.load_file(Constants::xmlPath);
     overweight = static_cast<float*>(malloc(sizeof(float)));
-    *overweight = doc.child("VH2015").child("vHeap").attribute("overweight").as_float();
-    vSize = static_cast<int*>(malloc(sizeof(int)));
-    *vSize = doc.child("VH2015").child("vHeap").attribute("size").as_int() *1024;
+    *overweight = doc.child(Constants::PROJECT_NAME).child(Constants::V_HEAP).attribute("overweight").as_float();
+    vSize = static_cast<long*>(malloc(sizeof(long)));
+    *vSize = doc.child(Constants::PROJECT_NAME).child(Constants::V_HEAP).attribute("size").as_int();
     vDebug = static_cast<bool*>(malloc(sizeof(bool)));
-    *vDebug = doc.child("VH2015").child("vDebug").attribute("activo").as_bool();
+    *vDebug = doc.child(Constants::PROJECT_NAME).child("vDebug").attribute("activo").as_bool();
     mainChunk = malloc(*vSize);
     actualPos = mainChunk;
     initPos = mainChunk;
@@ -28,58 +28,64 @@ vHeap::vHeap(){
     metaData = vMetaData::getInstance();
     memoryMutex = metaData->getMutex();
 
-    dfrag = malloc(sizeof(vDefragmenter));
-    new(static_cast<vDefragmenter*>(dfrag)) vDefragmenter(initPos,finalPos);
-    pthread_create(&dfragThread,NULL,vDefragmentThread,dfrag);
-
-    dmp = malloc(sizeof(Dump));
-    new(static_cast<Dump*>(dmp)) Dump();
-    pthread_create(&dumpThread,NULL,dump,dmp);
-
     if(getVDebug()) logTime(debug, "Constructor vHeap");
-};
+}
 
 /**
  * Libera el espacio ocupado
  */
 vHeap::~vHeap(){
-    free(dfrag);
-    free(vDebug);
     free(overweight);
     free(mainChunk);
     free(dumpFrecuency);
-};
+}
 
 /**
  * Reservar un espacio en memoria, devuelve el int de referencia
  */
-unsigned int vHeap::vMalloc(int sz) {//Analisis de algoritmos 25T
+unsigned int vHeap::vMalloc(int neededSize) {//Analisis de algoritmos 25T
+    //Bloquea memoria
     pthread_mutex_lock(memoryMutex);
     std::chrono::high_resolution_clock::time_point debug;
     if(getVDebug()) debug = startTime();
-    if((*vSize)+(*vSize)*(*overweight) > (sz + metaData->getHeapUse())){
-        void* pos;
-        if(actualPos + sz < finalPos){
-            pos = actualPos;
-            actualPos += sz;
+    //Revisa si se dispone del espacio requerido
+    if((*vSize)+(*vSize)*(*overweight) > (neededSize + metaData->getHeapUse())){
+        void* positionToUse;
+        if(((actualPos + neededSize) < finalPos)){
+            //Si el dato cabe en mainChunk, asigna una posicion
+            positionToUse = actualPos;
+            actualPos += neededSize;
         }else{
-            vEntry* toPage = metaData->searchToPage(sz);
-            vPager a;
-            a.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
-            pos = toPage->getOffSet();
+            //Si el dato no cabe en mainChunk lo pagina
+            vEntry* toPage = metaData->searchToPage(neededSize);
+            vPager tmp;
+            //Baja el dato, notifica a la entrada y toma la posicion
+            tmp.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
+            positionToUse = toPage->getOffSet();
             toPage->fileDown();
         };
         if(getVDebug()) logTime(debug, "vMalloc");
+        //Desbloquea mutex
         pthread_mutex_unlock(memoryMutex);
-        return metaData->addEntry(sz, pos); //addEntry devuelve un numero de referencia
+        //addEntry devuelve un numero de referencia
+        return metaData->addEntry(neededSize, positionToUse);
     }else{
-        std::cout << "Exit code 1: vHeap is full" << std::endl;
-        abort();
-        if(getVDebug()) logTime(debug, "vMalloc");
-        pthread_mutex_unlock(memoryMutex);
-        return 0;
+        stopRunning(neededSize);
     };
-};
+}
+
+/**
+ * Reserva y limpia un espacio en memoria, devuelve el int de referencia
+ */
+unsigned int vHeap::vCalloc(int neededSize) {
+    //Realiza un vMalloc
+    unsigned int idToReturn = vMalloc(neededSize);
+    //Limpia la memoria
+    metaData->cleanChunk(neededSize,metaData->de_vReference(idToReturn));
+    //Retorna el id
+    return idToReturn;
+}
+
 
 vHeap* vHeap::vHeapSingleton = 0;
 
@@ -93,12 +99,6 @@ void vHeap::vFree(unsigned int idRef) {//4T
 }
 
 /**
- * Accede a la metadada
- */
-vMetaData *vHeap::getMetaData() {
-    return metaData;
-}
-/**
  * Singleton para obtener el heap
  */
 vHeap *vHeap::getInstance() {
@@ -111,14 +111,10 @@ vHeap *vHeap::getInstance() {
 /**
  * Se desreferencia un valor y se devuelve el dato
  */
-void *vHeap::de_vReference(int id) {//T(7+6i)
-    pthread_mutex_lock(memoryMutex);
-    std::chrono::high_resolution_clock::time_point debug;
-    if(getVDebug()) debug = startTime();
-    pthread_mutex_unlock(memoryMutex);
-    if(getVDebug()) logTime(debug, "vdeReference");
+void* vHeap::de_vReference(int id) {//T(7+6i)
+    //Llama al metodo de desreferenciar de metadata, el cual devuelve void*
     return metaData->de_vReference(id);
-};
+}
 
 /**
  * Se disminuye el numer de referencias de un vRef
@@ -126,7 +122,7 @@ void *vHeap::de_vReference(int id) {//T(7+6i)
 int vHeap::removeVRef(int idRef) {
     metaData->decreaseReference((unsigned int) idRef);
     return 0;
-};
+}
 
 /**
  * Aumenta el numero de referencias de un vRef
@@ -134,7 +130,7 @@ int vHeap::removeVRef(int idRef) {
 int vHeap::addVRef(int idRef) {
     metaData->increaseReference((unsigned int) idRef);
     return 0;
-};
+}
 
 /**
  * Devuelve bandera de debugger
@@ -150,10 +146,42 @@ long vHeap::getUse(){
     return metaData->getHeapUse();
 }
 
-void vHeap::setActualPos(void* pos){
-    actualPos = pos;
+/** Cambia la posicion actual
+ * @param void* newPos: nueva posicion
+ */
+void vHeap::setActualPos(void* newPos){
+    actualPos = newPos;
 }
 
-int vHeap::getSize() {
+/** Devuelve el tamano maximo del heap
+ * @return int
+ */
+long vHeap::getSize() {
     return *vSize;
+}
+
+/**Devuelve la posicion inicial del main chunk
+ * @return void*
+ */
+void* vHeap::getInitPos(){
+    return initPos;
+}
+
+/**Devuelve la posicion final del main chunk
+ * @return void*
+ */
+void* vHeap::getFinalPos(){
+    return finalPos;
+}
+
+/** Detiene la ejecucion si vHeap no tiene espacio
+ * @param int neededSize: tamano requerido
+ */
+void vHeap::stopRunning(int neededSize) {
+    std::cout << "vHeap esta lleno" << std::endl;
+    std::cout << "Capacidad maxima en Bytes: "<< (*vSize) + (*vSize)*(*overweight) <<std::endl;
+    std::cout << "Capacidad utilizada en Bytes: "<< metaData->getHeapUse()  << std::endl;
+    std::cout << "Capacidad solicitada en Bytes: "<< neededSize << std::endl;
+    std::cout << "Se abortara el programa"<< std::endl;
+    abort();
 }

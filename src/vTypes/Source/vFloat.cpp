@@ -17,6 +17,11 @@ vFloat::vFloat(float dataParam){
     vPlacement(data,dataParam);
 };
 
+//borra el dato
+vFloat::~vFloat(){
+    //vFree(data);
+}
+
 //brief Devuelve el dato envuelto por la clase
 //return float
 float vFloat::operator !(){
@@ -40,7 +45,12 @@ void vFloat::operator +=(vFloat pls){
 //brief Asigna un nuevo valor al contenido de la clase
 //param vFloat var: variable a sumar
 void vFloat::operator =(vFloat var){
-    (**data) = !var;
+    if((!data) != 0){
+        vPlacement(data, !var);
+    }else{
+        data = vMalloc(sizeof(long));
+        vPlacement(data, !var);
+    }
 };
 
 //brief Compara dos vFloat

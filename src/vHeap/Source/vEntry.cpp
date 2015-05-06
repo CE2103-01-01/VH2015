@@ -9,7 +9,12 @@
  * @brief pone en 1 el numero de referencias
 */
 vEntry::vEntry() {
+    idRef = 0;
     numReferences = 1;
+    useFlag = false;
+    onHeap = false;
+    offset = 0;
+
 }
 
 /**Constructor
@@ -23,6 +28,7 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset) {
     dataSize = (unsigned int) pDataSize;
     offset = pOffset;
     onHeap = true;
+    useFlag = false;
 }
 
 /**Constructor
@@ -37,6 +43,7 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool onHeapParam) {
     dataSize = (unsigned int) pDataSize;
     offset = pOffset;
     onHeap = onHeapParam;
+    useFlag = false;
 }
 
 /**@brief metodo que se ejecuta cuando una entrada se baja a memoria, pone la bandera en falso y el offset en 0
@@ -85,7 +92,11 @@ int vEntry::getIdRef() {
 /**@brief cambia la bandera de uso
  */
 void vEntry::changeFlag() {
-    useFlag = !useFlag;
+    if(useFlag == false){
+        useFlag = true;
+    }else{
+        useFlag = false;
+    }
 }
 
 /**@brief Devuelve el numero de referencias

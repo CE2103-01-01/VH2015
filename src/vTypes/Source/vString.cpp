@@ -6,25 +6,15 @@
 
 vString::vString(std::string str){
     word = vSimpleList<char>();
-    for(int i=0; i<str.length(); i++){
-        (word) + static_cast<char>(str[i]);
-    };
-};
-
-vString::~vString() {
-
+    for(int i=0; i<str.length(); i++) (word) + static_cast<char>(str[i]);
 };
 
 void vString::operator +=(std::string str){
-    for(int i=0; i<str.length(); i++){
-        (word) + (static_cast<char>(str[i]));
-    };
+    for(int i=0; i<str.length(); i++)(word) + (static_cast<char>(str[i]));
 };
 
 void vString::operator +=(vString str){
-    for(int i=0; i < !str.len(); i++){
-        (word) + !(str[i]);
-    };
+    for(int i=0; i < !str.len(); i++) (word) + !(str[i]);
 };
 
 void vString::operator +=(vChar chr){
@@ -82,15 +72,11 @@ bool vString::operator==(vString str) {
 };
 
 void vString::operator =(vString str){
-    for (int i = 0; i < !str.len(); i+=1) {
-        (word) + str[i];
-    }
+    for (int i = 0; i < !str.len(); i+=1)(word) + str[i];
 };
 
 void vString::operator =(std::string str){
-    for (int i = 0; i < str.length(); i+=1) {
-        (word) + static_cast<char>(str[i]);
-    }
+    for (int i = 0; i < str.length(); i+=1)(word) + static_cast<char>(str[i]);
 };
 
 //longitud
@@ -99,15 +85,11 @@ int vString::len() {
 };
 
 bool vString::operator>=(std::string str) {
-    for (int i = 0; i < word.len() && i < str.length(); i+=1) {
-        if (word[i]<str[i]) return false;
-    }
+    for (int i = 0; i < word.len() && i < str.length(); i+=1) if (word[i]<str[i]) return false;
     return true;
 }
 
 bool vString::operator>=(vString str) {
-    for (int i = 0; i < word.len() && i < str.len(); i+=1) {
-        if (word[i]<str[i]) return false;
-    }
+    for (int i = 0; i < word.len() && i < str.len(); i+=1) if (word[i]<str[i]) return false;
     return true;
 }

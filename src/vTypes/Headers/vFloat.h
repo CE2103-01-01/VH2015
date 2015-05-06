@@ -21,6 +21,7 @@ class vFloat{
 public:
     vFloat();
     vFloat(float);
+    ~vFloat();
     vFloat operator +(vFloat);
     vFloat operator +(float);
     float operator !();

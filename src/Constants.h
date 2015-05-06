@@ -15,16 +15,19 @@
 namespace Constants
 {
     // forward declarations only
-    extern const int treeSize;
+    extern char const* const PROJECT_NAME;
+    extern char const* const V_HEAP;
+    extern char const* const SIZE_STR;
+    extern char const* const PAGER_EXTENSION;
+    extern const std::string PAGES_PATH;
+    extern const std::string DUMPS_PATH;
+    extern const int DEFRAGMENTER_FRECUENCY;
     extern const std::string homePath;
     extern const std::string projectPath;
-    extern const std::string pagesPath;
-    extern const std::string dumpsPath;
     extern const std::string logsPath;
     extern const std::string logFilePath;
-    extern char const *xmlPath;
+    extern char const* xmlPath;
     extern const std::string currentDateTime();
-    extern const int defragmenterFrecuency;
 }
 
 

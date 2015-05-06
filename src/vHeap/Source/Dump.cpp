@@ -7,60 +7,91 @@
 #include "vHeap/Headers/Dump.h"
 using namespace pugi;
 
+/** Construye un objeto de dump
+ * 
+ */
 Dump::Dump() {
-    counter = 0;
-    frecuency = 5;
-    dumpping = true;
+    counter = static_cast<int*>(malloc(sizeof(int)));
+    (*counter) = 0;
+    frecuency = static_cast<int*>(malloc(sizeof(int)));
+    (*frecuency) = 5;
+    dumpping = static_cast<bool*>(malloc(sizeof(bool)));
+    (*dumpping) = true;
 }
 
+/** Destruye un objeto de dump
+ */
+Dump::~Dump() {
+    free(counter);
+    free(frecuency);
+    free(dumpping);
+}
+
+/** Devuelve el estado de dump
+ * @return bool
+ */
 bool Dump::getDumppingState(){
-    return dumpping;
+    return (*dumpping);
 }
 
-std::string Dump::IntToStr(int n) {
-    std::stringstream result;
-    result << n;
-    return result.str();
-
+/** Devuelve el estado de dump
+ */
+void Dump::changeDumppingState(){
+    (*dumpping) = !(*dumpping);
 }
 
-void Dump::saveDumpFile() {//T(25+17i)
-    std::string path = Constants::dumpsPath;
-    std::ofstream myfile(path);
-    Tree<vEntry> *tree = vMetaData::getInstance()->getMemoryTree();
+/**Guarda un archivo de dump
+ */
+void Dump::saveDumpFile() {
+    std::ofstream myfile(Constants::DUMPS_PATH);
+    Tree<vEntry>* tree = vMetaData::getInstance()->getMemoryTree();
     xml_document doc;
-    doc.load_file("vHeap.xml");
-    myfile<< "Total size of Memory: "<<doc.child("VH2015").child("vHeap").attribute("size").as_int()<<std::endl;
+    doc.load_file(Constants::xmlPath);
+    myfile << "Total size of Memory: "
+           <<doc.child(Constants::PROJECT_NAME).child(Constants::V_HEAP).attribute(Constants::SIZE_STR).as_int()
+           <<std::endl;
     for(int i=1; i<tree->max(); i++){
         try{
-            vEntry *m = (static_cast<vEntry*>(tree->searchElement(i)));
-            if(m->getUseFlag()==0) {
-                myfile << "Memory direction: " << m->getOffSet() << "\n";
-                myfile << "Size of data containing: " << m->getDataSize() << "\n";
-                myfile << "flag in use: " << true << "\n";
+            vEntry* entry = (static_cast<vEntry*>(tree->searchElement(i)));
+            if(entry->getIdRef()!=0) {
+                myfile << "The file is on heap: " << entry->isOnHeap() << "\n";
+                myfile << "Memory direction: " << entry->getOffSet() << "\n";
+                myfile << "Size of data containing: " << entry->getDataSize() << "\n";
+                myfile << "flag in use: " << entry->getUseFlag() << "\n";
             }
         }catch(int e){
             continue;
         }
     }
-    (Dump::counter)++;
+    (*counter)++;
     myfile.close();
 }
 
+/** Devuelve la frecuencia de dump
+ * @return int
+ */
 int Dump::getFrecuency() {
-    return frecuency;
+    return (*frecuency);
 }
 
-void* dump(void* d){
-    Dump* dmp = static_cast<Dump*>(d);
-    struct timespec o;
-    o.tv_nsec = 0;
-    o.tv_sec = dmp->getFrecuency();
-    while(true){
-        nanosleep(&o,0);
+/** Metodo que llamara el pthread, llama al metodo saveDumpFile()
+ * @return void*: 0
+ */
+void* dump(void* dumpObjParam){
+    //Crea el controlador de tiempo
+    struct timespec timeController;
+    timeController.tv_nsec = 0;
+    timeController.tv_sec = static_cast<Dump*>(dumpObjParam)->getFrecuency();
+    //Realiza dumps mientras este activo
+    while(static_cast<Dump*>(dumpObjParam)->getDumppingState()){
+        //Espera
+        nanosleep(&timeController,0);
+        //Bloquea el mutex
         pthread_mutex_lock(vMetaData::getInstance()->getMutex());
-        dmp->saveDumpFile();
+        //Realiza un dump
+        static_cast<Dump*>(dumpObjParam)->saveDumpFile();
+        //Desbloquea el mutex
         pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
     }
-    return 0;
+    return dumpObjParam;
 }
