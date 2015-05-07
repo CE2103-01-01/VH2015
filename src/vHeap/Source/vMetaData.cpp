@@ -152,6 +152,8 @@ void* vMetaData::de_vReference(int id) {
     pthread_mutex_lock(memoryMutex);
     //Busca la entrada
     vEntry* entry = memoryTree->searchElement(id);
+    std::cout<< "IDREF "<<entry->getIdRef() <<std::endl;
+    std::cout<< "NUMREF "<<entry->getNumReferences()<<std::endl;
     //cambia si bandera de uso
     entry->changeFlag();
     if(!(entry->isOnHeap())){

@@ -1,3 +1,0 @@
-18/3/15 Investigación e implementación de clases
-25/3/15 Investigación sobre utilización de XML en C++
-29/3/15 Terminado lectura y escritura XML.
