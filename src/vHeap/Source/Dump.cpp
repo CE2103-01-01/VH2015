@@ -53,13 +53,13 @@ void Dump::saveDumpFile() {
            <<std::endl;
     for(int i=1; i<tree->max(); i++){
         try{
-            vEntry* entry = (static_cast<vEntry*>(tree->searchElement(i)));
-
-            if(entry->getNumReferences()!=0) {
-                myfile << "The file is on heap: " << entry->isOnHeap() << "\n";
-                myfile << "Memory direction: " << entry->getOffSet() << "\n";
-                myfile << "Size of data containing: " << entry->getDataSize() << "\n";
-                myfile << "flag in use: " << entry->getUseFlag() << "\n";
+            //std::cout<<"dump:"<<tree->searchElement(i)->getNumReferences()<<std::endl;
+            if(tree->searchElement(i)->getIdRef()!=0) {
+                std::cout<<"dump:"<<tree->searchElement(i)->getIdRef()<<std::endl;
+                myfile << "The file is on heap: " << tree->searchElement(i)->isOnHeap() << "\n";
+                myfile << "Memory direction: " << tree->searchElement(i)->getOffSet() << "\n";
+                myfile << "Size of data containing: " << tree->searchElement(i)->getDataSize() << "\n";
+                myfile << "flag in use: " << tree->searchElement(i)->getUseFlag() << "\n";
             }
         }catch(int e){
             continue;

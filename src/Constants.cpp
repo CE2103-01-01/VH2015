@@ -15,7 +15,7 @@ namespace Constants
     int a = mkdir(Constants::projectPath.c_str(), 0777);
     extern const std::string PAGES_PATH = projectPath +"/pages/";
     int b = mkdir(Constants::PAGES_PATH.c_str(), 0777);
-    extern const std::string DUMPS_PATH = projectPath +"/dumps";
+    extern const std::string DUMPS_PATH = projectPath +"/dumps/";
     int c = mkdir(Constants::DUMPS_PATH.c_str(), 0777);
     extern const int DEFRAGMENTER_FRECUENCY = 30;
     extern const std::string logsPath = projectPath +"/logs";
