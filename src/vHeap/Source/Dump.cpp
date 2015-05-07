@@ -14,7 +14,7 @@ Dump::Dump() {
     counter = static_cast<int*>(malloc(sizeof(int)));
     (*counter) = 0;
     frecuency = static_cast<int*>(malloc(sizeof(int)));
-    (*frecuency) = 5;
+    (*frecuency) = 1;
     dumpping = static_cast<bool*>(malloc(sizeof(bool)));
     (*dumpping) = true;
 }

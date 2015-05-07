@@ -19,6 +19,7 @@ void vPager::pageDown(void *data, int id, int dSize) {
     for(int counter = 0; counter < dSize; counter++) {
         outFile.write(static_cast<const char *>(data + counter), 1);
     }
+    outFile.close();
 }
 
 /** Pagina arriba
@@ -44,4 +45,5 @@ void vPager::deletePage(int id){
     std::string path = Constants::PAGES_PATH;
     path.append(std::to_string(id));
     path.append(Constants::PAGER_EXTENSION);
+    remove(path.c_str());
 };
