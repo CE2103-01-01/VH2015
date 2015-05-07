@@ -1,5 +1,6 @@
-#include "Socket.h"
-#include "Test/proof.h"
+#include "Socket/Socket.h"
+#include "Test/Headers/proof.h"
+#include "vHeap/Headers/vCleaner.h"
 
 int main() {
     //Se inicializa vHeap
@@ -31,7 +32,8 @@ int main() {
     free(defragmenterObject);
     //Limpia folder de paginas
 
-    vPager::clean();
+    vCleaner::clean(Constants::PAGES_PATH);
+    vCleaner::clean(Constants::DUMPS_PATH);
 
     return 0;
 }

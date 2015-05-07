@@ -2,7 +2,6 @@
 // Created by roberto on 04/04/15.
 //
 
-#include <iostream>
 #include "vHeap/Headers/vPager.h"
 
 /** Pagina abajo
@@ -35,7 +34,7 @@ void vPager::pageUp(void *ret, int id) {//T(11+6i)
     std::ifstream inFile(path, std::ios::binary);
     inFile.read(static_cast<char*>(ret),inFile.precision());
     inFile.close();
-};
+}
 
 /** Borra pagina
  * @param: int id: numero de pagina
@@ -46,17 +45,4 @@ void vPager::deletePage(int id){
     path.append(std::to_string(id));
     path.append(Constants::PAGER_EXTENSION);
     remove(path.c_str());
-};
-
-/** Borra las paginas creadas
- */
-void vPager::clean(){
-    DIR* pagesFolder;
-    pagesFolder = opendir(Constants::PAGES_PATH.c_str());
-    struct dirent* nextFile;
-    char path[256];
-    while(nextFile = readdir(pagesFolder)){
-        sprintf(path,"%s%s", Constants::PAGES_PATH.c_str(), nextFile->d_name);
-        remove(path);
-    }
 }

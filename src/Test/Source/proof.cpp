@@ -2,7 +2,7 @@
 // Created by roberto on 17/04/15.
 //
 
-#include "proof.h"
+#include "../Headers/proof.h"
 
 /** Prueba una vSimpleList
  */
