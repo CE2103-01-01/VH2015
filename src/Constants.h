@@ -28,6 +28,8 @@ namespace Constants
     extern const std::string logFilePath;
     extern char const* xmlPath;
     extern const std::string currentDateTime();
+    extern const std::string DUMP_FILE;
+    extern const std::string TXT;
 }
 
 

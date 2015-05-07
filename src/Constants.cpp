@@ -20,7 +20,8 @@ namespace Constants
     extern const int DEFRAGMENTER_FRECUENCY = 30;
     extern const std::string logsPath = projectPath +"/logs";
     int d = mkdir(Constants::logsPath.c_str(), 0777);
-    extern const std::string logFilePath = logsPath +"/log"+currentDateTime()+".txt";
+    extern const std::string TXT = ".txt";
+    extern const std::string logFilePath = logsPath +"/log"+currentDateTime()+TXT;
     extern char const *xmlPath ="vHeap.xml";
     extern const std::string currentDateTime() {
         time_t     now = time(0);
@@ -32,4 +33,5 @@ namespace Constants
 
         return buf;
     }
+    extern const std::string DUMP_FILE = "DumpFile";
 }
