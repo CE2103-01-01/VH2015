@@ -177,5 +177,4 @@ void vEntry::setDefault(){
  */
 void setDefault(vEntry* entry, void* param){
     entry->setDefault();
-    std::cout << "SE BORRA LA ENTRADA" << std::endl;
 };
