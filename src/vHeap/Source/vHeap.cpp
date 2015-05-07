@@ -39,34 +39,39 @@ vHeap::~vHeap(){
  * Reservar un espacio en memoria, devuelve el int de referencia
  */
 unsigned int vHeap::vMalloc(int neededSize) {//Analisis de algoritmos 25T
-    //Bloquea memoria
-    pthread_mutex_lock(vMetaData::getInstance()->getMutex());
-    std::chrono::high_resolution_clock::time_point debug;
-    if(getVDebug()) debug = startTime();
-    //Revisa si se dispone del espacio requerido
-    if((*vSize)+(*vSize)*(*overweight) > (neededSize + vMetaData::getInstance()->getHeapUse())){
-        void* positionToUse;
-        if(((actualPos + neededSize) < finalPos)){
-            //Si el dato cabe en mainChunk, asigna una posicion
-            positionToUse = actualPos;
-            actualPos += neededSize;
+    try{
+        //Bloquea memoria
+        pthread_mutex_lock(vMetaData::getInstance()->getMutex());
+        std::chrono::high_resolution_clock::time_point debug;
+        if(getVDebug()) debug = startTime();
+        //Revisa si se dispone del espacio requerido
+        if((*vSize)+(*vSize)*(*overweight) > (neededSize + vMetaData::getInstance()->getHeapUse())){
+            void* positionToUse;
+            if(((actualPos + neededSize) < finalPos)){
+                //Si el dato cabe en mainChunk, asigna una posicion
+                positionToUse = actualPos;
+                actualPos += neededSize;
+            }else{
+                //Si el dato no cabe en mainChunk lo pagina
+                vEntry* toPage = vMetaData::getInstance()->searchToPage(neededSize);
+                vPager tmp;
+                //Baja el dato, notifica a la entrada y toma la posicion
+                tmp.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
+                positionToUse = toPage->getOffSet();
+                toPage->fileDown();
+            };
+            if(getVDebug()) logTime(debug, "vMalloc");
+            //Desbloquea mutex
+            pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
+            //addEntry devuelve un numero de referencia
+            return vMetaData::getInstance()->addEntry(neededSize, positionToUse);
         }else{
-            //Si el dato no cabe en mainChunk lo pagina
-            vEntry* toPage = vMetaData::getInstance()->searchToPage(neededSize);
-            vPager tmp;
-            //Baja el dato, notifica a la entrada y toma la posicion
-            tmp.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
-            positionToUse = toPage->getOffSet();
-            toPage->fileDown();
+            stopRunning(neededSize);
         };
-        if(getVDebug()) logTime(debug, "vMalloc");
-        //Desbloquea mutex
-        pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
-        //addEntry devuelve un numero de referencia
-        return vMetaData::getInstance()->addEntry(neededSize, positionToUse);
-    }else{
-        stopRunning(neededSize);
-    };
+    }catch(int e){
+        std::cout<< "Error " << e <<std::endl;
+        abort();
+    }
 }
 
 /**

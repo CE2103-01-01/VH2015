@@ -20,64 +20,107 @@ template <class T> class vArray {
         T* operator [](int);
         T* operator [](vInt);
         int len();
-
 };
 
 #endif //VH2015_VARRAY_H
 
+/**Constructor
+ * @param int len: longitud del arreglo
+ */
 template <class T> vArray<T>::vArray(int len){
     vSize = vMalloc(sizeof(int));
     vPlacement(vSize, vInt(len));
     chunk = vMalloc((unsigned int) (sizeof(T) * len));
 }
 
+/**Destructor
+ */
 template <class T> vArray<T>::~vArray(){
     //vFree(chunk);
     //vFree(vSize);
 }
 
+/**Operador =
+ * @brief Toma los elementos de otro arreglo
+ * @return int
+ */
 template <class T> int vArray<T>::operator =(vArray<T> other){
+    //Comprueba la longitud
     if(vSize == other.len()){
+        //Itera sobre los elementos
         for(vInt i = 0; i < **vSize; i+=1){
+            //Copia el elemento
             *static_cast<T*>(*chunk + (!i)*sizeof(T)) = *(other[(!i)]);
         }
     }
+    //return 0 significa exitoso
     return 0;
 }
 
+/**Operador ==
+ * @brief Compara con otro array
+ * @return bool
+ */
 template <class T> bool vArray<T>::operator ==(vArray<T> other){
+    //Comprueba la longitud
     if(vSize == other.len()){
+        //Itera sobre los elementos
         for(vInt i = 0; i < **vSize; i+=1) {
+            //Si un elemento es diferente, retorna falso
             if(!(*static_cast<T*>(*chunk + (!i)*sizeof(T)) == *(other[(!i)]))) return false;
         }
+        //Si no encontro elementos diferentes retorna true
         return true;
     }
     return false;
 }
 
+/**Operador []: toma un elemento
+ * @int pos: posicion a tomar
+ */
 template <class T> T* vArray<T>::operator [](int pos){
+    //Comprueba el rango
     if(**vSize > pos){
+        //Retorna el dato
        return  static_cast<T*>((*chunk) + pos*sizeof(T));
     }
-    return 0;
+    //Si esta fuera de rango aborta
+    std::cout << "Error, posicion fuera de rango" << std::endl;
+    abort();
 }
 
+/**Operador []: toma un elemento
+ * @vInt pos: posicion a tomar
+ */
 template <class T> T* vArray<T>::operator [](vInt pos){
-    if(**vSize > !pos){
+    //Comprueba el rango
+    if(**vSize > pos){
+        //Retorna el dato
         return static_cast<T*>((*chunk) + !pos*sizeof(T));
     }
-    return 0;
+    //Si esta fuera de rango aborta
+    std::cout << "Error, posicion fuera de rango" << std::endl;
+    abort();
 }
 
+/**Devuelve la longitud del arreglo
+ * @return int
+ */
 template <class T> int vArray<T>::len(){
     return !**vSize;
 }
 
+/**Constructor para matriz i x j
+ * @param int i: filas
+ * @param int j: columnas
+ */
 template <class T>
 vArray<T>::vArray(int i, int j) {
     vSize = i;
     chunk = vMalloc((unsigned int) (sizeof(vArray<T>) * i));
+    //Itera sobre los elemtos
     for (int k = 0; k < i; ++k) {
+        //Construye los arrays
         vArray<T>* ptr = static_cast<vArray<T>*>((*chunk) + k*sizeof(T));
         new(ptr) vArray<T>(j);
     }
