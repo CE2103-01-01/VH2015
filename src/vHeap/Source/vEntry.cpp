@@ -51,7 +51,7 @@ vEntry::vEntry(int pIdRef, int pDataSize, void *pOffset, bool onHeapParam) {
 void vEntry::fileDown(){
     onHeap = false;
     offset = 0;
-};
+}
 
 /**@brief metodo que se ejecuta cuando una entrada se sube a memoria
  * @param void* content: nueva direccion
@@ -59,7 +59,7 @@ void vEntry::fileDown(){
 void vEntry::fileUp(void* content){
     onHeap = true;
     offset = content;
-};
+}
 
 /**@brief Devuelve la direccion de memoria
  * @return void*
@@ -127,7 +127,7 @@ void vEntry::increaseNumReferences() {
  */
 bool vEntry::isOnHeap(){
     return onHeap;
-};
+}
 
 /**@brief cambia la difeccion de memoria segun el parametro
  * @oaram void* newOffsetParam: nueva direccion
@@ -148,33 +148,25 @@ void vEntry::setOffset(void* newOffsetParam){
  */
 void vEntry::setNumRef(int numReferencesParam){
     numReferences = numReferencesParam;
-};
+}
 
 /**@brief cambia el id de referencia
  * @param int newIdRefParam: nuevo ID
  */
 void vEntry::setID(int newIdRefParam){
     idRef=newIdRefParam;
-};
+}
 
 /**@brief coloca la entrada en valor por defecto
  */
 void vEntry::setDefault(){
-    if(!(onHeap)){
-        //Si el dato no esta en el heap lo borra
-        vPager tmp;
-        tmp.deletePage(idRef);
-    };
-    //Coloca las variables en valores por defecto
-    idRef=0;
     numReferences=0;
-    offset=0;
     onHeap=false;
-};
+}
 
 /**@brief metodo que llama al metodo setDefault() de la clase vEntry
  *          se utiliza para la compatibilidad con el arbol
  */
 void setDefault(vEntry* entry, void* param){
     entry->setDefault();
-};
+}

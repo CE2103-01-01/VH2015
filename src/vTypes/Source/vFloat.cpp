@@ -19,7 +19,7 @@ vFloat::vFloat(float dataParam){
 
 //borra el dato
 vFloat::~vFloat(){
-    //vFree(data);
+ //   vFree(data);
 }
 
 //brief Devuelve el dato envuelto por la clase

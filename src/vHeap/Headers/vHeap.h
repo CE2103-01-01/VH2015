@@ -11,7 +11,6 @@ class vMetaData;
 
 class vHeap{
     bool* vDebug;
-    int* dumpFrecuency;
     static vHeap* vHeapSingleton;
     float* overweight;
     long* vSize;
@@ -19,7 +18,6 @@ class vHeap{
     void* initPos;
     void* finalPos;
     void* actualPos;
-    vMetaData* metaData;
     pthread_mutex_t* memoryMutex;
     void stopRunning(int);
 public:
@@ -44,10 +42,8 @@ public:
 /**
  * Metodo para liberar memoria
  */
-template<class T> void vHeap::vFree(vRef<T> r) {
-    pthread_mutex_lock(memoryMutex);
-    metaData->removeEntry(!r);
-    pthread_mutex_unlock(memoryMutex);
+template<class T> void vHeap::vFree(vRef<T> reference) {
+    vMetaData::getInstance()->removeEntry(!reference);
 };
 /**
  * Se usa para poner un objeto en una vRef en memoria

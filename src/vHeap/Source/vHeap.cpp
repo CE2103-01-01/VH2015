@@ -11,7 +11,6 @@ using namespace pugi;
  */
 vHeap::vHeap(){
     std::chrono::high_resolution_clock::time_point debug;
-
     xml_document doc;
     doc.load_file(Constants::xmlPath);
     overweight = static_cast<float*>(malloc(sizeof(float)));
@@ -24,10 +23,6 @@ vHeap::vHeap(){
     actualPos = mainChunk;
     initPos = mainChunk;
     finalPos = initPos+*vSize;
-
-    metaData = vMetaData::getInstance();
-    memoryMutex = metaData->getMutex();
-
     if(getVDebug()) logTime(debug, "Constructor vHeap");
 }
 
@@ -35,9 +30,9 @@ vHeap::vHeap(){
  * Libera el espacio ocupado
  */
 vHeap::~vHeap(){
+    free(vSize);
     free(overweight);
     free(mainChunk);
-    free(dumpFrecuency);
 }
 
 /**
@@ -45,11 +40,11 @@ vHeap::~vHeap(){
  */
 unsigned int vHeap::vMalloc(int neededSize) {//Analisis de algoritmos 25T
     //Bloquea memoria
-    pthread_mutex_lock(memoryMutex);
+    pthread_mutex_lock(vMetaData::getInstance()->getMutex());
     std::chrono::high_resolution_clock::time_point debug;
     if(getVDebug()) debug = startTime();
     //Revisa si se dispone del espacio requerido
-    if((*vSize)+(*vSize)*(*overweight) > (neededSize + metaData->getHeapUse())){
+    if((*vSize)+(*vSize)*(*overweight) > (neededSize + vMetaData::getInstance()->getHeapUse())){
         void* positionToUse;
         if(((actualPos + neededSize) < finalPos)){
             //Si el dato cabe en mainChunk, asigna una posicion
@@ -57,7 +52,7 @@ unsigned int vHeap::vMalloc(int neededSize) {//Analisis de algoritmos 25T
             actualPos += neededSize;
         }else{
             //Si el dato no cabe en mainChunk lo pagina
-            vEntry* toPage = metaData->searchToPage(neededSize);
+            vEntry* toPage = vMetaData::getInstance()->searchToPage(neededSize);
             vPager tmp;
             //Baja el dato, notifica a la entrada y toma la posicion
             tmp.pageDown(toPage->getOffSet(),toPage->getIdRef(),toPage->getDataSize());
@@ -66,9 +61,9 @@ unsigned int vHeap::vMalloc(int neededSize) {//Analisis de algoritmos 25T
         };
         if(getVDebug()) logTime(debug, "vMalloc");
         //Desbloquea mutex
-        pthread_mutex_unlock(memoryMutex);
+        pthread_mutex_unlock(vMetaData::getInstance()->getMutex());
         //addEntry devuelve un numero de referencia
-        return metaData->addEntry(neededSize, positionToUse);
+        return vMetaData::getInstance()->addEntry(neededSize, positionToUse);
     }else{
         stopRunning(neededSize);
     };
@@ -81,7 +76,7 @@ unsigned int vHeap::vCalloc(int neededSize) {
     //Realiza un vMalloc
     unsigned int idToReturn = vMalloc(neededSize);
     //Limpia la memoria
-    metaData->cleanChunk(neededSize,metaData->de_vReference(idToReturn));
+    vMetaData::getInstance()->cleanChunk(neededSize,vMetaData::getInstance()->de_vReference(idToReturn));
     //Retorna el id
     return idToReturn;
 }
@@ -93,9 +88,9 @@ vHeap* vHeap::vHeapSingleton = 0;
  * Se libera la memoria
  */
 void vHeap::vFree(unsigned int idRef) {//4T
-    pthread_mutex_lock(memoryMutex);
-    metaData->removeEntry(idRef);
-    pthread_mutex_unlock(memoryMutex);;
+    pthread_mutex_lock(vMetaData::getInstance()->getMutex());
+    vMetaData::getInstance()->removeEntry(idRef);
+    pthread_mutex_unlock(vMetaData::getInstance()->getMutex());;
 }
 
 /**
@@ -113,14 +108,14 @@ vHeap *vHeap::getInstance() {
  */
 void* vHeap::de_vReference(int id) {//T(7+6i)
     //Llama al metodo de desreferenciar de metadata, el cual devuelve void*
-    return metaData->de_vReference(id);
+    return vMetaData::getInstance()->de_vReference(id);
 }
 
 /**
  * Se disminuye el numer de referencias de un vRef
  */
 int vHeap::removeVRef(int idRef) {
-    metaData->decreaseReference((unsigned int) idRef);
+    vMetaData::getInstance()->decreaseReference((unsigned int) idRef);
     return 0;
 }
 
@@ -128,7 +123,7 @@ int vHeap::removeVRef(int idRef) {
  * Aumenta el numero de referencias de un vRef
  */
 int vHeap::addVRef(int idRef) {
-    metaData->increaseReference((unsigned int) idRef);
+    vMetaData::getInstance()->increaseReference((unsigned int) idRef);
     return 0;
 }
 
@@ -143,7 +138,7 @@ bool vHeap::getVDebug() {
  * return long
  */
 long vHeap::getUse(){
-    return metaData->getHeapUse();
+    return vMetaData::getInstance()->getHeapUse();
 }
 
 /** Cambia la posicion actual
@@ -180,7 +175,7 @@ void* vHeap::getFinalPos(){
 void vHeap::stopRunning(int neededSize) {
     std::cout << "vHeap esta lleno" << std::endl;
     std::cout << "Capacidad maxima en Bytes: "<< (*vSize) + (*vSize)*(*overweight) <<std::endl;
-    std::cout << "Capacidad utilizada en Bytes: "<< metaData->getHeapUse()  << std::endl;
+    std::cout << "Capacidad utilizada en Bytes: "<< vMetaData::getInstance()->getHeapUse()  << std::endl;
     std::cout << "Capacidad solicitada en Bytes: "<< neededSize << std::endl;
     std::cout << "Se abortara el programa"<< std::endl;
     abort();
