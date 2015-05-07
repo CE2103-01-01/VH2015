@@ -43,6 +43,7 @@ void Dump::changeDumppingState(){
 /**Guarda un archivo de dump
  */
 void Dump::saveDumpFile() {
+
     std::ofstream myfile(Constants::DUMPS_PATH);
     Tree<vEntry>* tree = vMetaData::getInstance()->getMemoryTree();
     xml_document doc;
@@ -53,7 +54,8 @@ void Dump::saveDumpFile() {
     for(int i=1; i<tree->max(); i++){
         try{
             vEntry* entry = (static_cast<vEntry*>(tree->searchElement(i)));
-            if(entry->getIdRef()!=0) {
+
+            if(entry->getNumReferences()!=0) {
                 myfile << "The file is on heap: " << entry->isOnHeap() << "\n";
                 myfile << "Memory direction: " << entry->getOffSet() << "\n";
                 myfile << "Size of data containing: " << entry->getDataSize() << "\n";

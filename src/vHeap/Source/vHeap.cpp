@@ -17,7 +17,7 @@ vHeap::vHeap(){
     overweight = static_cast<float*>(malloc(sizeof(float)));
     *overweight = doc.child(Constants::PROJECT_NAME).child(Constants::V_HEAP).attribute("overweight").as_float();
     vSize = static_cast<long*>(malloc(sizeof(long)));
-    *vSize = doc.child(Constants::PROJECT_NAME).child(Constants::V_HEAP).attribute("size").as_int();
+    *vSize = doc.child(Constants::PROJECT_NAME).child(Constants::V_HEAP).attribute("size").as_int()*1024*1024;
     vDebug = static_cast<bool*>(malloc(sizeof(bool)));
     *vDebug = doc.child(Constants::PROJECT_NAME).child("vDebug").attribute("activo").as_bool();
     mainChunk = malloc(*vSize);

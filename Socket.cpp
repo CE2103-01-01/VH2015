@@ -16,8 +16,6 @@ void *connection_handler(void *socket_desc)
     Document document;
     const char* json = "{\"TotalSize\":\"0\",\"UseSize\":0}";
     document.Parse<0>(json);
-    rapidjson::Value& s = document["TotalSize"];
-    s.SetInt(vHeap::getInstance()->getSize());
 
     while( (read_size = recv(sock , client_message , 2000 , 0)) > 0 )
     {
@@ -25,6 +23,8 @@ void *connection_handler(void *socket_desc)
         client_message[read_size] = '\0';
         rapidjson::Value& j = document["UseSize"];
         j.SetInt(vHeap::getInstance()->getUse());
+        rapidjson::Value& s = document["TotalSize"];
+        s.SetInt(vHeap::getInstance()->getSize());
         rapidjson::StringBuffer buffer;
         Writer<StringBuffer> writer(buffer);
         document.Accept(writer);

@@ -84,8 +84,8 @@ template <class vType, class TypeToCastIndex> void prueba_vType_con_vArray(int c
 /** Inicia las pruebas
  */
 void begin(){
-    pruebaTree();
-    prueba_vType_con_vArray<vInt, int>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
+    //pruebaTree();
+    //prueba_vType_con_vArray<vInt, int>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
     prueba_vType_con_vArray<vFloat, float>(SIZE_OF_ARRAY_AND_LIST, FLOAT_OFFSET);
     prueba_vType_con_vArray<vLong, long>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
     prueba_vType_con_vArray<vChar, char>(SIZE_OF_CHAR_ARRAY, FIRST_ASCII_CHAR);
