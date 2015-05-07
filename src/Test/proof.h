@@ -26,9 +26,6 @@
 #define NUMBER_OF_CONTAINERS_TO_FILL 10000
 
 void pruebaTree();
-void pruebaPager();
-void pruebaSimpleList();
-void pruebaDoubleList();
 void pruebaString();
 template <class A, class B> void prueba_vType_con_vArray(int cantidadDeElementos);
 void begin();

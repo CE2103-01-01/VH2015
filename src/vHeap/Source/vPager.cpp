@@ -28,7 +28,7 @@ void vPager::pageDown(void *data, int id, int dSize) {
  * @param: int retSize: tamaño del dato
  * @brief carga una pagina formato ".celdmm"
  */
-void vPager::pageUp(void *ret, int id, int retSize) {//T(11+6i)
+void vPager::pageUp(void *ret, int id) {//T(11+6i)
     std::string path = Constants::PAGES_PATH;
     path.append(std::to_string(id));
     path.append(Constants::PAGER_EXTENSION);
@@ -47,3 +47,16 @@ void vPager::deletePage(int id){
     path.append(Constants::PAGER_EXTENSION);
     remove(path.c_str());
 };
+
+/** Borra las paginas creadas
+ */
+void vPager::clean(){
+    DIR* pagesFolder;
+    pagesFolder = opendir(Constants::PAGES_PATH.c_str());
+    struct dirent* nextFile;
+    char path[256];
+    while(nextFile = readdir(pagesFolder)){
+        sprintf(path,"%s%s", Constants::PAGES_PATH.c_str(), nextFile->d_name);
+        remove(path);
+    }
+}

@@ -29,5 +29,9 @@ int main() {
     free(dumpThread);
     free(dumpObject);
     free(defragmenterObject);
+    //Limpia folder de paginas
+
+    vPager::clean();
+
     return 0;
 }

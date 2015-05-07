@@ -90,8 +90,6 @@ void begin(){
     prueba_vType_con_vArray<vLong, long>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
     prueba_vType_con_vArray<vChar, char>(SIZE_OF_CHAR_ARRAY, FIRST_ASCII_CHAR);
     pruebaString();
-    //pruebaSimpleList();
-    //pruebaDoubleList();
     std::cout << "FIN DE LAS PRUEBAS, PARA INICIAR EL JUEGO PRESIONE ENTER" << std::endl;
     std::cin.get();
 }

@@ -164,7 +164,7 @@ void* vMetaData::de_vReference(int id) {
         //Notifica a la entrada que se bajo la pagina
         toPage->fileDown();
         //Se sube la pagina y se notifica a la entrada
-        tmp.pageUp(content,toPage->getIdRef(),toPage->getDataSize());
+        tmp.pageUp(content,toPage->getIdRef());
         entry->fileUp(content);
     };
     //Desbloquea el mutex
