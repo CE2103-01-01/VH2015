@@ -73,11 +73,16 @@ public:
     int len();
 };
 
+/**@brief: Constructor
+ */
 template <class T> vSimpleList<T>::vSimpleList(){
     m_len = 0;
     m_head = 0;
 }
 
+/**@brief: Agrega un dato
+ * @oaram T data: elemento a insertar
+ */
 template <class T> void vSimpleList<T>::operator +(T data){
     if(!m_head != 0){
         vRef<vSimpleNode<T>> tmp = m_head;
@@ -94,6 +99,9 @@ template <class T> void vSimpleList<T>::operator +(T data){
     }
 }
 
+/**@brief: Borra un dato
+ * @oaram T data: elemento a borrar
+ */
 template <class T> void vSimpleList<T>::operator -(T data){
     if(!**m_head != data){
         vRef<vSimpleNode<T>> tmp = m_head;
@@ -120,6 +128,9 @@ template <class T> void vSimpleList<T>::operator -(T data){
     }
 }
 
+/**@brief: devuelve el dato de la posicion indicada
+ * @param int pos: posicion
+ */
 template <class T> T vSimpleList<T>::operator [](int pos){
     vRef<vSimpleNode<T>> tmp = m_head;
     if(pos < m_len){
@@ -130,6 +141,10 @@ template <class T> T vSimpleList<T>::operator [](int pos){
     return !**tmp;
 }
 
+/**@brief inserta un dato en la posicion indicada
+ * @param int pos: posicion
+ * @param T data: dato a insertar
+ */
 template <class T> void vSimpleList<T>:: setPos(int pos, T data){
     if(pos < m_len){
         vRef<vSimpleNode<T>> tmp = m_head;
@@ -140,6 +155,8 @@ template <class T> void vSimpleList<T>:: setPos(int pos, T data){
     }
 }
 
+/**@brief: elimina todos los datos
+ */
 template <class T> void vSimpleList<T>::operator --(){
     while(!m_head != 0) {
         vRef<vSimpleNode<T>> tmp = m_head;
@@ -149,6 +166,9 @@ template <class T> void vSimpleList<T>::operator --(){
     m_len = 0;
 }
 
+/**@brief: Devuelve la longitud
+ * @return int
+ */
 template <class T> int vSimpleList<T>::len(){
     return m_len;
 }
