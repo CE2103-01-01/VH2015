@@ -167,6 +167,10 @@ vMetaData* vMetaData::getInstance() {
  * Busca la entrada con el id indicado y extrae el dato, si esta paginada la sube
  */
 void* vMetaData::de_vReference(int id) {
+    if (id == 0) {
+        std::cout << "Null Pointer exception" << std::endl;
+        abort();
+    }
     try{
         std::chrono::high_resolution_clock::time_point debug;
         if(getVDebug()) debug = startTime();

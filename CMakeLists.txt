@@ -58,3 +58,5 @@ add_executable(VH2015 ${HEADERS_FILES} ${SOURCE_FILES} ${RES_FILES} libs/rapidjs
 
 target_link_libraries (VH2015 ${CMAKE_THREAD_LIBS_INIT})
 include_directories(res)
+
+#add_subdirectory(Memory\ Visor)
