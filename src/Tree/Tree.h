@@ -135,7 +135,7 @@ template <class T> T* Tree<T>::searchAndDo(int indexToSearch, void method(T*, vo
  * @brief: calcula la ruta al indice recibido e inserta el dato
  */
 template <class T> void Tree<T>::insertElement(T param, int index){
-    if((*len) < max(*floors)){
+    if((*len) < max(*floors) && index <= max(*floors)){
         T* container = searchElement(index);
         *container = param;
         (*len)++;

@@ -69,27 +69,31 @@ void pruebaTree(){
  * @param int cantidadDeElementos: elementos a insertar
  * @param float offset: numero que se suma al indice del for
  */
-template <class vType, class TypeToCastIndex> void prueba_vType_con_vArray(int cantidadDeElementos, float offset){
-    vRef<vArray<vType>> referenciaAlArregloDePrueba = vMalloc(sizeof(vArray<vType>));
-    vPlacement(referenciaAlArregloDePrueba,vArray<vType>(cantidadDeElementos));
+template <class TypeToCast> void prueba_vNumber_con_vArray(int cantidadDeElementos, float offset){
+    vRef<vArray<vNumber<TypeToCast>>> referenciaAlArregloDePrueba = vMalloc(sizeof(vArray<vNumber<TypeToCast>>));
+    vPlacement(referenciaAlArregloDePrueba,vArray<vNumber<TypeToCast>>(cantidadDeElementos));
     std::cout << "SE PROBARA UN vTYPE, SE INSERTARAN " << cantidadDeElementos << " ELEMENTOS" <<
             " EN UN vARRAY SE IMPRIMIRA, PRESIONE ENTER" << std::endl;
     std::cin.get();
-    for(int i = 0; i<cantidadDeElementos; i++)  *(**referenciaAlArregloDePrueba)[i] = vType((TypeToCastIndex)i+offset);
-    for(int i = 0; i<cantidadDeElementos; i++) std::cout<<!*(**referenciaAlArregloDePrueba)[i]<<std::endl;
+    for(int i = 0; i<cantidadDeElementos; i++){
+        *(**referenciaAlArregloDePrueba)[i] = (TypeToCast)(i+offset);
+    }
+    for(int i = 0; i<cantidadDeElementos; i++) {
+        std::cout<< !*(**referenciaAlArregloDePrueba)[i]<<std::endl;
+    }
     std::cout << "FIN DE LA PRUEBA, PARA CONTINUAR PRESIONE ENTER" << std::endl;
     std::cin.get();
-}
+};
 
 /** Inicia las pruebas
  */
 void begin(){
-    pruebaTree();
-    prueba_vType_con_vArray<vInt, int>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
-    prueba_vType_con_vArray<vFloat, float>(SIZE_OF_ARRAY_AND_LIST, FLOAT_OFFSET);
-    prueba_vType_con_vArray<vLong, long>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
-    prueba_vType_con_vArray<vChar, char>(SIZE_OF_CHAR_ARRAY, FIRST_ASCII_CHAR);
-    pruebaString();
+    //pruebaTree();
+    prueba_vNumber_con_vArray<int>(SIZE_OF_ARRAY_AND_LIST, NULL_OFFSET);
+    prueba_vNumber_con_vArray<float>(SIZE_OF_ARRAY_AND_LIST, FLOAT_OFFSET);
+    prueba_vNumber_con_vArray<long>(SIZE_OF_ARRAY_AND_LIST, LONG_OFFSET);
+    prueba_vNumber_con_vArray<char>(SIZE_OF_CHAR_ARRAY, FIRST_ASCII_CHAR);
+    //pruebaString();
     std::cout << "FIN DE LAS PRUEBAS, PARA INICIAR EL JUEGO PRESIONE ENTER" << std::endl;
     std::cin.get();
 }

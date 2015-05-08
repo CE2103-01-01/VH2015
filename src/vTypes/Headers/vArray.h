@@ -6,10 +6,10 @@
 #define VH2015_VARRAY_H
 #include "../libs/vheaplib.h"
 #include "vHeap/Headers/vRef.h"
-#include "vTypes/Headers/vInt.h"
+#include "vTypes/Headers/vNumber.h"
 
 template <class T> class vArray {
-    vRef<vInt> vSize;
+    vRef<long> vSize;
     vRef<void> chunk;
     public:
         vArray(int,int);
@@ -17,9 +17,8 @@ template <class T> class vArray {
         ~vArray();
         int operator =(vArray);
         bool operator ==(vArray);
-        T* operator [](int);
-        T* operator [](vInt);
-        int len();
+        T* operator [](long);
+        long len();
 };
 
 /**Constructor
@@ -27,7 +26,7 @@ template <class T> class vArray {
  */
 template <class T> vArray<T>::vArray(int len){
     vSize = vMalloc(sizeof(int));
-    vPlacement(vSize, vInt(len));
+    vPlacement(vSize, long(len));
     chunk = vMalloc((unsigned int) (sizeof(T) * len));
 }
 
@@ -46,7 +45,7 @@ template <class T> int vArray<T>::operator =(vArray<T> other){
     //Comprueba la longitud
     if(vSize == other.len()){
         //Itera sobre los elementos
-        for(vInt i = 0; i < **vSize; i+=1){
+        for(long i = 0; i < **vSize; i+=1){
             //Copia el elemento
             *static_cast<T*>(*chunk + (!i)*sizeof(T)) = *(other[(!i)]);
         }
@@ -63,7 +62,7 @@ template <class T> bool vArray<T>::operator ==(vArray<T> other){
     //Comprueba la longitud
     if(vSize == other.len()){
         //Itera sobre los elementos
-        for(vInt i = 0; i < **vSize; i+=1) {
+        for(long i = 0; i < **vSize; i+=1) {
             //Si un elemento es diferente, retorna falso
             if(!(*static_cast<T*>(*chunk + (!i)*sizeof(T)) == *(other[(!i)]))) return false;
         }
@@ -74,9 +73,9 @@ template <class T> bool vArray<T>::operator ==(vArray<T> other){
 }
 
 /**Operador []: toma un elemento
- * @int pos: posicion a tomar
+ * @long pos: posicion a tomar
  */
-template <class T> T* vArray<T>::operator [](int pos){
+template <class T> T* vArray<T>::operator [](long pos){
     //Comprueba el rango
     if(**vSize > pos){
         //Retorna el dato
@@ -87,24 +86,10 @@ template <class T> T* vArray<T>::operator [](int pos){
     abort();
 }
 
-/**Operador []: toma un elemento
- * @vInt pos: posicion a tomar
- */
-template <class T> T* vArray<T>::operator [](vInt pos){
-    //Comprueba el rango
-    if(**vSize > pos){
-        //Retorna el dato
-        return static_cast<T*>((*chunk) + !pos*sizeof(T));
-    }
-    //Si esta fuera de rango aborta
-    std::cout << "Error, posicion fuera de rango" << std::endl;
-    abort();
-}
-
 /**Devuelve la longitud del arreglo
  * @return int
  */
-template <class T> int vArray<T>::len(){
+template <class T> long vArray<T>::len(){
     return !**vSize;
 }
 

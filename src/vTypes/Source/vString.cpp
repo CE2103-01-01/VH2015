@@ -17,7 +17,7 @@ void vString::operator +=(vString str){
     for(int i=0; i < !str.len(); i++) (word) + !(str[i]);
 };
 
-void vString::operator +=(vChar chr){
+void vString::operator +=(vNumber<char> chr){
     (word) + !chr;
 };
 

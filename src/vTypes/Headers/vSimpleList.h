@@ -9,7 +9,7 @@
 #include <stddef.h>
 #include <iostream>
 #include "../libs/vheaplib.h"
-#include "vInt.h"
+#include "vNumber.h"
 
 template <class T>
 class vSimpleNode{

@@ -10,15 +10,14 @@ set(SOURCE_FILES    src/vHeap/Source/vHeap.cpp
                     src/vHeap/Source/vDefragmenter.cpp
                     src/vHeap/Source/vPager.cpp
                     src/vHeap/Source/Dump.cpp
+                    src/vHeap/Source/vCleaner.cpp
                     libs/pugixml.cpp
                     libs/vheaplib.cpp
                     libs/vheaplibpp.cpp
-                    src/vTypes/Source/vInt.cpp
                     src/vTypes/Source/vString.cpp
-                    src/vTypes/Source/vChar.cpp
-                    src/vTypes/Source/vFloat.cpp
-                    src/vHeap/Source/Dump.cpp
-                    src/vTypes/Source/vLong.cpp
+                    src/Test/Source/proof.cpp src/Tree/Leaf.cpp
+                    src/Constants.cpp
+                    src/Socket/Socket.cpp
                     main.cpp
                                                                    )
 
@@ -31,6 +30,7 @@ set(HEADERS_FILES
                     src/vHeap/Headers/vDefragmenter.h
                     src/vHeap/Headers/vPager.h
                     src/vHeap/Headers/Dump.h
+                    src/vHeap/Headers/vCleaner.h
                     libs/pugiconfig.hpp
                     libs/pugixml.hpp
                     libs/vheaplib.h
@@ -40,13 +40,16 @@ set(HEADERS_FILES
                     src/vTypes/Headers/vList.h
                     src/vTypes/Headers/vString.h
                     src/vTypes/Headers/vDoubleList.h
-                    src/vTypes/Headers/vInt.h
-                    src/vTypes/Headers/vChar.h
-                    src/vTypes/Headers/vFloat.h
-                    src/vTypes/Headers/vLong.h
                     src/vTypes/Headers/vArray.h
                     src/vTypes/Headers/vBinaryTree.h
-                    src/vTypes/Headers/vSimpleList.h)
+                    src/vTypes/Headers/vSimpleList.h
+                    src/vTypes/Headers/vNumber.h
+                    src/Tree/Leaf.h
+                    src/Tree/Tree.h
+                    src/Test/Headers/proof.h
+                    src/Test/Headers/Ship.h
+                    src/Socket/Socket.h
+                    src/Constants.h)
 
 file(GLOB RES_FILES res/book.txt
                     res/vHeap.xml)
@@ -54,7 +57,7 @@ file(GLOB RES_FILES res/book.txt
 file(COPY ${RES_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 include_directories(src res libs)
 find_package (Threads)
-add_executable(VH2015 ${HEADERS_FILES} ${SOURCE_FILES} ${RES_FILES} libs/rapidjson/internal/pow10.h libs/rapidjson/internal/stack.h libs/rapidjson/internal/strfunc.h libs/rapidjson/document.h libs/rapidjson/filestream.h libs/rapidjson/prettywriter.h libs/rapidjson/rapidjson.h libs/rapidjson/reader.h libs/rapidjson/stringbuffer.h libs/rapidjson/writer.h src/Test/Headers/proof.h src/Test/Source/proof.cpp src/vTypes/Headers/vDoubleList.h src/Tree/Tree.h src/Test/Headers/Ship.h src/Constants.cpp src/Constants.h src/Tree/Leaf.cpp src/Tree/Leaf.h src/Socket/Socket.h src/Socket/Socket.cpp src/vHeap/Source/vCleaner.cpp src/vHeap/Headers/vCleaner.h)
+add_executable(VH2015 ${HEADERS_FILES} ${SOURCE_FILES} ${RES_FILES} libs/rapidjson/internal/pow10.h libs/rapidjson/internal/stack.h libs/rapidjson/internal/strfunc.h libs/rapidjson/document.h libs/rapidjson/filestream.h libs/rapidjson/prettywriter.h libs/rapidjson/rapidjson.h libs/rapidjson/reader.h libs/rapidjson/stringbuffer.h libs/rapidjson/writer.h)
 
 target_link_libraries (VH2015 ${CMAKE_THREAD_LIBS_INIT})
 include_directories(res)

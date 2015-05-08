@@ -7,7 +7,6 @@
 #define _VH2015_VSTRING_H_
 
 #include "vSimpleList.h"
-#include "vChar.h"
 #include <iostream>
 
 class vString{
@@ -21,7 +20,7 @@ class vString{
         void operator =(vString);
         void operator +=(std::string);
         void operator +=(vString);
-        void operator +=(vChar);
+        void operator +=(vNumber<char>);
         void operator +=(char);
         void operator --();
         char operator [](int);
