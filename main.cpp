@@ -22,8 +22,8 @@ int main() {
     pthread_create(static_cast<pthread_t*>(dumpThread),0,dump,dumpObject);
 
     //Se ejecuta la prueba
-    play();
     begin();
+    //play();
 
     //Se libera el espacio utilizado
     free(socketThread);

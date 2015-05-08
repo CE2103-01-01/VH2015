@@ -70,16 +70,15 @@ void pruebaTree(){
  * @param float offset: numero que se suma al indice del for
  */
 template <class TypeToCast> void prueba_vNumber_con_vArray(int cantidadDeElementos, float offset){
-    vRef<vArray<vNumber<TypeToCast>>> referenciaAlArregloDePrueba = vMalloc(sizeof(vArray<vNumber<TypeToCast>>));
-    vPlacement(referenciaAlArregloDePrueba,vArray<vNumber<TypeToCast>>(cantidadDeElementos));
+    vArray<vNumber<TypeToCast>> arreglo = vArray<vNumber<TypeToCast>>(cantidadDeElementos);
     std::cout << "SE PROBARA UN vTYPE, SE INSERTARAN " << cantidadDeElementos << " ELEMENTOS" <<
             " EN UN vARRAY SE IMPRIMIRA, PRESIONE ENTER" << std::endl;
     std::cin.get();
     for(int i = 0; i<cantidadDeElementos; i++){
-        *(**referenciaAlArregloDePrueba)[i] = (TypeToCast)(i+offset);
+        *(arreglo[i]) = (TypeToCast)(i+offset);
     }
     for(int i = 0; i<cantidadDeElementos; i++) {
-        std::cout<< !*(**referenciaAlArregloDePrueba)[i]<<std::endl;
+        std::cout<< !*(arreglo[i])<<std::endl;
     }
     std::cout << "FIN DE LA PRUEBA, PARA CONTINUAR PRESIONE ENTER" << std::endl;
     std::cin.get();

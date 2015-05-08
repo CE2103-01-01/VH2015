@@ -9,11 +9,12 @@
 #include "vTypes/Headers/vNumber.h"
 
 template <class T> class vArray {
-    vRef<long> vSize;
+    vNumber<long> vSize;
     vRef<void> chunk;
     public:
+        vArray(const vArray<T>& other);
         vArray(long,long);
-        vArray(int);
+        vArray(long);
         ~vArray();
         int operator =(vArray);
         bool operator ==(vArray);
@@ -24,17 +25,32 @@ template <class T> class vArray {
 /**Constructor
  * @param int len: longitud del arreglo
  */
-template <class T> vArray<T>::vArray(int len){
-    vSize = vMalloc(sizeof(int));
-    vPlacement(vSize, long(len));
+template <class T> vArray<T>::vArray(long len){
+    vSize = len;
     chunk = vMalloc((unsigned int) (sizeof(T) * len));
+}
+
+/**Operador =
+ * @brief Toma los elementos de otro arreglo
+ * @return int
+ */
+template <class T> vArray<T>::vArray(const vArray<T>& other){
+    vNumber<long> tmpSize = other.vSize;
+    vSize = tmpSize;
+    chunk = vMalloc((unsigned int) (sizeof(T) * !vSize));
+    //Itera sobre los elementos
+    for(long i = 0; vSize > i; i++){
+        //Copia el elemento
+        vRef<void> tmpChunk = other.chunk;
+        T data = *static_cast<T*>(*tmpChunk + (i)*sizeof(T));
+        *static_cast<T*>(*chunk + (i)*sizeof(T)) = data;
+    }
 }
 
 /**Destructor
  */
 template <class T> vArray<T>::~vArray(){
-    //vFree(chunk);
-    //vFree(vSize);
+    vFree(chunk);
 }
 
 /**Operador =
@@ -45,9 +61,9 @@ template <class T> int vArray<T>::operator =(vArray<T> other){
     //Comprueba la longitud
     if(vSize == other.len()){
         //Itera sobre los elementos
-        for(long i = 0; i < **vSize; i+=1){
+        for(long i = 0; vSize > i; i++){
             //Copia el elemento
-            *static_cast<T*>(*chunk + (!i)*sizeof(T)) = *(other[(!i)]);
+            *static_cast<T*>(*chunk + (i)*sizeof(T)) = *(other[(i)]);
         }
     }
     //return 0 significa exitoso
@@ -62,9 +78,9 @@ template <class T> bool vArray<T>::operator ==(vArray<T> other){
     //Comprueba la longitud
     if(vSize == other.len()){
         //Itera sobre los elementos
-        for(long i = 0; i < **vSize; i+=1) {
+        for(long i = 0; vSize > i ; i+=1) {
             //Si un elemento es diferente, retorna falso
-            if(!(*static_cast<T*>(*chunk + (!i)*sizeof(T)) == *(other[(!i)]))) return false;
+            if(!(*static_cast<T*>(*chunk + (i)*sizeof(T)) == *(other[(i)]))) return false;
         }
         //Si no encontro elementos diferentes retorna true
         return true;
@@ -77,7 +93,7 @@ template <class T> bool vArray<T>::operator ==(vArray<T> other){
  */
 template <class T> T* vArray<T>::operator [](long pos){
     //Comprueba el rango
-    if(**vSize > pos){
+    if(vSize > pos){
         //Retorna el dato
        return  static_cast<T*>((*chunk) + pos*sizeof(T));
     }
@@ -90,7 +106,7 @@ template <class T> T* vArray<T>::operator [](long pos){
  * @return int
  */
 template <class T> long vArray<T>::len(){
-    return !**vSize;
+    return !vSize;
 }
 
 /**Constructor para matriz i x j
@@ -99,8 +115,7 @@ template <class T> long vArray<T>::len(){
  */
 template <class T>
 vArray<T>::vArray(long i, long j) {
-    vSize = vMalloc(sizeof(int));
-    vPlacement(vSize, i);
+    vSize = i;
     chunk = vMalloc((unsigned int) (sizeof(vArray<T>) * i));
     //Itera sobre los elemtos
     for (int k = 0; k < i; ++k) {
