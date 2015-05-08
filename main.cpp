@@ -23,7 +23,7 @@ int main() {
 
     //Se ejecuta la prueba
     begin();
-    //play();
+    play();
 
     //Se libera el espacio utilizado
     free(socketThread);
