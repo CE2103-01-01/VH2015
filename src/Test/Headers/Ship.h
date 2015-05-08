@@ -6,6 +6,8 @@
 #define VH2015_SHIP_H
 #include <iostream>
 #include <ctime>
+#include <vTypes/Headers/vArray.h>
+
 using namespace std;
 
 const int rows = 10;

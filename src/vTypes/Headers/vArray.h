@@ -22,8 +22,6 @@ template <class T> class vArray {
         int len();
 };
 
-#endif //VH2015_VARRAY_H
-
 /**Constructor
  * @param int len: longitud del arreglo
  */
@@ -125,3 +123,6 @@ vArray<T>::vArray(int i, int j) {
         new(ptr) vArray<T>(j);
     }
 }
+
+
+#endif //VH2015_VARRAY_H

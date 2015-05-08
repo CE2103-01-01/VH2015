@@ -1,3 +1,4 @@
+#include <Test/Headers/Ship.h>
 #include "Socket/Socket.h"
 #include "Test/Headers/proof.h"
 #include "vHeap/Headers/vCleaner.h"
@@ -22,7 +23,7 @@ int main() {
 
     //Se ejecuta la prueba
     begin();
-    //play();
+    play();
 
     //Se libera el espacio utilizado
     free(socketThread);
