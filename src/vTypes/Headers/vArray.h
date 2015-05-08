@@ -12,7 +12,7 @@ template <class T> class vArray {
     vRef<long> vSize;
     vRef<void> chunk;
     public:
-        vArray(int,int);
+        vArray(long,long);
         vArray(int);
         ~vArray();
         int operator =(vArray);
@@ -98,9 +98,9 @@ template <class T> long vArray<T>::len(){
  * @param int j: columnas
  */
 template <class T>
-vArray<T>::vArray(int i, int j) {
+vArray<T>::vArray(long i, long j) {
     vSize = vMalloc(sizeof(int));
-    vPlacement(vSize, vInt(i));
+    vPlacement(vSize, i);
     chunk = vMalloc((unsigned int) (sizeof(vArray<T>) * i));
     //Itera sobre los elemtos
     for (int k = 0; k < i; ++k) {
