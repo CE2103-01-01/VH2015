@@ -99,7 +99,8 @@ template <class T> long vArray<T>::len(){
  */
 template <class T>
 vArray<T>::vArray(int i, int j) {
-    vSize = i;
+    vSize = vMalloc(sizeof(int));
+    vPlacement(vSize, vInt(i));
     chunk = vMalloc((unsigned int) (sizeof(vArray<T>) * i));
     //Itera sobre los elemtos
     for (int k = 0; k < i; ++k) {

@@ -10,11 +10,8 @@
 
 using namespace std;
 
-const int rows = 10;
-const int elements = 10;
-
-int maxships = 10;
-
+int rows = 10;
+int elements = 10;
 vArray<vArray<int>> matrix = vArray<vArray<int>>(rows, elements);
 
 void Clear()
@@ -71,7 +68,7 @@ void SetShips()
 {
     int s = 0;
     cout<<"CheatMode activated"<<endl;
-    while(s < maxships)
+    while(s < elements*rows*0.5)
     {
         int x = rand() % rows;
         int y = rand() % elements;
@@ -98,16 +95,20 @@ bool Attack(int x,int y)
 
 int play() {
     srand(time(NULL));
+    cout << "Please input matrix number of rows: ";
+    cin >> rows;
+    cout << "Please input matrix number of columns: ";
+    cin >> elements;
     Clear();
     SetShips();
     int pos1, pos2;
-    char prompt;
+    char prompt = 0;
     while (prompt!='y') {
         try{
             Show(false);
-            cout << "Please input X location";
+            cout << "Please input X location: ";
             cin >> pos1;
-            cout << "Please input Y location";
+            cout << "Please input Y location: ";
             cin >> pos2;
             if (Attack(pos1, pos2))
                 cout << "You got me! :)" << endl;
