@@ -1,6 +1,4 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include<QString>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,11 +12,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
              socket.doConnect(address.toString());
     }
-
-
-
-
-
 }
 
 MainWindow::~MainWindow()

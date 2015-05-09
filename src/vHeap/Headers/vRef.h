@@ -47,7 +47,7 @@ vRef<T>::vRef() {
 
 template<class T>
 vRef<T>::~vRef() {
-  //   vMetaData::getInstance()->decreaseReference((unsigned int) referenceID); // disminuye contador de referencias
+     vMetaData::getInstance()->decreaseReference((unsigned int) referenceID); // disminuye contador de referencias
 }
 
 template<class T>

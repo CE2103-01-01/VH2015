@@ -4,9 +4,11 @@
 #include <QMainWindow>
 #include<QtNetwork>
 #include<QTimer>
-#include"qcustomplot.h"
+#include "qcustomplot.h"
 #include <QList>
 #include "mytcpsocket.h"
+#include "ui_mainwindow.h"
+#include<QString>
 
 namespace Ui {
 class MainWindow;
