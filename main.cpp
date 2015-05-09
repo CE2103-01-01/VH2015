@@ -19,8 +19,8 @@ int main() {
     new(static_cast<Dump*>(dumpObject)) Dump();
     //Se inicializan los pthreads
     pthread_create(static_cast<pthread_t*>(socketThread),0,&startSocket,0);
-    pthread_create(static_cast<pthread_t*>(defragmenterThread),0,vDefragmentThread,defragmenterObject);
-    pthread_create(static_cast<pthread_t*>(dumpThread),0,dump,dumpObject);
+   // pthread_create(static_cast<pthread_t*>(defragmenterThread),0,vDefragmentThread,defragmenterObject);
+   // pthread_create(static_cast<pthread_t*>(dumpThread),0,dump,dumpObject);
 
     //Se ejecuta la prueba
     createVDoubleList();

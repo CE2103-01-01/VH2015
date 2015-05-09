@@ -97,15 +97,15 @@ void createVDoubleList() {
                 *palabras[i+offset] = *(tmpLine+i);
             }
             offset+=tmpOffset;
-            std::cout << offset << std::endl;
         }
         myFile.close();
     }else{
         cout << readError;
     }
     for(int i = 0; i<palabras.len(); i++){
-        std::cout << !*palabras[i] << std::endl;
+        std::cout << !*palabras[i];
     }
+    std::cout << std::endl;
 }
 
 void createVSimpleList(){
