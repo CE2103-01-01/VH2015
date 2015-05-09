@@ -11,7 +11,6 @@
 #include "../../vTypes/Headers/vSimpleList.h"
 #include "../../vTypes/Headers/vDoubleList.h"
 #include "../../vTypes/Headers/vNumber.h"
-#include "../../vTypes/Headers/vBinaryTree.h"
 #include "../../vHeap/Headers/vPager.h"
 #include "../../Tree/Tree.h"
 

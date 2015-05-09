@@ -8,6 +8,8 @@
 #include "../libs/pugixml.hpp"
 #include "vMetaData.h"
 #include <sstream>
+#include <sys/stat.h>
+#include <Constants.h>
 
 class Dump {
     int* frecuency;

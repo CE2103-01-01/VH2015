@@ -1,9 +1,12 @@
 #include <Test/Headers/Ship.h>
+#include <Test/Headers/TestApplication.h>
 #include "Socket/Socket.h"
 #include "Test/Headers/proof.h"
 #include "vHeap/Headers/vCleaner.h"
 
 int main() {
+
+    start("vDoubleList");
     //Se inicializa vHeap
     //Se reserva memoria para los pthreads
     void* socketThread =  malloc(sizeof(pthread_t));
@@ -22,8 +25,8 @@ int main() {
     pthread_create(static_cast<pthread_t*>(dumpThread),0,dump,dumpObject);
 
     //Se ejecuta la prueba
-    play();
     begin();
+    play();
 
     //Se libera el espacio utilizado
     free(socketThread);

@@ -13,6 +13,7 @@ class vString{
     vSimpleList<char> word;
     public:
         vString(std::string);
+        vString(const vString&);
         int len();
         bool operator >=(std::string);
         bool operator >=(vString);

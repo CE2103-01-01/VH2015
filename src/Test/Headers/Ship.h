@@ -107,9 +107,9 @@ int play() {
         try{
             Show(false);
             cout << "Please input X location: ";
-            cin >> pos1;
-            cout << "Please input Y location: ";
             cin >> pos2;
+            cout << "Please input Y location: ";
+            cin >> pos1;
             if (Attack(pos1, pos2))
                 cout << "You got me! :)" << endl;
             else

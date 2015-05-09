@@ -35,6 +35,7 @@ set(HEADERS_FILES
                     libs/pugixml.hpp
                     libs/vheaplib.h
                     libs/vheaplibpp.h
+                    src/Test/Headers/TestApplication.h
                     src/vTypes/Headers/vArray.h
                     src/vTypes/Headers/vBinaryTree.h
                     src/vTypes/Headers/vList.h
