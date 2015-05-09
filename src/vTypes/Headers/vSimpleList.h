@@ -18,6 +18,7 @@ class vSimpleNode{
 public:
     vSimpleNode();
     vSimpleNode(T);
+    vSimpleNode(const vSimpleNode<T>&);
     T operator !();                          //get Data
     vRef<vSimpleNode<T>> operator ++();      //get Next
     void operator *=(T);                     //assign
@@ -32,6 +33,10 @@ template <class T> vSimpleNode<T>::vSimpleNode(T param){
     data = vMalloc((unsigned int) sizeof(T));
     vPlacement(data,param);
     next = 0;
+}
+
+template <class T> vSimpleNode<T>::vSimpleNode(const vSimpleNode<T>& other){
+
 }
 
 template <class T> T vSimpleNode<T>::operator !(){

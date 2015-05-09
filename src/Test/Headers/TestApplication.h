@@ -6,7 +6,7 @@
 #define _VH2015_TESTAPPLICATION_H_
 
 
-static char const *const txtPath = "book.txt";
+static char const *const txtPath = "passwords.txt";
 
 static char const *const readError = "Unable to open file";
 
@@ -68,37 +68,45 @@ void createVBinaryTree() {
     else cout << readError;
 }
 
-
-void createVDoubleList() {
-    cout<<"Creando Lista Doble"<<endl;
-
-    vDoubleList<vString> palabras = vDoubleList<vString>();
+int counter() {
+    int toReturn = 0;
     fstream myFile;
     myFile.open(txtPath);
     string line;
-
-    time_t start,end;
-    time (&start);
     if (myFile.is_open()) {
-        while (getline(myFile, line)) {
-
-            istringstream iss(line);
-            do {
-                string sub;
-                iss >> sub;
-                if (sub!="")palabras.insertBack(sub);
-            } while (iss);
-        }
+        while (getline(myFile, line)) toReturn += line.length();
         myFile.close();
-        time (&end);
-        cout<<"se inserta correctamente el libro"<<endl;
-        double dif = difftime (end,start);
-        printf ("Tiempo transcurrido %.2lf segundos.", dif );
+        return toReturn;
+    }else{
+        cout << readError;
+        return 0;
     }
-
-    else cout << readError;
 }
 
+void createVDoubleList() {
+    vArray<vNumber<char>> palabras = vArray<vNumber<char>>(counter());
+    int offset = 0;
+    fstream myFile;
+    myFile.open(txtPath);
+    string line;
+    if (myFile.is_open()) {
+        while (getline(myFile, line)){
+            int tmpOffset = line.length();
+            const char* tmpLine = line.c_str();
+            for(int i = 0; i<line.length(); i++){
+                *palabras[i+offset] = *(tmpLine+i);
+            }
+            offset+=tmpOffset;
+            std::cout << offset << std::endl;
+        }
+        myFile.close();
+    }else{
+        cout << readError;
+    }
+    for(int i = 0; i<palabras.len(); i++){
+        std::cout << !*palabras[i] << std::endl;
+    }
+}
 
 void createVSimpleList(){
     cout<<"Creando Lista Simple"<<endl;

@@ -4,32 +4,6 @@
 
 #include "../Headers/proof.h"
 
-/** Prueba una vSimpleList
- */
-void pruebaSimpleList(){
-    vRef<vSimpleList<int>> referenciaAListaSimple = vMalloc(sizeof(vSimpleList<int>));
-    vPlacement(referenciaAListaSimple,vSimpleList<int>());
-    std::cout << "INICIA LA PRUEBA DE LA VSIMPLELIST, SE INSERTARAN 10000 ELEMENTOS Y SE IMPRIMIRAN LOS DATOS, PRESIONE ENTER" << std::endl;
-    std::cin.get();
-    for(int i=0; i<SIZE_OF_ARRAY_AND_LIST; i++)(**referenciaAListaSimple)+i;
-    for(int i=0; i<SIZE_OF_ARRAY_AND_LIST; i++)std::cout << (**referenciaAListaSimple)[i] << std::endl;
-    std::cout << "FIN DE LA PRUEBA, PARA CONTINUAR PRESIONE ENTER" << std::endl;
-    std::cin.get();
-}
-
-/** Prueba un vDoubleList
- */
-void pruebaDoubleList(){
-    vRef<vDoubleList<int>> referenciaAListaDoble = vMalloc(sizeof(vDoubleList<int>));
-    vPlacement(referenciaAListaDoble,vDoubleList<int>());
-    std::cout << "INICIA LA PRUEBA DE LA VSIMPLELIST, SE INSERTARAN 10000 ELEMENTOS Y SE IMPRIMIRAN LOS DATOS, PRESIONE ENTER" << std::endl;
-    std::cin.get();
-    for(int i=0; i<SIZE_OF_ARRAY_AND_LIST; i++)(**referenciaAListaDoble).insertBack(i);
-    for(int i=0; i<SIZE_OF_ARRAY_AND_LIST; i++)std::cout << (**referenciaAListaDoble)[i] << std::endl;
-    std::cout << "FIN DE LA PRUEBA, PARA CONTINUAR PRESIONE ENTER" << std::endl;
-    std::cin.get();
-}
-
 /** Prueba un vString
  */
 void pruebaString(){

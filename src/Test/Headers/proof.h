@@ -8,8 +8,6 @@
 #include "../../vTypes/Headers/vArray.h"
 #include "../../vHeap/Headers/vRef.h"
 #include "../../vTypes/Headers/vString.h"
-#include "../../vTypes/Headers/vSimpleList.h"
-#include "../../vTypes/Headers/vDoubleList.h"
 #include "../../vTypes/Headers/vNumber.h"
 #include "../../vHeap/Headers/vPager.h"
 #include "../../Tree/Tree.h"

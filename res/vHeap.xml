@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <VH2015>
     <vDebug activo="false" />
-    <vHeap size="1000" overweight="0.5" />
+    <vHeap size="250" overweight="1" />
 </VH2015>
